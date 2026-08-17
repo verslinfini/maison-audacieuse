@@ -1,6 +1,6 @@
 # Acces au site maison-audacieuse.fr
 
-Ce document dit **qui detient quoi** et **ou vit chaque secret**. Il ne contient aucune valeur : pas un mot de passe, pas une cle, pas un jeton. Il est versionne dans un depot prive, ce qui ne le rend pas pour autant un endroit ou ranger des secrets.
+Ce document dit **qui detient quoi** et **ou vit chaque secret**. Il ne contient aucune valeur : pas un mot de passe, pas une cle, pas un jeton. Le depot est public : rien de ce qui s ecrit ici, dans un commit ou dans un workflow ne doit jamais contenir un secret.
 
 Pour brancher un acces qui manque :
 
@@ -68,6 +68,12 @@ Cette section est remplie automatiquement par l etape 4 du wizard.
 
 <!-- delivrabilite:debut -->
 
-Pas encore releve. Lancer `bash "<vault>/.claude/scripts/site/wizard-acces.sh"` et aller jusqu a l etape 4.
+Releve du 2026-08-17 (wizard-acces.sh, etape 4) :
+
+| Enregistrement | Etat |
+| --- | --- |
+| SPF (maison-audacieuse.fr) | present |
+| DKIM | present (selecteurs : default) |
+| DMARC (_dmarc.maison-audacieuse.fr) | present |
 
 <!-- delivrabilite:fin -->
