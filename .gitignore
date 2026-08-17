@@ -1,0 +1,20 @@
+# Secrets et environnement
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Données et sauvegardes (RGPD : jamais de dump ni d'uploads en git)
+*.sql
+*.sql.gz
+*.tgz
+*.tar.gz
+uploads/
+sauvegardes/
+
+# Outillage
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db
