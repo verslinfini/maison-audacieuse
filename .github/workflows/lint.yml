@@ -1,0 +1,60 @@
+# Controle de syntaxe a chaque envoi de code.
+#
+# Ne juge pas la qualite du code : verifie seulement qu il est syntaxiquement valide,
+# pour eviter d envoyer sur le site un fichier PHP casse qui ferait un ecran blanc.
+
+name: Syntaxe (PHP et shell)
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  syntaxe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      # PHP 8.2 : version alignee sur celle du serveur o2switch.
+      - name: Installer PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: php -l sur tous les fichiers PHP
+        run: |
+          NB=0
+          ECHECS=0
+          # -print0 et read -d '' : resiste aux espaces dans les noms de fichiers.
+          while IFS= read -r -d '' f; do
+            NB=$((NB + 1))
+            if ! php -l "$f"; then
+              ECHECS=$((ECHECS + 1))
+              echo "::error file=$f::erreur de syntaxe PHP"
+            fi
+          done < <(find . -path ./.git -prune -o -name '*.php' -type f -print0)
+
+          echo "$NB fichier(s) PHP verifie(s), $ECHECS en erreur."
+          [ "$ECHECS" -eq 0 ]
+
+      - name: bash -n sur tous les scripts shell
+        run: |
+          NB=0
+          ECHECS=0
+          while IFS= read -r -d '' f; do
+            NB=$((NB + 1))
+            if ! bash -n "$f"; then
+              ECHECS=$((ECHECS + 1))
+              echo "::error file=$f::erreur de syntaxe shell"
+            fi
+          done < <(find . -path ./.git -prune -o -name '*.sh' -type f -print0)
+
+          echo "$NB script(s) shell verifie(s), $ECHECS en erreur."
+          [ "$ECHECS" -eq 0 ]

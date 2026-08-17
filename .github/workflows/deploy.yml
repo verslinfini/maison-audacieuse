@@ -1,0 +1,224 @@
+# Deploiement du theme enfant et des mu-plugins sur o2switch, par SSH.
+#
+# Voie A du plan de deploiement (voir docs/deploiement.md). Voie B sans SSH : build-zip.yml.
+# Rien n est publie automatiquement : ce workflow ne part que si Romain le lance a la main.
+# En cas de smoke test rouge, il restaure tout seul la sauvegarde prise juste avant.
+
+name: Deploiement (theme et mu-plugins)
+
+on:
+  workflow_dispatch:
+    inputs:
+      motif:
+        description: "Motif du deploiement (trace dans le journal du run)"
+        required: false
+        default: "deploiement manuel"
+
+  # Declenchement automatique sur push : volontairement desactive tant que la chaine
+  # n a pas fait ses preuves (un rollback provoque et constate, etape C4 du plan).
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'theme/**'
+  #     - 'mu-plugins/**'
+
+# Le workflow ne fait que lire le depot : aucun droit d ecriture sur GitHub.
+permissions:
+  contents: read
+
+# Deux deploiements en meme temps sur le meme serveur casseraient le rsync.
+concurrency:
+  group: deploiement-o2switch
+  cancel-in-progress: false
+
+env:
+  # Tiger Protect (o2switch) renvoie 403 a tout ce qui ne ressemble pas a un navigateur.
+  UA_NAVIGATEUR: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+  SITE: "https://www.maison-audacieuse.fr"
+  CLE: /home/runner/.ssh/o2switch_deploy
+
+jobs:
+  deploiement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ------------------------------------------------------------------ 1. le code
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      - name: Calculer le tampon de build
+        id: build
+        run: |
+          # Le SHA court sert de tampon : le theme l imprime dans wp_head, ce qui permet
+          # de verifier depuis l exterieur quelle version le site sert vraiment.
+          SHA=$(git rev-parse --short HEAD)
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Deploiement du commit $SHA (motif : ${{ inputs.motif }})"
+          # functions.php lit ce fichier pour imprimer <!-- lma-build: SHA -->
+          printf '%s\n' "$SHA" > theme/kadence-child/build.txt
+
+      # ------------------------------------------------------------------ 2. l acces SSH
+      - name: Installer la cle SSH et epingler l hote
+        env:
+          O2_SSH_KEY: ${{ secrets.O2_SSH_KEY }}
+          O2_KNOWN_HOSTS: ${{ secrets.O2_KNOWN_HOSTS }}
+        run: |
+          mkdir -p /home/runner/.ssh
+          chmod 700 /home/runner/.ssh
+          printf '%s\n' "$O2_SSH_KEY" > "$CLE"
+          chmod 600 "$CLE"
+          # known_hosts epingle : on ne desactive JAMAIS la verification de l hote
+          # (StrictHostKeyChecking=no ouvrirait la porte a une machine usurpee).
+          printf '%s\n' "$O2_KNOWN_HOSTS" > /home/runner/.ssh/known_hosts
+          chmod 644 /home/runner/.ssh/known_hosts
+
+      - name: Verifier la connexion
+        env:
+          O2_HOST: ${{ secrets.O2_HOST }}
+          O2_PORT: ${{ secrets.O2_PORT }}
+          O2_USER: ${{ secrets.O2_USER }}
+        run: |
+          ssh -i "$CLE" -p "$O2_PORT" -o ConnectTimeout=15 -o BatchMode=yes \
+            "$O2_USER@$O2_HOST" "echo connexion ok && pwd"
+
+      # ------------------------------------------------------------------ 3. la sauvegarde
+      - name: Sauvegarder les dossiers cibles sur le serveur
+        id: sauvegarde
+        env:
+          O2_HOST: ${{ secrets.O2_HOST }}
+          O2_PORT: ${{ secrets.O2_PORT }}
+          O2_USER: ${{ secrets.O2_USER }}
+          O2_PATH_THEME: ${{ secrets.O2_PATH_THEME }}
+          O2_PATH_MU: ${{ secrets.O2_PATH_MU }}
+        run: |
+          # Deux archives distinctes plutot qu une seule : le theme et les mu-plugins
+          # ne vivent pas dans le meme dossier parent, une archive unique se restaurerait au mauvais endroit.
+          HORO=$(date -u +%Y%m%d-%H%M%S)
+          echo "horo=$HORO" >> "$GITHUB_OUTPUT"
+
+          THEME_PARENT=$(dirname "$O2_PATH_THEME"); THEME_NOM=$(basename "$O2_PATH_THEME")
+          MU_PARENT=$(dirname "$O2_PATH_MU");       MU_NOM=$(basename "$O2_PATH_MU")
+
+          ssh -i "$CLE" -p "$O2_PORT" -o BatchMode=yes "$O2_USER@$O2_HOST" bash -s <<REMOTE
+          set -euo pipefail
+          mkdir -p ~/backups
+
+          if [ -d "$O2_PATH_THEME" ]; then
+            tar -czf ~/backups/theme-$HORO.tgz -C "$THEME_PARENT" "$THEME_NOM"
+            echo "sauvegarde theme : theme-$HORO.tgz"
+          else
+            echo "premier deploiement : pas encore de theme a sauvegarder"
+          fi
+
+          if [ -d "$O2_PATH_MU" ]; then
+            tar -czf ~/backups/mu-$HORO.tgz -C "$MU_PARENT" "$MU_NOM"
+            echo "sauvegarde mu-plugins : mu-$HORO.tgz"
+          else
+            echo "premier deploiement : pas encore de mu-plugins a sauvegarder"
+          fi
+
+          # On ne garde que les 5 dernieres archives de chaque type.
+          # Le || true est indispensable : au premier deploiement il n existe aucune archive,
+          # ls sort en erreur, et sans lui le set -e ferait echouer tout le deploiement.
+          ls -t ~/backups/theme-*.tgz 2>/dev/null | tail -n +6 | xargs -r rm -f || true
+          ls -t ~/backups/mu-*.tgz    2>/dev/null | tail -n +6 | xargs -r rm -f || true
+          echo "archives conservees :"
+          ls -t ~/backups/*.tgz 2>/dev/null | head -n 10 || true
+          REMOTE
+
+      # ------------------------------------------------------------------ 4. l envoi
+      - name: Envoyer le theme enfant et les mu-plugins
+        env:
+          O2_HOST: ${{ secrets.O2_HOST }}
+          O2_PORT: ${{ secrets.O2_PORT }}
+          O2_USER: ${{ secrets.O2_USER }}
+          O2_PATH_THEME: ${{ secrets.O2_PATH_THEME }}
+          O2_PATH_MU: ${{ secrets.O2_PATH_MU }}
+        run: |
+          # --delete : le serveur devient le miroir exact du depot. C est voulu,
+          # aucun fichier ne doit vivre sur le serveur sans exister dans git.
+          # Les / finaux comptent : ils envoient le CONTENU du dossier, pas le dossier lui-meme.
+          RSYNC_SSH="ssh -p $O2_PORT -i $CLE -o BatchMode=yes"
+
+          rsync -az --delete -e "$RSYNC_SSH" \
+            --exclude '.DS_Store' --exclude 'Thumbs.db' \
+            theme/kadence-child/ "$O2_USER@$O2_HOST:$O2_PATH_THEME/"
+          echo "theme envoye vers $O2_PATH_THEME"
+
+          rsync -az --delete -e "$RSYNC_SSH" \
+            --exclude '.DS_Store' --exclude 'Thumbs.db' --exclude '.gitkeep' \
+            mu-plugins/ "$O2_USER@$O2_HOST:$O2_PATH_MU/"
+          echo "mu-plugins envoyes vers $O2_PATH_MU"
+
+      # ------------------------------------------------------------------ 5. la preuve
+      - name: Smoke test (page 200 et tampon de build attendu)
+        id: smoke
+        env:
+          SHA: ${{ steps.build.outputs.sha }}
+        run: |
+          # Le parametre d URL contourne le cache LiteSpeed : sans lui, on lirait
+          # une page en cache et le tampon de l ancienne version, donc un faux echec.
+          URL="$SITE/?lma-smoke=${{ steps.sauvegarde.outputs.horo }}"
+          OK=non
+
+          for essai in 1 2 3; do
+            CODE=$(curl -s -o /tmp/home.html -w '%{http_code}' -A "$UA_NAVIGATEUR" --max-time 30 "$URL" || echo 000)
+            TAMPON=$(grep -o 'lma-build: [a-f0-9]*' /tmp/home.html 2>/dev/null | head -n1 | cut -d' ' -f2 || true)
+            echo "essai $essai : HTTP $CODE, tampon '$TAMPON', attendu '$SHA'"
+            if [ "$CODE" = "200" ] && [ "$TAMPON" = "$SHA" ]; then OK=oui; break; fi
+            sleep 8
+          done
+
+          if [ "$OK" != "oui" ]; then
+            echo "::error::smoke test rouge (HTTP $CODE, tampon '$TAMPON', attendu '$SHA') : restauration en cours"
+            exit 1
+          fi
+          echo "smoke test vert : le site repond 200 et sert bien le commit $SHA"
+
+      # ------------------------------------------------------------------ 6. le filet
+      - name: Restaurer la sauvegarde (uniquement si une etape a echoue)
+        if: failure()
+        env:
+          O2_HOST: ${{ secrets.O2_HOST }}
+          O2_PORT: ${{ secrets.O2_PORT }}
+          O2_USER: ${{ secrets.O2_USER }}
+          O2_PATH_THEME: ${{ secrets.O2_PATH_THEME }}
+          O2_PATH_MU: ${{ secrets.O2_PATH_MU }}
+          HORO: ${{ steps.sauvegarde.outputs.horo }}
+        run: |
+          if [ -z "$HORO" ]; then
+            echo "::warning::echec avant la sauvegarde : rien n a ete envoye au serveur, rien a restaurer."
+            exit 0
+          fi
+
+          THEME_PARENT=$(dirname "$O2_PATH_THEME")
+          MU_PARENT=$(dirname "$O2_PATH_MU")
+
+          ssh -i "$CLE" -p "$O2_PORT" -o BatchMode=yes "$O2_USER@$O2_HOST" bash -s <<REMOTE
+          set -uo pipefail
+          if [ -f ~/backups/theme-$HORO.tgz ]; then
+            tar -xzf ~/backups/theme-$HORO.tgz -C "$THEME_PARENT"
+            echo "theme restaure depuis theme-$HORO.tgz"
+          else
+            echo "pas d archive theme-$HORO.tgz : le theme n existait pas avant ce deploiement."
+          fi
+          if [ -f ~/backups/mu-$HORO.tgz ]; then
+            tar -xzf ~/backups/mu-$HORO.tgz -C "$MU_PARENT"
+            echo "mu-plugins restaures depuis mu-$HORO.tgz"
+          else
+            echo "pas d archive mu-$HORO.tgz : les mu-plugins n existaient pas avant ce deploiement."
+          fi
+          REMOTE
+
+          echo "::error::deploiement annule et sauvegarde restauree. Verifie le site, puis lis docs/rollback.md."
+
+      # ------------------------------------------------------------------ 7. le cache
+      - name: Rappel de purge du cache
+        if: success()
+        run: |
+          # Pas d appel REST au site depuis le runner : Tiger Protect bloque les
+          # requetes qui ne viennent pas d un navigateur. La purge se fait en local.
+          echo "Deploiement termine."
+          echo "purge locale : node wp-push.mjs --purge-only   (ou admin WP > LiteSpeed Cache > Purger tout)"
+          echo "puis verifie le site en navigation privee : $SITE"
