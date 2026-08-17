@@ -1,0 +1,40 @@
+{
+  "pages": {
+    "contacts": {
+      "id": 1967,
+      "sha256": "b78b16d9f1dd0ec023baa73f7f203b7fd7a66019e86716ad7cb46017c8128c45",
+      "modified": "2026-06-09T09:41:35",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    },
+    "la-maison-audacieuse": {
+      "id": 1901,
+      "sha256": "b72cca0b8b499a9c2089a455581a28727415ec577ea6e4209fd31428620e97ec",
+      "modified": "2026-06-09T09:17:23",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    },
+    "le-projet-architectural": {
+      "id": 1973,
+      "sha256": "b353c7993710ead04fbc2e54ba4ed8b5596dff3f0435564aa318fb75dc7a1bf8",
+      "modified": "2026-06-09T09:31:22",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    },
+    "lequipe-projet": {
+      "id": 1970,
+      "sha256": "97fba24f58f08f8f36a1fd507587a2c69f248fdde815fd747e01e13cb09bf326",
+      "modified": "2026-06-15T08:55:39",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    },
+    "les-medias": {
+      "id": 1975,
+      "sha256": "f50c355f8a6e33936139faa861135e34302ad395574de281737af3d96cd3def4",
+      "modified": "2026-06-09T09:36:18",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    },
+    "politique-de-confidentialite-mentions-legales": {
+      "id": 1980,
+      "sha256": "20b09351d19ecee01935c1db8f644bfba735ae9e107af4d9668cdb6ed1d08a77",
+      "modified": "2026-06-09T09:45:51",
+      "pulled_at": "2026-08-17T12:38:39.836Z"
+    }
+  }
+}

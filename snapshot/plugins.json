@@ -1,0 +1,87 @@
+{
+  "coupon-x-discount-pop-up/coupon-x-for-wc": {
+    "nom": "Coupon X Discount Pop Up",
+    "version": "1.4.7",
+    "statut": "active"
+  },
+  "forminator/forminator": {
+    "nom": "Forminator",
+    "version": "1.57.0",
+    "statut": "active"
+  },
+  "helloasso/hello-asso": {
+    "nom": "HelloAsso",
+    "version": "1.1.24",
+    "statut": "active"
+  },
+  "insert-headers-and-footers/ihaf": {
+    "nom": "WPCode Lite",
+    "version": "2.3.8",
+    "statut": "active"
+  },
+  "jetpack-boost/jetpack-boost": {
+    "nom": "Jetpack Boost",
+    "version": "4.6.3",
+    "statut": "active"
+  },
+  "kadence-blocks/kadence-blocks": {
+    "nom": "Kadence Blocks — Page Builder Toolkit for Gutenberg Editor",
+    "version": "3.7.9.1",
+    "statut": "active"
+  },
+  "litespeed-cache/litespeed-cache": {
+    "nom": "LiteSpeed Cache",
+    "version": "7.9",
+    "statut": "active"
+  },
+  "mailin/sendinblue": {
+    "nom": "Brevo - Email, SMS, Web Push, Chat, et plus.",
+    "version": "3.3.5",
+    "statut": "active"
+  },
+  "redirection/redirection": {
+    "nom": "Redirection",
+    "version": "5.9.0",
+    "statut": "active"
+  },
+  "updraftplus/updraftplus": {
+    "nom": "UpdraftPlus - Sauvegarde/Restauration",
+    "version": "1.26.6",
+    "statut": "active"
+  },
+  "wordpress-seo-premium/wp-seo-premium": {
+    "nom": "Yoast SEO Premium",
+    "version": "24.6",
+    "statut": "inactive"
+  },
+  "wordpress-seo/wp-seo": {
+    "nom": "Yoast SEO",
+    "version": "28.2",
+    "statut": "active"
+  },
+  "wp-mail-smtp/wp_mail_smtp": {
+    "nom": "WP Mail SMTP",
+    "version": "4.9.0",
+    "statut": "active"
+  },
+  "wpforms-form-locker/wpforms-form-locker": {
+    "nom": "WPForms Form Locker",
+    "version": "2.8.0",
+    "statut": "active"
+  },
+  "wpforms-sendinblue/wpforms-sendinblue": {
+    "nom": "WPForms Brevo",
+    "version": "1.3.0",
+    "statut": "active"
+  },
+  "wpforms-signatures/wpforms-signatures": {
+    "nom": "WPForms Signatures",
+    "version": "1.11.0",
+    "statut": "active"
+  },
+  "wpforms/wpforms": {
+    "nom": "WPForms",
+    "version": "1.9.2.2",
+    "statut": "active"
+  }
+}

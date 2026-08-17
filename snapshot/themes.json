@@ -1,0 +1,12 @@
+{
+  "kadence": {
+    "nom": "Kadence",
+    "version": "1.5.1",
+    "statut": "active"
+  },
+  "twentytwentyfive": {
+    "nom": "Twenty Twenty-Five",
+    "version": "1.5",
+    "statut": "inactive"
+  }
+}
