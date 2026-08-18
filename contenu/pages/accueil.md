@@ -118,7 +118,7 @@ Frise de faits datés, 4 items :
 
 - 2025 : lauréat de l'appel à projets d'Annecy
 <!-- source : délibération D.CN.2025-134 du 30/06/2025, AMI Ville d'Annecy -->
-- Février 2026 : promesse de bail de 99 ans signée
+- Mars 2026 : promesse de bail de 99 ans signée <!-- source : promesse signée le 6 mars 2026 (CR cadrage Ville 28/05/2026), délibération du conseil municipal du 02/02/2026 -->
 - Avril 2026 : la campagne de dons se referme
 - Juillet 2026 : la coopérative est immatriculée
 
@@ -126,7 +126,7 @@ Action : aucune. Le beat 2 porte déjà le lien vers le projet.
 Visuel : [TROU: photo datée de la campagne de dons, Nextcloud `04 COM/01 Photos`]. Candidat de repli à vérifier avant usage : `prochaines_etapes.png` (infographie du collectif, susceptible de porter les objectifs obsolètes de 80 000 € et 100 000 €, à contrôler à l'écran).
 Alt à écrire une fois la photo choisie, format attendu : « la ferme un jour de campagne, personnes réunies devant le bâtiment ».
 Mots : 91 de corps titre compris, 28 de frise.
-Notes intégrateur : annotation manuscrite Meow Script sur la photo, placeholder « 99 ans de bail ». Une seule annotation, jamais une rangée de cartouches chiffrés. La frise est horizontale sous le paragraphe en variante A, verticale en marge en variante C.
+Notes intégrateur : annotation manuscrite Meow Script sur la photo, placeholder « 99 ans, promesse de bail ». Une seule annotation, jamais une rangée de cartouches chiffrés. La frise est horizontale sous le paragraphe en variante A, verticale en marge en variante C.
 
 ## Beat 4, La part en 4 faits
 
@@ -138,9 +138,9 @@ Corps :
 
 Une part sociale, ce n'est pas un don. C'est un apport que vous confiez à la coopérative et qui reste le vôtre.
 
-- À partir de 100 €. Une part coûte 100 €. Vous en prenez autant que vous le souhaitez.
+- À partir de 100 €. Une part coûte 100 €. Vous en prenez autant que vous le souhaitez. <!-- source : statuts constitutifs signés de La Coop Audacieuse, part à 100 € -->
 - Vous devenez copropriétaire. Le lieu appartient à celles et ceux qui le financent. C'est un bien commun.
-- Une personne, une voix. Quel que soit le nombre de parts, chacune et chacun pèse autant dans les décisions.
+- Une personne, une voix. Quel que soit le nombre de parts, chacune et chacun pèse autant dans les décisions. <!-- source : statuts, principe coopératif une personne une voix -->
 - Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts, à leur valeur d'origine, selon les statuts.
 
 <!-- après délibération du Conseil Coopératif, visée 31/08 : remplacer la seule phrase de remboursement du quatrième fait par la formulation retenue par Romain le 14/08 et rien d'autre. « Vos parts sont remboursables à leur valeur d'origine, sur simple demande. Notre engagement : constituer tout au long du projet une réserve de trésorerie dédiée, pour rembourser au plus vite les demandes de moins de 5 000 €. La coopérative dispose statutairement d'un délai pouvant aller jusqu'à 5 ans. » Tant que la délibération n'est pas prise, ni le seuil de 5 000 € ni le délai de 5 ans ne paraissent sur le site. -->
@@ -162,7 +162,7 @@ Pour rénover cette ferme, il faudra emprunter. Mais une banque ne prête qu'à 
 
 Nous avons choisi de ne pas laisser une banque financer plus de la moitié de ce lieu. Moins d'emprunt, ce sont des loyers accessibles.
 
-Plus notre apport citoyen est solide, plus la banque suit et plus le lieu reste abordable pour toutes et tous. Les statuts l'interdisent : tout excédent reste dans la coopérative.
+Plus notre apport citoyen est solide, plus la banque suit et plus le lieu reste abordable pour toutes et tous. Les statuts interdisent tout enrichissement personnel : l'excédent reste dans la coopérative.
 
 Chaque part en appelle d'autres.
 
@@ -241,7 +241,7 @@ Une part vaut 100 €. Vous en prenez autant que vous le souhaitez.
 
 [Je prends ma part]
 
-Le don reste possible. Il est déductible à 66 % de vos impôts : un don de 100 € vous en coûte 34.
+Le don reste possible. Il est déductible à 66 % de vos impôts : un don de 100 € vous en coûte 34 €.
 <!-- source : 66 % de déduction, régime fiscal du don, jamais de la part. Landing V1 bloc 7 -->
 
 [Je fais un don]
