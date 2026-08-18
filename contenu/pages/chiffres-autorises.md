@@ -4,7 +4,7 @@ Règle : un chiffre absent de ce fichier ou marqué interdit est RETIRÉ de la p
 
 | Chiffre | Formulation | Source | Statut |
 |---|---|---|---|
-| 88 900 € | levés en dons, campagne close le 23/04/2026 | CLAUDE.md LMA jalon J2 ; page HelloAsso | autorisé |
+| 88 900 € | levés en dons, campagne close le 23/04/2026 | CLAUDE.md LMA jalon J2 ; page HelloAsso | autorisé HORS home (FAQ, page financière) : la home compte des personnes, et HelloAsso affichera bientôt ~135 k€ avec le mécénat de compétences |
 | 650+ | donateurs et donatrices de la campagne de dons | CLAUDE.md LMA jalon J2 ; plan de campagne 14/08 | autorisé (666 = chiffre exact à figer au 07/09) |
 | 100 € | valeur d'une part sociale | statuts constitutifs signés de La Coop Audacieuse | autorisé |
 | une personne = une voix | principe coopératif | statuts (4 collèges pondérés 35/35/20/10) | autorisé |
