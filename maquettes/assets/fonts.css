@@ -1,0 +1,18 @@
+/* Polices La Maison Audacieuse, chargees en local (OFL), aucune requete externe. */
+/* Details licence et source : assets/SOURCES.md */
+
+@font-face {
+  font-family: "Onest";
+  src: url("./fonts/Onest-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Meow Script";
+  src: url("./fonts/MeowScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
