@@ -15,6 +15,8 @@ Règle : un chiffre absent de ce fichier ou marqué interdit est RETIRÉ de la p
 | 66 % | déduction fiscale du DON (jamais de la part) | régime fiscal du don, landing V1 bloc 7 | autorisé pour le don seulement |
 | 1 700 | signataires de la lettre de soutien 2025 | plan de campagne 14/08 section 3 ; fichier interne | autorisé (arrondi « près de 1 700 » comme sur la home actuelle) |
 | 666 → 1 700 → 3 000 → 5 000 | cascade des paliers de coopératrices | plan de campagne 14/08 section 3 | autorisé (lectures des paliers 3 000 et 5 000 à valider le 24/08) |
+| 5 000 € | seuil sous lequel les demandes de remboursement sont traitées en priorité (réserve de trésorerie dédiée) | article 15 des statuts constitutifs signés ; délibération du Conseil Coopératif visée le 31/08/2026 | autorisé APRÈS délibération, jamais avant |
+| jusqu'à 5 ans | délai statutaire maximal de remboursement des parts | article 15 des statuts constitutifs signés | autorisé APRÈS délibération, jamais avant (ne pas confondre avec la durée de conservation fiscale IR-PME) |
 | 54 000 | femmes majeures à Annecy (lecture « une Annécienne sur dix ») | INSEE, à sourcer | INTERDIT tant que non sourcé |
 | 300 | personnes à la Fête de l'Audace 1 | never-say.md §2, non sourcé | INTERDIT tant que non sourcé |
 | 3,81 M€, 3 701 184 € | coût réel estimé, emplois déposés DDETS | interne | INTERDIT |
