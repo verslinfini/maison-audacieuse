@@ -8,7 +8,8 @@ Règle : un chiffre absent de ce fichier ou marqué interdit est RETIRÉ de la p
 | 650+ | donateurs et donatrices de la campagne de dons | CLAUDE.md LMA jalon J2 ; plan de campagne 14/08 | autorisé (666 = chiffre exact à figer au 07/09) |
 | 100 € | valeur d'une part sociale | statuts constitutifs signés de La Coop Audacieuse | autorisé |
 | une personne = une voix | principe coopératif | statuts (4 collèges pondérés 35/35/20/10) | autorisé |
-| 99 ans | bail emphytéotique administratif avec la Ville d'Annecy | conseil municipal du 02/02/2026, promesse signée en mars 2026 | autorisé |
+| 99 ans | PROMESSE de bail emphytéotique administratif signée avec la Ville d'Annecy (le bail lui-même vient après le permis) | conseil municipal du 02/02/2026, promesse signée le 06/03/2026 | autorisé, à formuler « la Ville a signé la promesse de bail de 99 ans », jamais « la ferme est sous bail » |
+| samedi 19/09/2026 | Fête de l'Audace 2, premier événement de conversion, souscription sur place | plan de campagne 14/08 sections 5 et 7 | autorisé (lieu et horaires : trou à combler) |
 | lauréat AMI Ville d'Annecy 2025 | preuve institutionnelle | délibération D.CN.2025-134 du 30/06/2025 | autorisé |
 | 10/07/2026 | immatriculation de la SCIC La Coop Audacieuse au RCS d'Annecy | Kbis, CLAUDE.md LMA jalon J3 | autorisé |
 | 3,2 M€ | coût du projet, référentiel public | plan de campagne 14/08 section 1 | autorisé |
