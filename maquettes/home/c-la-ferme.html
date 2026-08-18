@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Une ferme d'Annecy devient un lieu de vie solidaire. Prenez une part à 100 € et devenez coopératrice ou coopérateur du lieu.">
+<title>Parts sociales d'un lieu solidaire | La Maison Audacieuse</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* ------------------------------------------------------------------ *
+ * Maquette C, La ferme. Le lieu est le fil, la campagne est en marge. *
+ * ------------------------------------------------------------------ */
+
+:root {
+  --violet: #766DA0;
+  --violet-sombre: #383648;
+  --kaki: #9D9669;
+  --vert: #5E9E85;
+  --terracotta: #A3716A;
+  --menthe: #BAFFE4;
+  --jaune: #FFF3A8;
+  --texte: #56546B;
+  --fond: #F5F5F6;
+  --fond-violace: #EDEDF5;
+  --blanc: #FFFFFF;
+  --filet: #DEDCE8;
+  --rail: 312px;
+  --rayon: 4px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: "Onest", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-synthesis-weight: none;
+}
+
+img { display: block; max-width: 100%; }
+
+h1, h2 {
+  color: var(--violet-sombre);
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.45rem, 5.1vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 2.7vw, 2.625rem);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+}
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+a { color: var(--violet); }
+
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.sur-sombre :focus-visible { outline-color: var(--jaune); }
+
+/* --- grain de la charte, filtre SVG en ligne, aucune requete --- */
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.grain--sombre { opacity: .30; mix-blend-mode: overlay; }
+.grain--clair  { opacity: .40; mix-blend-mode: multiply; }
+.filtres { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------------------------- ossature ---------------------------- */
+
+.cadre { position: relative; }
+.contenu {
+  max-width: 1120px;
+  padding-left: clamp(20px, 5vw, 72px);
+  padding-right: clamp(20px, 3vw, 40px);
+}
+
+/* ------------------------------ badge ----------------------------- */
+
+.badge {
+  position: fixed;
+  top: 10px;
+  left: 14px;
+  z-index: 80;
+  display: inline-block;
+  padding: .3rem .6rem;
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  background: var(--fond-violace);
+  color: var(--violet-sombre);
+  font-size: .78125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: .01em;
+}
+
+/* ----------------------------- entete ----------------------------- */
+
+.entete {
+  position: relative;
+  z-index: 30;
+  background: var(--blanc);
+  border-bottom: 1px solid var(--filet);
+  padding-top: 40px;
+}
+.entete__rang {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 14px;
+}
+.entete__logo { display: inline-flex; align-items: center; min-height: 44px; }
+.entete__logo img { width: 148px; height: auto; }
+
+.nav { display: flex; align-items: center; gap: clamp(.6rem, 1.5vw, 1.45rem); margin-left: auto; }
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--violet-sombre);
+  font-size: clamp(.9rem, 1vw, .96875rem);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color .16s ease, border-color .16s ease;
+}
+.nav a:hover { color: var(--violet); border-bottom-color: var(--violet); }
+.nav a.bouton { color: var(--blanc); border-bottom: 0; }
+.nav a.bouton:hover { color: var(--blanc); }
+.nav a:active { color: var(--violet-sombre); }
+
+.menu-bouton { display: none; }
+
+/* ---------------------------- boutons ----------------------------- */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 44px;
+  padding: .7rem 1.35rem;
+  border: 2px solid var(--violet);
+  border-radius: var(--rayon);
+  background: var(--violet);
+  color: var(--blanc);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .17s ease, border-color .17s ease, transform .17s ease;
+}
+.bouton:hover { background: #635B8C; border-color: #635B8C; }
+.bouton:active { transform: translateY(1px); }
+
+.bouton--compact { min-height: 44px; padding: .55rem 1.05rem; font-size: .9375rem; margin-left: .35rem; }
+.bouton--large { width: 100%; min-height: 56px; font-size: 1.0625rem; padding: .9rem 1.2rem; }
+.bouton--second {
+  background: transparent;
+  border-color: var(--violet-sombre);
+  color: var(--violet-sombre);
+}
+.bouton--second:hover { background: var(--violet-sombre); border-color: var(--violet-sombre); color: var(--blanc); }
+.bouton--tertiaire {
+  background: transparent;
+  border-width: 1px;
+  border-color: var(--violet-sombre);
+  color: var(--violet-sombre);
+  font-size: .9375rem;
+  padding: .55rem 1rem;
+}
+.bouton--tertiaire:hover { background: var(--violet-sombre); color: var(--blanc); }
+
+.lien-texte {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--violet-sombre);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 0 var(--violet);
+  transition: color .16s ease, box-shadow .16s ease;
+}
+.lien-texte:hover { color: var(--violet); box-shadow: inset 0 -2px 0 0 var(--violet-sombre); }
+
+/* ------------------------------ trous ----------------------------- */
+
+.trou {
+  display: block;
+  border: 1px dashed rgba(118, 109, 160, .6);
+  border-radius: 3px;
+  padding: .65rem .85rem;
+  color: var(--texte);
+  font-size: .9375rem;
+  line-height: 1.5;
+}
+.trou--enligne {
+  display: inline;
+  padding: .05rem .3rem;
+  font-size: .95em;
+}
+.trou--visuel {
+  display: flex;
+  align-items: flex-end;
+  min-height: 260px;
+  padding: 1.1rem;
+}
+
+/* ------------------------------ heros ----------------------------- */
+
+.heros {
+  position: relative;
+  background-color: #22203A;
+  height: clamp(560px, calc(100vh - 104px), 800px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.heros__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 46%;
+}
+.heros__voile {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(34, 32, 58, .95) 0%, rgba(34, 32, 58, .88) 26%, rgba(34, 32, 58, .58) 52%, rgba(34, 32, 58, .22) 78%, rgba(34, 32, 58, .10) 100%),
+    linear-gradient(to right, rgba(34, 32, 58, .55) 0%, rgba(34, 32, 58, .12) 62%, rgba(34, 32, 58, 0) 100%);
+}
+.heros__mots {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-bottom: clamp(2.4rem, 5vh, 4rem);
+  padding-top: 3rem;
+  color: var(--blanc);
+}
+.heros h1 { color: var(--blanc); max-width: 15ch; }
+.heros h1 .manuscrit {
+  display: inline-block;
+  font-family: "Meow Script", cursive;
+  font-weight: 400;
+  color: var(--jaune);
+  font-size: 1.28em;
+  line-height: .9;
+  letter-spacing: 0;
+  transform: rotate(-2.2deg);
+  transform-origin: left bottom;
+  margin-left: .1em;
+}
+.heros__lignes {
+  margin-top: clamp(1.6rem, 3.2vh, 2.4rem);
+  max-width: 46ch;
+  display: grid;
+  gap: .85rem;
+}
+.heros__lignes p { font-size: clamp(1rem, 1.25vw, 1.1875rem); line-height: 1.55; }
+.heros__lignes p:first-child { font-weight: 600; font-size: clamp(1.125rem, 1.5vw, 1.375rem); }
+
+/* ------------------- rail de campagne, en marge -------------------- */
+
+.rail {
+  position: relative;
+  z-index: 40;
+  background: var(--fond-violace);
+  border-top: 1px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+}
+.rail__inner { position: relative; z-index: 2; }
+.rail__chiffre {
+  display: block;
+  font-size: 3.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--violet-sombre);
+}
+.rail__suite { display: block; color: var(--violet-sombre); font-weight: 500; font-size: 1.0625rem; margin-top: .25rem; }
+.rail__palier { margin-top: .45rem; font-size: .9375rem; line-height: 1.45; }
+.rail__prix { font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
+.rail__apres { font-size: .9375rem; line-height: 1.45; }
+.rail__filet { height: 1px; background: var(--filet); border: 0; margin: 0; }
+
+/* -------------------- fil du lieu, image epine -------------------- */
+
+.epine { position: relative; }
+.epine__grille { display: grid; gap: 3.5rem; }
+.epine__zone { position: relative; margin-top: 1.75rem; }
+.epine__fin { margin-top: 2rem; }
+
+.plan { position: relative; overflow: hidden; border-radius: var(--rayon); }
+.plan__pile { display: grid; gap: .6rem; }
+.plan__vue { position: relative; margin: 0; }
+.plan__vue img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.plan__vue--auj img { object-position: 32% 52%; }
+.plan__vue--demain img { object-position: 40% 50%; }
+.plan__vue figcaption {
+  font-size: .8125rem;
+  color: var(--texte);
+  padding-top: .4rem;
+  letter-spacing: .02em;
+}
+
+.notes { display: grid; gap: 1.15rem; margin-top: 1.6rem; }
+.notes li { position: relative; }
+.notes .mot {
+  display: block;
+  font-family: "Meow Script", cursive;
+  font-size: 1.85rem;
+  line-height: 1.15;
+  color: var(--violet);
+}
+.notes .suite { display: block; font-size: 1rem; line-height: 1.5; color: var(--texte); }
+
+/* ------------------------ blocs de recit -------------------------- */
+
+.bloc { display: grid; gap: 1.15rem; }
+.bloc p { max-width: 58ch; }
+.mesure-courte p { max-width: 46ch; }
+
+.faits { margin-top: 3.75rem; display: grid; }
+.faits li {
+  padding: 2.7rem 0 2.8rem;
+  border-top: 1px solid rgba(157, 150, 105, .55);
+}
+.faits li:last-child { border-bottom: 1px solid rgba(157, 150, 105, .55); }
+.faits b { display: block; font-weight: 600; color: var(--violet-sombre); }
+.faits span { display: block; margin-top: .25rem; }
+
+.chute {
+  font-size: clamp(1.375rem, 2.1vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--violet-sombre);
+  letter-spacing: -0.012em;
+  max-width: 22ch;
+}
+.chute--terracotta { color: var(--terracotta); }
+
+.amorce-liste { font-weight: 600; color: var(--violet-sombre); }
+.limites { display: grid; gap: 1rem; margin-top: .5rem; }
+.limites li { padding-left: 1.15rem; border-left: 2px solid var(--filet); }
+.limites b { font-weight: 600; color: var(--violet-sombre); }
+
+/* ------------------------- sections, fonds ------------------------ */
+
+.bande-blanche { background: var(--blanc); }
+.bande-pale { position: relative; background: var(--fond-violace); }
+.bande-pale > .contenu { position: relative; z-index: 2; }
+
+#le-lieu, #la-part { scroll-margin-top: 24px; }
+section { scroll-margin-top: 24px; }
+
+.epine-section { padding: clamp(64px, 9vw, 112px) 0 clamp(56px, 7vw, 88px); }
+.section-choix { padding: clamp(72px, 10vw, 128px) 0 clamp(64px, 8vw, 104px); }
+.section-deja { padding: clamp(56px, 7vw, 88px) 0 clamp(68px, 9vw, 108px); }
+.section-ou { padding: clamp(68px, 9vw, 120px) 0 clamp(72px, 10vw, 132px); }
+.section-ou .bloc p { max-width: 52ch; }
+.section-collectif { padding: clamp(52px, 6vw, 76px) 0 clamp(60px, 8vw, 96px); }
+.section-vous { padding: clamp(64px, 8vw, 104px) 0 clamp(68px, 9vw, 112px); }
+
+/* -------------------------- beat 5, choix ------------------------- */
+
+.choix__grille { display: grid; gap: 2.5rem; }
+.dessin { margin: 0; }
+.dessin img { width: 100%; height: auto; mix-blend-mode: multiply; }
+.dessin figcaption { font-size: .8125rem; color: var(--texte); padding-top: .5rem; }
+
+/* ------------------------ beat 3, deja fait ----------------------- */
+
+.deja__bas { display: grid; gap: 2.75rem; margin-top: 2.75rem; }
+.trou-photo { position: relative; }
+.trou-photo .annotation {
+  position: absolute;
+  right: 1.1rem;
+  top: 1.1rem;
+  font-family: "Meow Script", cursive;
+  font-size: 2.15rem;
+  line-height: 1.1;
+  color: var(--violet);
+  transform: rotate(-3deg);
+  max-width: 62%;
+  text-align: right;
+}
+.frise { display: grid; }
+.frise li {
+  position: relative;
+  padding: 0 0 1.4rem 1.75rem;
+  border-left: 1px solid var(--filet);
+}
+.frise li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.frise li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: .55rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vert);
+}
+.frise b { display: block; font-weight: 600; color: var(--violet-sombre); }
+.frise span { display: block; font-size: 1rem; }
+
+/* -------------------------- beat 6, cascade ----------------------- */
+
+.cascade { margin: 2.75rem 0 0; display: grid; gap: 1.35rem; }
+.cascade li { display: grid; grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+.cascade .nombre {
+  font-family: "Meow Script", cursive;
+  line-height: 1.05;
+  color: var(--violet);
+  font-size: 2.6rem;
+  justify-self: start;
+}
+.cascade .lecture { font-size: 1.0625rem; line-height: 1.5; }
+.cascade li:nth-child(1) .nombre { font-size: 2.6rem; }
+.cascade li:nth-child(2) .nombre { font-size: 2.95rem; }
+.cascade li:nth-child(3) .nombre { font-size: 3.35rem; }
+.cascade li:nth-child(4) .nombre { font-size: 3.8rem; }
+.cascade li:nth-child(1) .nombre {
+  color: var(--violet-sombre);
+  background: linear-gradient(to top, var(--jaune) 0 62%, transparent 62%);
+  padding: 0 .16em .06em;
+  margin-left: -.16em;
+}
+
+/* -------------------------- beat 8, appel ------------------------- */
+
+.appel__portes { display: grid; gap: 2.25rem; margin-top: 2.5rem; align-items: start; }
+.porte { display: grid; gap: 1rem; justify-items: start; align-content: start; }
+.porte p { max-width: 52ch; }
+.appel__filet { height: 1px; background: var(--filet); border: 0; margin: 0; }
+.champ-ligne { display: flex; flex-wrap: wrap; gap: .65rem; align-items: center; }
+.champ {
+  min-height: 48px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  max-width: 340px;
+  padding: .6rem .85rem;
+  border: 1.5px solid var(--filet);
+  border-radius: var(--rayon);
+  background: var(--blanc);
+  color: var(--violet-sombre);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.champ::placeholder { color: var(--texte); opacity: 1; }
+.champ:focus-visible { border-color: var(--violet); }
+.vh {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------ pied ------------------------------ */
+
+.pied {
+  position: relative;
+  background: var(--violet-sombre);
+  color: var(--fond-violace);
+  padding: clamp(48px, 6vw, 68px) 0 clamp(88px, 8vw, 104px);
+  overflow: hidden;
+}
+.pied > .contenu { position: relative; z-index: 2; }
+.pied__grille { display: grid; gap: 2.25rem; }
+.pied__logo img { width: 98px; height: auto; }
+.pied__liens { display: flex; flex-wrap: wrap; gap: .2rem 1.6rem; }
+.pied__liens a, .pied__liens .mort {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--fond-violace);
+  font-size: .96875rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .16s ease, color .16s ease;
+}
+.pied__liens a:hover { border-bottom-color: var(--menthe); color: var(--menthe); }
+.pied__liens .mort { color: #C9C6D8; }
+.pied__mention { font-size: .84375rem; color: #C9C6D8; letter-spacing: .01em; }
+
+/* ------------------- barre mobile et selecteur -------------------- */
+
+.barre-mobile { display: none; }
+
+.selecteur {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 90;
+}
+.selecteur__pile {
+  display: flex;
+  align-items: center;
+  gap: .15rem;
+  padding: .2rem .35rem;
+  border: 1px solid var(--filet);
+  border-radius: 999px;
+  background: var(--blanc);
+  box-shadow: 0 4px 18px rgba(56, 54, 72, .16);
+}
+.selecteur a, .selecteur__nom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  color: var(--violet-sombre);
+  text-decoration: none;
+  font-size: .9375rem;
+}
+.selecteur__fleche { width: 44px; font-size: 1.1rem; border-radius: 999px; transition: background-color .16s ease; }
+.selecteur__fleche:hover { background: var(--fond-violace); }
+.selecteur__nom { padding: 0 .7rem; font-weight: 600; white-space: nowrap; }
+.selecteur__barre { width: 1px; height: 22px; background: var(--filet); margin: 0 .3rem; }
+.selecteur__tout { font-size: .8125rem; padding: 0 .75rem 0 .1rem; white-space: nowrap; }
+.selecteur__tout:hover { color: var(--violet); }
+
+/* --------------------------- etat avant --------------------------- */
+
+html[data-etat="avant"] .campagne-seule { display: none; }
+
+/* =========================== 768 et plus ========================== */
+
+@media (min-width: 768px) {
+  .rail__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; align-items: center; }
+  .plan__vue img { aspect-ratio: 16 / 10; }
+  .notes { grid-template-columns: 1fr 1fr; gap: 1.4rem 2.5rem; }
+  .choix__grille { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3.5rem; align-items: start; }
+  .deja__bas { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 3rem; }
+  .appel__portes { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .pied__grille { grid-template-columns: auto minmax(0, 1fr); gap: 3rem; align-items: start; }
+  .cascade li { grid-template-columns: minmax(0, 1fr); }
+  .cascade li:nth-child(2) { padding-left: 2.5rem; }
+  .cascade li:nth-child(3) { padding-left: 5rem; }
+  .cascade li:nth-child(4) { padding-left: 7.5rem; }
+}
+
+/* ===================== entre 768 et 1079 ========================= */
+
+@media (min-width: 768px) and (max-width: 1079px) {
+  .entete__logo img { width: 112px; }
+  .entete__rang { gap: .9rem; }
+  .nav { gap: .7rem; }
+  .nav a { font-size: .875rem; }
+  .bouton--compact { font-size: .875rem; padding: .5rem .8rem; margin-left: .15rem; }
+}
+
+/* ========================== 1080 et plus ========================== */
+
+@media (min-width: 1080px) {
+
+  .cadre { padding-right: var(--rail); }
+
+  .rail {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--rail);
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 1px solid var(--filet);
+    padding: 128px 30px 32px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .rail__inner { display: block; max-width: none; padding-left: 0; padding-right: 0; }
+  .rail__chiffre { font-size: 4.25rem; }
+  .rail .bouton--large { margin-top: 1.5rem; }
+
+  .epine__grille {
+    grid-template-columns: 536px minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .epine__grille { align-items: stretch; }
+  #le-lieu { display: grid; grid-template-rows: auto auto minmax(min-content, 1fr) auto; }
+  .epine__zone { margin-top: 2.25rem; }
+  .epine__fin { margin-top: 2.25rem; align-self: end; }
+
+  .section-ou > .contenu { padding-left: 268px; max-width: 1120px; }
+  .choix__grille { grid-template-columns: minmax(0, 1.65fr) minmax(0, .78fr); gap: 4.5rem; }
+  .deja__bas { grid-template-columns: minmax(0, 1.15fr) minmax(0, .9fr); gap: 4rem; }
+  .appel__portes { gap: 4rem; }
+}
+
+/* le voile global du panneau n'existe que superpose */
+/* le voile du panneau n'existe que dans la vue superposee, voir le bloc garde */
+.plan__voile { display: none; }
+
+/* --- panneau superpose : seulement si le fondu au defilement est possible --- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1080px) {
+      .epine__zone { min-height: min(600px, calc(100vh - 230px)); }
+      .epine__panneau { position: sticky; top: 96px; }
+      .plan { height: min(600px, calc(100vh - 230px)); background-color: #262436; }
+      .plan__pile { gap: .75rem; height: 100%; }
+      .plan__vue { height: 100%; }
+
+      /* les cinq briques deviennent des notes au feutre sur la photo */
+      .notes {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        display: block;
+        margin: 0;
+        pointer-events: none;
+      }
+      .notes li { position: absolute; width: 236px; }
+      .notes li::before {
+        content: "";
+        position: absolute;
+        inset: -56% -26%;
+        z-index: -1;
+        background: radial-gradient(62% 56% at 46% 50%, rgba(24, 22, 38, .93) 0%, rgba(24, 22, 38, .84) 32%, rgba(24, 22, 38, .46) 60%, rgba(24, 22, 38, 0) 86%);
+      }
+      .notes .mot {
+        font-size: 2rem;
+        color: var(--menthe);
+        text-shadow: 0 1px 10px rgba(20, 18, 32, .8);
+      }
+      .notes .suite {
+        font-size: .9375rem;
+        line-height: 1.45;
+        color: #F2F0F7;
+        text-shadow: 0 1px 8px rgba(20, 18, 32, .85);
+      }
+      .notes li:nth-child(1) { left: 5%;  top: 3.5%;  transform: rotate(-1.6deg); }
+      .notes li:nth-child(2) { left: 47%; top: 22.5%; transform: rotate(1.3deg); }
+      .notes li:nth-child(3) { left: 4%;  top: 41%;   transform: rotate(-0.9deg); }
+      .notes li:nth-child(4) { left: 50%; top: 60%;   transform: rotate(1.7deg); width: 200px; }
+      .notes li:nth-child(5) { left: 3%;  top: 76.5%; transform: rotate(-1.2deg); }
+
+      .plan__voile {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(175deg, rgba(38, 36, 54, .34) 0%, rgba(38, 36, 54, .16) 46%, rgba(38, 36, 54, .38) 100%);
+        pointer-events: none;
+      }
+      .plan__vue img { aspect-ratio: auto; height: 100%; }
+      .plan__vue figcaption {
+        position: absolute;
+        right: .75rem;
+        bottom: .6rem;
+        color: #F2F0F7;
+        text-shadow: 0 1px 8px rgba(20, 18, 32, .9);
+        padding: 0;
+      }
+  }
+}
+
+/* ========================== moins de 768 ========================== */
+
+@media (max-width: 767px) {
+
+  body { padding-bottom: 156px; }
+
+  .entete { padding-top: 36px; }
+  .entete__rang { gap: .75rem; padding-bottom: 10px; }
+  .entete__logo img { width: 122px; }
+
+  .menu-bouton {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    border: 1px solid var(--filet);
+    border-radius: var(--rayon);
+    background: var(--blanc);
+    cursor: pointer;
+  }
+  .menu-bouton span { display: block; width: 20px; height: 2px; background: var(--violet-sombre); }
+  .nav {
+    display: none;
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-bottom: .5rem;
+  }
+  .menu-bouton[aria-expanded="true"] + .nav { display: flex; }
+  .nav a { border-bottom: 1px solid var(--filet); border-top: 0; padding: .35rem 0; }
+  .nav .bouton--compact { display: none; }
+
+  .heros { height: auto; min-height: 74vh; padding-top: 2rem; }
+  .heros__photo { object-position: 40% 62%; }
+  .heros h1 { max-width: 12ch; }
+  .heros__mots { padding-top: 8rem; padding-bottom: 2.4rem; }
+
+  .rail { padding: 2rem 0 2.25rem; }
+  .rail__chiffre { font-size: 3.25rem; }
+  .rail .bouton--large { display: none; }
+
+  .plan__vue img { aspect-ratio: 4 / 5; }
+  .trou--visuel { min-height: 190px; }
+  .trou-photo .annotation { font-size: 1.7rem; }
+
+  .cascade li:nth-child(2) { padding-left: 1.1rem; }
+  .cascade li:nth-child(3) { padding-left: 2.2rem; }
+  .cascade li:nth-child(4) { padding-left: 3.3rem; }
+  .cascade .nombre { font-size: 2.3rem; }
+  .cascade li:nth-child(2) .nombre { font-size: 2.5rem; }
+  .cascade li:nth-child(3) .nombre { font-size: 2.7rem; }
+  .cascade li:nth-child(4) .nombre { font-size: 2.9rem; }
+
+  .champ { max-width: none; }
+
+  .barre-mobile {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 85;
+    display: block;
+    padding: .65rem 16px calc(.65rem + env(safe-area-inset-bottom));
+    background: var(--blanc);
+    border-top: 1px solid var(--filet);
+  }
+  .barre-mobile .bouton { width: 100%; min-height: 52px; }
+
+  .selecteur { bottom: 82px; max-width: calc(100% - 20px); }
+  .selecteur__pile { justify-content: center; padding: .15rem .3rem; }
+  .selecteur__nom { font-size: .8125rem; padding: 0 .3rem; }
+  .selecteur__barre { margin: 0 .2rem; }
+  .selecteur__tout { font-size: .75rem; padding: 0 .45rem 0 .1rem; white-space: nowrap; }
+}
+
+/* =================== moment de scroll, le fondu =================== */
+
+@keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #le-lieu { view-timeline-name: --ferme; view-timeline-axis: block; }
+    .plan__pile { gap: 0; }
+    .plan__vue { grid-area: 1 / 1; }
+    .plan__vue--demain {
+      opacity: 0;
+      animation: apparait linear both;
+      animation-timeline: --ferme;
+      animation-range: cover 20% cover 46%;
+    }
+    @media (min-width: 1080px) {
+      .plan__vue--demain { animation-range: cover 42% cover 70%; }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bouton, .lien-texte, .nav a { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg class="filtres" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <filter id="bruit">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+</svg>
+
+<span class="badge">Maquette, chiffres d'exemple</span>
+
+<div class="cadre">
+
+  <header class="entete">
+    <div class="contenu entete__rang">
+      <a class="entete__logo" href="#hero"><img src="../assets/logo/lma.svg" width="3576" height="1099" alt="La Maison Audacieuse"></a>
+      <button class="menu-bouton" id="menu-bouton" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="/le-projet-architectural/">Le projet</a>
+        <a href="/part-sociale/">La part sociale</a>
+        <a href="/lequipe-projet/">L'équipe</a>
+        <a href="/les-medias/">Médias</a>
+        <a href="/contacts/">Contact</a>
+        <a class="bouton bouton--compact" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= Beat 1, Heros ================= -->
+    <section id="hero" class="heros sur-sombre">
+      <img class="heros__photo" src="../assets/img/exterieur3-1.jpg" width="1368" height="857" alt="La ferme de Novel, à Annecy, longue bâtisse de pierre au grand toit de tuiles">
+      <div class="heros__voile"></div>
+      <svg class="grain grain--sombre" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
+      <div class="contenu heros__mots">
+        <h1>Et si ce lieu était <span class="manuscrit">le nôtre ?</span></h1>
+        <div class="heros__lignes">
+          <p>Devenons-en coopératrices et coopérateurs.</p>
+          <p>La Maison Audacieuse, c'est une ferme d'Annecy qui devient un lieu de vie solidaire.</p>
+          <p>Elle se construit en coopérative. Le lieu appartient à celles et ceux qui le financent.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Marge de campagne, compteur et appel ========== -->
+    <aside class="rail">
+      <svg class="grain grain--clair" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
+      <div class="contenu rail__inner">
+        <p class="campagne-seule">
+          <span class="rail__chiffre">218</span>
+          <span class="rail__suite">coopératrices et coopérateurs.</span>
+          <span class="rail__palier">Premier palier : autant que de donatrices.</span>
+        </p>
+        <div>
+          <p class="rail__prix">À partir de 100 € la part.</p>
+          <a class="bouton bouton--large" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <p class="rail__apres" style="margin-top:.9rem">Vous choisissez votre nombre de parts à l'écran suivant.</p>
+          <p style="margin-top:1.1rem"><a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a></p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====== Beats 2 et 4, le lieu puis la part en marge ====== -->
+    <div class="epine epine-section">
+      <div class="contenu epine__grille">
+
+        <section id="le-lieu">
+          <h2>La ferme de Novel</h2>
+          <p style="margin-top:1.15rem;max-width:44ch">Quartier de Novel, à Annecy. Rénovée, la ferme abritera :</p>
+
+          <div class="epine__zone">
+          <div class="epine__panneau">
+            <div class="plan">
+              <div class="plan__pile">
+                <figure class="plan__vue plan__vue--auj">
+                  <img src="../assets/img/exterieur3-1.jpg" width="1368" height="857" loading="lazy" alt="La ferme de Novel aujourd'hui, murs de pierre et grand toit de tuiles">
+                </figure>
+                <figure class="plan__vue plan__vue--demain">
+                  <img src="../assets/img/visuel-dauphine-1.jpg" width="900" height="563" loading="lazy" alt="La ferme rénovée en projet, façade vitrée et parvis planté">
+                  <figcaption>© Basa Architecture</figcaption>
+                </figure>
+              </div>
+              <div class="plan__voile"></div>
+              <ul class="notes">
+                <li><span class="mot">Un refuge</span><span class="suite">pour les femmes qui fuient les violences.</span></li>
+                <li><span class="mot">Un toit partagé</span><span class="suite">pour des femmes âgées ou isolées.</span></li>
+                <li><span class="mot">Un café</span><span class="suite">culturel et associatif ouvert sur le quartier.</span></li>
+                <li><span class="mot">Un pôle santé</span><span class="suite">inclusif.</span></li>
+                <li><span class="mot">Une maison de la créativité</span><span class="suite">pour les enfants et les familles.</span></li>
+              </ul>
+            </div>
+          </div>
+          </div>
+
+          <div class="epine__fin">
+            <p style="max-width:44ch">Personne ne s'y enrichit, tout y vise l'équilibre et l'utilité.</p>
+            <p style="margin-top:1rem"><a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a></p>
+            <p class="trou" style="margin-top:1.2rem;max-width:44ch">[TROU: cinq briques à revalider le 24/08 avec la programmation du 20/07]</p>
+          </div>
+        </section>
+
+        <section id="la-part">
+          <h2>La part sociale</h2>
+          <p style="margin-top:1.75rem;font-size:1.1875rem;line-height:1.6">Une part sociale, ce n'est pas un don. C'est un apport que vous confiez à la coopérative et qui reste le vôtre.</p>
+          <ul class="faits">
+            <li><b>À partir de 100 €.</b><span>Une part coûte 100 €. Vous en prenez autant que vous le souhaitez.</span></li>
+            <li><b>Vous devenez copropriétaire.</b><span>Le lieu appartient à celles et ceux qui le financent. C'est un bien commun.</span></li>
+            <li><b>Une personne, une voix.</b><span>Quel que soit le nombre de parts, chacune et chacun pèse autant dans les décisions.</span></li>
+            <li><b>Votre argent reste le vôtre.</b><span>Vous pouvez demander le remboursement de vos parts, à leur valeur d'origine, selon les statuts.</span></li>
+          </ul>
+          <p style="margin-top:2.75rem"><a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a></p>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ================= Beat 5, Notre choix ================= -->
+    <section id="notre-choix" class="bande-blanche section-choix">
+      <div class="contenu choix__grille">
+        <div class="bloc">
+          <h2>Notre choix</h2>
+          <p style="margin-top:.4rem">Pour rénover cette ferme, il faudra emprunter. Mais une banque ne prête qu'à un projet qui apporte déjà une partie de la somme. C'est ce qu'on appelle l'apport.</p>
+          <p>Nous avons choisi de ne pas laisser une banque financer plus de la moitié de ce lieu. Moins d'emprunt, ce sont des loyers accessibles.</p>
+          <p>Plus notre apport citoyen est solide, plus la banque suit et plus le lieu reste abordable pour toutes et tous. Les statuts interdisent tout enrichissement personnel : l'excédent reste dans la coopérative.</p>
+          <p class="chute chute--terracotta" style="margin-top:1.4rem">Chaque part en appelle d'autres.</p>
+          <p class="amorce-liste" style="margin-top:1.9rem">Ce que la part n'est pas.</p>
+          <ul class="limites">
+            <li><b>Ce n'est pas un placement.</b> Les parts ne rapportent pas d'intérêts, c'est un choix : ici, l'argent sert le projet, pas la rente.</li>
+            <li><b>Ce n'est pas immédiatement disponible.</b> Le remboursement se demande, il suit les règles des statuts. On y met de l'argent qu'on peut laisser travailler un moment.</li>
+            <li><b>Ce n'est pas un don défiscalisé.</b> Si l'avantage fiscal compte pour vous, le don reste possible en complément.</li>
+          </ul>
+        </div>
+        <figure class="dessin">
+          <img src="../assets/img/dessin.jpg" width="747" height="1107" alt="croquis d'un espace intérieur de la ferme, coursives plantées et tables occupées">
+          <figcaption>collectif La Maison Audacieuse</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Beat 3, Ce qui existe deja ============ -->
+    <section id="deja-fait" class="bande-pale section-deja">
+      <svg class="grain grain--clair" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
+      <div class="contenu">
+        <div class="bloc">
+          <h2>Ce qui existe déjà</h2>
+          <p style="margin-top:.4rem">Plus de 650 personnes ont déjà donné pour ce lieu. La campagne de dons s'est refermée en avril. Le projet existe, il est sur les rails.</p>
+          <p>Grâce à elles, l'architecte travaille et la Ville d'Annecy a signé la promesse de bail de 99 ans. Depuis le 10 juillet, La Coop Audacieuse est immatriculée au registre du commerce d'Annecy.</p>
+          <p>Pour passer des plans aux murs, nous changeons d'étape et nous ouvrons la première levée de parts sociales.</p>
+          <p class="chute" style="margin-top:1.2rem">Le don a lancé les études. La part fait exister le lieu.</p>
+        </div>
+        <div class="deja__bas">
+          <div class="trou-photo">
+            <p class="trou trou--visuel">[TROU: photo datée de la campagne de dons, Nextcloud 04 COM/01 Photos. Alt à écrire une fois la photo choisie]</p>
+            <span class="annotation" aria-hidden="true">99 ans, promesse de bail</span>
+          </div>
+          <ul class="frise">
+            <li><b>2025 :</b><span>lauréat de l'appel à projets d'Annecy</span></li>
+            <li><b>Mars 2026 :</b><span>promesse de bail de 99 ans signée</span></li>
+            <li><b>Avril 2026 :</b><span>la campagne de dons se referme</span></li>
+            <li><b>Juillet 2026 :</b><span>la coopérative est immatriculée</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== Beat 6, Ou on en est ============== -->
+    <section id="ou-on-en-est" class="section-ou">
+      <div class="contenu">
+        <div class="bloc">
+          <h2>Où on en est</h2>
+          <p class="campagne-seule" style="margin-top:.4rem">218 coopératrices et coopérateurs ont déjà pris leur part de la Maison Audacieuse.</p>
+          <p>Plus nous sommes nombreuses et nombreux, plus le lieu reste accessible et plus il pèse face aux financeurs.</p>
+          <p>Devant nous, quatre paliers. Les deux premiers regardent notre histoire, les deux suivants le poids que ce lieu prend sur son territoire.</p>
+        </div>
+        <ul class="cascade">
+          <li><span class="nombre">666 :</span><span class="lecture">celles qui ont donné reprennent leur part du lieu.</span></li>
+          <li><span class="nombre">1&nbsp;700 :</span><span class="lecture">celles qui ont signé en 2025 en deviennent copropriétaires.</span></li>
+          <li><span class="nombre">3&nbsp;000 :</span><span class="lecture"><span class="trou trou--enligne">[TROU: lecture à valider le 24/08]</span>.</span></li>
+          <li><span class="nombre">5&nbsp;000 :</span><span class="lecture">l'objectif audacieux de cette campagne. <span class="trou trou--enligne">[TROU: lecture du palier 5 000 à valider le 24/08]</span></span></li>
+        </ul>
+        <p class="trou" style="margin-top:1.8rem;max-width:46ch">[TROU: visuel de cascade à produire, brief Solène]</p>
+        <p class="chute" style="margin-top:2.6rem;max-width:26ch">On ne donne pas à quelque chose, on devient quelque chose.</p>
+        <p style="margin-top:2rem"><a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a></p>
+      </div>
+    </section>
+
+    <!-- ============== Beat 7, Le collectif ============== -->
+    <section id="le-collectif" class="bande-blanche section-collectif">
+      <div class="contenu deja__bas" style="margin-top:0">
+        <div class="bloc">
+          <h2>Le collectif</h2>
+          <p style="margin-top:.4rem">Ce lieu est porté par des associations annéciennes déjà à l'oeuvre. <span class="trou trou--enligne">[TROU: liste des exploitantes à figer au 24/08]</span></p>
+          <p>Autour d'elles, des architectes et une équipe de maîtrise d'ouvrage.</p>
+          <p>On se retrouve le samedi 19 septembre pour la Fête de l'Audace, pendant les journées du patrimoine. Venez voir le bâtiment, rencontrer celles et ceux qui le portent et prendre votre part sur place.</p>
+          <p class="trou" style="max-width:48ch">[TROU: lieu et horaires de la Fête de l'Audace du 19/09, à poser en bloc date, lieu, adresse sous le paragraphe]</p>
+          <p style="margin-top:.4rem"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe</a></p>
+        </div>
+        <p class="trou trou--visuel" style="min-height:200px;align-self:start">[TROU: photos de la Fête de l'Audace 1, Nextcloud 04 COM/01 Photos/2026.03 Fête de l'Audace, droit à l'image des personnes photographiées à vérifier avant mise en ligne]</p>
+      </div>
+    </section>
+
+    <!-- ================ Beat 8, Et vous ? ================ -->
+    <section id="et-vous" class="bande-pale section-vous">
+      <span id="prendre-part" aria-hidden="true"></span>
+      <svg class="grain grain--clair" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
+      <div class="contenu">
+        <h2>Et vous ?</h2>
+        <div class="porte" style="margin-top:1.4rem">
+          <p class="chute" style="max-width:24ch">Prenez part à la Maison Audacieuse.</p>
+          <p>Une part vaut 100 €. Vous en prenez autant que vous le souhaitez.</p>
+          <a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+        </div>
+        <hr class="appel__filet" style="margin-top:3rem">
+        <div class="appel__portes">
+          <div class="porte">
+            <p>Le don reste possible. Il est déductible à 66 % de vos impôts : un don de 100 € vous en coûte 34 €.</p>
+            <a class="bouton bouton--second" href="https://www.helloasso.com/associations/la-maison-audacieuse/collectes/la-maison-audacieuse">Je fais un don</a>
+            <p class="trou" style="max-width:46ch">[TROU: URL HelloAsso à jour, la page de campagne doit être mise à jour avant la bascule]</p>
+            <p>Vous pouvez aussi en parler autour de vous ou venir nous donner un coup de main.</p>
+            <p class="trou" style="max-width:46ch">[TROU: bénévolat, décider entre un lien vers /contacts/ et un libellé sans lien]</p>
+          </div>
+          <div class="porte">
+            <p>Et si vous préférez suivre le chantier avant de décider, laissez-nous votre adresse.</p>
+            <label class="vh" for="courriel">Adresse email</label>
+            <div class="champ-ligne">
+              <input class="champ" id="courriel" type="email" name="courriel" autocomplete="email" placeholder="Adresse email">
+              <button class="bouton bouton--tertiaire" type="button">Je m'inscris</button>
+            </div>
+            <p class="trou" style="max-width:46ch">[TROU: consentement et fréquence newsletter]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== Beat 9, Pied ==================== -->
+  <footer class="pied sur-sombre" id="pied">
+    <svg class="grain grain--sombre" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
+    <div class="contenu">
+      <div class="pied__grille">
+        <div class="pied__logo">
+          <img src="../assets/logo/lma-blanc.png" width="584" height="720" alt="La Maison Audacieuse">
+        </div>
+        <div>
+          <nav class="pied__liens">
+            <a href="/le-projet-architectural/">Le projet</a>
+            <a href="/part-sociale/">La part sociale</a>
+            <a href="/lequipe-projet/">L'équipe</a>
+            <a href="/les-medias/">Médias</a>
+            <a href="/contacts/">Contact</a>
+            <a href="/politique-de-confidentialite-mentions-legales/">Mentions légales</a>
+            <a href="/politique-de-confidentialite-mentions-legales/">Politique de confidentialité</a>
+            <a href="#et-vous">Newsletter</a>
+          </nav>
+          <p class="pied__mention" style="margin-top:1rem">Statuts, à venir avec le tunnel. CGV parts, à venir avec le tunnel.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<div class="barre-mobile">
+  <a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+</div>
+
+<nav class="selecteur" aria-label="Variantes de maquette">
+  <div class="selecteur__pile">
+    <a class="selecteur__fleche" id="sel-prec" href="b-compteur.html" aria-label="Variante précédente, B, Le compteur">&#8592;</a>
+    <span class="selecteur__nom">C, La ferme</span>
+    <a class="selecteur__fleche" id="sel-suiv" href="a-recit.html" aria-label="Variante suivante, A, Le récit">&#8594;</a>
+    <span class="selecteur__barre" aria-hidden="true"></span>
+    <a class="selecteur__tout" href="../index.html">toutes les maquettes</a>
+  </div>
+</nav>
+
+<script>
+(function () {
+  var p = new URLSearchParams(location.search);
+  var etat = p.get('etat');
+  if (etat === 'avant') document.documentElement.setAttribute('data-etat', 'avant');
+  var q = etat ? '?etat=' + encodeURIComponent(etat) : '';
+  var prec = 'b-compteur.html' + q, suiv = 'a-recit.html' + q;
+  document.getElementById('sel-prec').href = prec;
+  document.getElementById('sel-suiv').href = suiv;
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target;
+    if (t && t.closest && t.closest('input, textarea, select, [contenteditable]')) return;
+    if (e.key === 'ArrowLeft') location.href = prec;
+    if (e.key === 'ArrowRight') location.href = suiv;
+  });
+  var bt = document.getElementById('menu-bouton');
+  bt.addEventListener('click', function () {
+    bt.setAttribute('aria-expanded', bt.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+  });
+})();
+</script>
+
+</body>
+</html>

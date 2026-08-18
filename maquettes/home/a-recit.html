@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Parts sociales d'un lieu solidaire | La Maison Audacieuse</title>
+<meta name="description" content="Une ferme d'Annecy devient un lieu de vie solidaire. Prenez une part a 100 EUR et devenez cooperatrice ou cooperateur du lieu.">
+<link rel="stylesheet" href="../assets/fonts.css">
+<script>
+(function () {
+  var e = new URLSearchParams(window.location.search).get('etat');
+  if (e === 'avant') { document.documentElement.className += ' etat-avant'; }
+})();
+</script>
+<style>
+/* ------------------------------------------------------------------ */
+/* Maquette A, Le recit. Variante 1 sur 3 de la home maison-audacieuse.fr */
+/* Charte fermee : 7 couleurs, Onest, Meow Script en annotation seulement */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --violet: #766DA0;
+  --violet-sombre: #383648;
+  --kaki: #9D9669;
+  --vert: #5E9E85;
+  --terracotta: #A3716A;
+  --menthe: #BAFFE4;
+  --jaune: #FFF3A8;
+  --texte: #56546B;
+  --gris: #F5F5F6;
+  --violace: #EDEDF5;
+  --blanc: #FFFFFF;
+
+  --filet: rgba(56, 54, 72, .16);
+  --filet-clair: rgba(255, 255, 255, .22);
+
+  --strip: 30px;
+  --h-entete: 76px;
+  --marge: clamp(1.25rem, 3.6vw, 3.5rem);
+
+  --t-display: clamp(2.55rem, 6.4vw, 5.25rem);
+  --t-titre: clamp(1.95rem, 3.4vw, 3rem);
+  --t-lead: clamp(1.2rem, 1.55vw, 1.55rem);
+  --t-corps: clamp(1.0625rem, .95vw, 1.125rem);
+  --t-petit: .875rem;
+  --t-micro: .7rem;
+  --t-meow: clamp(2.4rem, 4.6vw, 3.9rem);
+
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-padding-top: calc(var(--strip) + var(--h-entete) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding-top: var(--strip);
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: "Onest", "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: var(--t-corps);
+  line-height: 1.62;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2 {
+  font-weight: 700;
+  color: var(--violet-sombre);
+  margin: 0;
+  letter-spacing: -.018em;
+}
+
+h1 { font-size: var(--t-display); line-height: .98; }
+h2 { font-size: var(--t-titre); line-height: 1.04; }
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.sur-sombre :focus-visible,
+.hero :focus-visible { outline-color: var(--menthe); }
+
+/* ---------- deux etats de campagne ---------- */
+/* Par defaut : etat campagne, le compteur est allume.
+   ?etat=avant : fenetre du 30/08 au lancement, le compteur est masque,
+   le heros perd sa ligne de compteur et le beat 6 sa premiere ligne. */
+
+html.etat-avant [data-compteur] { display: none; }
+
+/* ---------- surfaces ---------- */
+
+.grain { position: relative; isolation: isolate; }
+.grain > .grain__voile {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  pointer-events: none;
+  z-index: 0;
+}
+.grain > *:not(.grain__voile) { position: relative; z-index: 1; }
+
+.sur-sombre {
+  background-color: var(--violet-sombre);
+  color: rgba(255, 255, 255, .93);
+}
+.sur-sombre h2, .sur-sombre .accroche { color: var(--blanc); }
+.sur-sombre .voile-degrade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(115% 85% at 88% 6%, rgba(118, 109, 160, .92) 0%, rgba(118, 109, 160, 0) 62%),
+    radial-gradient(60% 55% at 108% 104%, rgba(157, 150, 105, .55) 0%, rgba(157, 150, 105, 0) 72%);
+}
+
+/* ---------- bandeau de maquette ---------- */
+
+.strip {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--strip);
+  z-index: 80;
+  background: var(--blanc);
+  border-bottom: 1px solid rgba(56, 54, 72, .10);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--marge);
+}
+.badge {
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--violet-sombre);
+  border: 1px solid rgba(56, 54, 72, .28);
+  border-radius: 999px;
+  padding: .18rem .6rem;
+  line-height: 1.4;
+}
+
+/* ---------- entete ---------- */
+
+.entete {
+  position: sticky;
+  top: var(--strip);
+  z-index: 60;
+  height: var(--h-entete);
+  background-image: linear-gradient(to bottom, rgba(56, 54, 72, .68) 0%, rgba(56, 54, 72, .32) 62%, rgba(56, 54, 72, 0) 100%);
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+.entete__inner {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--marge);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.6rem);
+}
+.logo { display: inline-flex; align-items: center; min-height: 44px; }
+.logo img { height: 32px; width: auto; transition: filter 180ms ease; }
+.entete .logo img { filter: brightness(0) invert(1); }
+.entete[data-solide="oui"] { background-image: none; background-color: var(--blanc); box-shadow: 0 1px 0 rgba(56, 54, 72, .12); }
+.entete[data-solide="oui"] .logo img { filter: none; }
+
+.nav { margin-left: auto; }
+.nav ul { display: flex; align-items: center; gap: clamp(.5rem, 1.3vw, 1.5rem); }
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 .35rem;
+  font-size: var(--t-petit);
+  font-weight: 500;
+  color: var(--blanc);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.nav a:hover { border-bottom-color: currentColor; }
+.entete[data-solide="oui"] .nav a { color: var(--violet-sombre); }
+
+.entete__cta { margin-left: clamp(.5rem, 1.4vw, 1.4rem); }
+
+.menu-bouton {
+  display: none;
+  margin-left: auto;
+  min-height: 44px;
+  min-width: 62px;
+  align-items: center;
+  justify-content: center;
+  font: 600 var(--t-petit)/1 "Onest", system-ui, sans-serif;
+  color: var(--blanc);
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, .55);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.entete[data-solide="oui"] .menu-bouton { color: var(--violet-sombre); border-color: rgba(56, 54, 72, .35); }
+.menu-bouton:hover { background: rgba(255, 255, 255, .14); }
+.entete[data-solide="oui"] .menu-bouton:hover { background: rgba(56, 54, 72, .07); }
+
+.menu-mobile {
+  position: fixed;
+  top: calc(var(--strip) + var(--h-entete));
+  left: 0; right: 0;
+  z-index: 59;
+  background: var(--blanc);
+  border-bottom: 1px solid var(--filet);
+  padding: .5rem var(--marge) 1rem;
+  box-shadow: 0 14px 28px rgba(56, 54, 72, .14);
+}
+.menu-mobile[hidden] { display: none; }
+.menu-mobile a {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  font-weight: 500;
+  color: var(--violet-sombre);
+  text-decoration: none;
+  border-bottom: 1px solid var(--filet);
+}
+.menu-mobile li:last-child a { border-bottom: 0; }
+
+/* ---------- boutons et liens ---------- */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.65rem;
+  font-size: var(--t-petit);
+  font-weight: 600;
+  letter-spacing: .005em;
+  text-decoration: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+  transition: background-color 170ms ease, color 170ms ease, transform 120ms ease;
+}
+.bouton--primaire { background: var(--violet); color: var(--blanc); }
+.bouton--primaire:hover { background: var(--violet-sombre); }
+.bouton--primaire:active { transform: translateY(1px); }
+
+.bouton--secondaire {
+  background: transparent;
+  color: var(--violet-sombre);
+  border: 2px solid var(--violet-sombre);
+}
+.bouton--secondaire:hover { background: var(--violet-sombre); color: var(--blanc); }
+.bouton--secondaire:active { transform: translateY(1px); }
+
+.lien-texte {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  font-size: var(--t-petit);
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .34em;
+  transition: text-decoration-thickness 150ms ease, text-decoration-color 150ms ease;
+}
+.lien-texte:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
+.sur-sombre .lien-texte { color: var(--blanc); text-decoration-color: rgba(255, 255, 255, .55); }
+.sur-sombre .lien-texte:hover { text-decoration-color: var(--blanc); }
+.hero .lien-texte { color: var(--blanc); text-decoration-color: rgba(255, 255, 255, .55); }
+.hero .lien-texte:hover { text-decoration-color: var(--blanc); }
+
+/* ---------- trous de copy ---------- */
+
+.trou {
+  display: block;
+  border: 1.5px dashed rgba(118, 109, 160, .62);
+  background: rgba(118, 109, 160, .05);
+  border-radius: 3px;
+  padding: .65rem .85rem;
+  font-size: var(--t-petit);
+  line-height: 1.5;
+  color: var(--texte);
+}
+.trou--suite { margin-top: .8rem; }
+.trou--inline { display: inline-block; padding: .3rem .6rem; }
+.sur-sombre .trou { border-color: rgba(255, 255, 255, .5); background: rgba(255, 255, 255, .07); color: rgba(255, 255, 255, .9); }
+
+/* ---------- heros ---------- */
+
+.hero {
+  position: relative;
+  margin-top: calc(-1 * var(--h-entete));
+  min-height: calc(100vh - var(--strip));
+  min-height: calc(100svh - var(--strip));
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--h-entete) + 3rem) var(--marge) clamp(3rem, 18vh, 11rem);
+  overflow: hidden;
+  background: var(--violet-sombre);
+}
+.hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 74%;
+  filter: brightness(1.24) contrast(1.04);
+}
+.hero__voile {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(56, 54, 72, .26) 0%, rgba(56, 54, 72, 0) 15%, rgba(56, 54, 72, 0) 38%, rgba(56, 54, 72, .64) 64%, rgba(56, 54, 72, .93) 82%, rgba(56, 54, 72, .96) 100%),
+    linear-gradient(to right, rgba(56, 54, 72, .34) 0%, rgba(56, 54, 72, 0) 52%);
+}
+.hero__contenu {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  gap: clamp(1.75rem, 4.5vw, 5rem);
+  align-items: end;
+  color: var(--blanc);
+}
+.hero h1 { color: var(--blanc); max-width: 14ch; }
+.hero__lead {
+  margin-top: 1.4rem;
+  font-size: var(--t-lead);
+  font-weight: 500;
+  line-height: 1.32;
+  max-width: 24ch;
+}
+.hero__compteur {
+  margin-top: 1.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, .34);
+  max-width: 34ch;
+  font-size: var(--t-petit);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .92);
+}
+.hero__compteur .chiffre {
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--blanc);
+  letter-spacing: -.01em;
+}
+.hero__colonne { display: flex; flex-direction: column; gap: 1rem; padding-bottom: .35rem; }
+.hero__colonne p { max-width: 42ch; color: rgba(255, 255, 255, .94); }
+.hero__colonne .hero__prix { font-weight: 600; color: var(--blanc); }
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem 1.6rem;
+  margin-top: .7rem;
+}
+.hero__colonne .hero__apres { font-size: var(--t-petit); color: rgba(255, 255, 255, .84); }
+
+/* ---------- ossature des sections ---------- */
+
+.contenu { max-width: 1240px; margin: 0 auto; padding: 0 var(--marge); }
+.accroche {
+  font-size: var(--t-lead);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--violet-sombre);
+  letter-spacing: -.01em;
+}
+
+/* Beat 2, Le lieu */
+
+#le-lieu { padding: clamp(5rem, 10vh, 8.5rem) 0 clamp(3.5rem, 6vh, 5rem); }
+#le-lieu .contenu { max-width: 1240px; }
+.lieu__texte { max-width: 44rem; margin-left: clamp(0rem, 7vw, 8rem); }
+.lieu__intro { margin-top: 1.6rem; }
+.usages {
+  margin-top: 2.2rem;
+  padding-left: clamp(1.1rem, 2vw, 1.8rem);
+  border-left: 2px solid var(--violet);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+}
+.usages li {
+  font-size: clamp(1.15rem, 1.45vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.34;
+  color: var(--violet-sombre);
+}
+.lieu__cloture { margin-top: 2.2rem; max-width: 40rem; }
+.lieu__figure { margin: clamp(2.75rem, 6vh, 4.5rem) 0 0; }
+
+.revele__cadre { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.revele__img {
+  width: 100%;
+  height: clamp(230px, 44vh, 500px);
+  object-fit: cover;
+  object-position: center 58%;
+}
+.revele__bloc { position: relative; }
+.etiquette {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  background: var(--blanc);
+  color: var(--violet-sombre);
+  font-size: var(--t-petit);
+  font-weight: 600;
+  padding: .3rem .75rem;
+  border-radius: 3px;
+}
+.revele__bloc--apres .etiquette { left: auto; right: 1rem; }
+.credit {
+  margin: .8rem var(--marge) 0 0;
+  text-align: right;
+  font-size: var(--t-petit);
+  color: var(--texte);
+}
+.lieu__lien { margin-top: 1.4rem; margin-left: clamp(0rem, 7vw, 8rem); }
+
+@media (max-width: 720px) {
+  .revele__cadre { grid-template-columns: 1fr; }
+  .revele__img { height: clamp(210px, 34vh, 320px); }
+}
+
+/* Le seul moment de defilement de la page : la ferme d'aujourd'hui se change
+   en projet Basa. La photo reste la couche de fond, elle ne disparait jamais :
+   sans support ou a mi-course, on voit toujours une image, jamais du vide. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .revele__cadre { grid-template-columns: 1fr; gap: 0; }
+    .revele__bloc { grid-area: 1 / 1; }
+    .revele__img { height: clamp(300px, 62vh, 620px); }
+    .revele__bloc--apres { opacity: 0; animation: fondu linear both; animation-timeline: view(); animation-range: cover 20% cover 52%; }
+    .revele__bloc--avant .etiquette { animation: fondu-sortie linear both; animation-timeline: view(); animation-range: cover 20% cover 40%; }
+  }
+}
+@keyframes fondu { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fondu-sortie { from { opacity: 1; } to { opacity: 0; } }
+
+/* Beat 3, Ce qui existe deja */
+
+#deja-fait { background: var(--violace); padding: clamp(4rem, 7vh, 6rem) 0 clamp(4rem, 7vh, 6.5rem); }
+.deja__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.deja__texte { display: flex; flex-direction: column; gap: 1.15rem; max-width: 40rem; }
+.deja__texte h2 { margin-bottom: .5rem; }
+.deja__chute { margin-top: 1rem; padding-top: 1.3rem; border-top: 2px solid var(--violet-sombre); text-wrap: balance; }
+
+.cliche {
+  position: relative;
+  border: 1.5px dashed rgba(118, 109, 160, .62);
+  background: rgba(118, 109, 160, .05);
+  border-radius: 3px;
+  aspect-ratio: 4 / 3.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 2.4vw, 2rem);
+  overflow: hidden;
+}
+.cliche p { font-size: var(--t-petit); line-height: 1.5; max-width: 30ch; }
+.annotation {
+  position: absolute;
+  right: clamp(.6rem, 2vw, 1.6rem);
+  bottom: clamp(.2rem, 1.5vw, 1rem);
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(1.7rem, 2.7vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--terracotta);
+  transform: rotate(-5deg);
+  transform-origin: right bottom;
+  max-width: 8ch;
+  text-align: right;
+}
+
+.frise {
+  margin-top: clamp(2.75rem, 6vh, 4.25rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 2px solid rgba(56, 54, 72, .25);
+}
+.frise li { padding: 1.1rem 1.4rem 0 0; position: relative; }
+.frise li::before {
+  content: "";
+  position: absolute;
+  top: -2px; left: 0;
+  width: 34px; height: 2px;
+  background: var(--violet-sombre);
+}
+.frise .date { display: block; font-weight: 600; color: var(--violet-sombre); font-size: var(--t-petit); }
+.frise .fait { display: block; font-size: var(--t-petit); line-height: 1.5; margin-top: .2rem; }
+
+/* Beat 4, La part sociale */
+
+#la-part { padding: clamp(5.5rem, 11vh, 9rem) 0 clamp(5rem, 9vh, 7.5rem); }
+#la-part .contenu { max-width: 1160px; }
+.part__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(1.75rem, 4vw, 4rem);
+  align-items: start;
+}
+.part__intro { max-width: 30ch; }
+.part__intro p { margin-top: 1.2rem; }
+.part__panneau {
+  background: var(--menthe);
+  border-radius: 4px;
+  padding: clamp(1.6rem, 3.2vw, 2.9rem);
+  margin-top: clamp(0rem, 2vw, 2.2rem);
+}
+.faits { display: flex; flex-direction: column; }
+.faits li { padding: 1.15rem 0; border-top: 1px solid rgba(56, 54, 72, .22); color: var(--violet-sombre); }
+.faits li:first-child { border-top: 0; padding-top: 0; }
+.faits li:last-child { padding-bottom: 0; }
+.amorce { font-weight: 700; }
+.part__lien { margin-top: 1.5rem; }
+
+/* Beat 5, Notre choix */
+
+#notre-choix { padding: clamp(6rem, 12vh, 10rem) 0; overflow: hidden; }
+.choix__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+.choix__texte { display: flex; flex-direction: column; gap: 1.2rem; max-width: 42rem; }
+.choix__texte h2 { margin-bottom: .6rem; }
+.dessin { background: var(--blanc); padding: 1.1rem; border-radius: 3px; }
+.dessin img { width: 100%; height: auto; }
+.choix__chute {
+  margin: clamp(3rem, 6vh, 4.75rem) 0 clamp(2.5rem, 5vh, 4rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+  color: var(--blanc);
+  max-width: 52rem;
+  text-wrap: balance;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--filet-clair);
+}
+.pas { max-width: 52rem; }
+.pas__amorce { font-weight: 600; color: var(--blanc); }
+.limites { margin-top: 1.2rem; }
+.limites li { padding: 1.05rem 0; border-top: 1px solid var(--filet-clair); }
+.limites li:last-child { border-bottom: 1px solid var(--filet-clair); }
+
+/* Beat 6, Ou on en est */
+
+#ou-on-en-est { background: var(--gris); padding: clamp(4.5rem, 8vh, 7rem) 0 clamp(5rem, 9vh, 7.5rem); }
+#ou-on-en-est .contenu { max-width: 1080px; }
+.etat__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 44rem; }
+.etat__texte h2 { margin-bottom: .5rem; }
+.etat__compteur { font-size: var(--t-lead); font-weight: 500; line-height: 1.3; color: var(--violet-sombre); }
+.etat__compteur .chiffre { font-weight: 700; }
+.paliers { margin-top: clamp(2.5rem, 5vh, 3.75rem); }
+.paliers li {
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--filet);
+  color: var(--violet-sombre);
+  line-height: 1.5;
+}
+.paliers li:last-child { border-bottom: 1px solid var(--filet); }
+.paliers li:nth-child(2) { padding-left: clamp(0rem, 2vw, 2.2rem); }
+.paliers li:nth-child(3) { padding-left: clamp(0rem, 4vw, 4.4rem); }
+.paliers li:nth-child(4) { padding-left: clamp(0rem, 6vw, 6.6rem); }
+.palier__nb {
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: var(--t-meow);
+  line-height: 1;
+  color: var(--terracotta);
+  margin-right: .1rem;
+}
+.etat__chute {
+  margin-top: clamp(2.5rem, 5vh, 3.75rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+  color: var(--violet-sombre);
+  max-width: 34ch;
+  text-wrap: balance;
+}
+.etat__action { margin-top: 2rem; }
+
+/* Beat 7, Le collectif */
+
+#le-collectif { padding: clamp(4rem, 7vh, 6rem) 0; }
+#le-collectif .contenu { max-width: 1200px; }
+.collectif__haut {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.collectif__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 38rem; }
+.collectif__texte h2 { margin-bottom: .5rem; }
+.rendez-vous {
+  border-left: 4px solid var(--vert);
+  padding: .3rem 0 .3rem clamp(1rem, 2vw, 1.6rem);
+  margin-top: clamp(1rem, 3vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 34rem;
+}
+.collectif__figure { margin: clamp(2.5rem, 5vh, 3.75rem) 0 0; max-width: 820px; }
+.collectif__figure img { width: 100%; max-width: 820px; height: auto; background: var(--gris); padding: clamp(.75rem, 1.6vw, 1.5rem); }
+.collectif__figure figcaption { margin-top: .9rem; max-width: 44rem; }
+.collectif__lien { margin-top: 1.2rem; }
+
+/* Beat 8, Et vous */
+
+#et-vous {
+  background-color: var(--violace);
+  padding: clamp(5rem, 10vh, 8rem) 0 clamp(5.5rem, 10vh, 8.5rem);
+}
+#et-vous .contenu { max-width: 1120px; }
+.vous__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.25rem, 5vw, 5rem);
+  align-items: start;
+  margin-top: clamp(1.75rem, 4vh, 3rem);
+}
+.porte { display: flex; flex-direction: column; gap: 1.1rem; }
+.porte--une { max-width: 26ch; align-self: center; }
+.porte--deux { max-width: 40rem; padding-top: .3rem; }
+.porte--deux .bloc { display: flex; flex-direction: column; gap: 1rem; }
+.porte--deux .bloc + .bloc { margin-top: 1.9rem; padding-top: 1.9rem; border-top: 1px solid rgba(56, 54, 72, .18); }
+.vous__baseline {
+  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -.015em;
+  color: var(--violet-sombre);
+}
+.champ { display: flex; max-width: 30rem; }
+.champ input {
+  flex: 1 1 0%;
+  min-width: 0;
+  width: 6rem;
+  min-height: 52px;
+  padding: 0 .95rem;
+  font: 400 var(--t-corps)/1.5 "Onest", system-ui, sans-serif;
+  color: var(--violet-sombre);
+  background: var(--blanc);
+  border: 1.5px solid rgba(56, 54, 72, .42);
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+}
+.bouton--inscription {
+  background: var(--violet-sombre);
+  color: var(--blanc);
+  border-radius: 0 6px 6px 0;
+  padding: 0 1.15rem;
+}
+.bouton--inscription:hover { background: var(--violet); }
+.etiquette-champ { display: block; max-width: 42ch; }
+
+/* Beat 9, Pied */
+
+.pied { padding: clamp(3.5rem, 6vh, 5rem) 0 clamp(6.5rem, 11vh, 8rem); }
+.pied .contenu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
+}
+.pied img { height: 46px; width: auto; filter: brightness(0) invert(1); }
+.pied ul { display: flex; flex-wrap: wrap; gap: 0 clamp(.9rem, 2vw, 1.9rem); justify-content: flex-end; }
+.pied a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--t-petit);
+  color: var(--violace);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease;
+}
+.pied a:hover { border-bottom-color: currentColor; }
+
+/* ---------- barre CTA mobile ---------- */
+
+.barre-mobile {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 70;
+  padding: .6rem var(--marge) calc(.6rem + env(safe-area-inset-bottom, 0px));
+  background: var(--blanc);
+  border-top: 1px solid var(--filet);
+}
+.barre-mobile .bouton { width: 100%; }
+
+/* ---------- selecteur de variante ---------- */
+
+.selecteur {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 75;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .3rem .35rem;
+  background: var(--violet-sombre);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .26);
+  box-shadow: 0 8px 26px rgba(56, 54, 72, .38);
+  max-width: calc(100% - 20px);
+}
+.selecteur a, .selecteur span { color: var(--blanc); }
+.selecteur__fleche {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+.selecteur__fleche:hover { background: rgba(255, 255, 255, .16); }
+.selecteur__fleche svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.selecteur__nom { font-size: var(--t-petit); font-weight: 600; padding: 0 .3rem; white-space: nowrap; }
+.selecteur__toutes {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 .85rem 0 .7rem;
+  margin-left: .15rem;
+  font-size: var(--t-micro);
+  color: rgba(255, 255, 255, .82);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+  border-left: 1px solid rgba(255, 255, 255, .28);
+  white-space: nowrap;
+}
+.selecteur__toutes:hover { color: var(--blanc); }
+.selecteur :focus-visible { outline-color: var(--menthe); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1080px) {
+  .hero__contenu { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .hero h1 { max-width: 18ch; }
+  .deja__grille { grid-template-columns: minmax(0, 1fr); }
+  .cliche { max-width: 30rem; aspect-ratio: 4 / 3; }
+  .part__grille { grid-template-columns: minmax(0, 1fr); }
+  .part__panneau { margin-top: 0; }
+  .choix__grille { grid-template-columns: minmax(0, 1fr) minmax(0, 320px); }
+  .revele__img { height: clamp(280px, 42vh, 420px); }
+  .collectif__haut { grid-template-columns: minmax(0, 1fr); }
+  .vous__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+}
+
+@media (max-width: 860px) {
+  .choix__grille { grid-template-columns: minmax(0, 1fr); }
+  .dessin { max-width: 22rem; }
+  .frise { grid-template-columns: 1fr 1fr; }
+  .frise li { padding-bottom: 1.1rem; }
+  .frise li:nth-child(n+3) { border-top: 1px solid rgba(56, 54, 72, .25); }
+}
+
+@media (max-width: 767px) {
+  :root { --h-entete: 58px; }
+  .nav, .entete__cta { display: none; }
+  .menu-bouton { display: inline-flex; }
+  .barre-mobile { display: block; }
+  .selecteur { padding: 0 .25rem; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
+  .barre-mobile { padding: .5rem var(--marge) calc(.5rem + env(safe-area-inset-bottom, 0px)); }
+  .bouton { min-height: 48px; }
+  /* En 375 la photo ne peut pas passer derriere tout le texte : assez sombre
+     pour porter du blanc, elle ne montrerait plus la ferme. Elle prend donc
+     une bande haute, en paysage, et le texte descend sur l'aplat violet. */
+  .hero { padding-top: calc(var(--h-entete) + 16.5rem); padding-bottom: 4.5rem; }
+  .hero h1 { font-size: 2.2rem; max-width: 100%; }
+  .hero__lead { font-size: 1.05rem; margin-top: .8rem; max-width: 100%; }
+  .hero__compteur { margin-top: .95rem; padding-top: .7rem; }
+  .hero__compteur .chiffre { font-size: 1.2rem; }
+  .hero__contenu { gap: 1.05rem; }
+  .hero__colonne { gap: .55rem; }
+  .hero__actions { margin-top: .2rem; gap: .2rem 1.2rem; }
+  /* En 375 la photo passe derriere tout le bloc de texte, voile uniforme :
+     un degrade y produirait un aplat violet sans photo lisible. */
+  .hero__img { height: 300px; bottom: auto; object-position: 46% 58%; filter: brightness(1.06) contrast(1.14); }
+  .hero__voile {
+    height: 300px;
+    bottom: auto;
+    background: linear-gradient(to bottom, rgba(56, 54, 72, .52) 0%, rgba(56, 54, 72, .14) 26%, rgba(56, 54, 72, .22) 58%, rgba(56, 54, 72, .90) 92%, rgb(56, 54, 72) 100%);
+  }
+  .lieu__texte, .lieu__lien { margin-left: 0; }
+  .revele__img { height: 320px; object-position: 46% 58%; }
+  .credit { margin-right: 0; }
+  .frise { grid-template-columns: 1fr; }
+  .frise li { padding: .95rem 0; }
+  .frise li:nth-child(n+2) { border-top: 1px solid rgba(56, 54, 72, .25); }
+  .paliers li { padding-left: 0; }
+  .pied .contenu { justify-content: flex-start; }
+  .pied ul { justify-content: flex-start; }
+}
+
+@media (max-width: 400px) {
+  .hero__actions { gap: .3rem 1rem; }
+  .bouton { padding: 0 1.15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <p class="badge">Maquette, chiffres d'exemple</p>
+</div>
+
+<header class="entete" id="entete" data-solide="non">
+  <div class="entete__inner">
+    <a class="logo" href="#hero"><img src="../assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="/le-projet-architectural/">Le projet</a></li>
+        <li><a href="/part-sociale/">La part sociale</a></li>
+        <li><a href="/lequipe-projet/">L'équipe</a></li>
+        <li><a href="/les-medias/">Médias</a></li>
+        <li><a href="/contacts/">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="bouton bouton--primaire entete__cta" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+    <button class="menu-bouton" type="button" id="menu-bouton" aria-expanded="false" aria-controls="menu-mobile">Menu</button>
+  </div>
+</header>
+
+<nav class="menu-mobile" id="menu-mobile" aria-label="Navigation, menu replié" hidden>
+  <ul>
+    <li><a href="/le-projet-architectural/">Le projet</a></li>
+    <li><a href="/part-sociale/">La part sociale</a></li>
+    <li><a href="/lequipe-projet/">L'équipe</a></li>
+    <li><a href="/les-medias/">Médias</a></li>
+    <li><a href="/contacts/">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- Beat 1, Heros -->
+  <section class="hero" id="hero">
+    <img class="hero__img" src="../assets/img/hero1.jpg" alt="La ferme de Novel, à Annecy, longue bâtisse de pierre au grand toit de tuiles" width="1368" height="857">
+    <div class="hero__voile" aria-hidden="true"></div>
+    <div class="hero__contenu">
+      <div>
+        <h1>Et si ce lieu était le nôtre ?</h1>
+        <p class="hero__lead">Devenons-en coopératrices et coopérateurs.</p>
+        <p class="hero__compteur" data-compteur><span class="chiffre">218</span> coopératrices et coopérateurs. Premier palier : autant que de donatrices.</p>
+      </div>
+      <div class="hero__colonne">
+        <p>La Maison Audacieuse, c'est une ferme d'Annecy qui devient un lieu de vie solidaire.</p>
+        <p>Elle se construit en coopérative. Le lieu appartient à celles et ceux qui le financent.</p>
+        <p class="hero__prix">À partir de 100 € la part.</p>
+        <div class="hero__actions">
+          <a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
+        </div>
+        <p class="hero__apres">Vous choisissez votre nombre de parts à l'écran suivant.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beat 2, Le lieu -->
+  <section id="le-lieu">
+    <div class="contenu">
+      <div class="lieu__texte">
+        <h2>La ferme de Novel</h2>
+        <p class="lieu__intro">Quartier de Novel, à Annecy. Rénovée, la ferme abritera :</p>
+        <ul class="usages">
+          <li>Un refuge pour les femmes qui fuient les violences.</li>
+          <li>Un toit partagé pour des femmes âgées ou isolées.</li>
+          <li>Un café culturel et associatif ouvert sur le quartier.</li>
+          <li>Un pôle santé inclusif.</li>
+          <li>Une maison de la créativité pour les enfants et les familles.</li>
+        </ul>
+        <p class="trou trou--suite">[TROU: cinq briques à revalider le 24/08 avec la programmation du 20/07]</p>
+        <p class="lieu__cloture">Personne ne s'y enrichit, tout y vise l'équilibre et l'utilité.</p>
+      </div>
+    </div>
+    <figure class="lieu__figure">
+      <div class="revele__cadre">
+        <div class="revele__bloc revele__bloc--avant">
+          <img class="revele__img" src="../assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui, murs de pierre et grand toit de tuiles" width="1368" height="857" loading="lazy">
+          <span class="etiquette">aujourd'hui</span>
+        </div>
+        <div class="revele__bloc revele__bloc--apres">
+          <img class="revele__img" src="../assets/img/visuel-dauphine-1.jpg" alt="La ferme rénovée en projet, façade vitrée et parvis planté" width="900" height="563" loading="lazy">
+          <span class="etiquette">demain</span>
+        </div>
+      </div>
+      <figcaption class="credit">© Basa Architecture.</figcaption>
+    </figure>
+    <div class="contenu">
+      <p class="lieu__lien"><a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a></p>
+    </div>
+  </section>
+
+  <!-- Beat 3, Ce qui existe deja -->
+  <section id="deja-fait">
+    <div class="contenu">
+      <div class="deja__grille">
+        <div class="deja__texte">
+          <h2>Ce qui existe déjà</h2>
+          <p>Plus de 650 personnes ont déjà donné pour ce lieu. La campagne de dons s'est refermée en avril. Le projet existe, il est sur les rails.</p>
+          <p>Grâce à elles, l'architecte travaille et la Ville d'Annecy a signé la promesse de bail de 99 ans. Depuis le 10 juillet, La Coop Audacieuse est immatriculée au registre du commerce d'Annecy.</p>
+          <p>Pour passer des plans aux murs, nous changeons d'étape et nous ouvrons la première levée de parts sociales.</p>
+          <p class="accroche deja__chute">Le don a lancé les études. La part fait exister le lieu.</p>
+        </div>
+        <div class="cliche">
+          <p>[TROU: photo datée de la campagne de dons, Nextcloud 04 COM/01 Photos]</p>
+          <span class="annotation" aria-hidden="true">99 ans, promesse de bail</span>
+        </div>
+      </div>
+      <ul class="frise">
+        <li><span class="date">2025 :</span><span class="fait">lauréat de l'appel à projets d'Annecy</span></li>
+        <li><span class="date">Mars 2026 :</span><span class="fait">promesse de bail de 99 ans signée</span></li>
+        <li><span class="date">Avril 2026 :</span><span class="fait">la campagne de dons se referme</span></li>
+        <li><span class="date">Juillet 2026 :</span><span class="fait">la coopérative est immatriculée</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Beat 4, La part en 4 faits -->
+  <section id="la-part">
+    <div class="contenu">
+      <div class="part__grille">
+        <div class="part__intro">
+          <h2>La part sociale</h2>
+          <p>Une part sociale, ce n'est pas un don. C'est un apport que vous confiez à la coopérative et qui reste le vôtre.</p>
+        </div>
+        <div>
+          <div class="part__panneau">
+            <ul class="faits">
+              <li><span class="amorce">À partir de 100 €.</span> Une part coûte 100 €. Vous en prenez autant que vous le souhaitez.</li>
+              <li><span class="amorce">Vous devenez copropriétaire.</span> Le lieu appartient à celles et ceux qui le financent. C'est un bien commun.</li>
+              <li><span class="amorce">Une personne, une voix.</span> Quel que soit le nombre de parts, chacune et chacun pèse autant dans les décisions.</li>
+              <li><span class="amorce">Votre argent reste le vôtre.</span> Vous pouvez demander le remboursement de vos parts, à leur valeur d'origine, selon les statuts.</li>
+            </ul>
+          </div>
+          <p class="part__lien"><a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beat 5, Notre choix -->
+  <section id="notre-choix" class="sur-sombre grain">
+    <div class="voile-degrade" aria-hidden="true"></div>
+    <div class="grain__voile" aria-hidden="true" style="opacity:.26;mix-blend-mode:overlay"></div>
+    <div class="contenu">
+      <div class="choix__grille">
+        <div class="choix__texte">
+          <h2>Notre choix</h2>
+          <p>Pour rénover cette ferme, il faudra emprunter. Mais une banque ne prête qu'à un projet qui apporte déjà une partie de la somme. C'est ce qu'on appelle l'apport.</p>
+          <p>Nous avons choisi de ne pas laisser une banque financer plus de la moitié de ce lieu. Moins d'emprunt, ce sont des loyers accessibles.</p>
+          <p>Plus notre apport citoyen est solide, plus la banque suit et plus le lieu reste abordable pour toutes et tous. Les statuts interdisent tout enrichissement personnel : l'excédent reste dans la coopérative.</p>
+        </div>
+        <figure class="dessin">
+          <img src="../assets/img/dessin.jpg" alt="croquis d'un espace intérieur de la ferme, coursives plantées et tables occupées" width="747" height="1107" loading="lazy">
+        </figure>
+      </div>
+      <p class="choix__chute">Chaque part en appelle d'autres.</p>
+      <div class="pas">
+        <p class="pas__amorce">Ce que la part n'est pas.</p>
+        <ul class="limites">
+          <li><span class="amorce">Ce n'est pas un placement.</span> Les parts ne rapportent pas d'intérêts, c'est un choix : ici, l'argent sert le projet, pas la rente.</li>
+          <li><span class="amorce">Ce n'est pas immédiatement disponible.</span> Le remboursement se demande, il suit les règles des statuts. On y met de l'argent qu'on peut laisser travailler un moment.</li>
+          <li><span class="amorce">Ce n'est pas un don défiscalisé.</span> Si l'avantage fiscal compte pour vous, le don reste possible en complément.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beat 6, Ou on en est -->
+  <section id="ou-on-en-est">
+    <div class="contenu">
+      <div class="etat__texte">
+        <h2>Où on en est</h2>
+        <p class="etat__compteur" data-compteur><span class="chiffre">218</span> coopératrices et coopérateurs ont déjà pris leur part de la Maison Audacieuse.</p>
+        <p>Plus nous sommes nombreuses et nombreux, plus le lieu reste accessible et plus il pèse face aux financeurs.</p>
+        <p>Devant nous, quatre paliers. Les deux premiers regardent notre histoire, les deux suivants le poids que ce lieu prend sur son territoire.</p>
+      </div>
+      <ul class="paliers">
+        <li><span class="palier__nb">666</span> : celles qui ont donné reprennent leur part du lieu.</li>
+        <li><span class="palier__nb">1 700</span> : celles qui ont signé en 2025 en deviennent copropriétaires.</li>
+        <li><span class="palier__nb">3 000</span> : <span class="trou trou--inline">[TROU: lecture à valider le 24/08]</span>.</li>
+        <li><span class="palier__nb">5 000</span> : l'objectif audacieux de cette campagne. <span class="trou trou--inline">[TROU: lecture du palier à valider le 24/08]</span></li>
+      </ul>
+      <p class="etat__chute">On ne donne pas à quelque chose, on devient quelque chose.</p>
+      <p class="etat__action"><a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a></p>
+    </div>
+  </section>
+
+  <!-- Beat 7, Le collectif -->
+  <section id="le-collectif">
+    <div class="contenu">
+      <div class="collectif__haut">
+        <div class="collectif__texte">
+          <h2>Le collectif</h2>
+          <p>Ce lieu est porté par des associations annéciennes déjà à l'oeuvre. <span class="trou" style="display:inline-block">[TROU: liste des exploitantes à figer au 24/08]</span></p>
+          <p>Autour d'elles, des architectes et une équipe de maîtrise d'ouvrage.</p>
+        </div>
+        <div class="rendez-vous">
+          <p>On se retrouve le samedi 19 septembre pour la Fête de l'Audace, pendant les journées du patrimoine. Venez voir le bâtiment, rencontrer celles et ceux qui le portent et prendre votre part sur place.</p>
+          <p class="trou">[TROU: lieu et horaires de la Fête de l'Audace du 19/09, à poser en bloc date, lieu, adresse sous le paragraphe]</p>
+        </div>
+      </div>
+      <figure class="collectif__figure">
+        <img src="../assets/img/collectif-1.png" alt="le collectif de la Maison Audacieuse réuni devant la ferme de Novel" width="860" height="534" loading="lazy">
+        <figcaption class="trou trou--suite">[TROU: photos de la Fête de l'Audace 1, Nextcloud 04 COM/01 Photos/2026.03 Fête de l'Audace, droit à l'image des personnes photographiées à vérifier avant mise en ligne]</figcaption>
+      </figure>
+      <p class="collectif__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe</a></p>
+    </div>
+  </section>
+
+  <!-- Beat 8, Et vous -->
+  <section id="et-vous" class="vous grain">
+    <div class="grain__voile" aria-hidden="true" style="opacity:.34;mix-blend-mode:soft-light"></div>
+    <div class="contenu">
+      <h2>Et vous ?</h2>
+      <div class="vous__grille">
+        <div class="porte porte--une" id="prendre-part">
+          <p class="vous__baseline">Prenez part à la Maison Audacieuse.</p>
+          <p>Une part vaut 100 €. Vous en prenez autant que vous le souhaitez.</p>
+          <p><a class="bouton bouton--primaire" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a></p>
+        </div>
+        <div class="porte porte--deux">
+          <div class="bloc">
+            <p>Le don reste possible. Il est déductible à 66 % de vos impôts : un don de 100 € vous en coûte 34 €.</p>
+            <p><a class="bouton bouton--secondaire" href="https://www.helloasso.com/associations/la-maison-audacieuse/collectes/la-maison-audacieuse">Je fais un don</a></p>
+            <p class="trou">[TROU: URL HelloAsso à jour, la page de campagne doit être mise à jour avant la bascule]</p>
+          </div>
+          <div class="bloc">
+            <p>Vous pouvez aussi en parler autour de vous ou venir nous donner un coup de main.</p>
+            <p class="trou">[TROU: bénévolat, décider entre un lien vers /contacts/ et un libellé sans lien]</p>
+          </div>
+          <div class="bloc">
+            <label class="etiquette-champ" for="courriel">Et si vous préférez suivre le chantier avant de décider, laissez-nous votre adresse.</label>
+            <form class="champ" id="form-newsletter" novalidate>
+              <input type="email" id="courriel" name="courriel" autocomplete="email">
+              <button class="bouton bouton--inscription" type="submit">Je m'inscris</button>
+            </form>
+            <p class="trou">[TROU: consentement et fréquence newsletter]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Beat 9, Pied -->
+<footer class="pied sur-sombre grain" id="pied">
+  <div class="grain__voile" aria-hidden="true" style="opacity:.22;mix-blend-mode:overlay"></div>
+  <div class="contenu">
+    <a class="logo" href="#hero"><img src="../assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099" loading="lazy"></a>
+    <nav aria-label="Navigation de pied de page">
+      <ul>
+        <li><a href="/le-projet-architectural/">Le projet</a></li>
+        <li><a href="/part-sociale/">La part sociale</a></li>
+        <li><a href="/lequipe-projet/">L'équipe</a></li>
+        <li><a href="/les-medias/">Médias</a></li>
+        <li><a href="/contacts/">Contact</a></li>
+        <li><a href="/politique-de-confidentialite-mentions-legales/">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite-mentions-legales/">Politique de confidentialité</a></li>
+        <li><a href="#et-vous">Newsletter</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<div class="barre-mobile">
+  <a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+</div>
+
+<nav class="selecteur" aria-label="Choix de la variante de maquette">
+  <a class="selecteur__fleche" id="prec" href="c-la-ferme.html" aria-label="Variante précédente, C, La ferme">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+  </a>
+  <span class="selecteur__nom">A, Le récit</span>
+  <a class="selecteur__fleche" id="suiv" href="b-compteur.html" aria-label="Variante suivante, B, Le compteur">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </a>
+  <a class="selecteur__toutes" href="../index.html">toutes les maquettes</a>
+</nav>
+
+<script>
+(function () {
+  var entete = document.getElementById('entete');
+  var hero = document.getElementById('hero');
+  if (entete && hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entrees) {
+      entete.setAttribute('data-solide', entrees[0].isIntersecting ? 'non' : 'oui');
+    }, { rootMargin: '-74px 0px 0px 0px', threshold: 0 }).observe(hero);
+  }
+
+  var bouton = document.getElementById('menu-bouton');
+  var menu = document.getElementById('menu-mobile');
+  if (bouton && menu) {
+    bouton.addEventListener('click', function () {
+      var ouvert = bouton.getAttribute('aria-expanded') === 'true';
+      bouton.setAttribute('aria-expanded', String(!ouvert));
+      menu.hidden = ouvert;
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { bouton.setAttribute('aria-expanded', 'false'); menu.hidden = true; }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) { bouton.setAttribute('aria-expanded', 'false'); menu.hidden = true; bouton.focus(); }
+    });
+  }
+
+  var form = document.getElementById('form-newsletter');
+  if (form) { form.addEventListener('submit', function (e) { e.preventDefault(); }); }
+
+  /* Defilement doux sur les ancres internes, en JS et non en CSS :
+     scroll-behavior: smooth sur html perturbe tout defilement programme. */
+  document.addEventListener('click', function (e) {
+    var lien = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!lien) { return; }
+    var cible = document.getElementById(lien.getAttribute('href').slice(1));
+    if (!cible) { return; }
+    e.preventDefault();
+    var doux = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    cible.scrollIntoView({ behavior: doux ? 'smooth' : 'auto', block: 'start' });
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', lien.getAttribute('href'));
+    }
+  });
+
+  var etat = new URLSearchParams(window.location.search).get('etat');
+  var suffixe = etat ? '?etat=' + encodeURIComponent(etat) : '';
+  var prec = document.getElementById('prec');
+  var suiv = document.getElementById('suiv');
+  if (prec) { prec.href = 'c-la-ferme.html' + suffixe; }
+  if (suiv) { suiv.href = 'b-compteur.html' + suffixe; }
+  document.addEventListener('keydown', function (e) {
+    var cible = e.target;
+    if (cible && (cible.tagName === 'INPUT' || cible.tagName === 'TEXTAREA' || cible.isContentEditable)) { return; }
+    if (e.metaKey || e.ctrlKey || e.altKey) { return; }
+    if (e.key === 'ArrowRight' && suiv) { window.location.href = suiv.href; }
+    if (e.key === 'ArrowLeft' && prec) { window.location.href = prec.href; }
+  });
+})();
+</script>
+
+</body>
+</html>
