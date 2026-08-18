@@ -27,7 +27,7 @@ Ce que cela exclut, sans exception : le vault Atlas, ce depot, un compte-rendu, 
 | --- | --- | --- |
 | Administrateur WordPress | Romain | en place |
 | Hebergement o2switch (cPanel) | Romain | en place |
-| Depot GitHub `verslinfini/maison-audacieuse` | Romain (compte `verslinfini`) | en place, prive |
+| Depot GitHub `verslinfini/maison-audacieuse` | Romain (compte `verslinfini`) | en place, public (passé public le 17/08/2026) |
 | Nom de domaine `maison-audacieuse.fr` | a confirmer | **a clarifier avec l agence** |
 | Licence Kadence Blocks Pro | a confirmer | **a clarifier avec l agence** |
 | Compte Brevo (emailing) | Romain | en place |

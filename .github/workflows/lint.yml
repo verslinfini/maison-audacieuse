@@ -7,7 +7,9 @@ name: Syntaxe (PHP et shell)
 
 on:
   push:
+    paths-ignore: ['maquettes/**']
   pull_request:
+    paths-ignore: ['maquettes/**']
 
 permissions:
   contents: read

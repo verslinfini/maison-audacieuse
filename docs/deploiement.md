@@ -87,6 +87,8 @@ Le workflow `build-zip.yml` se declenche sur le tag, fabrique les deux archives 
 
 Le contenu ne passe jamais par un deploiement. Il se travaille en local, page par page.
 
+Pour une page qui n existe pas encore sur le site : `node wp-create.mjs --title "..." --slug ...` la cree d abord (statut prive par defaut, idempotent, ne touche jamais au manifest), puis la sequence habituelle prend le relais : create -> pull -> push.
+
 ```
 node wp-pull.mjs                      recupere les 6 pages et met a jour le manifest
 node wp-pull.mjs --slug les-medias    une seule page
