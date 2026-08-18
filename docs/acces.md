@@ -29,10 +29,10 @@ Ce que cela exclut, sans exception : le vault Atlas, ce depot, un compte-rendu, 
 | Hebergement o2switch (cPanel) | Romain | en place |
 | Depot GitHub `verslinfini/maison-audacieuse` | Romain (compte `verslinfini`) | en place, public (passé public le 17/08/2026) |
 | Nom de domaine `maison-audacieuse.fr` | a confirmer | **a clarifier avec l agence** |
-| Licence Kadence Blocks Pro | a confirmer | **a clarifier avec l agence** |
+| Licence Kadence Blocks Pro | aucune : le plugin Pro n est pas installe (WP-CLI, 18/08/2026), seul Kadence Blocks libre 3.7.9.1 est actif ; le namespace REST kbp/v1 est un residu | sans objet |
 | Compte Brevo (emailing) | Romain | en place |
 
-Les deux lignes a clarifier sont plus urgentes que le reste : sans le domaine, aucune reprise en main du DNS n est possible ; sans la licence Kadence Pro, les blocs Pro deja utilises sur les pages cessent d etre mis a jour.
+Les deux lignes a clarifier sont plus urgentes que le reste : sans le domaine, aucune reprise en main du DNS n est possible ; la licence Kadence Pro ne se pose plus : aucun bloc Pro n est installe ni utilise (verifie le 18/08/2026), les 6 pages n emploient que des blocs libres.
 
 ## Acces techniques a brancher
 

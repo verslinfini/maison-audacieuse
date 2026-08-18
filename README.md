@@ -1,6 +1,6 @@
 # maison-audacieuse.fr
 
-Dépôt du site de La Maison Audacieuse (Annecy) : thème enfant Kadence, code custom, contenu source, scripts d'exploitation et chaîne de déploiement. Le site tourne sous WordPress (thème Kadence + Kadence Blocks Pro) chez o2switch.
+Dépôt du site de La Maison Audacieuse (Annecy) : thème enfant Kadence, code custom, contenu source, scripts d'exploitation et chaîne de déploiement. Le site tourne sous WordPress (thème Kadence + Kadence Blocks version libre, Pro absent, vérifié par WP-CLI le 18/08/2026) chez o2switch.
 
 ## Ce que contient ce dépôt
 

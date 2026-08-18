@@ -1,6 +1,6 @@
 # maison-audacieuse.fr — dépôt du site
 
-Site WordPress de La Maison Audacieuse (SCIC, Annecy), thème Kadence + Kadence Blocks Pro, hébergé o2switch. Ce dépôt versionne le code et le contenu source ; la production fait foi pour le contenu publié.
+Site WordPress de La Maison Audacieuse (SCIC, Annecy), thème Kadence + Kadence Blocks version libre (Pro absent, vérifié par WP-CLI le 18/08/2026), hébergé o2switch. Ce dépôt versionne le code et le contenu source ; la production fait foi pour le contenu publié.
 
 ## Règles dures
 
