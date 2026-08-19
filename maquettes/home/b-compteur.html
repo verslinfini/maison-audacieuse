@@ -649,8 +649,10 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
   padding: 0.7rem 1.25rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
   background: var(--blanc);
   border-top: 1px solid var(--filet);
+  transition: transform 200ms ease;
 }
 .barre-mobile .cta { width: 100%; }
+.barre-mobile.est-cachee { transform: translateY(100%); }
 
 /* ---------- selecteur de variante ---------- */
 
@@ -869,7 +871,7 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
       <a href="/contacts/" target="_blank" rel="noopener">Contact</a>
     </nav>
 
-    <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+    <a class="cta" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
   </div>
 </header>
 
@@ -900,9 +902,9 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
         </div>
 
         <div class="hero-actions">
-          <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction" target="_blank" rel="noopener">Je prends ma part</a>
           <p class="hero-note">Vous choisissez votre nombre de parts à l'écran suivant.</p>
-          <p class="hero-lien"><a class="lien-texte" href="/part-sociale/" title="Page /part-sociale/ à venir">C'est quoi, une part sociale ?</a></p>
+          <p class="hero-lien"><a class="lien-texte" href="/part-sociale/" title="Page /part-sociale/ à venir" target="_blank" rel="noopener">C'est quoi, une part sociale ?</a></p>
         </div>
       </div>
     </div>
@@ -993,7 +995,7 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
         <li><b>Une personne, une voix.</b> <span>Quel que soit le nombre de parts, chacune et chacun pèse autant dans les décisions.</span></li>
         <li><b>Votre argent reste le vôtre.</b> <span>Vous pouvez demander le remboursement de vos parts, à leur valeur d'origine, selon les statuts.</span></li>
       </ul>
-      <p class="part-lien"><a class="lien-texte" href="/part-sociale/" title="Page /part-sociale/ à venir">C'est quoi, une part sociale ?</a></p>
+      <p class="part-lien"><a class="lien-texte" href="/part-sociale/" title="Page /part-sociale/ à venir" target="_blank" rel="noopener">C'est quoi, une part sociale ?</a></p>
     </div>
   </section>
 
@@ -1037,7 +1039,7 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
         </ul>
         <p class="trou trou--suite">[TROU: cinq briques à revalider le 24/08 avec la programmation du 20/07]</p>
         <p class="lieu-fin">Personne ne s'y enrichit, tout y vise l'équilibre et l'utilité.</p>
-        <p class="lieu-lien"><a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a></p>
+        <p class="lieu-lien"><a class="lien-texte" href="/le-projet-architectural/" target="_blank" rel="noopener">Découvrir le projet architectural</a></p>
       </div>
     </div>
 
@@ -1067,7 +1069,7 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
         <p>Autour d'elles, des architectes et une équipe de maîtrise d'ouvrage.</p>
         <p>On se retrouve le samedi 19 septembre pour la Fête de l'Audace, pendant les journées du patrimoine. Venez voir le bâtiment, rencontrer celles et ceux qui le portent et prendre votre part sur place.</p>
         <p class="trou">[TROU: lieu et horaires de la Fête de l'Audace du 19/09, à poser en bloc date, lieu, adresse sous le paragraphe]</p>
-        <p class="collectif-lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe</a></p>
+        <p class="collectif-lien"><a class="lien-texte" href="/lequipe-projet/" target="_blank" rel="noopener">Découvrir l'équipe</a></p>
       </div>
 
       <div class="trou-bande">
@@ -1081,16 +1083,16 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
     <div class="env">
       <h2>Et vous ?</h2>
       <div class="portes">
-        <div class="porte">
+        <div class="porte" id="prendre-part">
           <p class="porte-titre">Prenez part à la Maison Audacieuse.</p>
           <p>Une part vaut <span style="white-space:nowrap">100 €</span>. Vous en prenez autant que vous le souhaitez.</p>
-          <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction" target="_blank" rel="noopener">Je prends ma part</a>
         </div>
 
         <div class="porte porte-second">
           <div class="bloc-don">
             <p>Le don reste possible. Il est déductible à <span style="white-space:nowrap">66 %</span> de vos impôts : un don de <span style="white-space:nowrap">100 €</span> vous en coûte <span style="white-space:nowrap">34 €</span>.</p>
-            <a class="bouton-second" href="https://www.helloasso.com/associations/la-maison-audacieuse/collectes/la-maison-audacieuse">Je fais un don</a>
+            <a class="bouton-second" href="https://www.helloasso.com/associations/la-maison-audacieuse/collectes/la-maison-audacieuse" target="_blank" rel="noopener">Je fais un don</a>
             <p class="trou trou--suite">[TROU: URL HelloAsso à jour, la page de campagne doit être mise à jour avant la bascule]</p>
           </div>
 
@@ -1131,10 +1133,10 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
   </div>
 </footer>
 
-<a class="cta rail" id="rail" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+<a class="cta rail" id="rail" href="/prendre-part/" title="Tunnel /prendre-part/ en construction" target="_blank" rel="noopener">Je prends ma part</a>
 
 <div class="barre-mobile">
-  <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+  <a class="cta" href="/prendre-part/" title="Tunnel /prendre-part/ en construction" target="_blank" rel="noopener">Je prends ma part</a>
 </div>
 
 <nav class="selecteur" aria-label="Sélecteur de maquette">
@@ -1189,13 +1191,17 @@ html:not([data-etat="avant"]) .compteur-avant { display: none; }
 
   // CTA sticky lateral : il parait quand le heros est sorti, il s'efface quand
   // la zone d'appel est a l'ecran, pour ne jamais doubler le meme bouton.
+  // La barre CTA mobile suit la meme logique : cachee tant que le heros est
+  // visible, et de nouveau cachee pendant que la zone d'appel est a l'ecran.
   var rail = document.getElementById('rail');
   var heros = document.getElementById('hero');
   var appel = document.getElementById('et-vous');
+  var barre = document.querySelector('.barre-mobile');
   var herosSorti = false;
   var appelVisible = false;
   var majRail = function () {
     rail.classList.toggle('est-visible', herosSorti && !appelVisible);
+    barre.classList.toggle('est-cachee', !herosSorti || appelVisible);
   };
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entrees) {
