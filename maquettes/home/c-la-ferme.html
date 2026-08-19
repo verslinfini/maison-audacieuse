@@ -24,7 +24,7 @@
   --fond: #F5F5F6;
   --fond-violace: #EDEDF5;
   --blanc: #FFFFFF;
-  --filet: #DEDCE8;
+  --filet: rgba(56, 54, 72, .12);
   --rail: 312px;
   --rayon: 4px;
 }
@@ -105,9 +105,11 @@ a { color: var(--violet); }
 
 .badge {
   position: fixed;
-  top: 10px;
+  top: auto;
+  bottom: 18px;
   left: 14px;
   z-index: 80;
+  pointer-events: none;
   display: inline-block;
   padding: .3rem .6rem;
   border: 1px solid var(--filet);
@@ -181,7 +183,12 @@ a { color: var(--violet); }
   cursor: pointer;
   transition: background-color .17s ease, border-color .17s ease, transform .17s ease;
 }
-.bouton:hover { background: #635B8C; border-color: #635B8C; }
+.bouton:hover {
+  background: var(--violet-sombre);
+  background: color-mix(in srgb, var(--violet) 72%, var(--violet-sombre));
+  border-color: var(--violet-sombre);
+  border-color: color-mix(in srgb, var(--violet) 72%, var(--violet-sombre));
+}
 .bouton:active { transform: translateY(1px); }
 
 .bouton--compact { min-height: 44px; padding: .55rem 1.05rem; font-size: .9375rem; margin-left: .35rem; }
@@ -192,16 +199,6 @@ a { color: var(--violet); }
   color: var(--violet-sombre);
 }
 .bouton--second:hover { background: var(--violet-sombre); border-color: var(--violet-sombre); color: var(--blanc); }
-.bouton--tertiaire {
-  background: transparent;
-  border-width: 1px;
-  border-color: var(--violet-sombre);
-  color: var(--violet-sombre);
-  font-size: .9375rem;
-  padding: .55rem 1rem;
-}
-.bouton--tertiaire:hover { background: var(--violet-sombre); color: var(--blanc); }
-
 .lien-texte {
   display: inline-flex;
   align-items: center;
@@ -213,6 +210,15 @@ a { color: var(--violet); }
   transition: color .16s ease, box-shadow .16s ease;
 }
 .lien-texte:hover { color: var(--violet); box-shadow: inset 0 -2px 0 0 var(--violet-sombre); }
+/* la seconde porte du beat 8 n'est ni de la meme couleur ni de la meme forme que la premiere */
+.lien-bouton {
+  padding: 0 .2rem;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
 
 /* ------------------------------ trous ----------------------------- */
 
@@ -241,7 +247,7 @@ a { color: var(--violet); }
 
 .heros {
   position: relative;
-  background-color: #22203A;
+  background-color: var(--violet-sombre);
   height: clamp(560px, calc(100vh - 104px), 800px);
   overflow: hidden;
   display: flex;
@@ -259,8 +265,8 @@ a { color: var(--violet); }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(34, 32, 58, .95) 0%, rgba(34, 32, 58, .88) 26%, rgba(34, 32, 58, .58) 52%, rgba(34, 32, 58, .22) 78%, rgba(34, 32, 58, .10) 100%),
-    linear-gradient(to right, rgba(34, 32, 58, .55) 0%, rgba(34, 32, 58, .12) 62%, rgba(34, 32, 58, 0) 100%);
+    linear-gradient(to top, rgba(56, 54, 72, .88) 0%, rgba(56, 54, 72, .78) 26%, rgba(56, 54, 72, .42) 52%, rgba(56, 54, 72, .15) 78%, rgba(56, 54, 72, .06) 100%),
+    linear-gradient(to right, rgba(56, 54, 72, .44) 0%, rgba(56, 54, 72, .10) 62%, rgba(56, 54, 72, 0) 100%);
 }
 .heros__mots {
   position: relative;
@@ -343,12 +349,15 @@ a { color: var(--violet); }
 
 .notes { display: grid; gap: 1.15rem; margin-top: 1.6rem; }
 .notes li { position: relative; }
+/* rendu degrade : les cinq amorces sont du texte, pas cinq lignes manuscrites d'affilee.
+   Meow Script ne revient que posee sur la photo, dans le bloc @supports superpose. */
 .notes .mot {
   display: block;
-  font-family: "Meow Script", cursive;
-  font-size: 1.85rem;
-  line-height: 1.15;
-  color: var(--violet);
+  font-family: "Onest", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  color: var(--violet-sombre);
 }
 .notes .suite { display: block; font-size: 1rem; line-height: 1.5; color: var(--texte); }
 
@@ -395,7 +404,6 @@ section { scroll-margin-top: 24px; }
 .section-choix { padding: clamp(72px, 10vw, 128px) 0 clamp(64px, 8vw, 104px); }
 .section-deja { padding: clamp(56px, 7vw, 88px) 0 clamp(68px, 9vw, 108px); }
 .section-ou { padding: clamp(68px, 9vw, 120px) 0 clamp(72px, 10vw, 132px); }
-.section-ou .bloc p { max-width: 52ch; }
 .section-collectif { padding: clamp(52px, 6vw, 76px) 0 clamp(60px, 8vw, 96px); }
 .section-vous { padding: clamp(64px, 8vw, 104px) 0 clamp(68px, 9vw, 112px); }
 
@@ -485,16 +493,8 @@ section { scroll-margin-top: 24px; }
   font-family: inherit;
   font-size: 1rem;
 }
-.champ::placeholder { color: var(--texte); opacity: 1; }
 .champ:focus-visible { border-color: var(--violet); }
-.vh {
-  position: absolute;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
+.etiquette { display: block; font-size: .9375rem; font-weight: 600; color: var(--violet-sombre); }
 
 /* ------------------------------ pied ------------------------------ */
 
@@ -520,8 +520,7 @@ section { scroll-margin-top: 24px; }
   transition: border-color .16s ease, color .16s ease;
 }
 .pied__liens a:hover { border-bottom-color: var(--menthe); color: var(--menthe); }
-.pied__liens .mort { color: #C9C6D8; }
-.pied__mention { font-size: .84375rem; color: #C9C6D8; letter-spacing: .01em; }
+.pied__liens .mort { color: rgba(237, 237, 245, .72); font-size: .875rem; }
 
 /* ------------------- barre mobile et selecteur -------------------- */
 
@@ -570,6 +569,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   .rail__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; align-items: center; }
   .plan__vue img { aspect-ratio: 16 / 10; }
   .notes { grid-template-columns: 1fr 1fr; gap: 1.4rem 2.5rem; }
+  .notes li:last-child { grid-column: 1 / -1; }
   .choix__grille { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3.5rem; align-items: start; }
   .deja__bas { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 3rem; }
   .appel__portes { grid-template-columns: 1fr 1fr; gap: 3rem; }
@@ -578,23 +578,44 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   .cascade li:nth-child(2) { padding-left: 2.5rem; }
   .cascade li:nth-child(3) { padding-left: 5rem; }
   .cascade li:nth-child(4) { padding-left: 7.5rem; }
+
+  /* etat avant : le compteur n'existe pas, le bandeau ne laisse pas de cellule vide */
+  html[data-etat="avant"] .rail__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2.5rem; }
+  html[data-etat="avant"] .rail .bouton--large { max-width: 340px; }
+
+  /* le selecteur se range a droite, il ne croise plus le fil de lecture */
+  .selecteur { left: auto; right: 24px; transform: none; }
+
+  /* le rail porte le prix et le CTA dans le premier ecran a toutes ces largeurs :
+     l'en-tete ne double pas le bouton violet dans la meme vue */
+  .nav .bouton--compact { display: none; }
 }
 
-/* ===================== entre 768 et 1079 ========================= */
+/* ===================== entre 768 et 1239 ========================= */
 
-@media (min-width: 768px) and (max-width: 1079px) {
+@media (min-width: 768px) and (max-width: 1239px) {
   .entete__logo img { width: 112px; }
   .entete__rang { gap: .9rem; }
   .nav { gap: .7rem; }
   .nav a { font-size: .875rem; }
   .bouton--compact { font-size: .875rem; padding: .5rem .8rem; margin-left: .15rem; }
+  /* le rail est encore un bandeau : le prix et le CTA doivent entrer dans le premier ecran */
+  .heros { height: clamp(480px, calc(100vh - 260px), 720px); }
 }
 
-/* ========================== 1080 et plus ========================== */
+/* ========================== 1240 et plus ========================== */
 
-@media (min-width: 1080px) {
+@media (min-width: 1240px) {
 
-  .cadre { padding-right: var(--rail); }
+  /* la gouttiere de droite porte le fond du rail en propre : quand le rail s'efface
+     devant le pied, la colonne garde son ton au lieu de laisser une bande nue */
+  .cadre {
+    padding-right: var(--rail);
+    background-image: linear-gradient(to right, var(--filet) 0 1px, var(--fond-violace) 1px 100%);
+    background-size: var(--rail) 100%;
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
 
   .rail {
     position: fixed;
@@ -605,16 +626,39 @@ html[data-etat="avant"] .campagne-seule { display: none; }
     border-top: 0;
     border-bottom: 0;
     border-left: 1px solid var(--filet);
-    padding: 128px 30px 32px;
+    padding: 112px 30px 24px;
     overflow-y: auto;
     overscroll-behavior: contain;
   }
   .rail__inner { display: block; max-width: none; padding-left: 0; padding-right: 0; }
-  .rail__chiffre { font-size: 4.25rem; }
-  .rail .bouton--large { margin-top: 1.5rem; }
+  .rail .bouton--large { margin-top: 1.15rem; }
+
+  /* la cascade des quatre paliers vit dans le bandeau lateral fixe (le JS l'y depose) */
+  .rail .cascade { margin-top: 1.15rem; gap: .55rem; }
+  .rail .cascade .lecture { font-size: .8125rem; line-height: 1.35; }
+  .rail .cascade .nombre { font-size: 1.65rem; }
+  .rail .cascade li:nth-child(1) { padding-left: 0; }
+  .rail .cascade li:nth-child(2) { padding-left: .6rem; }
+  .rail .cascade li:nth-child(3) { padding-left: 1.2rem; }
+  .rail .cascade li:nth-child(4) { padding-left: 1.8rem; }
+  /* le jaune reste au heros : dans le rail la cascade ne pose pas de seconde zone chaude */
+  .rail .cascade li:nth-child(1) .nombre { background: none; padding: 0; margin-left: 0; color: var(--violet); }
+  .rail .cascade li:nth-child(2) .nombre { font-size: 1.8rem; }
+  .rail .cascade li:nth-child(3) .nombre { font-size: 1.95rem; }
+  .rail .cascade li:nth-child(4) .nombre { font-size: 2.1rem; }
+
+  /* le rail ne double jamais un CTA deja present dans la vue */
+  .rail .bouton--large, .rail__apres, .rail__chiffre, .rail__suite, .rail {
+    transition: opacity .2s ease, visibility .2s ease;
+  }
+  html.cta-en-vue .rail .bouton--large,
+  html.cta-en-vue .rail__apres { opacity: 0; visibility: hidden; }
+  html.beat6-en-vue .rail__chiffre,
+  html.beat6-en-vue .rail__suite { opacity: 0; visibility: hidden; }
+  html.pied-en-vue .rail { opacity: 0; visibility: hidden; }
 
   .epine__grille {
-    grid-template-columns: 536px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     gap: 3.5rem;
     align-items: start;
   }
@@ -624,10 +668,40 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   .epine__zone { margin-top: 2.25rem; }
   .epine__fin { margin-top: 2.25rem; align-self: end; }
 
-  .section-ou > .contenu { padding-left: 268px; max-width: 1120px; }
+  .section-ou > .contenu { padding-left: 140px; max-width: 1120px; }
   .choix__grille { grid-template-columns: minmax(0, 1.65fr) minmax(0, .78fr); gap: 4.5rem; }
   .deja__bas { grid-template-columns: minmax(0, 1.15fr) minmax(0, .9fr); gap: 4rem; }
   .appel__portes { gap: 4rem; }
+
+  /* le pied va jusqu'au bord, il ne s'arrete pas sous une colonne orpheline */
+  .pied { margin-right: calc(var(--rail) * -1); padding-right: var(--rail); }
+  .selecteur { right: calc(var(--rail) + 24px); }
+
+  /* etat avant : rien a compter, le rail redevient un bandeau horizontal
+     et le heros se raccourcit pour que le prix et le CTA entrent dans le premier ecran */
+  html[data-etat="avant"] .heros { height: clamp(480px, calc(100vh - 260px), 720px); }
+  html[data-etat="avant"] .cadre { padding-right: 0; background-image: none; }
+  html[data-etat="avant"] .pied { margin-right: 0; padding-right: 0; }
+  html[data-etat="avant"] .selecteur { right: 24px; }
+  html[data-etat="avant"] .rail {
+    position: static;
+    width: auto;
+    border-top: 1px solid var(--filet);
+    border-bottom: 1px solid var(--filet);
+    border-left: 0;
+    padding: 2.5rem 0 2.75rem;
+    overflow: visible;
+  }
+  html[data-etat="avant"] .rail__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2.5rem;
+    max-width: 1120px;
+    padding-left: clamp(20px, 5vw, 72px);
+    padding-right: clamp(20px, 3vw, 40px);
+  }
+  html[data-etat="avant"] .rail .bouton--large { margin-top: 0; max-width: 340px; }
 }
 
 /* le voile global du panneau n'existe que superpose */
@@ -636,10 +710,10 @@ html[data-etat="avant"] .campagne-seule { display: none; }
 
 /* --- panneau superpose : seulement si le fondu au defilement est possible --- */
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) and (min-width: 1080px) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1240px) {
       .epine__zone { min-height: min(600px, calc(100vh - 230px)); }
       .epine__panneau { position: sticky; top: 96px; }
-      .plan { height: min(600px, calc(100vh - 230px)); background-color: #262436; }
+      .plan { height: min(600px, calc(100vh - 230px)); background-color: var(--violet-sombre); }
       .plan__pile { gap: .75rem; height: 100%; }
       .plan__vue { height: 100%; }
 
@@ -656,20 +730,30 @@ html[data-etat="avant"] .campagne-seule { display: none; }
       .notes li::before {
         content: "";
         position: absolute;
-        inset: -56% -26%;
+        inset: -62% -30%;
         z-index: -1;
-        background: radial-gradient(62% 56% at 46% 50%, rgba(24, 22, 38, .93) 0%, rgba(24, 22, 38, .84) 32%, rgba(24, 22, 38, .46) 60%, rgba(24, 22, 38, 0) 86%);
+        background: radial-gradient(72% 62% at 46% 50%, rgba(56, 54, 72, .97) 0%, rgba(56, 54, 72, .95) 46%, rgba(56, 54, 72, .74) 66%, rgba(56, 54, 72, 0) 92%);
       }
+      /* les notes 2 et 4 tombent sur le ciel et la facade claire : voile plus dense et plus large */
+      .notes li:nth-child(2)::before,
+      .notes li:nth-child(4)::before {
+        inset: -74% -34%;
+        background: radial-gradient(74% 64% at 46% 50%, rgba(56, 54, 72, .98) 0%, rgba(56, 54, 72, .96) 48%, rgba(56, 54, 72, .80) 68%, rgba(56, 54, 72, 0) 94%);
+      }
+      /* posee sur la photo, l'amorce redevient une note au feutre */
       .notes .mot {
+        font-family: "Meow Script", cursive;
+        font-weight: 400;
         font-size: 2rem;
+        line-height: 1.15;
         color: var(--menthe);
-        text-shadow: 0 1px 10px rgba(20, 18, 32, .8);
+        text-shadow: 0 1px 10px rgba(56, 54, 72, .92);
       }
       .notes .suite {
         font-size: .9375rem;
         line-height: 1.45;
-        color: #F2F0F7;
-        text-shadow: 0 1px 8px rgba(20, 18, 32, .85);
+        color: var(--blanc);
+        text-shadow: 0 1px 8px rgba(56, 54, 72, .92);
       }
       .notes li:nth-child(1) { left: 5%;  top: 3.5%;  transform: rotate(-1.6deg); }
       .notes li:nth-child(2) { left: 47%; top: 22.5%; transform: rotate(1.3deg); }
@@ -682,17 +766,19 @@ html[data-etat="avant"] .campagne-seule { display: none; }
         position: absolute;
         inset: 0;
         z-index: 2;
-        background: linear-gradient(175deg, rgba(38, 36, 54, .34) 0%, rgba(38, 36, 54, .16) 46%, rgba(38, 36, 54, .38) 100%);
+        background: linear-gradient(175deg, rgba(56, 54, 72, .36) 0%, rgba(56, 54, 72, .17) 46%, rgba(56, 54, 72, .40) 100%);
         pointer-events: none;
       }
       .plan__vue img { aspect-ratio: auto; height: 100%; }
+      /* le credit obligatoire de l'agence se pose sur son propre fond, pas sur le rendu clair */
       .plan__vue figcaption {
         position: absolute;
         right: .75rem;
         bottom: .6rem;
-        color: #F2F0F7;
-        text-shadow: 0 1px 8px rgba(20, 18, 32, .9);
-        padding: 0;
+        color: var(--blanc);
+        background: rgba(56, 54, 72, .86);
+        padding: .2rem .5rem;
+        border-radius: 4px;
       }
   }
 }
@@ -703,11 +789,17 @@ html[data-etat="avant"] .campagne-seule { display: none; }
 
   body { padding-bottom: 156px; }
 
+  /* le badge se range au dessus du selecteur et de la barre CTA, il ne croise plus le texte */
+  .badge { bottom: 140px; }
+
   .entete { padding-top: 36px; }
-  .entete__rang { gap: .75rem; padding-bottom: 10px; }
+  /* la nav ouverte descend sous l'en-tete au lieu de comprimer le logo et le bouton menu */
+  .entete__rang { gap: .75rem; padding-bottom: 10px; flex-wrap: wrap; }
+  .entete__logo { flex: 0 0 auto; }
   .entete__logo img { width: 122px; }
 
   .menu-bouton {
+    flex: 0 0 44px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -725,6 +817,8 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   .menu-bouton span { display: block; width: 20px; height: 2px; background: var(--violet-sombre); }
   .nav {
     display: none;
+    order: 3;
+    flex: 0 0 100%;
     width: 100%;
     margin: 0;
     flex-direction: column;
@@ -739,7 +833,8 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   .heros { height: auto; min-height: 74vh; padding-top: 2rem; }
   .heros__photo { object-position: 40% 62%; }
   .heros h1 { max-width: 12ch; }
-  .heros__mots { padding-top: 8rem; padding-bottom: 2.4rem; }
+  /* le bas de la colonne de texte passe au dessus du badge et du selecteur */
+  .heros__mots { padding-top: 8rem; padding-bottom: 4.6rem; }
 
   .rail { padding: 2rem 0 2.25rem; }
   .rail__chiffre { font-size: 3.25rem; }
@@ -788,13 +883,15 @@ html[data-etat="avant"] .campagne-seule { display: none; }
     #le-lieu { view-timeline-name: --ferme; view-timeline-axis: block; }
     .plan__pile { gap: 0; }
     .plan__vue { grid-area: 1 / 1; }
+    /* les deux vues sont superposees : une seule legende, celle qui apparait */
+    .plan__vue--auj figcaption { display: none; }
     .plan__vue--demain {
       opacity: 0;
       animation: apparait linear both;
       animation-timeline: --ferme;
       animation-range: cover 20% cover 46%;
     }
-    @media (min-width: 1080px) {
+    @media (min-width: 1240px) {
       .plan__vue--demain { animation-range: cover 42% cover 70%; }
     }
   }
@@ -836,11 +933,16 @@ html[data-etat="avant"] .campagne-seule { display: none; }
     </div>
   </header>
 
+  <!-- barre CTA mobile : placee ici pour que la tabulation l'atteigne juste apres l'en-tete -->
+  <div class="barre-mobile">
+    <a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+  </div>
+
   <main>
 
     <!-- ================= Beat 1, Heros ================= -->
     <section id="hero" class="heros sur-sombre">
-      <img class="heros__photo" src="../assets/img/exterieur3-1.jpg" width="1368" height="857" alt="La ferme de Novel, à Annecy, longue bâtisse de pierre au grand toit de tuiles">
+      <img class="heros__photo" src="../assets/img/hero1.jpg" width="1368" height="857" alt="La ferme de Novel, à Annecy, longue bâtisse de pierre au grand toit de tuiles">
       <div class="heros__voile"></div>
       <svg class="grain grain--sombre" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
       <div class="contenu heros__mots">
@@ -854,7 +956,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
     </section>
 
     <!-- ========== Marge de campagne, compteur et appel ========== -->
-    <aside class="rail">
+    <aside class="rail" id="rail">
       <svg class="grain grain--clair" aria-hidden="true" focusable="false"><rect width="100%" height="100%" filter="url(#bruit)"/></svg>
       <div class="contenu rail__inner">
         <p class="campagne-seule">
@@ -867,6 +969,8 @@ html[data-etat="avant"] .campagne-seule { display: none; }
           <a class="bouton bouton--large" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
           <p class="rail__apres" style="margin-top:.9rem">Vous choisissez votre nombre de parts à l'écran suivant.</p>
           <p style="margin-top:1.1rem"><a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a></p>
+          <!-- la cascade des paliers vient se poser ici au dessus de 1240 px, etat campagne -->
+          <div id="paliers-rail" class="campagne-seule"></div>
         </div>
       </div>
     </aside>
@@ -885,10 +989,11 @@ html[data-etat="avant"] .campagne-seule { display: none; }
               <div class="plan__pile">
                 <figure class="plan__vue plan__vue--auj">
                   <img src="../assets/img/exterieur3-1.jpg" width="1368" height="857" loading="lazy" alt="La ferme de Novel aujourd'hui, murs de pierre et grand toit de tuiles">
+                  <figcaption>aujourd'hui</figcaption>
                 </figure>
                 <figure class="plan__vue plan__vue--demain">
                   <img src="../assets/img/visuel-dauphine-1.jpg" width="900" height="563" loading="lazy" alt="La ferme rénovée en projet, façade vitrée et parvis planté">
-                  <figcaption>© Basa Architecture</figcaption>
+                  <figcaption>demain. © Basa Architecture</figcaption>
                 </figure>
               </div>
               <div class="plan__voile"></div>
@@ -942,7 +1047,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
           </ul>
         </div>
         <figure class="dessin">
-          <img src="../assets/img/dessin.jpg" width="747" height="1107" alt="croquis d'un espace intérieur de la ferme, coursives plantées et tables occupées">
+          <img src="../assets/img/dessin.jpg" width="747" height="1107" loading="lazy" alt="croquis d'un espace intérieur de la ferme, coursives plantées et tables occupées">
           <figcaption>collectif La Maison Audacieuse</figcaption>
         </figure>
       </div>
@@ -983,12 +1088,14 @@ html[data-etat="avant"] .campagne-seule { display: none; }
           <p>Plus nous sommes nombreuses et nombreux, plus le lieu reste accessible et plus il pèse face aux financeurs.</p>
           <p>Devant nous, quatre paliers. Les deux premiers regardent notre histoire, les deux suivants le poids que ce lieu prend sur son territoire.</p>
         </div>
-        <ul class="cascade">
-          <li><span class="nombre">666 :</span><span class="lecture">celles qui ont donné reprennent leur part du lieu.</span></li>
-          <li><span class="nombre">1&nbsp;700 :</span><span class="lecture">celles qui ont signé en 2025 en deviennent copropriétaires.</span></li>
-          <li><span class="nombre">3&nbsp;000 :</span><span class="lecture"><span class="trou trou--enligne">[TROU: lecture à valider le 24/08]</span>.</span></li>
-          <li><span class="nombre">5&nbsp;000 :</span><span class="lecture">l'objectif audacieux de cette campagne. <span class="trou trou--enligne">[TROU: lecture du palier 5 000 à valider le 24/08]</span></span></li>
-        </ul>
+        <div id="paliers-beat6">
+          <ul class="cascade" id="cascade">
+            <li><span class="nombre">666 :</span><span class="lecture">celles qui ont donné reprennent leur part du lieu.</span></li>
+            <li><span class="nombre">1&nbsp;700 :</span><span class="lecture">celles qui ont signé en 2025 en deviennent copropriétaires.</span></li>
+            <li><span class="nombre">3&nbsp;000 :</span><span class="lecture"><span class="trou trou--enligne">[TROU: lecture à valider le 24/08]</span>.</span></li>
+            <li><span class="nombre">5&nbsp;000 :</span><span class="lecture">l'objectif audacieux de cette campagne. <span class="trou trou--enligne">[TROU: lecture du palier 5 000 à valider le 24/08]</span></span></li>
+          </ul>
+        </div>
         <p class="trou" style="margin-top:1.8rem;max-width:46ch">[TROU: visuel de cascade à produire, brief Solène]</p>
         <p class="chute" style="margin-top:2.6rem;max-width:26ch">On ne donne pas à quelque chose, on devient quelque chose.</p>
         <p style="margin-top:2rem"><a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a></p>
@@ -1032,10 +1139,10 @@ html[data-etat="avant"] .campagne-seule { display: none; }
           </div>
           <div class="porte">
             <p>Et si vous préférez suivre le chantier avant de décider, laissez-nous votre adresse.</p>
-            <label class="vh" for="courriel">Adresse email</label>
-            <div class="champ-ligne">
-              <input class="champ" id="courriel" type="email" name="courriel" autocomplete="email" placeholder="Adresse email">
-              <button class="bouton bouton--tertiaire" type="button">Je m'inscris</button>
+            <label class="etiquette" for="courriel">Adresse email</label>
+            <div class="champ-ligne" style="margin-top:-.6rem">
+              <input class="champ" id="courriel" type="email" name="courriel" autocomplete="email">
+              <button class="lien-texte lien-bouton" type="button">Je m'inscris</button>
             </div>
             <p class="trou" style="max-width:46ch">[TROU: consentement et fréquence newsletter]</p>
           </div>
@@ -1051,7 +1158,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
     <div class="contenu">
       <div class="pied__grille">
         <div class="pied__logo">
-          <img src="../assets/logo/lma-blanc.png" width="584" height="720" alt="La Maison Audacieuse">
+          <img src="../assets/logo/lma-blanc.png" width="584" height="720" loading="lazy" alt="La Maison Audacieuse">
         </div>
         <div>
           <nav class="pied__liens">
@@ -1063,17 +1170,14 @@ html[data-etat="avant"] .campagne-seule { display: none; }
             <a href="/politique-de-confidentialite-mentions-legales/">Mentions légales</a>
             <a href="/politique-de-confidentialite-mentions-legales/">Politique de confidentialité</a>
             <a href="#et-vous">Newsletter</a>
+            <span class="mort">Statuts, à venir avec le tunnel</span>
+            <span class="mort">CGV parts, à venir avec le tunnel</span>
           </nav>
-          <p class="pied__mention" style="margin-top:1rem">Statuts, à venir avec le tunnel. CGV parts, à venir avec le tunnel.</p>
         </div>
       </div>
     </div>
   </footer>
 
-</div>
-
-<div class="barre-mobile">
-  <a class="bouton" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
 
 <nav class="selecteur" aria-label="Variantes de maquette">
@@ -1105,6 +1209,30 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   var bt = document.getElementById('menu-bouton');
   bt.addEventListener('click', function () {
     bt.setAttribute('aria-expanded', bt.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+  });
+
+  // La cascade des paliers vit dans le bandeau lateral fixe quand il existe, sinon au beat 6.
+  var cascade = document.getElementById('cascade');
+  var dansLeRail = document.getElementById('paliers-rail');
+  var auBeat6 = document.getElementById('paliers-beat6');
+  var large = window.matchMedia('(min-width: 1240px)');
+  function placerCascade() {
+    var cible = (large.matches && etat !== 'avant') ? dansLeRail : auBeat6;
+    if (cascade.parentNode !== cible) cible.appendChild(cascade);
+  }
+  placerCascade();
+  if (large.addEventListener) large.addEventListener('change', placerCascade);
+
+  // Le rail ne double jamais un CTA present dans la vue et s'efface quand le pied arrive.
+  var veilles = { 'ou-on-en-est': 'beat6-en-vue', 'et-vous': 'cta-en-vue', 'pied': 'pied-en-vue' };
+  Object.keys(veilles).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el || !window.IntersectionObserver) return;
+    new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        document.documentElement.classList.toggle(veilles[id], e.isIntersecting);
+      });
+    }).observe(el);
   });
 })();
 </script>
