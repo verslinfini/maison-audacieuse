@@ -120,3 +120,87 @@ Cinquième, absente aussi : le mot « placement » en dénégation est encore «
 ## Passe
 
 Passe **1**. Deux Critical, la gate 1 n'est pas franchie en l'état. Les deux se corrigent par ajout, aucun ne rouvre l'arc de la page. La question du Conseil Coopératif et celle du régime d'offre au public ne se corrigent pas dans le document, elles se traitent hors site et conditionnent ce que la page pourra écrire.
+
+## Passe 2 (19/08/2026)
+
+Même auditeur tiers, même grille, aucune ligne de la passe 1 modifiée. Cible relue en entier, 423 lignes contre 364. Statuts constitutifs signés relus article par article sur toutes les sections corrigées : articles 5, 6.1, 7, 8, 9.1, 9.2, 10, 11, 12, 13, 14.1, 14.2, 15.1 à 15.5, 16.1, 18 chapeau, 18.1, 18.3, 18.4, 22.1, 22.2, 23.1, 23.2, 23.5, 23.6, 24.1, 24.2, 24.3, 24.4, 26, 28, 30, 31, 34 et 36. `contenu/pages/chiffres-autorises.md` et `contenu/pages/accueil.md` relus au mot près.
+
+### Score
+
+| Axe | Poids | Passe 1 | Passe 2 | Motif |
+|---|---:|---:|---:|---|
+| 1. Complétude vs intention | 25 | 19 | 24 | la FAQ 10 comble le seul manque de fond, le collège de rattachement est nommé et chiffré, la promesse de bail cesse d'être une preuve de sécurité |
+| 2. Cohérence intention, preuve, action | 25 | 17 | 20 | règle d'unicité posée cinq fois et tenue dans toute la prose, mais le tableau des chiffres autorise encore les deux chiffres de la chaîne au beat 7 et en FAQ 2, et la FAQ 10 sert deux phrases que la règle anti-doublon interdit |
+| 3. Fiabilité | 25 | 14 | 23 | les deux Critical sont fermés, tous les renvois des sections corrigées vérifiés exacts au texte signé, statuts des chiffres exacts contre le fichier du repo ; restent deux rattachements de source approximatifs |
+| 4. Rédigeabilité et « aucune phrase neuve » | 15 | 11 | 12 | intitulés déclarés, phrase de risque citée, formulation du plafond imposée, ligne obligatoire du beat 4 laissée à la copy ; mais deux phrases interdites servies sans piège et un budget de mots faux |
+| 5. Forme | 10 | 8 | 8 | sommaire exécutif ajouté, zéro cadratin, zéro exclamation, zéro ligne à espace initial, tous les liens entre chevrons ; mais quatre points-virgules au lieu de deux et dix virgules avant « et » contre sa propre règle 9 |
+| **Total brut** | **100** | **69** | **87** | |
+
+**Vetos.** Veto de fiabilité **désarmé** : la citation de l'article 23.5 est exacte et cohérente dans ses quatre occurrences, aucun chiffre non sourcé n'est porté au tableau comme « autorisé ». Veto slop non armé. Veto tiret cadratin non armé, zéro occurrence.
+
+**Score SPECS : 87/100.** Passe 1 : 69. Cible 95.
+
+### Reprise des constats de la passe 1
+
+`Critical n° 1, article 23.5 | CORRIGÉ | Beat 3 porte un bloc dédié : « L'article 23.5 dit "Outre sa propre voix, aucun sociétaire ne peut posséder plus de CINQ (5) voix", soit cinq pouvoirs reçus en plus de la sienne et six voix au total. » Citation conforme au texte signé, article 23.5, troisième alinéa. Le tableau des chiffres porte « outre sa propre voix, pas plus de cinq pouvoirs, six voix au total », statut « à confirmer par écrit avec Ana avant tout affichage ». Cohérent aux quatre endroits où le plafond apparaît. Aucune trace de l'ancienne formule. Recommandation de ne pas l'afficher du tout : bonne, il ne sert que le lecteur institutionnel.`
+
+`Critical n° 2, prix du remboursement total | CORRIGÉ | Beat 4 : « demander le remboursement de la totalité de ses parts, c'est perdre la qualité d'associé, donc la voix, la copropriété et le statut (art 14 et art 15) », posé en ligne obligatoire et non en arbitrage. Vérifié : l'article 15.1 arrête le montant « dans les cas prévus à l'article 14 » ou « au cours duquel l'Associé·e a demandé un remboursement partiel », l'article 14.1 ouvre la perte de qualité par « la démission de cette qualité, notifiée formellement par voie postale ou électronique », l'article 15.5 soumet le partiel à « autorisation préalable du Conseil Coopératif ». Le renvoi « art 14.1 » des FAQ 2 et 6 est donc exact, et il n'entre pas en conflit avec l'usage du même article pour la perte de plein droit à la troisième assemblée, qui est bien au 14.1 lui aussi. Conséquences déclinées par état, ce qui va au-delà de ce qui était demandé : en état A, sans Conseil, la seule route ouverte est le total, la page le dit et n'annonce pas le partiel.`
+
+`Major n° 1, chaîne de remboursement en trois endroits | PARTIEL | La règle d'unicité est posée en décisions de format, au beat 4, dans la cellule du beat 7, en FAQ 2 et jusque dans le piège de reprise du tunnel au beat 8 : cinq formulations concordantes, la cellule ne porte plus « Oui » nu. Mais le tableau des chiffres autorisés garde deux lignes qui disent le contraire : « 5 000 €, seuil de remboursement prioritaire | ... | beat 4, beat 7, FAQ 2 » et « jusqu'à 5 ans, délai statutaire | ... | beat 4, beat 7, FAQ 2 ». Le rédacteur qui travaille au tableau des chiffres, ce que le document lui demande de faire, se voit autoriser les deux chiffres exactement là où la règle dure les interdit. Correction : remplacer les deux cellules par « beat 4 uniquement ».`
+
+`Major n° 2, collège de rattachement | CORRIGÉ | Beat 3 porte la ligne obligatoire, avec la définition de la catégorie 4 citée mot pour mot et vérifiée à l'article 11, et le collège D à 10 % vérifié au tableau de l'article 22.2. La question fermée (a) est fermée à deux issues, sans troisième voie. Le tableau des chiffres range la répartition en « à ajouter en ligne propre », ce qui est exact : elle ne figure aujourd'hui qu'en colonne source de la ligne « une personne = une voix » du fichier du repo.`
+
+`Major n° 3, à quoi sert l'argent | CORRIGÉ dans le fond, RÉGRESSION dans la matière | La FAQ 10 existe, la section « Ce que la page ne fait pas » ouvre l'exception, le lien vers l'ancre #notre-choix est inscrit aux liens sortants et l'ancre existe bien au beat 5 de accueil.md. Mais deux des citations servies en matière sont mot pour mot sur la home : « Nous avons choisi de ne pas laisser une banque financer plus de la moitié de ce lieu. Moins d'emprunt, ce sont des loyers accessibles. » et « chaque part en appelle d'autres ». La règle anti-doublon interdit « toute phrase présente à l'identique dans contenu/pages/accueil.md », avec deux exceptions seulement dont aucune ne les couvre, et le document arme scrupuleusement un piège de reprise aux beats 1, 7 et 8. Ici, rien. Même défaut à la FAQ 3, antérieur à la correction, qui propose la même phrase de levier. Correction : marquer les deux en pièges de reprise, la FAQ 10 s'écrivant en formulation neuve avant de renvoyer à l'ancre.`
+
+`Major n° 4, promesse de bail en preuve de sécurité | CORRIGÉ | FAQ 1 : « la promesse de bail n'entre pas dans cette réponse comme preuve de sécurité », avec la règle de position, le trou « permis refusé » ouvert en point 4 des points à confirmer avec Romain, et la phrase de risque de juin citée. La sécurité est renvoyée au seul mécanisme qui la borne, la responsabilité limitée à l'apport de l'article 9.2, vérifié.`
+
+`Major n° 5, 34 € marqué autorisé | CORRIGÉ | La ligne porte « absent de chiffres-autorises.md, à y ajouter avant l'étape copy, pour le don seulement », le beat 6 le répète et la règle armée liste les sept lignes à porter au fichier. Vérifié dans le repo : le 66 % y est, le 34 € n'y est pas. Le compte de sept lignes est juste.`
+
+`Major n° 6, « placement » présenté comme tranché | CORRIGÉ | Beat 5 : « à valider par Romain, il n'est pas tranché », avec le titre exact de la section de accueil.md et la phrase « La rédaction recommande de garder la négation », tous deux vérifiés. Question fermée (b), version de repli déjà écrite, et la règle « les deux pages portant le même mot au même moment » est la bonne.`
+
+`Major n° 7, conséquences de l'absence de Conseil Coopératif | CORRIGÉ | Bloc dédié au beat 4, repris en question fermée (c) et dans « Ce qui reste ouvert ». Raisonnement juridique vérifié : l'article 23.2 rend l'action en nullité irrecevable « si tou·tes les Associé·es sont présent·es ou représenté·es », l'article 24.2 fixe le quorum de l'assemblée ordinaire au dixième des droits de vote sur première convocation, l'article 24.4 ouvre l'ordinaire réunie extraordinairement. Point non dit et qui renforce la recommandation : l'article 18.1 demande trois membres au minimum et, « sous réserve de candidatures », un représentant de chaque catégorie ; les trois fondateurs couvrent trois catégories sur quatre, la catégorie Partenaires n'étant pas dotée à la création, l'assemblée est donc faisable telle quelle.`
+
+`Minors et nits de la passe 1 | 12 corrigés, 2 partiels, 1 non corrigé | Corrigés : intitulés de FAQ déclarés neufs, questions 4 à 8 et 10 · lien unique vers les statuts au beat 3, avec exclusion explicite aux beats 4 et 8 · renvoi de l'article 36 vers la question 1 de la FAQ · phrase de risque citée · consigne 375 px au tableau des collèges · seizième jour sorti du beat 8 · clé des sources partie A · trait n° 4 de voice-dna · référendum, section 4 et vigilance 2 · attribution des baselines scindée · libellé « Je m'inscris » · quatre collèges en ligne propre. Partiels : le total de mots, voir régressions, et le compte des parallélismes négatifs, la règle 9 n'en donne toujours aucun, même si le beat 1 ferme désormais le quasi-clone de la phrase de la home, qui était le vrai risque. Non corrigé : les points-virgules, deux en passe 1, quatre aujourd'hui.`
+
+`FYI de la passe 1 | 5 sur 5 traités | Piège de reprise « récupérable » à l'intention de la session tunnel · arbitrage entre les deux citations du 66 % · écart assumé avec la section 9 du plan, porté en point 5 de Romain · affectation au collège à l'entrée du sociétariat, remontée à la session tunnel · abstention valant vote favorable à l'article 23.6, posée comme point à connaître avant d'en faire un argument. Tous vérifiés au texte.`
+
+### Régressions
+
+`Major | FAQ 10 | Deux phrases verbatim de accueil.md servies en matière sans piège de reprise. Détail au Major n° 3 ci-dessus. C'est la seule régression de niveau Major et elle naît de la correction elle-même.`
+
+`Minor | Arc de la page et sommaire exécutif | Le budget de mots est faux du côté haut. La somme des dix maxima du tableau de l'arc vaut 1 725 et non 1 675, donc le total avec tableaux et arbre vaut 1 835 et non 1 785. Le côté bas est juste, 1 195 puis 1 305. L'erreur est répétée à l'identique au sommaire exécutif, ce qui la rend cohérente mais fausse deux fois. Accessoirement, « 355 à 535 mots pour dix questions, soit 35 à 55 mots par réponse » ne se referme pas non plus : dix réponses de 35 à 55 mots font 350 à 550.`
+
+`Nit | Beat 3 | « Seule formulation autorisée si le chiffre est affiché : "outre sa propre voix, personne ne peut détenir plus de cinq pouvoirs (art 23.5)". » C'est une chaîne entre guillemets sans source, alors que la clé du document promet qu'une phrase citée existe déjà quelque part. Elle vient de l'audit. L'attribuer, ou retirer les guillemets.`
+
+`Nit | FAQ 1 | « le permis n'est pas déposé et le dépôt est visé fin septembre (Chiffres) ». Le fait est vrai, il est au jalon J7 du CLAUDE.md du projet, « Dépôt du permis de construire (ouvert, fin septembre 2026) ». Mais chiffres-autorises.md ne porte que « le bail lui-même vient après le permis », sans date. Rattacher la date au bon fichier.`
+
+`Nit | Lignes 241 et 277 | Deux points-virgules neufs, introduits dans des passages réécrits après audit, alors que la règle typographique 9 du document les interdit. Le total passe de deux à quatre.`
+
+`Nit | Dix lignes | Virgules avant « et » dans la prose du document, dont sept dans des passages réécrits après audit : lignes 139, 147, 184, 196, 241 deux fois, 257, 268, 299 et 320. La règle 9 vise la copy, mais le document s'applique ses règles à lui-même partout ailleurs, et l'une de ces occurrences se trouve dans la phrase qui explique justement pourquoi la citation de la landing est écartée pour cette faute.`
+
+Contrôles négatifs, tous propres : zéro tiret cadratin, zéro point d'exclamation, zéro ligne commençant par un espace, zéro lien markdown sans chevrons, aucune phrase de copy neuve destinée à la page en dehors du nit du beat 3, aucune affirmation juridique nouvelle fausse, aucun renvoi orphelin. Les onze renvois internes du type « point n des points à confirmer » résolvent tous vers la bonne entrée. Le sommaire exécutif concorde avec le corps sur l'arc, les dix questions, les trois questions fermées, les cinq points de Romain, les six points d'Ana et les deux états, à la seule exception du budget de mots.
+
+### Constat neuf, hors passe 1
+
+`Minor | Cohérence entre les deux pages | La correction fait dire à /part-sociale/ que le remboursement total suppose la perte de la qualité d'associé. La même chaîne de remboursement est déjà en ligne sur la home, au beat 4 de accueil.md, sans cette ligne. Le document traite exactement ce cas de figure pour le mot « placement », « les deux pages portant le même mot au même moment », et ne le traite pas ici, alors que la phrase est sous veto de campagne et que le lecteur institutionnel lit les deux pages. Ce n'est pas un défaut du document, c'est une décision qui lui échappe : soit la home reçoit la même ligne, soit l'asymétrie est assumée et écrite quelque part.`
+
+### Objection de fond, mise à jour
+
+L'objection de la passe 1 tient toujours et elle n'appelait pas de correction dans le document. La page fait de la preuve statutaire son moteur, et ce pari n'est bon que si les statuts tiennent à la lecture. Ce qui a changé, c'est que le document ne cache plus ce qui ne tient pas. Il dit le prix du remboursement total, il dit que le remboursement partiel est fermé faute d'organe, il dit que le collège du souscripteur pèse 10 %, il dit que l'abstention à distance vaut oui, il ramène les liens vers le PDF de trois à un. Le lecteur institutionnel qui vérifie trouvera donc ce que la page lui a déjà dit, ce qui est exactement le contrat du registre. La décision de fond reste entière et elle n'est pas éditoriale : sans Conseil Coopératif constitué avant le 30/08, la page part en état A avec une liquidité dont la seule route est la sortie du sociétariat, et c'est une page de réassurance qui s'ouvre sur cet aveu.
+
+### Verdict
+
+**VALIDABLE PAR ROMAIN.** 87/100, aucun Critical, veto de fiabilité désarmé. Les deux Major résiduels se corrigent chacun en une ligne et ne rouvrent aucun beat : deux cellules du tableau des chiffres à passer en « beat 4 uniquement », deux phrases de la FAQ 10 à marquer en piège de reprise. À faire avant l'ouverture de la session copy, pas avant la validation de Romain.
+
+### Pour Romain
+
+Trois questions fermées à trancher : (a) garder la table des collèges en nommant le collège Soutiens et ses 10 %, recommandation de l'audit oui, ou la sortir entièrement · (b) le mot « placement » en dénégation, une seule décision pour la home et cette page, recommandation garder la négation · (c) convoquer cette semaine l'assemblée des trois fondateurs pour constituer le Conseil Coopératif.
+La question (c) est la seule qui coûte du temps et c'est celle qui débloque le plus : sans Conseil, pas d'état B, pas de 5 000 €, pas de 5 ans, pas de remboursement partiel, pas d'avis sur les admissions. Tant que vous n'êtes que trois, l'assemblée se tient immédiatement et sans délai de convocation ; après les premières admissions, il faut quinze jours.
+Avec Ana Etcheverry, six points, dont deux ne bornent pas une ligne mais la campagne entière : le régime d'offre au public de parts d'une SCIC sous forme de SAS, à traiter avant la bascule du 30/08, et l'article qui gouverne le droit de vote, le 12 ou le 23.5, dont dépend le fait que les souscripteurs de la campagne votent ou non.
+Les quatre autres points d'Ana sont des confirmations écrites : le plafond de voix de l'article 23.5, cinq pouvoirs plus la sienne ou cinq en tout · la valeur d'un bulletin électronique au regard de l'article 9.2 · l'absence de plafond de détention de parts · les deux questions sensibles de la FAQ.
+Deux corrections d'une ligne à faire appliquer avant la copy : les lignes 5 000 € et jusqu'à 5 ans du tableau des chiffres doivent dire « beat 4 uniquement », et les deux phrases de la home citées en FAQ 10 doivent passer en piège de reprise.
+Point neuf à arbitrer : la home porte la même chaîne de remboursement sans dire le prix du remboursement total. Soit elle reçoit la même ligne, soit l'écart entre les deux pages est assumé par écrit.
+
+### Passe
+
+Passe **2**. Gate 1 franchie. Onze corrections annoncées, neuf pleinement appliquées, deux partielles, une régression de niveau Major créée par la correction elle-même. La fiabilité statutaire du document est désormais son point fort : elle a été vérifiée article par article sur le texte signé.
