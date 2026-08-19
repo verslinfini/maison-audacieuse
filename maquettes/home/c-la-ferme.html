@@ -92,7 +92,7 @@ a { color: var(--violet); }
 /* sur fond clair le grain se pose en overlay et non en multiply : multiply assombrit la
    moyenne de 13 niveaux et ouvre une couture de ton contre la gouttiere du rail, qui elle
    n'est pas grainee. En overlay le grain se voit et le fond reste a la valeur de la charte. */
-.grain--clair  { opacity: .40; mix-blend-mode: overlay; }
+.grain--clair  { opacity: .40; mix-blend-mode: multiply; }
 .filtres { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* ---------------------------- ossature ---------------------------- */
@@ -610,7 +610,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
      l'appel : l'en-tete devient collante et reprend le CTA, comme la barre basse le fait
      sous 768 et le rail fixe au dessus de 1240. Hauteur mesuree 75 px. */
   .entete { position: sticky; top: 0; z-index: 60; padding-top: 18px; }
-  section, #le-lieu, #la-part { scroll-margin-top: 88px; }
+  section, #le-lieu, #la-part, #prendre-part { scroll-margin-top: 88px; }
   /* sans JS rien ne peut l'effacer devant le bandeau : il ne parait qu'avec le JS */
   html.js .nav .bouton--compact { display: inline-flex; }
   /* un seul CTA violet par vue : le compact s'efface des qu'un autre est a l'ecran */
@@ -725,7 +725,7 @@ html[data-etat="avant"] .campagne-seule { display: none; }
   html[data-etat="avant"] .entete__rang { padding-bottom: 12px; }
   html[data-etat="avant"] section,
   html[data-etat="avant"] #le-lieu,
-  html[data-etat="avant"] #la-part { scroll-margin-top: 88px; }
+  html[data-etat="avant"] #la-part, html[data-etat="avant"] #prendre-part { scroll-margin-top: 88px; }
   html.js[data-etat="avant"] .nav .bouton--compact { display: inline-flex; }
   html[data-etat="avant"].cta-rail-en-vue .nav .bouton--compact,
   html[data-etat="avant"].cta-en-vue .nav .bouton--compact { display: none; }
