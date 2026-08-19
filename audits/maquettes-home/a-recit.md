@@ -89,3 +89,115 @@ L'état `?etat=avant` tient debout : le héros perd sa ligne et la composition r
 ## Objection de fond
 
 Le seul geste qui distingue A de la mise en page sage que la copy produirait toute seule est le fondu du beat 2, et ce geste est deux fois fragile : dans son réglage actuel il est terminé avant que l'image soit cadrée, et il ne s'affiche pas du tout sur les navigateurs qui ne portent pas les animations pilotées par le défilement, iPhone compris. Retirez-le et il reste l'ordre nominal des beats dans une page bien composée, ce qui est le mérite de A et son risque : c'est la variante qui convainc et qui ne pousse pas. Le nombre que toute la campagne doit faire monter est le plus petit texte du premier écran, et le seul bouton de la page est un violet posé sur un violet où l'oeil ne le trouve pas. Ce n'est pas une erreur du constructeur, c'est le parti pris de A poussé jusqu'à son bord. La décision de demain matin n'est donc pas « quelle mise en page » mais « la home doit-elle convaincre ou faire pression ». Si Romain choisit A, il doit exiger les deux corrections qui rendent le parti pris tenable, détacher le CTA de son fond et donner au compteur sa propre ligne plutôt qu'une note de bas de titre, sinon il choisit à la fois l'option sobre et l'appel faible.
+
+## Passe 2 (19/08/2026)
+
+Passe 2 sur 3. Auditeur tiers, ni producteur ni correcteur de la maquette. Objet : vérifier que les corrections annoncées après la passe 1 sont réellement faites, chercher les régressions, rescorer.
+
+États testés : campagne (par défaut) et `?etat=avant`. Largeurs mesurées : 375, 600, 768, 800, 860, 900, 1024, 1080, 1100, 1200, 1366, 1440.
+Outils : `maquettes/verif.mjs` (deux états), `maquettes/copy-check.mjs` (deux états), cinq scripts Playwright écrits pour cette passe dans `maquettes/_verif/` (`audit2-tiers.mjs`, `audit2-entete.mjs`, `audit2-lisere.mjs`, `audit2-etiquette.mjs`, `audit2-crops.mjs`), mesures et captures dans `maquettes/_verif/a2-tiers/`. Les contrastes du liseré sont échantillonnés sur les pixels réellement rendus, par décodage PNG des captures à deux fois la densité, pas estimés depuis le CSS.
+
+### Score
+
+**92 / 100.** Brut 92. Veto FIABILITÉ **levé** (la seule cause d'armement est corrigée et vérifiée). Veto SLOP **non armé**. Veto tiret cadratin **levé** (0 occurrence dans la source, 0 dans le rendu, deux états, deux largeurs).
+
+| Axe | Passe 1 | Passe 2 | Ce qui a bougé |
+|---|---|---|---|
+| Fidélité au brief et à la copy | 20 / 25 | 23 / 25 | Meta description recopiée à l'identique, bandeau qui tient à 768, plus aucun CTA qui sort de la maquette ; reste le sélecteur qui masque trois mots à 375. |
+| Charte et anti-slop | 17 / 25 | 22 / 25 | L'infographie d'un autre système graphique a disparu, la cellule vide de la grille du beat 8 aussi, le CTA se détache enfin de son fond ; reste l'ordre vertical des deux boutons du beat 8 au-dessus de 1100 px et deux Nit de rythme. |
+| Fiabilité | 9 / 20 | 19 / 20 | Aucun nom de structure exploitante, aucune personne physique, aucune marque commerciale nulle part dans le fichier ; reste `dessin.jpg` publié sans ligne de crédit, écart commun aux trois variantes. |
+| Accessibilité et technique | 15 / 20 | 19 / 20 | L'`alt` orphelin est parti avec l'image, les boutons principaux sont mesurés à 4,81:1 au pire contre leur voisinage ; reste une timeline d'étiquette qui ne pointe pas sur la bonne boîte. |
+| Concept de variante | 7 / 10 | 9 / 10 | Le fondu se joue maintenant pendant que la figure est cadrée et les deux cadrages se répondent vraiment ; reste que `animation-timeline` n'est pas porté par les moteurs anciens, ce qui plafonne le geste et ne se corrige pas en CSS. |
+
+Cible du module : 95. Non atteinte, l'écart tient aux points listés plus bas, aucun n'est bloquant.
+
+### Vérification constat par constat
+
+Verdicts : **corrigé**, **partiel**, **non corrigé**, **refus accepté**, **refus rejeté**.
+
+#### Critical
+
+| Constat de la passe 1 | Verdict | Preuve |
+|---|---|---|
+| Infographie `collectif-1.png` publiant quatre structures exploitantes, une personne physique et une marque commerciale | **corrigé** | Zéro occurrence de `collectif-1` dans le fichier. Images référencées, liste complète : `lma.svg`, `hero1.jpg`, `exterieur3-1.jpg`, `visuel-dauphine-1.jpg`, `dessin.jpg`. Recherche plein texte de OSTARA, CAFÉ DES AUDACIEUSES, BANJO, EN-SANTÉ, Moenne, Loccoz, Bidot, `part_` : aucune occurrence. Le trou est promu en bloc visuel (`.trou--visuel`, `max-width: 820px`, `min-height: clamp(180px, 24vw, 250px)`), ce que rendent déjà B et C. Captures `a2-tiers/sec-1440-le-collectif.png` et `sec-375-le-collectif.png`. |
+| `alt` de la copy posé sur un fichier qu'il ne décrit pas | **corrigé** | Disparaît avec la figure. `imagesSansAlt: 0`, et les cinq `alt` restants décrivent bien leur fichier. |
+
+Veto FIABILITÉ levé.
+
+#### Major
+
+| Constat de la passe 1 | Verdict | Preuve |
+|---|---|---|
+| Meta description désaccentuée | **corrigé** | Comparaison caractère par caractère avec `accueil.md` ligne 16 : identique. Identique aussi à `b-compteur.html` et `c-la-ferme.html`. |
+| Grille du beat 8 : cellule vide et ordre des deux portes inversé | **partiel** | `align-self: start` posé, `padding-top` retiré, `align-items: start` sur la grille : les deux portes démarrent à la même ligne (y = 6 728 à 1440), la cellule vide sous le H2 a disparu. Mais les boutons n'ont pas suivi : « Je fais un don » tombe à y = 6 799 et « Je prends ma part » à y = 6 935, soit 136 px d'écart au lieu de 345. Mesuré à 1100, 1200, 1366 et 1440, toujours dans le même sens. Sous 1080 px, colonne unique, ordre correct (« Je prends ma part » 163 px avant). L'écart ne vient plus de la mise en page mais de la hauteur du texte au-dessus du bouton dans la porte 1. Voir « À trancher au gate ». |
+| CTA violet posé sur héros violet, ne se détache pas | **corrigé** | Liseré `rgba(255, 255, 255, .86)` en `box-shadow` interne. Mesuré sur les pixels rendus à densité 2, valeur réelle du liseré `[236, 234, 242]`. Contre le fond voisin : CTA du héros 8,73 / 9,14 / 9,06 à 1440 et 10,34 / 10,16 / 10,22 à 1024 ; CTA d'en-tête 7,24 / 4,81 / 6,20 à 1440 et 7,55 / 6,12 / 6,59 à 1024. Pire valeur 4,81:1, pour 3:1 attendus. Liseré contre le violet du bouton 3,95:1, l'arête se voit aussi de l'intérieur. Le correcteur a fait mieux que la prescription en portant le liseré sur `.entete:not([data-solide="oui"])` : vérifié à 1440, 1024 et 768, il disparaît dès que l'en-tête devient blanche. |
+| Fondu du beat 2 terminé avant que l'image soit cadrée, deux cadrages qui ne se répondent pas | **corrigé** | `animation-range: cover 40% cover 72%`. Figure haute de 593 px, sommet à 1 496 : elle est entièrement dans l'écran de 1 189 à 1 496 de défilement. Opacité mesurée : 0 à 1 140, 0,16 à 1 196, 0,52 à 1 346, 0,87 à 1 496, 1 vers 1 550. Le fondu se joue donc en entier dans la fenêtre où la figure est cadrée. Mi-course à 1 340, figure à 156 px du haut et 151 px du bas d'un écran de 900, soit centrée. `object-position: 50% 72%` sur l'image d'aujourd'hui : à mi-course la ligne de faîtage, la porte cintrée et la ligne de sol des deux images coïncident, cela se lit comme une transformation du même bâtiment et non comme un défaut d'affichage. Capture `a2-tiers/fondu-micourse.png`. |
+| CTA du beat 8 pointant sur `/prendre-part/`, 404 | **corrigé** | Les cinq boutons portent `href="#prendre-part"`, `title` conservé. Aucun CTA ne quitte la page. |
+| Bandeau desktop qui casse à 768 px | **corrigé** | Requête `max-width: 900px and min-width: 768px` appliquée. Mesuré à 768, 800, 860, 900 et 1024 : les cinq entrées sur une seule ligne (toutes à y = 46), aucun chevauchement avec le logo ni avec le CTA, marge restante de 27 à 39 px. La bascule mobile reste à 767 px, vérifiée. Captures `a2-tiers/fold-768.png` et `entete-solide-768.png`. |
+
+#### Minor
+
+| Constat de la passe 1 | Verdict | Preuve |
+|---|---|---|
+| Crédit Basa attribuant à Basa une image qui n'est pas de lui | **corrigé** | Option de repli retenue : « Le lieu projeté, © Basa Architecture. » Le sujet est nommé, l'attribution ne porte plus sur la photo. |
+| `hero1.jpg` et `brightness(1.24)`, la ferme illisible sous la brume | **partiel, refus accepté** | Le filtre est ramené à `brightness(1.06) contrast(1.1)` à toutes les largeurs, valeur que la passe 1 proposait elle-même. La ferme se lit : grand toit de tuiles, murs de pierre, portes cintrées, véhicule. Le refus du swap est vérifié en ouvrant les deux fichiers : `hero1.jpg` est `exterieur3-1.jpg` avec le traitement violet, même prise de vue, même jour, même véhicule, mêmes bacs. L'échanger poserait deux fois le même cadrage sur la page et priverait l'« avant » du fondu de son identité. Refus accepté. |
+| Sélecteur qui recouvre une ligne de copy à 375 | **partiel** | `.selecteur__toutes { display: none }`, pastille calée à droite, largeur ramenée de 330 à 183 px, flèches toujours à 44 px, `?etat=avant` conservé sur les deux. Mais le recouvrement subsiste : pastille de x 180 à 363, paragraphe de x 20 à 355, trois mots de « appartient à celles et ceux qui le financent » restent masqués au premier écran. Chrome de comparaison et non contenu de la page future, contrainte commune aux trois variantes. |
+| `visuel-dauphine-1.jpg` agrandi 1,6 fois | **corrigé** | Option de repli retenue : `.lieu__figure { max-width: 1100px }` centrée. Agrandissement ramené à 1,22 fois. |
+| Terracotta Meow `#A3716A`, marge de contraste mince | **refus accepté** | La charte ferme la palette à sept couleurs et `#A3716A` est le terracotta de charte (`docs/charte.md`, ligne 13). `#8E5F58` serait une huitième couleur, donc un écart à la charte non validé par Romain, que la grille DESIGN sanctionne d'un plafond. La passe 1 écrivait elle-même « aucune correction obligatoire » et les deux ratios, 3,76:1 et 3,33:1, restent au-dessus du seuil de 3:1 du texte large. Refus accepté. |
+| Point orphelin après l'encadré de la ligne « 3 000 » | **corrigé** | Le point est passé dans l'encadré, plus rien ne flotte après. |
+| Point d'interrogation du H1 seul en deuxième ligne à 768 et 1024 | **corrigé** | `text-wrap: balance` et `max-width: 22ch` sous 1080. Mesuré à 375, 600, 768, 900, 1024, 1080, 1200, 1366 et 1440 : le point d'interrogation n'ouvre jamais une ligne, et à 768 comme à 1024 le H1 tient sur une seule ligne. |
+
+#### Nit
+
+| Constat de la passe 1 | Verdict |
+|---|---|
+| Encadré des cinq briques inséré entre la liste et sa phrase de clôture | **non corrigé** |
+| Cinq sections consécutives sur la même grille, jamais inversée | **non corrigé** |
+| `annotation` en `aria-hidden` | inchangé, aucune action attendue |
+| Étiquettes « aujourd'hui » et « demain » présentes aussi dans le cas animé | inchangé, aucune action attendue |
+
+### Régressions
+
+Cherchées : débordement, contraste, texte coupé, zone chaude doublée, copy altérée, requête externe, console, ordre de lecture, dégradation.
+
+**Aucune régression.**
+
+Copy : 80 segments sur 80 présents dans les deux états, 10 trous rendus, title inchangé, compteur 218 présent en campagne et absent en avant lancement. Aucune altération.
+`verif.mjs` à 375 et 1440, deux états : 0 message de console, 0 erreur de page, 0 requête externe, 0 requête en échec, 0 débordement horizontal, 0 cible sous 44 px, 0 tiret cadratin, 0 point d'exclamation, un seul h1, aucun saut de niveau, 0 élément focusable sans indicateur visible, 0 image cassée, sans `alt` ou sans dimensions.
+Aucun débordement non plus à 768, 800, 860, 900, 1024, 1200 et 1366 : largeur du document égale à la largeur d'écran partout.
+En-tête au défilement, vérifiée à 1440, 1024 et 768 : transparente sur le héros, puis blanche opaque avec navigation sombre et logo violet dès 900 px de défilement, liseré du CTA correctement retiré dans l'état opaque. Rien ne se dégrade.
+Texte blanc du héros sur la photo : 12,67:1 pour le H1, 12,53:1 pour le chapô, 12,02:1 pour la ligne de compteur.
+Menu mobile : `aria-expanded` passe à `true` à l'entrée, les cinq liens s'affichent, Escape referme et rend le focus au bouton, aucune erreur de console.
+Mouvement réduit : les deux images se posent côte à côte, `grid-template-columns: 548.5px 548.5px`, opacité 1. Dégradation conforme, inchangée.
+État `?etat=avant` : la composition tient, les deux CTA portent leur liseré.
+
+Une observation qui n'est pas une régression : le CTA du beat 8 pointe sur `#prendre-part`, identifiant porté par son propre conteneur, donc le clic fait défiler la page sur elle-même. C'est exactement ce que prescrivait la passe 1, la cible réelle se remet à l'intégration, aucun cul-de-sac.
+
+### Verdict
+
+**PUBLIABLE.** 92 sur 100, aucun Critical, aucun Major bloquant, veto fiabilité levé, veto slop non armé, veto tiret cadratin levé. La maquette peut aller au gate de comparaison.
+
+### Reste à corriger, aucun bloquant
+
+| Sévérité | Où | Correction exécutable |
+|---|---|---|
+| Minor | `.selecteur`, sous 768 px | Trois mots de copy restent masqués au premier écran. Soit masquer aussi `.selecteur__nom` sous 480 px pour ne garder que les deux flèches, soit remonter la pastille à `bottom: calc(70px + 3.2rem + env(safe-area-inset-bottom, 0px))`. À décider pour les trois variantes ensemble, la contrainte est commune. |
+| Nit | `.revele__bloc--avant .etiquette` | Sa `animation-timeline: view()` se résout sur la boîte de l'étiquette, pas sur celle de la figure : `cover 40% cover 62%` tombe donc dans une autre fenêtre de défilement. Mesuré : l'étiquette « aujourd'hui » ne commence à s'effacer qu'à 1 420 et vaut encore 0,32 à 1 546, quand l'image est à 0,99 de « demain ». Poser `view-timeline-name: --revele` sur `.revele__bloc--avant` et `animation-timeline: --revele` sur l'étiquette, la plage existante devient alors celle qui était voulue. |
+| Nit | `.trou--suite` du beat 2 | Déplacer l'encadré après « Personne ne s'y enrichit, tout y vise l'équilibre et l'utilité. », en fin de bloc. Non fait à la passe 1. |
+| Nit | Beat 5, `.choix__grille` | Inverser cette seule section pour rompre la répétition de cinq grilles identiques. Non fait à la passe 1. |
+| FYI | `dessin.jpg`, beat 5 | Toujours publié sans ligne de crédit alors que `SOURCES.md` note « auteur précis non identifié » et que la copy porte un trou pour lui. Écart commun aux trois variantes, à trancher au gate pour les trois ensemble. |
+
+### À trancher au gate
+
+**1. Beat 8 au-dessus de 1100 px, ordre des deux boutons.** Le défaut anti-slop est réglé : les deux portes partent de la même ligne, plus aucune cellule vide. Reste que « Je fais un don » se lit 136 px au-dessus de « Je prends ma part », parce que la porte 1 porte une accroche de trois lignes avant son bouton. Ce qui joue en sens inverse : la porte 1 est la colonne de gauche, donc lue en premier, elle ouvre sur le texte le plus fort de la section, et son bouton est plein quand le second n'est que cerné. Les trois façons de supprimer l'écart coûtent quelque chose : remonter le bouton dans la porte 1 change l'ordre de la copy, élargir la porte 1 ne gagne qu'une quarantaine de pixels, décaler la porte 2 vers le bas réinstalle le vide en haut à droite que la passe 1 avait fait retirer. L'audit ne tranche pas un arbitrage de hiérarchie visuelle qui n'a plus de bonne réponse mécanique.
+
+**2. Premier écran, le traitement violet de `hero1.jpg`.** Le refus du swap est fondé, les deux fichiers sont la même prise de vue. Le filtre adouci rend la ferme lisible dans le tiers bas. Reste que le tiers haut du premier écran est une brume violette. Question de goût, pas de conformité : garder cette prise de vue traitée comme signature d'ouverture, ou demander un autre cadrage de la ferme pour le beat 1 afin que la variante qui s'appelle « Le récit » ouvre franchement sur son sujet.
+
+### Ce que la passe 2 confirme comme acquis
+
+Le fondu du beat 2 est devenu ce que la passe 1 demandait : il se joue quand la figure est cadrée et les deux cadrages se répondent. C'est le seul geste qui distingue A, et il fonctionne maintenant.
+Le CTA se voit. Mesuré à 4,81:1 au pire contre son voisinage, il n'est plus le violet perdu sur le violet que décrivait la passe 1.
+Le socle technique n'a pas bougé d'un pouce : zéro console, zéro requête externe, zéro débordement de 375 à 1440, focus visible partout, clavier complet, mouvement réduit traité.
+La copy reste collée telle quelle, 80 sur 80, et les dix trous du corps sont rendus sans être maquillés.
+
+L'objection de fond de la passe 1 tient toujours, elle ne relève pas de la correction : A convainc et ne pousse pas, et `animation-timeline` prive une part des visiteurs, iPhone en tête, du seul geste qui la distingue. Cela se dit à voix haute avant de choisir A, cela ne se corrige pas dans le fichier.

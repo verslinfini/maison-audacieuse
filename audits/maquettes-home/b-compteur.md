@@ -119,3 +119,158 @@ Beat 3, les quatre items de frise « 2025 : lauréat de l'appel à projets d'Ann
 Beat 6, « 666 : celles qui ont donné reprennent leur part du lieu. » et « 1 700 : celles qui ont signé en 2025 en deviennent copropriétaires. » : **légitimes**. Même mécanique, le deux-points est rendu par les deux colonnes de la cascade, nombre à gauche, lecture à droite. Aucun mot changé.
 
 Aucun manquant réel. Zéro mot changé sur les 80 segments.
+
+## Passe 2 (19/08/2026)
+
+Passe 2 sur 3. Auditeur tiers, ni producteur ni correcteur de la maquette. Vérification une par une des corrections annoncées, recherche de régression, rescore.
+Fichier audité : même chemin, 1219 lignes (1125 en passe 1).
+États testés : campagne et `?etat=avant`. Largeurs testées : 375, 768, 820, 900, 1000, 1023, 1024, 1100, 1180, 1239, 1240, 1300, 1440. Modes testés : défaut, `prefers-reduced-motion: reduce`, et par lecture du source la branche `@supports not (animation-timeline: view())` ainsi que le cas d'un moteur qui connaît `view()` sans connaître `timeline-scope`.
+
+Outils : `maquettes/verif.mjs` (deux états), `maquettes/copy-check.mjs` (deux états), cinq scripts Playwright écrits pour cette passe dans `maquettes/_verif/` (`audit2-b.mjs` mesures d'en-tête, de menu, de fondu, de vides et de hit-test, `audit2-b-pixels.mjs` contraste sur le fond rendu seul, `audit2-b-crops.mjs` crops du fondu et cible au quart de pixel, `audit2-b-ecrans.mjs` la page écran par écran, `audit2-b-final.mjs` contrôles de non régression), lecture intégrale du source, lecture à l'oeil de 20 captures produites pour cette passe dans `_verif/b-passe2/`. Contrastes recalculés à la main sur les couleurs réelles, aucun repris de `verif.mjs`. Aucun outil Playwright MCP employé. Aucune écriture dans la maquette.
+
+## Score de la passe 2
+
+**90 / 100** (passe 1 : 76). Score brut, aucun plafond appliqué, aucun veto armé.
+
+| Axe (grille DESIGN) | Passe 1 | Passe 2 | Note |
+|---|---|---|---|
+| Respect de la charte, intrant fermé | 15 / 20 | 18 / 20 | Dégradé sombre remis aux trois bornes de la charte, `#766DA0` présent en `rgba(118, 109, 160, 0.22)` sur base `#383648` avec pointe kaki `#9D9669`. Les deux fonds de section sortent encore de la liste littérale du brief mais ne sont plus des nuances inventées : `color-mix` de deux couleurs autorisées, repli en aplat de charte sous `@supports`, et la famille obtenue est celle que la charte décrit. Manque l'acquiescement d'une ligne. |
+| Hiérarchie et lisibilité | 14 / 20 | 17 / 20 | Les trois vides prescrits sont résorbés, le héros en état avant est refait. Reste le CTA principal dédoublé en mobile, deux fois dans la page, et l'ordre mobile du héros non tranché. |
+| Cohérence des composants et des espacements | 9 / 10 | 9 / 10 | Les deux actions secondaires portent enfin le même contour. Reste un traitement inégal des liens sortants : nav et pied en nouvel onglet, CTA et liens de corps non. |
+| Accessibilité mesurée | 11 / 15 | 15 / 15 | Les deux échecs de la passe 1 sont corrigés et vérifiés par mesure et par hit-test. Aucun échec mesuré, y compris au pire pixel de grain de l'aplat sombre. |
+| Responsive réel, vérifié au navigateur | 6 / 10 | 10 / 10 | En-tête à 79 px de 768 à 1239 px, menu replié sous 1024 px, zéro débordement horizontal aux 13 largeurs testées, dans les deux états. |
+| Âme, la page est reconnaissable comme celle de CETTE structure | 21 / 25 | 21 / 25 | Inchangé, seuil de 20 franchi, critère non compensable satisfait. Les gestes de la passe 1 sont tous intacts, le croisement des deux crédits en ajoute un. La page reste à trois images réelles et le beat 7 n'en porte aucune, cette fois par décision. |
+
+### Vetos
+
+**VETO SLOP : non armé.** Recherché de nouveau écran par écran sur les 8 vues de 1440 et les 12 de 375. Aucun interdit relevé : pas de rangée de trois cartes, aucun eyebrow, aucune numérotation, aucun dégradé décoratif ni halo ni bouton en dégradé, aucune ombre molle sur carte de contenu (les trois seules ombres portent le chrome flottant, rail, pilule et tiroir de menu), rayon mixte documenté, aucun séparateur en vague ni en biseau, rien de centré section après section, padding variable, alternance texte image limitée à deux, aucune cellule de grille vide, aucune carte dans une carte, zéro emoji, zéro icône cliché, aucun texte blanc sur photo, aucun faux tableau de bord, compteur typographique et non animé, aucun indicateur de défilement, aucun Title Case, 0 point d'exclamation.
+
+**VETO FIABILITÉ : non armé, et consolidé.** Le seul défaut de cette famille en passe 1 était le placement du crédit Basa : il est levé, vérifié dans les trois modes de rendu. Aucun chiffre interdit ne paraît, contrôlé au grep sur le source : 0 occurrence de « sous bail », 88 900, 3,2, 54 000, « 5 ans », « 15 % », « 25 % », « 18 % », « 300 personnes », « 5 000 € ». Aucune exploitante n'est nommée, la liste reste un trou visible.
+
+**VETO TIRET CADRATIN : non armé.** 0 occurrence dans le source, 0 dans le rendu aux deux largeurs et dans les deux états (`verif.mjs`, `cadratins: 0`).
+
+## Reprise des constats de la passe 1
+
+### C1, crédit Basa posé sur une photo du collectif : CORRIGÉ
+
+Vérifié, pas cru sur parole. Le `figcaption` porte deux crédits nommés, `aujourd'hui, collectif La Maison Audacieuse` et `demain, © Basa Architecture`, empilés dans la même cellule de grille et croisés sur la même `view-timeline` que les images. Opacités relevées à sept positions de défilement (fractions 0 / 0,2 / 0,38 / 0,48 / 0,58 / 0,8 / 1) : image d'hier 1 / 1 / 1 / 0,4999 / 0 / 0 / 0 et crédit d'hier exactement les mêmes valeurs, crédit de demain 0 / 0 / 0 / 0,5001 / 1 / 1 / 1. Au repos, avant tout défilement, seul le crédit du collectif est peint. En `prefers-reduced-motion` les deux paraissent sur une ligne, séparés par un point médian, chacun nommant son image (`_verif/b-passe2/fondu-reduced-complet.png`). La branche `@supports not (animation-timeline: view())` donne le même rendu par construction, les deux règles d'animation des crédits vivant à l'intérieur du bloc `@supports (animation-timeline: view()) and (timeline-scope: --fondu)`. Le cas d'un moteur qui connaîtrait `view()` sans `timeline-scope` a été examiné : les images se fondent, les deux crédits restent affichés côte à côte, chacun avec le nom de son image, donc aucune attribution fausse dans ce cas non plus.
+
+### M1, en-tête cassé à 768 px : CORRIGÉ
+
+Hauteur d'en-tête mesurée à onze largeurs : 79 px à 768, 820, 900, 1000, 1023, 1024, 1100, 1180 et 1239 px, `position: sticky` sur toute cette plage, 119 px et `position: relative` à partir de 1240 px. Le menu se replie en bouton sous 1024 px, la pastille CTA de l'en-tête reste affichée dès 768 px, la barre fixe basse ne paraît que sous 768 px. De 1024 à 1300 px les cinq libellés tiennent chacun sur une seule ligne à 44 px de haut (`Le projet` 86, `La part sociale` 126, `L'équipe` 82, `Médias` 73, `Contact` 79), `white-space: nowrap` posé. Débordement horizontal nul aux treize largeurs, `.entete-rangee` sans dépassement de contenu. Menu ouvert vérifié à 768 et à 375 : `aria-expanded` passe de false à true, cinq entrées à 48 px, panneau opaque, Échap referme et rend le focus au bouton (`_verif/b-passe2/menu-768-ouvert.png`, `menu-375-ouvert.png`).
+
+### M2, image du collectif absente : CLOS PAR DÉCISION, refus accepté et fondé
+
+Le refus est le bon appel, et il vaut mieux que le constat de la passe 1. `SOURCES.md` qualifie `collectif-1.png` d'infographie des futures occupantes : l'insérer aurait publié la liste des exploitantes que la copy tient encore explicitement en trou, `[TROU: liste des exploitantes à figer au 24/08]`. Sur une page de levée, c'était armer le veto fiabilité pour combler un vide de mise en page. La passe 1 avait raison de voir le vide, tort de nommer ce fichier comme sa réponse.
+Vide résiduel jugé résorbé : la bande passe de 277 à 71 px, le rectangle en pointillé vide a disparu au profit d'une bande de largeur de contenu portant son texte de trou, et le vide sous le dernier élément de la section tombe à 60 px, soit exactement le padding bas (`_verif/b-passe2/collectif-1440.png`, `m8.png`).
+
+### M3, bordure du champ email : CORRIGÉ
+
+Couleur calculée de la bordure : `rgb(95, 87, 136)`, soit `#5F5788`. Recalculé à la main : 6,55:1 sur le blanc du champ, 5,63:1 sur le `#EDEDF5` de la section. Le seuil de WCAG 1.4.11 est 3:1, il est franchi du double.
+
+### M4, cibles tactiles des quatre liens texte : CORRIGÉ
+
+Vérifié par hit-test au quart de pixel, `elementFromPoint` balayé sur toute la hauteur et toute la largeur de chaque lien, et non par lecture du rect. Cible réelle atteignable : 48,75 x 272,5 px à 1440 px sur les quatre liens (`hero-lien`, `part-lien`, `lieu-lien`, `collectif-lien`), 45,75 x 245,25 px à 375 px. Les 44 px du brief sont tenus dans les deux dimensions et aux deux largeurs. `verif.mjs` continue de lister ces quatre liens dans `ciblesPetites` : faux positif confirmé, il mesure le rect de l'élément et ignore le `::after`.
+
+### M5, héros en état avant : CORRIGÉ
+
+Grille du héros calculée `1180px` à 1440 et `335px` à 375, donc une seule colonne, filet masqué, compteur masqué, trou du palier visé en pleine largeur. Sous le bloc d'actions il reste 64 px à 1440 et 44 px à 375, soit exactement le padding bas de la section : plus aucun trou de composition. Les 171 px de crème vide au milieu du premier écran ont disparu (`_verif/b-passe2/avant-375-fold.png`, `b-compteur-avant/b-compteur-avant-1440-fold.png`).
+
+### M6, vides de composition : CORRIGÉ sur les trois points prescrits
+
+Vide à droite de la phrase du compteur : 314 px en passe 1, 69 px mesurés, la phrase atteint la colonne d'action. Colonnes de la zone d'appel : `align-items: stretch` et filet vertical sur `.porte-second`, les deux colonnes finissent sur la même ligne, vide résiduel 0 px sous chacune, la colonne courte est tenue par un trait exactement comme la passe 1 le demandait. Collectif : 321 px de vide sous le texte en passe 1, 60 px mesurés.
+La gouttière de 208 px au-dessus de 1240 px n'est pas traitée. Elle n'est pas un vide accidentel mais le logement du rail latéral, documenté en tête de feuille de style et occupé pendant toute la fenêtre où le rail paraît. Parti pris accepté, aucune correction demandée.
+
+### M7, deux fonds hors liste et dégradé sombre recomposé : PARTIELLEMENT CORRIGÉ, sévérité ramenée à un point de gate
+
+Deuxième moitié du constat, corrigée : le dégradé sombre est `#383648` en base, `rgba(118, 109, 160, 0.22)` en linéaire et `rgba(157, 150, 105, 0.34)` en radial. Le violet principal `#766DA0` est de retour dans l'aplat, les trois bornes sont celles que la charte décrit.
+Première moitié, non corrigée mais transformée : les deux fonds restent hors de la liste littérale du brief, mais ils ne sont plus des valeurs inventées. Ils sont dérivés par `color-mix(in srgb, #FFF3A8 35%, #F5F5F6)` et `color-mix(in srgb, #A3716A 12%, #F5F5F6)`, donc de deux couleurs autorisées chacun, avec repli en aplat de charte pur pour les moteurs sans `color-mix`. Valeurs rendues relevées : `color(srgb 0.97451 0.958039 0.857647)` soit `#F8F4DB`, et `color(srgb 0.922196 0.898667 0.898823)` soit `#EBE5E5`. C'est très exactement la famille que `docs/charte.md` nomme « clair pastel : dégradé bleu pâle / rose / crème, pour les fonds de page et les tuiles douces ».
+Je tranche : le PLAFOND « écart à la charte non validé par Romain » ne se déclenche pas, parce qu'il n'y a pas d'écart à la charte, seulement au raccourci que le brief en avait fait. Il reste une formalité, une ligne d'acquiescement au gate, pas une correction.
+Contrôle du repli : sans `color-mix`, le héros repasse en `#FFF3A8` plein et le beat 7 en `#F5F5F6`. Contraste du corps `#56546B` sur ces deux aplats, recalculé : 6,48:1 et 6,70:1. Le repli est sûr.
+
+### Minor, liens vers les chemins de production : PARTIELLEMENT CORRIGÉ
+
+`target="_blank" rel="noopener"` posé sur les cinq entrées de nav et les sept liens sortants du pied, douze occurrences. Vérifié qu'il n'a rien cassé : il n'est posé ni sur les flèches du sélecteur, ni sur le lien du hub, ni sur l'ancre `#et-vous` du pied. Clic réel sur « Newsletter » depuis `?etat=avant` : on reste sur `b-compteur.html?etat=avant#et-vous`, défilement à 6112 px, zéro réponse en échec. Le paramètre d'état est conservé sur les trois liens du sélecteur.
+Reste ouvert : les cinq CTA `/prendre-part/`, les quatre liens texte du corps et le bouton HelloAsso n'ont pas reçu le même traitement. Voir N1.
+
+### Minor, poids du bouton « Je m'inscris » : CORRIGÉ
+
+`.bouton-second` et `.bouton-tiers` partagent le même contour, fond transparent, texte et bordure `#383648`. L'aplat plein reste au seul CTA principal. La hiérarchie des deux actions secondaires se lit à la place, comme la passe 1 le proposait en seconde option.
+
+### Minor, doublon du CTA en barre mobile : NON CORRIGÉ, refus refusé
+
+Le motif invoqué, « JS », ne tient pas : `majRail` et deux `IntersectionObserver` sont déjà écrits dans la page, la barre mobile demande six lignes de plus.
+Le défaut est mesuré et il ne se produit pas une fois mais deux. Au premier écran de 375 px, deux pastilles violettes strictement identiques sont visibles ensemble, celle du héros à y=520 et celle de la barre fixe à y=749, 229 px d'écart (`_verif/b-passe2/mobile-375-fold.png`). Dans la zone d'appel, le même doublon revient, CTA de la porte principale à y=393 et barre fixe à y=774 (`m9.png`). Le rail desktop, lui, s'efface correctement sur `#et-vous`. Correction exigée, voir R1.
+
+### Minor, ordre mobile du héros : NON CORRIGÉ, arbitrage porté au gate
+
+Refus accepté comme arbitrage, pas comme correction. La passe 1 offrait un minimum qui ne touchait pas au parti pris de B, remonter la seule ligne de prix au-dessus du compteur. Il n'a pas été pris. En l'état, le premier écran mobile demande de cliquer « Je prends ma part » avant d'avoir dit « à partir de 100 € la part ». Point porté au gate, c'est à Romain de choisir entre la copy et l'effet.
+
+### Nit, sélecteur qui mord sur le soulignement en mobile : NON APPLIQUÉ, refus confirmé par la mesure
+
+Le correcteur écrit « mesuré contre-productif », et il a raison. La pilule est à `top: 676`, le lien à `top: 658`. La monter de 1,4 rem la porterait à 654, donc par dessus le texte du lien au lieu de son soulignement. Refus accepté.
+Constat neuf que la correction M4 fait apparaître : la cible agrandie du lien du héros descend maintenant sous la pilule. Balayage au quart de pixel à 375 px sans défilement, la hauteur de cible atteignable tombe à 29 px sur la plus grande part de la largeur du lien et ne vaut 45,75 px que sur ses 16 derniers pixels. Cela reste au dessus des 24 px de WCAG 2.5.8 AA, cela ne concerne que la position initiale, et la cause est le sélecteur de maquette, qui n'existera pas en production. Aucune action, aucun point retiré, mais le chiffre est écrit ici, il nest pas tu.
+
+### Nit, contraste des pointillés : CORRIGÉ au delà de la demande
+
+`--pointille` passe à `var(--violet)`, soit `#766DA0`. Mesuré sur le fond rendu : 4,18:1 sur le héros et 3,74:1 sur le fond du beat 7, contre 2,91:1 et 2,96:1 en passe 1. La passe 1 proposait `#7C7694`, le correcteur a fait mieux.
+
+### Nit, logo blanchi du pied et point final du crédit : non traités, conformes à la passe 1
+
+La passe 1 écrivait « aucune action » et « si on passe par là ». Rien à ajouter.
+
+## Contrastes, recalculés à la main
+
+`verif.mjs` rend `contrastesInsuffisants: []` dans les deux états et aux deux largeurs, mais Chrome sérialise `color-mix()` en `color(srgb …)`, forme que l'outil ne parse pas : ses valeurs sur le héros et sur le beat 7 sont donc à écarter. Recalcul complet, sur le fond réellement peint, contenu masqué, grain compris, par échantillonnage pixel du rendu.
+
+Héros, fond réel `#F8F4DB` : corps `#56546B` 6,49:1, titres et texte de définition `#383648` 10,43:1, liens `#5F5788` 5,82:1, pointillé `#766DA0` 4,18:1.
+Beat 7, fond réel `#EBE5E5` : corps 5,81:1, titres 9,34:1, liens 5,22:1, pointillé 3,74:1.
+Aplat sombre, cascade et pied, fond moyen relevé `rgb(68, 65, 81)` : `#E7E4F0` 7,90:1 et blanc 9,90:1. Au point le plus clair de la section, bloc de 8 x 8 px `rgb(97, 93, 91)` : 5,19:1 et 6,51:1. Au pixel de grain le plus clair, `rgb(103, 100, 98)` : 4,69:1 et 5,87:1.
+Tout tient AA, y compris au pire point de l'aplat le plus clair et sur le grain isolé. Le correcteur annonçait 5,79:1 en pire cas ; je mesure 5,19:1 au pire bloc de fond, ce qui passe quand même. C'est sa mesure qui était optimiste, pas le rendu qui est faux.
+Champ email : bordure `#5F5788`, 6,55:1 sur blanc et 5,63:1 sur `#EDEDF5`.
+
+## Régressions
+
+Cherchées, aucune trouvée.
+
+Console : 0 message, 0 erreur de page, aux deux largeurs et dans les deux états. Réseau : 0 requête vers un hôte externe, 0 requête en échec, 0 réponse à 400 ou plus. Débordement horizontal : nul aux treize largeurs testées, `debordent: []` élément par élément à 375 et 1440 dans les deux états. Texte coupé : aucun, y compris les cinq libellés de nav de 1024 à 1300 px et les cinq entrées du menu replié.
+Copy : 72 segments sur 80 en campagne et 73 sur 80 en avant, exactement les mêmes chiffres qu'en passe 1, et exactement les mêmes huit manquants, tous analysés et jugés légitimes en fin de rapport de passe 1. Aucun nouveau manquant, aucun mot altéré. Un seul H1, aucun saut de niveau de titre, `noindex, nofollow` et `<title>` inchangés, cinq images toutes avec alt et dimensions, `loading="lazy"` correctement réparti.
+`target="_blank"` : ne casse ni le sélecteur, ni les touches flèches, ni l'ancre `#et-vous` du pied, vérifié par clic réel et par lecture des `href` reconstruits en `?etat=avant`.
+Zone chaude : recomptée écran par écran sur les 8 vues de 1440 et les 12 vues de 375. Jamais deux accents chauds dans la même vue. Les deux fonds retouchés gardent leur teinte d'origine, ils n'ajoutent aucun accent.
+Deux portes du beat 8 : le filet vertical ajouté n'introduit aucun chevauchement et bascule bien en filet horizontal sous 1080 px. Fondu du beat 2 : aucun saut, aucune image manquante, le repli empilé est intact.
+
+## Constats de la passe 2
+
+### Corrections requises
+
+`R1` | `.barre-mobile`, script en pied de page | 375, campagne (`_verif/b-passe2/mobile-375-fold.png`, `m9.png`) | le CTA principal est dédoublé dans la même vue à deux endroits de la page, premier écran du héros et zone d'appel, deux pastilles violettes strictement identiques à 229 px puis à 381 px l'une de l'autre. Le rail desktop résout déjà ce cas, la barre mobile non. C'est le critère « une seule action principale » de l'axe hiérarchie | réutiliser la mécanique déjà écrite : ajouter `barre.classList.toggle('est-cachee', !herosSorti || appelVisible)` dans `majRail`, poser un troisième `IntersectionObserver` sur `.hero-actions` si l'on préfère un seuil plus précis que la sortie du héros, et déclarer `.barre-mobile.est-cachee { transform: translateY(100%); transition: transform 200ms ease }` pour que la barre glisse au lieu de disparaître sèchement.
+
+`R2` | les cinq `a.cta[href="/prendre-part/"]`, les quatre `a.lien-texte` du corps, `.bloc-don .bouton-second` | toutes largeurs, deux états | la correction des liens de production s'est arrêtée à la nav et au pied. Les neuf liens du corps et le bouton HelloAsso sortent toujours de la maquette, dont les cinq exemplaires du bouton principal, qui est le lien que Romain cliquera le plus probablement pendant la séance de comparaison plein écran. Le motif de la passe 1, « Romain perd sa page de comparaison », vaut plus fort ici que sur la nav. S'y ajoute un écart au brief que la passe 1 n'avait pas relevé : le brief demande que le bouton d'en-tête pointe sur l'ancre du beat 8, pas sur le chemin du tunnel | poser `target="_blank" rel="noopener"` sur ces dix liens, ce qui donne une règle unique et lisible, tout lien qui quitte la maquette ouvre un onglet. Variante pour le seul bouton d'en-tête si l'on veut aussi rendre le brief : `href="#et-vous"` en gardant le `title` « Tunnel /prendre-part/ en construction ».
+
+### Nit
+
+`Nit` | `.hero-lien .lien-texte` sous `.selecteur` | 375, position initiale | la cible agrandie par le `::after` descend sous la pilule du sélecteur : 29 px atteignables sur la plus grande part de la largeur du lien, 45,75 px sur ses 16 derniers pixels. Au dessus des 24 px de WCAG 2.5.8, cause propre à la maquette, disparaît en production | aucune action. Ne pas remonter la pilule, la mesure montre que cela la poserait sur le texte du lien.
+
+### FYI
+
+`FYI` | intégration | les quatre points de la passe 1 sur ce qui ne survivra pas tel quel à Kadence restent valables et le croisement des crédits en ajoute un cinquième, léger : la légende du fondu demande maintenant `timeline-scope` en plus de `animation-timeline`, donc un bloc HTML personnalisé et du CSS additionnel, pas un bloc Kadence. Le repli est écrit et vérifié, le coût reste du CSS, pas du risque.
+
+`FYI` | objection de fond de la passe 1 | elle n'est pas levée par les corrections et elle ne pouvait pas l'être. Le trou visuel de l'état avant est réparé, le fait que le premier écran de B n'a de raison d'être que quand le nombre monte ne l'est pas. La question du gate reste « accepte-t-on de livrer deux héros pendant la première semaine ».
+
+## Verdict par axe, format m9
+
+Exactitude du contenu : `pass`. Le seul défaut de la famille est levé et vérifié dans les trois modes de rendu, aucun chiffre interdit, aucune exploitante nommée, tous les crédits d'image à leur place.
+Design dans la charte : `pass`. Anti-slop intégralement respecté, dégradé sombre remis aux bornes de la charte, fonds dérivés de couleurs autorisées, composition resserrée. Une ligne d'acquiescement à obtenir au gate, pas une correction.
+Accessibilité : `pass`. Les deux échecs mesurés de la passe 1 sont corrigés et vérifiés par mesure et hit-test, tous les contrastes recalculés à la main tiennent AA.
+Technique : `pass`. Console, réseau et débordements irréprochables aux treize largeurs, en-tête réparé, aucun effet de bord des liens en nouvel onglet.
+SEO : `pass`. Inchangé et conforme.
+
+Verdict global : **PUBLIABLE**, passe 2 sur 3. 90 / 100, aucun `Critical`, aucun `Major` bloquant, critère âme au dessus de son seuil, aucun veto armé. Les deux corrections requises R1 et R2 sont des corrections de moins de dix lignes chacune, à passer avant la séance plein écran mais qui n'empêchent ni la mise en ligne du fichier ni la comparaison.
+Pour mémoire, la cible générique des grilles est 95 pour un livrable de production. La maquette est un objet de décision, pas la page ; le seuil retenu pour ce gate est 85.
+
+## À trancher au gate 2
+
+Deux points que l'audit ne peut pas trancher seul.
+
+1. Les deux nuances de fond. Le héros en crème `#F8F4DB` et le beat 7 en rose grisé `#EBE5E5`, tous deux obtenus par mélange de deux couleurs autorisées et conformes à la famille « clair pastel » de la charte, mais absents de la liste littérale du brief. Une ligne suffit : soit Romain les acte, soit on revient à `#FFF3A8` et `#EDEDF5` purs, ce que le repli `@supports` produit déjà et dont le contraste est vérifié.
+2. L'ordre du héros en mobile. En l'état, on demande de cliquer avant d'avoir dit le prix. Trois issues : laisser ainsi et assumer l'effet, remonter la seule ligne « à partir de 100 € la part » au dessus du compteur, ou repasser à l'ordre de la copy, définition puis compteur puis actions.
