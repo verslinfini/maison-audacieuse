@@ -231,3 +231,136 @@ Les cinq `Nit` de la passe 1 restent ouverts et restent optionnels.
 
 1. **La cascade dans le rail, ou au beat 6 ?** Elle remplit le rail, c'est ce que la passe 1 demandait, mais elle le fait déborder sur 1366x768 et 1440x720 et elle vide le beat 6, qui devient trois paragraphes et une chute. La ramener au beat 6 rouvre le Major du rail vide, l'y laisser impose de couper ailleurs. C'est un arbitrage de mise en page, pas une correction : l'audit peut mesurer les deux, pas choisir.
 2. **La bande 768 à 1239 sans CTA persistant.** Une fois le bandeau du rail passé, la page n'offre plus aucun « Je prends ma part » pendant 5 055 px à 768, 5 077 à 1024 et 5 200 à 1200, soit les deux tiers de la page. Ce n'était pas mieux en passe 1, l'en-tête n'étant pas collant, donc ce n'est pas une régression, mais c'est le dernier trou fonctionnel de la variante. Le combler demande un choix de forme : en-tête collant au dessus de 768, ou barre basse à la mobile étendue jusqu'à 1239.
+
+## Passe 3 (19/08/2026)
+
+Passe 3 sur 3, la dernière autorisée par m9. Auditeur tiers, ni producteur ni correcteur de cette maquette. Vérification des corrections annoncées pour la passe 2, recherche de régression, rescore, arbitrage des écarts assumés.
+Fichier relu : `maquettes/home/c-la-ferme.html`, 1308 lignes (1241 en passe 2, 1113 en passe 1), 54,6 Ko.
+Outils : `verif.mjs` deux états, `copy-check.mjs`, six scripts Playwright écrits pour cette passe dans `maquettes/_verif/` (géométrie sur 16 combinaisons fenêtre par état et 6 positions de défilement chacune, sondes de flottants, ancres activées, stabilité de l'en-tête collante, bascules de fenêtre enchaînées, rendu sans JavaScript, réduction de mouvement, mesure de grain au pixel avec `sharp`). Lecture visuelle de 14 captures dans `maquettes/_verif/c3-tiers/`.
+Fenêtres mesurées : 375x812, 768x1024, 1024x768, 1240x800, 1280x800, 1366x768, 1440x720, 1440x900, chacune en campagne et en `?etat=avant`, plus 1200x800, 1239x900, 1240x819, 1240x821, 1440x800, 1920x1080 en bascule.
+Note de méthode : `scroll-behavior: smooth` fausse toute mesure prise après un `scrollTo` scripté. Toutes les sondes de cette passe injectent `scroll-behavior: auto` avant de mesurer. Une première série faite sans cette précaution donnait des positions de défilement inexactes et a été refaite.
+
+### Score
+
+**85 / 100** (passe 1 : 71, passe 2 : 82). Brut 85, aucun plafond appliqué.
+
+| Axe | P1 | P2 | P3 | Note |
+|---|---|---|---|---|
+| Respect de la charte (intrant fermé) | 16 | 19 | 17 / 20 | palette toujours entièrement rentrée : 11 codes hexadécimaux, tous de la charte, 4 bases `rgba()` toutes dérivées de couleurs de la charte, aucune teinte ajoutée par cette passe. Meow Script à sa place. Retiré 2 points de plus pour le grain des fonds clairs, que le brief nomme explicitement et qui ne se rend plus : écart-type 0,67 contre 3,94 en passe 2, indiscernable d'un aplat sans grain. Trois des cinq aplats prévus sont concernés. |
+| Hiérarchie et lisibilité | 13 | 15 | 18 / 20 | le doublon de boutons violets du beat 6 est levé et mesuré sur 96 relevés, les deux creux du rail sont refermés, les groupes masqués partent entiers. Retiré pour le sélecteur et le badge qui mordent encore sur le prix et sur le bouton du rail dès que le bandeau atteint le haut de la fenêtre, et pour le beat 6 qui devient une colonne étroite dans un champ vide quand la cascade part dans le rail. |
+| Cohérence des composants et du rythme | 8 | 8 | 9 / 10 | le rail ne se coupe plus, ne se troue plus, la couture de ton est levée (1 niveau contre 11). L'en-tête collante est stable, sans saut de mise en page. Retiré parce que le traitement de surface n'est plus uniforme : les aplats sombres portent le grain, les clairs sont lisses. |
+| Accessibilité | 10 | 13 | 12 / 15 | le motif du retrait de la passe 2 est levé : zéro débordement du rail sur les 16 combinaisons. 27 arrêts de tabulation à 1440 et 1024, 23 à 375, tous avec indicateur visible, aucune cible sous 44 px. Retiré parce que l'ancre de l'action principale dépose le visiteur sur un titre de section entièrement masqué par l'en-tête collante, sur toute la bande 768 à 1239 et dans l'état de mise en ligne. |
+| Responsive réel, vérifié au navigateur | 4 | 7 | 9 / 10 | l'axe vertical est réparé : aucun défilement interne du rail nulle part, seuil de dépôt de la cascade exact au pixel, dix bascules de fenêtre enchaînées sans duplication ni débordement. Zéro débordement horizontal. Retiré pour les recouvrements de flottants aux positions intermédiaires. |
+| Âme, la page est reconnaissable comme celle de CETTE structure (non compensable, seuil 20) | 20 | 20 | 20 / 25 | seuil franchi d'un point pour la troisième fois. La photo annotée est intacte et dégrade proprement, le rail se remplit vraiment quand il en a la place. En regard, le grain des fonds clairs est perdu et le rail plein n'existe qu'au dessus de 1240 de large et 820 de haut, donc pas sur le portable de référence. Rien n'a été gagné en signature depuis la passe 2 et une texture de marque a été perdue. Si le grain n'est pas rétabli, la prochaine lecture de cet axe passe sous le seuil : la page ne tiendrait plus son identité que par la photo annotée, elle même conditionnée à 1240 px. |
+
+Vetos :
+- **SLOP : levé.** Recontrôlé sur les captures de cette passe. Les six corrections de la passe 3 (en-tête collante, repositionnement des flottants, mode de fusion du grain, `display: none`, dépôt conditionnel de la cascade, CTA compact) n'introduisent aucun motif de gabarit. Aucune rangée de cartes, aucun eyebrow, aucune numérotation, aucun dégradé décoratif, aucune ombre molle, aucun séparateur en vague, paddings réellement variés, aucun emoji, aucune icône cliché, aucun faux tableau de bord, aucun compteur animé, aucun indicateur de défilement, aucun Title Case.
+- **FIABILITÉ : levé.** `copy-check.mjs` : 79 segments sur 80, le seul manquant reste le faux positif connu du crédit avec point final. Aucun chiffre modifié, aucun mot changé. Images inchangées et toutes autorisées, crédit Basa affiché.
+- **CADRATIN : levé.** Zéro tiret cadratin dans le fichier, zéro point d'exclamation dans le texte visible.
+
+Verdict : **NON PUBLIABLE.** Le score atteint la cible de 85, mais un `Major` bloquant subsiste et il est régressif, plus une correction requise sur la charte. Troisième passe atteinte : pas de quatrième passe, escalade à Romain.
+
+### Vérification des constats de la passe 2
+
+**Major 1, deux boutons violets identiques au beat 6 : corrigé.** 96 relevés, 16 combinaisons de fenêtre et d'état par 6 positions de défilement. Jamais plus d'un bouton « Je prends ma part » visible dans la vue, à aucune position, à aucune largeur, dans aucun des deux états. À la position où `#cta-beat6` est à l'écran : un seul bouton, classe `cta-en-vue` posée, CTA du rail en `display: none` au dessus de 1240, CTA compact d'en-tête masqué entre 768 et 1239 et en `?etat=avant`, barre basse masquée sous 768.
+Un seul cas à zéro CTA : au pied, sur 1240x800, 1280x800, 1366x768 et 1440x720 en campagne, le rail s'efface devant le pied et `#cta-beat8` est déjà sorti. C'est la fin de la page et c'était déjà le cas en passe 2.
+
+**Major 2, rail tronqué sur les fenêtres courtes : corrigé.** `scrollHeight - clientHeight = 0` sur les 16 combinaisons, aux 6 positions, dans les deux états. Bas du contenu du rail mesuré : 734 sur 900 à 1440x900 cascade comprise, 431 sur 720, 431 sur 768, 431 sur 800 partout ailleurs. Aucun défilement interne nulle part, donc plus aucune zone morte à la molette. `overscroll-behavior` retiré, zéro occurrence dans le fichier. `scrollbar-gutter: stable` présent.
+Le dépôt conditionnel de la cascade est exact au pixel de seuil : 1240x819 la laisse au beat 6, 1240x821 la dépose dans le rail. Dix changements de fenêtre enchaînés (1440x900, 1440x800, 1239x900, 1240x900, 1240x819, 1240x821, 1000x900, 1920x1080, 1366x768, 1440x900) : toujours une seule `.cascade`, toujours quatre `li`, jamais de duplication, rail jamais en débordement.
+Réserve mesurée : le rail plein n'existe qu'au dessus de 1240 de large ET 820 de haut. Sur un portable 1440x900 réel, la fenêtre utile d'un navigateur avec onglets et favoris tourne autour de 810 px : la cascade y reste au beat 6. Le geste « rail rempli » est en pratique réservé aux écrans 1080p et plus. La dégradation est propre, mais l'axe Âme n'y gagne pas ce que la correction en attendait.
+
+**Correction requise, creux dans le rail : corrigée.** Plus grand écart mesuré entre deux blocs visibles du rail : 16 px, qui est la marge propre de `.rail__lien`. Aucun écart supérieur à 20 px sur les 6 positions, les 5 fenêtres à rail fixe et les deux états. Le correcteur annonçait 15 à 17 px, c'est confirmé.
+Groupes masqués entiers vérifiés à la mesure. Au beat 6, `.rail__compteur` part avec `.rail__chiffre`, `.rail__suite` et `.rail__palier` : la ligne « Premier palier : autant que de donatrices. » ne reste jamais seule sans le nombre auquel elle se rapporte. À `#et-vous`, `.rail__prix`, `#cta-rail` et `.rail__apres` partent ensemble : le prix ne reste jamais sans son bouton. Capture `beat6-1440-cascade-au-rail.png`.
+`#paliers-beat6` vidé de sa cascade mesure 0 px de haut : aucun trou laissé au beat 6, aucune cellule vide.
+
+**Minor, badge et sélecteur sur le texte du rail à 768 et 1024 : partiellement.** Au premier écran, qui est le cas décrit en passe 2, corrigé : aucun recouvrement mesuré à 768x1024 ni à 1024x768 au défilement zéro, dans les deux états. Les deux flottants sont remontés à `top: 88px`, sur la photo du héros, sous l'en-tête collante de 75 px.
+Le défaut se reporte à une autre position. Dès que le bandeau du rail atteint le haut de la fenêtre, le sélecteur recouvre « À partir de 100 € la part. » et mord 11 px sur le haut du bouton « Je prends ma part » : chevauchement mesuré 380x11 à 1024, 332x11 à 768. Capture `flottants-1024x768.png`. Même mécanique en `?etat=avant` au dessus de 1240 : le badge tombe sur le bouton du rail, chevauchement 137x28 sur un bouton de 340x56, soit 40 pour cent de sa largeur et la moitié de sa hauteur.
+
+**Nit, `.nav .bouton--compact` jamais rendu : corrigé.** Le bouton est désormais rendu entre 768 et 1239 et en `?etat=avant` au dessus de 1240, dès que `html.js` est posée et qu'aucun autre CTA n'est en vue. Il n'est plus masqué deux fois pour rien.
+
+**Nit, couture de ton à la gouttière : corrigée, mais au prix du grain.** Profil horizontal mesuré à travers la couture, à `#et-vous`, 1440x900 : 238 dans la section de x=1108 à x=1126, 222 sur le filet de 1 px à x=1128, 237 dans la gouttière et le rail de x=1130 à x=1152. Écart de 1 niveau contre 11 en passe 2. La couture est levée, voir le détail au chapitre des écarts tranchés.
+
+**Trou fonctionnel 768 à 1239, CTA persistant : corrigé avec JavaScript, ouvert sans.** Avec JS, un CTA à toutes les positions et à toutes les largeurs : l'en-tête devient collante à 75 px et reprend l'appel dès que le bandeau du rail est passé, puis s'efface quand un CTA de beat entre dans la vue. Stabilité vérifiée : hauteur d'en-tête 75 px constante (76 en `?etat=avant`), hauteur de page inchangée quand le bouton compact paraît et disparaît, écart mesuré 0 px sur les deux, à 768, 1024, 1200 et 1440 avant. Aucun saut de mise en page.
+Sans JS, la règle est derrière `html.js` : à 768, 1024 et 1200, entre 30 et 50 pour cent de la page, zéro CTA à l'écran. Voir l'arbitrage plus bas.
+
+**Barre basse sous 768 : correcte.** Un seul CTA aux trois positions testées, la barre s'efface quand `#cta-beat6` ou `#cta-beat8` est à l'écran et revient au pied. Capture `mobile-beat6.png`.
+
+**Non appliqué, comme annoncé.** Sélecteur sur le « 218 » à 375x812 : recouvrement mesuré 335x5, inchangé. Les cinq `Nit` de la passe 1 restent ouverts.
+
+### Les écarts assumés par le correcteur, tranchés
+
+1. **Veille portée sur les boutons et non sur les sections : accepté, et c'est le bon choix.** Le raisonnement du correcteur tient à la mesure. `beat6-en-vue` et `cta-en-vue` sont deux classes distinctes portées par deux observateurs différents : la première masque le compteur du rail pendant que la section défile, la seconde masque le prix et le bouton seulement quand un second bouton est réellement à l'écran. Veiller la section aurait effacé le CTA du rail dès l'entrée de `#ou-on-en-est`, soit environ 1 100 px avant que le bouton du beat 6 paraisse, laissant la vue sans appel. L'accumulation de porteurs est correctement écrite : `porteurs[classe]` est un dictionnaire d'identifiants, la classe ne tombe qu'au départ du dernier porteur. Aucun clignotement, aucune boucle de bascule observée sur les 96 relevés.
+2. **CTA compact derrière `html.js` : accepté.** Sans JavaScript, aucun observateur ne peut effacer le bouton compact quand le bandeau du rail est encore à l'écran : on retomberait sur deux boutons violets identiques dans la même vue, exactement le `Major` que la passe 2 demandait de lever. Trois « Je prends ma part » restent atteignables sans JS (bandeau du rail, beat 6, beat 8) et l'en-tête collante garde la navigation. Ce n'est pas non plus une régression : la passe 2 n'offrait aucun CTA persistant sur cette bande, avec ou sans JS. Reste à savoir : sans JS, l'en-tête collante coûte 75 px de fenêtre sans rien apporter de plus qu'une nav. À noter, pas à corriger.
+3. **Grain en `overlay` : refusé.** Mesure au pixel sur le même patch de `#deja-fait`, 190x110 px, trois états forcés :
+
+| état du grain clair | rgb moyen | écart-type de luminance | étendue |
+|---|---|---|---|
+| aucun grain | 237,237,245 | 0 | 0 |
+| `overlay`, état actuel | 238,238,245 | 0,67 | 5 |
+| `multiply`, état passe 2 | 224,224,232 | 3,94 | 39 |
+
+Le grain des fonds sombres, pour comparaison, mesure 1,45 d'écart-type. En `overlay`, le grain des surfaces claires a donc une amplitude six fois moindre qu'en `multiply` et deux fois moindre que celle du grain sombre, sur un fond où l'oeil est bien moins sensible. Sur les crops `grain-clair-overlay.png` et `grain-clair-multiply.png`, le premier est un aplat parfaitement lisse, le second une surface papier nettement grainée. Le risque signalé par le correcteur est confirmé et plus fort qu'annoncé : ce n'est pas « plus fin », c'est absent.
+Le brief demande le grain « sur les aplats violet sombre et sur un fond pastel clair ». Sur fond clair il n'est plus rendu. Et la passe 2 indiquait pour la même couture une autre voie qui garde les deux : « porter le grain sur la gouttière du rail, ou retirer le `background-image` de `.cadre` et donner son fond au rail seul ». Cette voie n'a pas été prise. On a supprimé la couture en supprimant le grain.
+4. **Dépôt de la cascade conditionné à 1240 par 820 : accepté sur la mécanique, à trancher sur le fond.** La mécanique est irréprochable, seuil exact, aucune duplication, aucun débordement. Ce qui reste à décider est de composition et revient à Romain, voir le dernier chapitre.
+
+### Régressions et défauts nouveaux
+
+1. **L'en-tête collante recouvre entièrement le titre du beat 8 quand on clique le CTA. `Major`.**
+`#prendre-part` est un `<span>` sans `scroll-margin-top` : la règle `section, #le-lieu, #la-part { scroll-margin-top: 88px }` ne l'atteint pas. Or c'est la cible des quatre boutons « Je prends ma part » de la page.
+Mesures après activation de l'ancre :
+
+| fenêtre et état | bas de l'en-tête | h2 « Et vous ? » | masqué | chute |
+|---|---|---|---|---|
+| 1024x768 campagne | 75 | 0 à 34 | 34 px, en entier | commence à 56, coupée |
+| 768x1024 campagne | 75 | 0 à 34 | 34 px, en entier | commence à 56, coupée |
+| 1440x900 `?etat=avant` | 76 | 0 à 43 | 43 px, en entier | commence à 65, coupée |
+| 1440x900 campagne | non collante | 0 à 43 | 0 | correcte |
+| 375x812 | non collante | 0 à 33 | 0 | correcte |
+
+Sur les captures `ancre-1024x768.png` et `ancre-1440x900-avant.png` on lit la moitié basse des lettres de « Prenez part à la Maison Audacieuse. » et le titre de section n'existe plus à l'écran.
+Les deux autres ancres de la page sont correctes : `#et-vous`, cible du lien « Newsletter » du pied, pose le h2 à 170 px à 1024 et à 192 px en avant ; `#hero`, cible du logo, est correcte aussi. Seule l'ancre de l'action principale est cassée.
+Portée : toute la bande 768 à 1239 dans les deux états, et `?etat=avant` au dessus de 1240, c'est à dire l'état dans lequel le site part en ligne le 30/08. Le brief demande des « liens d'ancre fonctionnels ». Introduit par la correction de la passe 3, l'en-tête n'étant pas collante avant.
+Correctif d'une ligne : ajouter `#prendre-part` aux deux règles `scroll-margin-top: 88px` déjà écrites, celle du bloc 768 à 1239 et celle du bloc `html[data-etat="avant"]` au dessus de 1240.
+2. **Grain des fonds clairs perdu.** Décrit ci dessus. Correction requise.
+3. **Sélecteur et badge déplacés sur le prix et sur le bouton du rail.** Décrit ci dessus. `Minor`.
+4. **Bouton compact de l'en-tête non atteignable au clavier depuis le haut de page, entre 768 et 1239.** Il est en `display: none` tant que `#cta-rail` est à l'écran, donc au moment précis où le curseur de tabulation passe sur lui dans l'ordre du DOM. Trois autres « Je prends ma part » restent atteignables et l'ordre reste logique. `Nit`.
+5. **Position du badge incohérente d'une largeur à l'autre.** En haut à gauche entre 768 et 1239 et en `?etat=avant` au dessus de 1240, en bas à gauche partout ailleurs, alors que le brief le veut « en haut à gauche ». `Nit`.
+
+### Ce qui a été contrôlé et ne bouge pas
+
+- Copy : 79 segments sur 80, seul manquant le faux positif connu. Aucun mot changé, aucune phrase coupée. Les 11 trous du corps de copy restent rendus.
+- Palette : 11 codes hexadécimaux, tous de la charte ; 4 bases `rgba()`, toutes dérivées de couleurs de la charte (56,54,72 puis 157,150,105 puis 237,237,245 puis 118,109,160). Aucune teinte ajoutée par cette passe.
+- Zéro erreur console, zéro erreur de page, zéro requête externe, zéro requête en échec, sur les 16 combinaisons de fenêtre et d'état.
+- Zéro débordement horizontal sur 375, 768, 1024, 1240, 1280, 1366 et 1440, dans les deux états, aux 6 positions de défilement.
+- Clavier : 27 arrêts à 1440 et à 1024, 23 à 375, aucun sans indicateur de focus, aucune cible sous 44 px, CTA au 7e arrêt en desktop et au 3e à 375.
+- Réduction de mouvement : `.notes .mot` en Onest `#383648`, les deux légendes « aujourd'hui » et « demain. © Basa Architecture » affichées, notes en flux, cellules mesurées 253, 253, 253, 253, 547, aucune cellule vide. Sans réduction : Meow Script menthe, notes en absolu, seule la légende « demain » affichée. Les deux dégradations obtenues en passe 2 tiennent.
+- En-tête collante : hauteur et hauteur de page strictement constantes quand le CTA compact paraît et disparaît. Aucun saut.
+- Pied pleine largeur et rail qui s'efface devant lui : inchangés, corrects.
+- Zone chaude : une seule par vue sur toutes les captures relues, le jaune du 666 reste retiré dans le rail, le CTA garde le même violet du haut au pied.
+- Contraste des notes au feutre et du cartouche Basa : aucune règle de compositing les concernant n'a bougé, le `.grain--clair` ne touche ni `.plan` ni `.notes`. Les mesures de la passe 2 (10,09:1 pour le crédit, 11,08:1 et 10,87:1 pour la note 2) restent valides. Non remesuré au pixel dans cette passe.
+
+### Ce qui reste avant que le gate puisse être franchi
+
+1. **`Major`, `#prendre-part`, bande 768 à 1239 dans les deux états et `?etat=avant` au dessus de 1240.** Le h2 « Et vous ? » est entièrement sous l'en-tête collante après clic sur le CTA. Ajouter `#prendre-part` aux deux règles `scroll-margin-top: 88px` existantes.
+2. **Correction requise, `.grain--clair`.** Revenir à `mix-blend-mode: multiply` et supprimer la couture par la voie que la passe 2 indiquait : porter le grain sur la gouttière du rail, ou retirer le `background-image` de `.cadre` et donner son fond au rail seul.
+3. **`Minor`, `.selecteur` et `.badge`, 768 à 1239 et `?etat=avant` au dessus de 1240.** Ils mordent sur « À partir de 100 € la part. » et sur le bouton du rail dès que le bandeau atteint le haut de la fenêtre. Les caler sous le bandeau plutôt que sous l'en-tête, ou ne les poser en haut que tant que le héros est à l'écran.
+4. **`Nit`, badge.** Position incohérente d'une bande à l'autre et contraire à la lettre du brief.
+5. **`Nit`, bouton compact de l'en-tête.** Non atteignable au clavier depuis le haut de page entre 768 et 1239.
+6. Les cinq `Nit` de la passe 1 restent ouverts et restent optionnels.
+
+### À trancher avec Romain au gate 2
+
+1. **La cascade dans le rail, ou au beat 6 ?** La question de la passe 2 n'est pas close, elle est seulement devenue mesurable. La cascade ne monte dans le rail qu'au dessus de 1240 de large et 820 de haut, donc sur écran 1080p et plus, pas sur le portable de référence. Quand elle y monte, le beat 6 devient une colonne de texte étroite dans un champ vide, ce que la passe 1 reprochait déjà à cette section. Quand elle reste au beat 6, le rail tient en 431 px sur une colonne haute comme la fenêtre. Les deux états sont propres et aucun ne déborde : c'est un choix de composition, pas une correction, et l'audit peut mesurer les deux sans choisir.
+2. **Le grain des fonds clairs contre la couture de ton.** Les deux sont mesurés et la troisième voie, qui garde les deux, n'a pas été prise. Si Romain préfère la surface lisse, l'écart au brief doit être validé explicitement, sans quoi le plafond charte redevient discutable à la prochaine lecture de cette page.
+
+### Escalade
+
+Troisième passe atteinte, verdict toujours pas au vert, pas de quatrième passe.
+Axe en cause : accessibilité et technique, sur un point unique et récent.
+Constat exact : l'ancre `#prendre-part`, cible des quatre CTA de la page, dépose le visiteur sur un titre de section entièrement masqué par l'en-tête collante introduite en passe 3, sur toute la bande 768 à 1239 et dans l'état `?etat=avant` qui est celui de la mise en ligne.
+Ce qui a été tenté : trois passes, deux `Critical` et huit `Major` de la passe 1 levés, les deux `Major` de la passe 2 levés et mesurés. Le score est passé de 71 à 82 puis à 85. Le seul point bloquant restant est né de la dernière correction et se règle en une ligne de CSS.
+Option de repli : si Romain ne veut pas d'une quatrième intervention sur cette maquette, retirer l'en-tête collante de la bande 768 à 1239 et de `?etat=avant` rend l'ancre correcte immédiatement, au prix du trou fonctionnel de CTA que la passe 2 avait signalé et qui n'était pas bloquant. Le choix entre les deux lui revient : une ligne de CSS pour garder le CTA persistant et réparer l'ancre, ou un retour en arrière sur la correction.
+
+## Hotfix du principal apres la passe 3 (19/08/2026, non re-audite)
+
+Trois passes atteintes, escalade a Romain. Deux correctifs d une ligne poses par le contexte principal, commit `maquettes-home` suivant `f81d5ae` : `#prendre-part` ajoute aux deux regles `scroll-margin-top: 88px` (ancre mesuree a 88 px sous une en-tete de 75 px a 1024, 768 et 1440 avant) ; `.grain--clair` repasse en `multiply` (la couture de ton de la gouttiere revient, 13 niveaux, acceptee comme Nit). Verif.mjs apres hotfix : console 0, externes 0, debordement 0, contrastes 0, copy 79/80. Restent ouverts : Minor flottants aux positions intermediaires, Nit badge, Nit bouton compact au clavier, arbitrages cascade et grain a gate 2.
