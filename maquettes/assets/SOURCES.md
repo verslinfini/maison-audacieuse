@@ -50,7 +50,7 @@ Licence ou droit d'usage pour toutes : déjà publié sur maison-audacieuse.fr.
 | `article-_03.jpg` | 889x900 | 72,0 Ko | idem |
 | `article-_04.jpg` | 889x900 | 59,1 Ko | idem |
 | `article-_05.jpg` | 889x900 | 61,1 Ko | idem |
-| `collectif-1.png` | 860x534 | 58,5 Ko | collectif La Maison Audacieuse (infographie futures occupantes) |
+| `collectif-1.png` | retiré le 19/08/2026 | | infographie « Les futures occupantes » qui nomme quatre structures exploitantes et une personne : interdite sur la home tant que la liste n est pas figée (24/08), retirée de la branche |
 | `color_blanc.png` | 645x59 | 0,6 Ko | collectif La Maison Audacieuse (bandeau couleur, éditeur de blocs du site) |
 | `color_bleu.png` | 645x59 | 0,6 Ko | idem |
 | `color_jaune.png` | 645x59 | 0,5 Ko | idem |
