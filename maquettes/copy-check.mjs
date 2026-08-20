@@ -1,6 +1,8 @@
-// Contrôle de fidélité de la copy : chaque segment de texte de contenu/pages/accueil.md doit se retrouver
-// tel quel dans le texte rendu de la maquette (espaces et apostrophes normalisés, casse conservée).
-// Usage : node maquettes/copy-check.mjs maquettes/home/a-recit.html [--copy CHEMIN] [--etat avant]
+// Contrôle de fidélité de la copy : chaque segment de la copy home validée (doc du 20/08, écrans 0 à 8)
+// doit se retrouver tel quel dans le texte rendu de la maquette (espaces, apostrophes et flèches
+// normalisés, casse conservée). Décisions transverses, Trous à figer et chaque bloc « Notes
+// d'intégration » sont hors copy : exclus de l'extraction.
+// Usage : node maquettes/copy-check.mjs maquettes/home/a-recit.html [--copy CHEMIN] [--etat avant] [--dump]
 import { createRequire } from 'module';
 import path from 'path';
 import fs from 'fs';
@@ -10,10 +12,11 @@ const { chromium } = require('playwright');
 
 const args = process.argv.slice(2);
 const fichier = args.find(a => a.endsWith('.html'));
-if (!fichier) { console.error('usage : node maquettes/copy-check.mjs <fichier.html> [--copy CHEMIN] [--etat avant]'); process.exit(2); }
+if (!fichier) { console.error('usage : node maquettes/copy-check.mjs <fichier.html> [--copy CHEMIN] [--etat avant] [--dump]'); process.exit(2); }
 const opt = (n, d) => { const i = args.indexOf('--' + n); return i >= 0 ? args[i + 1] : d; };
 const etat = opt('etat', null);
-const copyPath = opt('copy', 'C:/Users/romai/dev/maison-audacieuse/contenu/pages/accueil.md');
+const dump = args.includes('--dump');
+const copyPath = opt('copy', "C:/Users/romai/OneDrive/04 L'univers v2/02 Projets/LMA - Maison Audacieuse/05 Site web/2026.08.20 - Copy home validée écran par écran - LMA.md");
 
 const norm = s => s
   .replace(/<!--[\s\S]*?-->/g, '')
@@ -21,38 +24,81 @@ const norm = s => s
   .replace(/[\u00AB\u00BB\u201C\u201D]/g, '"')
   .replace(/[\u00A0\u202F\u2009]/g, ' ')
   .replace(/\u2026/g, '...')
+  .replace(/-->/g, ' ')
+  .replace(/[→⟶➜⭢]/g, ' ')
   .replace(/\s+/g, ' ')
   .trim();
 
-// 1. Segments attendus, extraits de la copy
+// 1. Segments attendus, extraits des écrans validés du doc de copy.
 const md = fs.readFileSync(copyPath, 'utf8').replace(/<!--[\s\S]*?-->/g, '');
 const lignes = md.split(/\r?\n/);
-const debut = lignes.findIndex(l => l.startsWith('## Nav'));
-const fin = lignes.findIndex(l => l.startsWith('## Notes de rédaction'));
-const corps = lignes.slice(debut, fin < 0 ? undefined : fin);
-const IGNORER = /^(Ancre|Niveau de titre|Visuel|Notes intégrateur|Mots|Action|Alt à écrire|Corps|Frise de faits|Point de vigilance|Les deux autres phrases|Total|Barre CTA mobile|Identique, moins)/;
+const headingIdx = [];
+lignes.forEach((l, i) => { if (/^#\s+\S/.test(l)) headingIdx.push(i); });
+headingIdx.push(lignes.length);
+
+// Nombre d'items dans « # Trous à figer avant mise en ligne (consolidé) », pour le rapport.
+const mTrous = md.match(/#\s*Trous à figer[\s\S]*/);
+const nbTrousCopy = mTrous ? (mTrous[0].match(/^\d+\.\s/gm) || []).length : 0;
+
+const META_EXCLURE = /^(Photo de la ferme plein écran|Frise chronologique graphique|Avant\/après ou plans, crédit|Titre avec.*traité graphiquement|Header transparent)/;
 const segments = [];
-let beat = 'Nav';
-for (let l of corps) {
-  l = l.trim();
-  if (!l) continue;
-  if (l.startsWith('## ')) { beat = l.slice(3); continue; }
-  if (l.startsWith('|')) {
-    if (/^\|\s*-+/.test(l) || /Libellé/.test(l)) continue;
-    const cell = l.split('|')[1].trim().replace(/\s*\(bouton\)\s*$/, '');
-    if (cell) segments.push({ beat, type: 'nav', texte: cell });
-    continue;
+
+const pousseParagraphe = (beat, texte) => {
+  const seg = { beat, type: 'paragraphe', texte };
+  if (norm(texte).toLowerCase() === norm('À ANNECY, QUARTIER DE NOVEL').toLowerCase()) seg.ci = true;
+  segments.push(seg);
+};
+
+for (let h = 0; h < headingIdx.length - 1; h++) {
+  const idxH = headingIdx[h];
+  const heading = lignes[idxH].trim();
+  const mEcran = heading.match(/^#\s*Écran\s+(\d+)\s*:\s*(.*)$/);
+  if (!mEcran) continue; // exclut Décisions transverses, Trous à figer, etc.
+  const num = parseInt(mEcran[1], 10);
+  let beat = 'Écran ' + num;
+  if (num >= 2 && num <= 7) {
+    const mt = mEcran[2].match(/^(.*?)\.\s*VALIDÉ(?:\s|$)/);
+    if (mt && mt[1].trim()) segments.push({ beat, type: 'titre', texte: mt[1].trim() });
   }
-  if (IGNORER.test(l)) continue;
-  if (/^Titre :/.test(l)) { const t = l.replace(/^Titre :\s*/, ''); if (t && t !== 'aucun') segments.push({ beat, type: 'titre', texte: t }); continue; }
-  if (/^Libellés :/.test(l)) { l.replace(/^Libellés :\s*/, '').replace(/\.$/, '').split('·').map(s => s.trim()).filter(Boolean).forEach(t => segments.push({ beat, type: 'pied', texte: t })); continue; }
-  if (/^(Alt image \d|Crédit visible[^:]*) :/.test(l)) { const t = l.replace(/^[^:]+:\s*/, '').replace(/^«\s*|\s*»\.?$/g, ''); if (t) segments.push({ beat, type: l.startsWith('Alt') ? 'alt' : 'credit', texte: t }); continue; }
-  if (/\[TROU:/.test(l)) continue;
-  if (/^\[[^\]]+\]$/.test(l)) { segments.push({ beat, type: 'bouton', texte: l.slice(1, -1) }); continue; }
-  if (/^- /.test(l)) { segments.push({ beat, type: 'liste', texte: l.slice(2) }); continue; }
-  segments.push({ beat, type: 'paragraphe', texte: l });
+  let skipNotes = false;
+  for (let i = idxH + 1; i < headingIdx[h + 1]; i++) {
+    const l = lignes[i].trim();
+    if (!l) continue;
+    if (/^##\s*Notes d.int.gration/i.test(l)) { skipNotes = true; continue; }
+    if (/^##\s+/.test(l)) { skipNotes = false; beat = 'Écran ' + num + ' / ' + l.replace(/^##\s+/, '').trim(); continue; }
+    if (skipNotes) continue;
+    if (/^Libellés seulement,?\s*inchangés\s*:/i.test(l)) {
+      l.replace(/^Libellés seulement,?\s*inchangés\s*:\s*/i, '').replace(/\.\s*$/, '')
+        .split('·').map(s => s.trim()).filter(Boolean).forEach(t => segments.push({ beat, type: 'pied', texte: t }));
+      continue;
+    }
+    if (/^Libellés\s*:/.test(l)) {
+      l.replace(/^Libellés\s*:\s*/, '').replace(/\.\s*$/, '').split('·').forEach(chunk => {
+        const c = chunk.split('-->')[0].trim().replace(/^bouton\s+/i, '').replace(/^\[|\]$/g, '');
+        if (c) segments.push({ beat, type: 'nav', texte: c });
+      });
+      continue;
+    }
+    if (META_EXCLURE.test(l)) continue;
+    if (l.includes('812') && /prochain palier/i.test(l)) { segments.push({ beat, type: 'compteur', texte: l }); continue; }
+    const mBracket = l.match(/\[([^\]]+)\]/);
+    if (mBracket) {
+      let bTxt = mBracket[1].trim();
+      if (/^champ email Brevo/i.test(bTxt)) bTxt = "Je m'inscris";
+      else if (bTxt.includes('-->')) bTxt = bTxt.split('-->')[0].trim();
+      const reste = (l.slice(0, mBracket.index) + l.slice(mBracket.index + mBracket[0].length)).trim();
+      if (reste) pousseParagraphe(beat, reste);
+      segments.push({ beat, type: 'bouton', texte: bTxt });
+      continue;
+    }
+    pousseParagraphe(beat, l);
+  }
 }
-const nbTrousCopy = (md.match(/\[TROU:/g) || []).length;
+
+if (dump) {
+  console.log(JSON.stringify(segments.map(s => ({ beat: s.beat, type: s.type, texte: s.texte })), null, 2));
+  process.exit(0);
+}
 
 // 2. Texte rendu de la maquette
 const abs = path.resolve(fichier);
@@ -73,14 +119,26 @@ const tout = texteN + ' ' + altsN + ' ' + norm(rendu.titres);
 
 // 3. Comparaison
 let ligneCompteurAbsenteEnAvant = null;
+const compteur812Present = texteN.includes('812');
 const resultats = segments.map(s => {
-  let t = norm(s.texte);
-  if (/\{\{compteur\}\}/.test(t)) {
-    const avecChiffre = t.replace('{{compteur}}', '218');
-    if (etat === 'avant') { ligneCompteurAbsenteEnAvant = (ligneCompteurAbsenteEnAvant !== false) && !texteN.includes(avecChiffre); return { ...s, attendu: false, present: true }; }
-    t = avecChiffre;
+  if (s.type === 'compteur') {
+    if (etat === 'avant') {
+      const absent = !texteN.includes('812') && !texteN.includes(norm('prochain palier'));
+      ligneCompteurAbsenteEnAvant = (ligneCompteurAbsenteEnAvant !== false) && absent;
+      return { ...s, attendu: false, present: true };
+    }
+    const parties = ['812', 'coopérateur·ices', 'prochain palier', '1 700'].map(norm);
+    return { ...s, present: parties.every(p => tout.includes(p)) };
   }
-  const cible = s.type === 'alt' ? altsN : tout;
+  if (/\/ La frise$/.test(s.beat) && s.type === 'paragraphe') {
+    const t = norm(s.texte);
+    if (tout.includes(t)) return { ...s, present: true };
+    const mDF = s.texte.match(/^(.+?)\s*:\s*(.+)$/);
+    if (mDF) return { ...s, present: tout.includes(norm(mDF[1])) && tout.includes(norm(mDF[2])) };
+    return { ...s, present: false };
+  }
+  const t = s.ci ? norm(s.texte).toLowerCase() : norm(s.texte);
+  const cible = s.ci ? tout.toLowerCase() : tout;
   return { ...s, present: cible.includes(t) };
 });
 const manquants = resultats.filter(r => r.attendu !== false && !r.present);
@@ -88,7 +146,7 @@ const rapport = {
   fichier: abs, etat: etat || 'campagne', segmentsAttendus: segments.length, presents: resultats.filter(r => r.present || r.attendu === false).length,
   manquants: manquants.map(m => ({ beat: m.beat, type: m.type, texte: m.texte })),
   trousCopy: nbTrousCopy, trousRendus: rendu.trous, titleRendu: rendu.title,
-  compteur218Present: texteN.includes('218'), ligneCompteurAbsenteEnAvant,
+  compteur812Present, ligneCompteurAbsenteEnAvant,
 };
 console.log(JSON.stringify(rapport, null, 2));
 process.exitCode = manquants.length ? 1 : 0;

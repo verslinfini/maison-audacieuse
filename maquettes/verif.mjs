@@ -87,7 +87,7 @@ for (const vp of VIEWPORTS) {
       cadratins, contexteCadratins: ctxCad, exclamations: exclam, contexteExclamations: ctxEx,
       polices: { onest: document.fonts.check('16px Onest'), meow: document.fonts.check('16px "Meow Script"') },
       images: imgs, imagesCassees: imgs.filter(x => !x.ok).length, imagesSansAlt: imgs.filter(x => !x.alt).length, imagesSansDimensions: imgs.filter(x => !x.w || !x.h).length,
-      texteCompteurExemple: t.includes('218'),
+      texteCompteurExemple: t.includes('812'),
       liensNus: Array.from(document.querySelectorAll('a[href="#"]')).length,
     };
   });
