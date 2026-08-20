@@ -1,5 +1,7 @@
 # Accueil, copy de page
 
+**OBSOLÈTE depuis le 20/08/2026.** La copy de la home a été refondue et validée écran par écran : la source de vérité est `02 Projets/LMA - Maison Audacieuse/05 Site web/2026.08.20 - Copy home validée écran par écran - LMA.md` (vault). Ce fichier sera régénéré à la session d'intégration WordPress.
+
 Page : accueil de maison-audacieuse.fr (levée de parts sociales de la SCIC La Coop Audacieuse).
 Slug : `accueil` (URL `/` via `page_on_front`).
 Statut : proposition v1, à valider par Romain.
