@@ -361,9 +361,8 @@ html.etat-avant [data-compteur] { display: none; }
   gap: clamp(.9rem, 1.6vw, 1.4rem);
 }
 .jauge__anneau { position: relative; flex: 0 0 auto; width: 112px; height: 112px; }
-/* Le miroir remet l'arc dans le sens horaire : un cercle SVG se trace en sens
-   inverse, la progression se lirait a l'envers sans lui. */
-.jauge__anneau svg { width: 100%; height: 100%; transform: scaleX(-1) rotate(-90deg); }
+/* rotate(-90deg) demarre l'arc a midi et le fait tourner en sens horaire. */
+.jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .jauge__piste { fill: none; stroke: rgba(255, 255, 255, .24); stroke-width: 7; }
 .jauge__arc {
   fill: none;
@@ -629,7 +628,7 @@ html.etat-avant [data-compteur] { display: none; }
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 5.4fr);
   gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
+  align-items: start;
   margin-top: clamp(1.5rem, 3.5vh, 2.5rem);
 }
 .part__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 30rem; }
@@ -994,7 +993,7 @@ html.etat-avant [data-compteur] { display: none; }
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier"><span class="jauge__point">·</span> prochain palier : 1 700</span>
+            <span class="jauge__palier">prochain palier : 1 700</span>
           </p>
         </div>
       </div>
@@ -1061,10 +1060,10 @@ html.etat-avant [data-compteur] { display: none; }
             <figure>
               <img src="../assets/img/visuel-dauphine-1.jpg" alt="Le projet de rénovation de la ferme, grande façade vitrée, parvis planté et arbres" width="900" height="563" loading="lazy">
               <figcaption class="repere">après</figcaption>
+              <p class="credit">© Basa Architecture</p>
             </figure>
           </div>
-          <p class="credit">© Basa Architecture</p>
-          <p class="trou">[TROU: autorisation d'usage web des visuels Basa à confirmer avant mise en ligne. Le crédit © Basa Architecture reste visible dans tous les cas.]</p>
+          <!-- [TROU: autorisation d'usage web des visuels Basa à confirmer avant mise en ligne. Le crédit © Basa Architecture reste visible dans tous les cas.] -->
         </div>
       </div>
     </div>
