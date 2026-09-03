@@ -240,7 +240,15 @@ html.etat-avant [data-compteur] { display: none; }
 .bouton--primaire:hover { background: var(--violet-sombre); }
 .bouton--primaire:active { transform: translateY(1px); }
 .hero .bouton--primaire,
-.entete:not([data-solide="oui"]) .bouton--primaire { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .86); }
+.sur-sombre .bouton--primaire,
+.entete:not([data-solide="oui"]) .bouton--primaire {
+  background: var(--blanc);
+  color: var(--violet-sombre);
+  box-shadow: none;
+}
+.hero .bouton--primaire:hover,
+.sur-sombre .bouton--primaire:hover,
+.entete:not([data-solide="oui"]) .bouton--primaire:hover { background: var(--jaune); color: var(--violet-sombre); }
 
 .bouton--secondaire {
   background: transparent;
@@ -406,8 +414,8 @@ html.etat-avant [data-compteur] { display: none; }
   font-size: .8rem;
   font-weight: 600;
   letter-spacing: .16em;
-  color: rgba(255, 255, 255, .82);
-  margin-bottom: 1.05rem;
+  color: rgba(255, 255, 255, .86);
+  margin-bottom: .9rem;
 }
 .hero__phrase {
   font-size: clamp(1.2rem, 1.72vw, 1.62rem);
@@ -415,12 +423,6 @@ html.etat-avant [data-compteur] { display: none; }
   line-height: 1.46;
   color: var(--blanc);
   max-width: 30ch;
-}
-.hero__bien {
-  margin-top: .95rem;
-  max-width: 32ch;
-  font-size: clamp(1.125rem, 1.3vw, 1.3rem);
-  color: rgba(255, 255, 255, .92);
 }
 .hero__actions {
   display: flex;
@@ -922,7 +924,14 @@ html.etat-avant [data-compteur] { display: none; }
   .hero { padding-top: calc(var(--h-entete) + 16.5rem); padding-bottom: 5rem; }
   .hero h1 { font-size: 2.2rem; max-width: 100%; }
   .hero__lead { font-size: 1.05rem; margin-top: .8rem; max-width: 100%; }
-  .hero__contenu { gap: 1.9rem; }
+  .hero__contenu { display: flex; flex-direction: column; gap: 1.15rem; }
+  .hero__bloc, .hero__colonne { display: contents; }
+  .hero .kicker { order: 1; }
+  .hero h1 { order: 2; }
+  .hero__lead { order: 3; }
+  .hero__phrase { order: 4; }
+  .jauge { order: 5; margin-top: .7rem; }
+  .hero__actions { order: 6; margin-top: .3rem; }
   .hero__actions { margin-top: 1.35rem; gap: .4rem 1.2rem; }
   .hero__img { height: 300px; bottom: auto; object-position: 46% 58%; filter: brightness(1.06) contrast(1.14); }
   .hero__voile {
@@ -997,6 +1006,7 @@ html.etat-avant [data-compteur] { display: none; }
     <div class="hero__voile" aria-hidden="true"></div>
     <div class="hero__contenu">
       <div class="hero__bloc">
+        <p class="kicker">À ANNECY, QUARTIER DE NOVEL</p>
         <h1>Et si ce lieu était le nôtre ?</h1>
         <p class="hero__lead">Devenons-en toutes et tous coopérateur·ices.</p>
         <!-- 812 = valeur d'exemple ; chiffre réel figé au 07/09, câblé à la session tunnel -->
@@ -1018,9 +1028,7 @@ html.etat-avant [data-compteur] { display: none; }
         </div>
       </div>
       <div class="hero__colonne">
-        <p class="kicker">À ANNECY, QUARTIER DE NOVEL</p>
         <p class="hero__phrase">La Maison Audacieuse : un lieu de vie pour prendre soin, créer du lien et <span class="marqueur">bousculer les inégalités de genre</span>.</p>
-        <p class="hero__bien">Création d'un bien commun qui appartient à celles et ceux qui y croient.</p>
         <div class="hero__actions">
           <a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
           <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
