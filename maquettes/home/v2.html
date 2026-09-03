@@ -306,8 +306,8 @@ html.etat-avant [data-compteur] { display: none; }
 #le-lieu h2 { max-width: 13ch; }
 .lieu__grille {
   display: grid;
-  grid-template-columns: minmax(0, 5.4fr) minmax(0, 6fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 4.6fr) minmax(0, 6fr);
+  gap: clamp(1.8rem, 3.4vw, 3.4rem);
   align-items: start;
 }
 .lieu__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 40rem; }
@@ -344,6 +344,30 @@ html.etat-avant [data-compteur] { display: none; }
   border-radius: 2px;
   background: var(--vert);
 }
+.niveaux .logo-structure {
+  height: 46px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: .7rem;
+}
+.niveaux .nom-structure {
+  display: block;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: .45rem;
+}
+/* Variante logos : la vignette remplace le tiret vert. */
+html.usages-logos .niveaux li { padding-top: 0; }
+html.usages-logos .niveaux li::before { display: none; }
+html.usages-logos .nom-structure { display: none; }
+/* Variante noms : le tiret reste, le nom s'intercale. */
+html:not(.usages-logos) .logo-structure { display: none; }
+html:not(.usages-logos) .niveaux li { padding-top: 1.5rem; }
 .lieu__lien { margin-top: clamp(1.2rem, 2.6vh, 1.9rem); }
 
 /* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
@@ -471,11 +495,11 @@ html.etat-avant [data-compteur] { display: none; }
       </div>
       <div class="usages">
         <ul class="niveaux">
-            <li>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
-            <li>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
-            <li>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
-            <li>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
-          <li>un espace de créativité et d'éveil pour les enfants et les familles.</li>
+            <li><img class="logo-structure" src="../assets/img/part_ostara.jpg" alt="Ostara" width="440" height="440"><span class="nom-structure">Ostara</span>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
+            <li><img class="logo-structure" src="../assets/img/part_beguinage.jpg" alt="Le béguinage" width="440" height="440"><span class="nom-structure">Le béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
+            <li><img class="logo-structure" src="../assets/img/part_cafe.jpg" alt="Le Café des Audacieuses" width="440" height="440"><span class="nom-structure">Le Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
+            <li><img class="logo-structure" src="../assets/img/part_sante.jpg" alt="Maison En-Santé" width="440" height="440"><span class="nom-structure">Maison En-Santé</span>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
+          <li><img class="logo-structure" src="../assets/img/part_banjo.jpg" alt="Banjo" width="440" height="440"><span class="nom-structure">Banjo</span>un espace de créativité et d'éveil pour les enfants et les familles.</li>
         </ul>
         <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
       </div>
@@ -489,8 +513,9 @@ html.etat-avant [data-compteur] { display: none; }
 
 <script>
 (function () {
-  var e = new URLSearchParams(window.location.search).get('etat');
-  if (e === 'avant') { document.documentElement.className += ' etat-avant'; }
+  var q = new URLSearchParams(window.location.search);
+  if (q.get('etat') === 'avant') { document.documentElement.className += ' etat-avant'; }
+  if (q.get('u') !== 'noms') { document.documentElement.className += ' usages-logos'; }
   var entete = document.getElementById('entete');
   var seuil = 120;
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
