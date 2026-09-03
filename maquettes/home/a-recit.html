@@ -142,7 +142,7 @@ html.etat-avant [data-compteur] { display: none; }
 }
 .entete__inner {
   height: 100%;
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 var(--marge);
   display: flex;
@@ -309,7 +309,7 @@ html.etat-avant [data-compteur] { display: none; }
   min-height: 100svh;
   display: flex;
   align-items: flex-end;
-  padding: calc(var(--h-entete) + 3rem) var(--marge) clamp(3rem, 12vh, 7rem);
+  padding: calc(var(--h-entete) + 3rem) 0 clamp(3rem, 12vh, 7rem);
   overflow: hidden;
   background: var(--violet-sombre);
 }
@@ -332,10 +332,12 @@ html.etat-avant [data-compteur] { display: none; }
 .hero__contenu {
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  /* Meme conteneur que .contenu : le h1 tombe sur la verticale des titres suivants. */
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 0 var(--marge);
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
   gap: clamp(1.75rem, 4.5vw, 5rem);
   align-items: end;
   color: var(--blanc);
@@ -360,14 +362,14 @@ html.etat-avant [data-compteur] { display: none; }
   align-items: center;
   gap: clamp(.9rem, 1.6vw, 1.4rem);
 }
-.jauge__anneau { position: relative; flex: 0 0 auto; width: 112px; height: 112px; }
+.jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
 /* rotate(-90deg) demarre l'arc a midi et le fait tourner en sens horaire. */
 .jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.jauge__piste { fill: none; stroke: rgba(255, 255, 255, .24); stroke-width: 7; }
+.jauge__piste { fill: none; stroke: rgba(255, 255, 255, .26); stroke-width: 8; }
 .jauge__arc {
   fill: none;
   stroke: var(--blanc);
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
   stroke-dasharray: 156.1 326.7;
 }
@@ -377,11 +379,21 @@ html.etat-avant [data-compteur] { display: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.55rem;
   font-weight: 700;
   letter-spacing: -.03em;
   color: var(--blanc);
   line-height: 1;
+}
+.jauge__deja {
+  flex: 0 0 auto;
+  align-self: center;
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(2rem, 2.5vw, 2.9rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, .95);
+  transform: rotate(-7deg);
+  margin: 0 -.2rem .5rem 0;
 }
 .jauge__legende { line-height: 1.4; }
 .jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--blanc); }
@@ -390,20 +402,25 @@ html.etat-avant [data-compteur] { display: none; }
 
 .hero__colonne { display: flex; flex-direction: column; padding-bottom: .35rem; }
 .kicker {
-  font-size: var(--t-micro);
+  font-size: .8rem;
   font-weight: 600;
   letter-spacing: .16em;
   color: rgba(255, 255, 255, .82);
   margin-bottom: 1.05rem;
 }
 .hero__phrase {
-  font-size: clamp(1.1rem, 1.35vw, 1.32rem);
+  font-size: clamp(1.2rem, 1.72vw, 1.62rem);
   font-weight: 500;
-  line-height: 1.42;
+  line-height: 1.36;
   color: var(--blanc);
-  max-width: 34ch;
+  max-width: 30ch;
 }
-.hero__bien { margin-top: .85rem; max-width: 36ch; color: rgba(255, 255, 255, .9); }
+.hero__bien {
+  margin-top: .95rem;
+  max-width: 32ch;
+  font-size: clamp(1.125rem, 1.3vw, 1.3rem);
+  color: rgba(255, 255, 255, .92);
+}
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -912,9 +929,10 @@ html.etat-avant [data-compteur] { display: none; }
     bottom: auto;
     background: linear-gradient(to bottom, rgba(56, 54, 72, .52) 0%, rgba(56, 54, 72, .14) 26%, rgba(56, 54, 72, .22) 58%, rgba(56, 54, 72, .90) 92%, rgb(56, 54, 72) 100%);
   }
-  .jauge { margin-top: 1.4rem; padding-top: 1.1rem; gap: .9rem; }
-  .jauge__anneau { width: 86px; height: 86px; }
-  .jauge__nombre { font-size: 1.5rem; }
+  .jauge { margin-top: 1.4rem; padding-top: 1.1rem; gap: .6rem; }
+  .jauge__anneau { width: 96px; height: 96px; }
+  .jauge__nombre { font-size: 1.75rem; }
+  .jauge__deja { font-size: 1.9rem; margin-bottom: .3rem; }
   .jauge__quoi { font-size: 1rem; }
   .portes__grille { grid-template-columns: minmax(0, 1fr); }
   .porte + .porte {
@@ -984,6 +1002,7 @@ html.etat-avant [data-compteur] { display: none; }
         <!-- L'anneau se lit toujours sur le palier en cours : 812 sur 1 700, jamais sur 5 000.
              Au lancement, 666 sur un palier 666, anneau plein, puis bascule au palier 1 700. -->
         <div class="jauge" data-compteur>
+          <span class="jauge__deja">déjà</span>
           <div class="jauge__anneau">
             <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
               <circle class="jauge__piste" cx="60" cy="60" r="52"></circle>
