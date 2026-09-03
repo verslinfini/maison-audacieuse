@@ -337,8 +337,8 @@ html.etat-avant [data-compteur] { display: none; }
   margin: 0 auto;
   padding: 0 var(--marge);
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
-  gap: clamp(1.75rem, 4.5vw, 5rem);
+  grid-template-columns: minmax(0, 1.07fr) minmax(0, .93fr);
+  gap: clamp(1.9rem, 5.4vw, 6rem);
   align-items: end;
   color: var(--blanc);
 }
@@ -360,6 +360,7 @@ html.etat-avant [data-compteur] { display: none; }
   border-top: 1px solid rgba(255, 255, 255, .3);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: clamp(.9rem, 1.6vw, 1.4rem);
 }
 .jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
@@ -389,7 +390,7 @@ html.etat-avant [data-compteur] { display: none; }
   flex: 0 0 auto;
   align-self: center;
   font-family: "Meow Script", "Onest", cursive;
-  font-size: clamp(2rem, 2.5vw, 2.9rem);
+  font-size: clamp(2.2rem, 2.8vw, 3.2rem);
   line-height: 1;
   color: rgba(255, 255, 255, .95);
   transform: rotate(-7deg);
@@ -411,7 +412,7 @@ html.etat-avant [data-compteur] { display: none; }
 .hero__phrase {
   font-size: clamp(1.2rem, 1.72vw, 1.62rem);
   font-weight: 500;
-  line-height: 1.36;
+  line-height: 1.46;
   color: var(--blanc);
   max-width: 30ch;
 }
@@ -436,8 +437,8 @@ html.etat-avant [data-compteur] { display: none; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'><path d='M2,11 C42,4 88,9 138,6 C188,3 244,10 298,3 L297,32 C252,38 196,31 142,35 C92,38 44,32 3,36 Z' fill='%23FFF3A8'/></svg>");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding: .06em .28em .1em;
-  margin: 0 -.1em;
+  padding: .17em .3em .21em;
+  margin: 0 -.12em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -932,7 +933,7 @@ html.etat-avant [data-compteur] { display: none; }
   .jauge { margin-top: 1.4rem; padding-top: 1.1rem; gap: .6rem; }
   .jauge__anneau { width: 96px; height: 96px; }
   .jauge__nombre { font-size: 1.75rem; }
-  .jauge__deja { font-size: 1.9rem; margin-bottom: .3rem; }
+  .jauge__deja { font-size: 2.1rem; margin-bottom: .3rem; }
   .jauge__quoi { font-size: 1rem; }
   .portes__grille { grid-template-columns: minmax(0, 1fr); }
   .porte + .porte {
