@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Parts sociales d'un lieu solidaire | La Maison Audacieuse</title>
+<meta name="description" content="Une ferme d'Annecy devient un lieu de vie solidaire. Prenez une part à 100 € et devenez coopératrice ou coopérateur du lieu.">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* ------------------------------------------------------------------ */
+/* Home maison-audacieuse.fr, reconstruction ecran par ecran.          */
+/* Copy verbatim : « Copy home validée écran par écran », 20/08/2026,  */
+/* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
+/* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
+/* Ecrans presents : 1 heros, 2 la place des femmes.                   */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --violet: #766DA0;
+  --violet-sombre: #383648;
+  --kaki: #9D9669;
+  --vert: #5E9E85;
+  --terracotta: #A3716A;
+  --menthe: #BAFFE4;
+  --jaune: #FFF3A8;
+  --texte: #56546B;
+  --gris: #F5F5F6;
+  --violace: #EDEDF5;
+  --blanc: #FFFFFF;
+
+  --filet: rgba(56, 54, 72, .16);
+
+  --h-entete: 76px;
+  --marge: clamp(1.25rem, 3.6vw, 3.5rem);
+
+  --t-display: clamp(2.55rem, 6.4vw, 5.25rem);
+  --t-titre: clamp(1.95rem, 3.4vw, 3rem);
+  --t-lead: clamp(1.2rem, 1.55vw, 1.55rem);
+  --t-corps: clamp(1.0625rem, .95vw, 1.125rem);
+  --t-petit: .875rem;
+
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: calc(var(--h-entete) + 1.5rem); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--violace);
+  color: var(--texte);
+  font-family: "Onest", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--t-corps);
+  line-height: 1.62;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-spacing: -.018em; }
+h1 { font-size: var(--t-display); line-height: .98; }
+h2 { font-size: var(--t-titre); line-height: 1.04; }
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; border-radius: 2px; }
+
+.contenu { max-width: 1240px; margin: 0 auto; padding: 0 var(--marge); }
+.grain__voile { position: absolute; inset: 0; pointer-events: none; background-image: var(--grain); opacity: .5; z-index: 0; }
+
+/* ---------- boutons et liens ---------- */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.65rem;
+  font-size: var(--t-petit);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 170ms ease, color 170ms ease, transform 120ms ease;
+}
+.bouton--primaire { background: var(--violet); color: var(--blanc); }
+.bouton--primaire:hover { background: var(--violet-sombre); }
+.bouton--primaire:active { transform: translateY(1px); }
+.lien-texte {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  font-size: var(--t-petit);
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .34em;
+  transition: text-decoration-thickness 150ms ease, text-decoration-color 150ms ease;
+}
+.lien-texte:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
+
+/* ---------- entete ---------- */
+.entete {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--h-entete);
+  z-index: 60;
+  background: transparent;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+.entete[data-solide="oui"] { background: var(--blanc); box-shadow: 0 1px 0 rgba(56, 54, 72, .12); }
+.entete__inner {
+  height: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--marge);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.6rem);
+}
+.logo { display: inline-flex; align-items: center; min-height: 44px; }
+.logo img { height: 32px; width: auto; }
+.nav { margin-left: auto; }
+.nav ul { display: flex; align-items: center; gap: clamp(.5rem, 1.3vw, 1.5rem); }
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 .35rem;
+  font-size: var(--t-petit);
+  font-weight: 500;
+  color: var(--violet-sombre);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 160ms ease;
+}
+.nav a:hover { border-bottom-color: currentColor; }
+.entete__cta { margin-left: clamp(.5rem, 1.4vw, 1.4rem); }
+.menu-bouton {
+  display: none;
+  margin-left: auto;
+  min-height: 44px;
+  min-width: 62px;
+  align-items: center;
+  justify-content: center;
+  font: 600 var(--t-petit)/1 "Onest", system-ui, sans-serif;
+  color: var(--violet-sombre);
+  background: transparent;
+  border: 1.5px solid rgba(56, 54, 72, .35);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.menu-mobile {
+  position: fixed;
+  top: var(--h-entete);
+  left: 0; right: 0;
+  z-index: 59;
+  background: var(--blanc);
+  border-bottom: 1px solid var(--filet);
+  padding: .5rem var(--marge) 1rem;
+  box-shadow: 0 14px 28px rgba(56, 54, 72, .14);
+}
+.menu-mobile[hidden] { display: none; }
+.menu-mobile a {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  font-weight: 500;
+  color: var(--violet-sombre);
+  text-decoration: none;
+  border-bottom: 1px solid var(--filet);
+}
+.menu-mobile li:last-child a { border-bottom: 0; }
+.barre-mobile {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 58;
+  background: var(--blanc);
+  border-top: 1px solid var(--filet);
+  padding: .6rem var(--marge) calc(.6rem + env(safe-area-inset-bottom, 0px));
+}
+.barre-mobile .bouton { width: 100%; }
+
+/* ================================================================== */
+/* Ecran 1, heros                                                     */
+/* ================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--h-entete) + 3rem) 0 clamp(3rem, 12vh, 7rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--violace);
+}
+.hero__contenu {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--marge);
+  display: grid;
+  grid-template-columns: minmax(0, 1.07fr) minmax(0, .93fr);
+  gap: clamp(1.9rem, 5.4vw, 6rem);
+  align-items: end;
+}
+.kicker { font-size: .8rem; font-weight: 600; letter-spacing: .16em; color: var(--violet-sombre); margin-bottom: .9rem; }
+.hero h1 { max-width: 14ch; text-wrap: balance; }
+.hero__lead { margin-top: 1.3rem; font-size: var(--t-lead); font-weight: 500; line-height: 1.32; max-width: 46ch; color: var(--violet-sombre); }
+.hero__phrase { font-size: clamp(1.2rem, 1.72vw, 1.62rem); font-weight: 500; line-height: 1.54; max-width: 30ch; color: var(--texte); }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.7rem; margin-top: 1.6rem; }
+
+/* Le lieu une fois renove, dans un cadre blanc legerement incline. */
+.figure { margin: 0 0 1.4rem; }
+.figure img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: 50% 56%;
+  border: 10px solid var(--blanc);
+  border-radius: 3px;
+  box-shadow: 0 18px 40px rgba(56, 54, 72, .18);
+  transform: rotate(-1.2deg);
+}
+.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: rgba(86, 84, 107, .72); text-align: right; }
+
+/* Compteur : anneau et chiffre en vert, le palier en cours pour denominateur.
+   812 sur 1 700, l'arc couvre 47,8 % du cercle (156,1 de 326,7). */
+.jauge {
+  margin-top: 1.9rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--filet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.9rem, 1.6vw, 1.4rem);
+}
+.jauge__deja {
+  flex: 0 0 auto;
+  align-self: center;
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(2.6rem, 3.4vw, 3.9rem);
+  line-height: 1;
+  color: var(--texte);
+  -webkit-text-stroke: .6px currentColor;
+  paint-order: stroke fill;
+  transform: rotate(-7deg);
+  margin: 0 -.2rem .5rem 0;
+}
+.jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
+.jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.jauge__piste { fill: none; stroke: rgba(56, 54, 72, .13); stroke-width: 8; }
+.jauge__arc { fill: none; stroke: var(--vert); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 156.1 326.7; }
+.jauge__nombre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.55rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--vert);
+  line-height: 1;
+}
+.jauge__legende { line-height: 1.4; }
+.jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
+.jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); color: var(--texte); }
+
+/* Surlignage marqueur, trait irregulier trace en SVG, jaune pale de la charte. */
+.marqueur {
+  color: var(--violet-sombre);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'><path d='M2,11 C42,4 88,9 138,6 C188,3 244,10 298,3 L297,32 C252,38 196,31 142,35 C92,38 44,32 3,36 Z' fill='%23FFF3A8'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: .24em .3em .28em;
+  margin: 0 -.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Etat avant l'allumage du 07/09 : la ligne compteur disparait, rien d'autre. */
+html.etat-avant [data-compteur] { display: none; }
+
+/* ================================================================== */
+/* Ecran 2, un lieu pour repenser la place des femmes                 */
+/* ================================================================== */
+#le-lieu {
+  position: relative;
+  background: var(--blanc);
+  padding: clamp(4.5rem, 9vh, 7.5rem) 0 clamp(4rem, 8vh, 6.5rem);
+  overflow: hidden;
+}
+#le-lieu > .contenu { position: relative; z-index: 1; }
+/* Sur le blanc, le grain gris doit rester une texture, pas un voile. */
+#le-lieu > .grain__voile { opacity: .28; }
+#le-lieu h2 { max-width: 20ch; }
+.lieu__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 6.2fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+}
+.lieu__texte { display: flex; flex-direction: column; gap: 1.15rem; max-width: 38rem; }
+.lieu__texte p { line-height: 1.66; }
+.lieu__reponse { color: var(--violet-sombre); font-weight: 500; font-size: var(--t-lead); line-height: 1.4; }
+/* L'emplacement de la photo de vie garde l'encombrement qu'aura le visuel :
+   un trou declare occupe la place du manque, il ne la masque pas. */
+.trou {
+  display: block;
+  background: var(--violace);
+  border: 2px dashed rgba(56, 54, 72, .28);
+  border-radius: 4px;
+  color: var(--violet-sombre);
+  font-size: var(--t-petit);
+  line-height: 1.45;
+}
+.lieu__trou {
+  margin-top: clamp(1.6rem, 3vh, 2.4rem);
+  max-width: 34rem;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(.9rem, 2vw, 1.4rem);
+}
+
+/* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
+   comme des niveaux. Un seul geste graphique, pose sur un panneau clair. */
+.toit {
+  background: var(--violace);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 2.6vw, 2rem) clamp(1.3rem, 2.4vw, 1.9rem) clamp(1.5rem, 2.8vw, 2.1rem);
+}
+.toit__faitage { display: block; width: 100%; height: clamp(30px, 4vw, 46px); }
+.toit__faitage polyline { fill: none; stroke: var(--vert); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.toit__intro {
+  margin-top: .6rem;
+  font-size: var(--t-lead);
+  font-weight: 700;
+  color: var(--violet-sombre);
+  letter-spacing: -.015em;
+}
+.niveaux { margin-top: .9rem; }
+.niveaux li {
+  position: relative;
+  padding: .9rem 0 .9rem 1.35rem;
+  border-top: 1px solid rgba(56, 54, 72, .14);
+  color: var(--violet-sombre);
+  line-height: 1.5;
+}
+.niveaux li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--vert);
+}
+.niveaux li:last-child { border-bottom: 1px solid rgba(56, 54, 72, .14); }
+.lieu__lien { margin-top: 1.15rem; }
+
+/* ---------- etroit ---------- */
+@media (max-width: 1080px) {
+  .hero__contenu { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+  .hero h1 { max-width: 22ch; }
+  .hero__phrase { max-width: 46ch; }
+  .lieu__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .toit { max-width: 34rem; }
+}
+@media (max-width: 767px) {
+  :root { --h-entete: 58px; }
+  .nav, .entete__cta { display: none; }
+  .menu-bouton { display: inline-flex; }
+  .barre-mobile { display: block; padding: .5rem var(--marge) calc(.5rem + env(safe-area-inset-bottom, 0px)); }
+  .bouton { min-height: 48px; }
+  body { padding-bottom: 78px; }
+  .hero { padding-top: calc(var(--h-entete) + 2rem); padding-bottom: 3.5rem; }
+  .hero h1 { font-size: 2.2rem; max-width: 100%; }
+  .hero__lead { font-size: 1.05rem; margin-top: .8rem; }
+  .hero__contenu { display: flex; flex-direction: column; gap: 1rem; }
+  .hero__bloc, .hero__colonne { display: contents; }
+  .kicker { order: 1; }
+  .hero h1 { order: 2; }
+  .hero__lead { order: 3; }
+  .figure { order: 4; margin-bottom: .6rem; }
+  .hero__phrase { order: 5; }
+  .jauge { order: 6; margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
+  .hero__actions { order: 7; margin-top: .4rem; }
+  .figure img { max-height: 158px; border-width: 8px; transform: rotate(-1deg); }
+  .figure figcaption { margin-top: .6rem; }
+  .jauge__anneau { width: 96px; height: 96px; }
+  .jauge__nombre { font-size: 1.75rem; }
+  .jauge__deja { font-size: 2.4rem; margin-bottom: .3rem; }
+  .lieu__reponse { font-size: 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="entete" id="entete">
+  <div class="entete__inner">
+    <a class="logo" href="#hero"><img src="../assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="#le-lieu">Le projet</a></li>
+        <li><a href="/part-sociale/">La part sociale</a></li>
+        <li><a href="/lequipe-projet/">L'équipe</a></li>
+        <li><a href="/les-medias/">Médias</a></li>
+        <li><a href="/contacts/">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="bouton bouton--primaire entete__cta" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+    <button class="menu-bouton" type="button" id="menu-bouton" aria-expanded="false" aria-controls="menu-mobile">Menu</button>
+  </div>
+</header>
+
+<div class="menu-mobile" id="menu-mobile" hidden>
+  <ul>
+    <li><a href="#le-lieu">Le projet</a></li>
+    <li><a href="/part-sociale/">La part sociale</a></li>
+    <li><a href="/lequipe-projet/">L'équipe</a></li>
+    <li><a href="/les-medias/">Médias</a></li>
+    <li><a href="/contacts/">Contact</a></li>
+  </ul>
+</div>
+
+<main>
+  <!-- Ecran 1, heros. Ambiance claire arbitree le 03/09. -->
+  <section class="hero" id="hero">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="hero__contenu">
+      <div class="hero__bloc">
+        <p class="kicker">À ANNECY, QUARTIER DE NOVEL</p>
+        <h1>Et si ce lieu était le nôtre ?</h1>
+        <p class="hero__lead">Devenons-en toutes et tous coopérateur·ices.</p>
+        <!-- 812 = valeur d'exemple, chiffre reel fige au 07/09, palier 666 puis 1 700 -->
+        <div class="jauge" data-compteur>
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+              <circle class="jauge__piste" cx="60" cy="60" r="52"></circle>
+              <circle class="jauge__arc" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <span class="jauge__nombre">812</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">prochain palier : 1 700</span>
+          </p>
+        </div>
+      </div>
+      <div class="hero__colonne">
+        <figure class="figure">
+          <img src="../assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové : la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
+          <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
+        </figure>
+        <p class="hero__phrase">La Maison Audacieuse : un lieu de vie pour prendre soin, créer du lien et <span class="marqueur">bousculer les inégalités de genre</span>.</p>
+        <div class="hero__actions">
+          <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecran 2, un lieu pour repenser la place des femmes -->
+  <section id="le-lieu">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <h2>Un lieu pour repenser la place des femmes</h2>
+      <div class="lieu__grille">
+        <div>
+          <div class="lieu__texte">
+            <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
+            <p class="lieu__reponse">Nous créons un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
+          </div>
+          <p class="trou lieu__trou">[TROU: photo de vie, à choisir dans le Nextcloud com. Les seuls visuels de personnes disponibles ici sont des logos et portraits de structures partenaires, à n'utiliser qu'une fois la liste des exploitantes figée.]</p>
+        </div>
+        <div class="toit">
+          <svg class="toit__faitage" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <polyline points="2,44 118,6 482,6 598,44" vector-effect="non-scaling-stroke"></polyline>
+          </svg>
+          <p class="toit__intro">Sous un même toit :</p>
+          <ul class="niveaux">
+            <li>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
+            <li>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
+            <li>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
+            <li>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
+            <li>un espace de créativité et d'éveil pour les enfants et les familles.</li>
+          </ul>
+          <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="barre-mobile">
+  <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+</div>
+
+<script>
+(function () {
+  var e = new URLSearchParams(window.location.search).get('etat');
+  if (e === 'avant') { document.documentElement.className += ' etat-avant'; }
+  var entete = document.getElementById('entete');
+  var seuil = 120;
+  var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
+  maj();
+  window.addEventListener('scroll', maj, { passive: true });
+  var bouton = document.getElementById('menu-bouton');
+  var menu = document.getElementById('menu-mobile');
+  bouton.addEventListener('click', function () {
+    var ouvert = bouton.getAttribute('aria-expanded') === 'true';
+    bouton.setAttribute('aria-expanded', String(!ouvert));
+    menu.hidden = ouvert;
+  });
+})();
+</script>
+</body>
+</html>
