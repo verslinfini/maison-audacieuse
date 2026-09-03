@@ -303,61 +303,51 @@ html.etat-avant [data-compteur] { display: none; }
 #le-lieu > .contenu { position: relative; z-index: 1; width: 100%; }
 /* Sur le blanc, le grain gris doit rester une texture, pas un voile. */
 #le-lieu > .grain__voile { opacity: .16; }
-#le-lieu h2 { max-width: 18ch; margin-bottom: clamp(.9rem, 1.8vh, 1.3rem); }
+#le-lieu h2 { max-width: 13ch; }
 .lieu__grille {
   display: grid;
-  grid-template-columns: minmax(0, 6.2fr) minmax(0, 5fr);
+  grid-template-columns: minmax(0, 5.4fr) minmax(0, 6fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
-.lieu__texte { display: flex; flex-direction: column; gap: .95rem; max-width: 38rem; }
+.lieu__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 40rem; }
 .lieu__texte p { line-height: 1.66; }
-.lieu__reponse { color: var(--violet-sombre); font-weight: 500; font-size: var(--t-lead); line-height: 1.4; }
-/* L'emplacement de la photo de vie garde l'encombrement qu'aura le visuel :
-   un trou declare occupe la place du manque, il ne la masque pas. */
-.trou {
-  display: block;
-  background: var(--violace);
-  border: 2px dashed rgba(56, 54, 72, .28);
-  border-radius: 4px;
-  color: var(--violet-sombre);
-  font-size: var(--t-petit);
-  line-height: 1.45;
-}
-.lieu__trou {
-  margin-top: clamp(.9rem, 1.8vh, 1.3rem);
-  max-width: 25rem;
-  aspect-ratio: 16 / 9;
-  display: flex;
-  align-items: flex-end;
-  padding: clamp(.9rem, 2vw, 1.4rem);
-}
+/* Meme corps que le constat : seule la couleur dit que c'est la reponse. */
+.lieu__reponse { color: var(--violet-sombre); font-weight: 500; }
 
-/* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
-   comme des niveaux. Un seul geste graphique, pose sur un panneau clair. */
-/* Les cinq usages, sans toit ni intro : la liste porte seule le concret.
-   La puce se cale au milieu de l'item, pas sur sa premiere ligne. */
+/* Les cinq usages en bande, sous le texte : un inventaire, pas une colonne
+   de lecture qui concurrence la premiere. */
+.usages {
+  margin-top: clamp(1.8rem, 4vh, 3.2rem);
+  padding-top: clamp(1.4rem, 3vh, 2.2rem);
+  border-top: 1px solid rgba(56, 54, 72, .14);
+}
+.niveaux {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+}
 .niveaux li {
   position: relative;
-  padding: 1rem 0 1rem 1.5rem;
-  border-top: 1px solid rgba(56, 54, 72, .14);
+  padding-top: 1.4rem;
   color: var(--violet-sombre);
+  font-size: 1rem;
   line-height: 1.5;
 }
 .niveaux li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
+  top: 0;
+  width: 22px;
   height: 8px;
   border-radius: 2px;
   background: var(--vert);
 }
-.niveaux li:first-child { border-top: 0; padding-top: 0; }
-.niveaux li:last-child { padding-bottom: 0; }
-.lieu__lien { margin-top: 1.15rem; }
+.lieu__lien { margin-top: clamp(1.2rem, 2.6vh, 1.9rem); }
+
+/* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
+   comme des niveaux. Un seul geste graphique, pose sur un panneau clair. */
 
 /* ---------- etroit ---------- */
 @media (max-width: 1080px) {
@@ -365,7 +355,7 @@ html.etat-avant [data-compteur] { display: none; }
   .hero h1 { max-width: 22ch; }
   .hero__phrase { max-width: 46ch; }
   .lieu__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
-  .usages { max-width: 34rem; }
+  .niveaux { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -471,24 +461,23 @@ html.etat-avant [data-compteur] { display: none; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
+        <h2>Un lieu pour repenser la place des femmes</h2>
         <div>
-          <h2>Un lieu pour repenser la place des femmes</h2>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
             <p class="lieu__reponse">Nous créons un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
           </div>
-          <p class="trou lieu__trou">[TROU: photo de vie, à choisir dans le Nextcloud com. Les seuls visuels de personnes disponibles ici sont des logos et portraits de structures partenaires, à n'utiliser qu'une fois la liste des exploitantes figée.]</p>
         </div>
-        <div class="usages">
-          <ul class="niveaux">
+      </div>
+      <div class="usages">
+        <ul class="niveaux">
             <li>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
             <li>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
             <li>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
             <li>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
-            <li>un espace de créativité et d'éveil pour les enfants et les familles.</li>
-          </ul>
-          <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
-        </div>
+          <li>un espace de créativité et d'éveil pour les enfants et les familles.</li>
+        </ul>
+        <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
       </div>
     </div>
   </section>
