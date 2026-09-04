@@ -42,6 +42,15 @@
   --t-petit: .875rem;
 
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+  /* Traces du surlignage. Cadre 64x32, les 15 unites de chaque bord ne
+     s'etirent pas : le biais garde son angle quelle que soit la longueur
+     du texte, seul le milieu s'allonge. */
+  --trace-1: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M4,2.5 L50,2.1 L60,29.9 L13,30.4 Z' fill='%23FFF3A8'/></svg>");
+  --trace-2: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M14,2.1 L62,2.5 L50,30.3 L2,29.9 Z' fill='%23FFF3A8'/></svg>");
+  --trace-3: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M2,2.7 L50,1.9 L62,30.1 L14,30.7 Z' fill='%23FFF3A8'/></svg>");
+  --trace-4: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M12,2.3 L61,2 L52,30.2 L3,30.5 Z' fill='%23FFF3A8'/></svg>");
+  --trace-5: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M3,2.2 L50,2.6 L61,30.5 L14,30.1 Z' fill='%23FFF3A8'/></svg>");
+
   --grain-couleur: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23c)'/></svg>");
 }
 
@@ -281,18 +290,28 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
    dans les deux cotes, obliques et de pentes inegales. Le bloc deborde plus
    bas que haut, comme un marqueur passe a la main sous le texte. */
 .marqueur {
+  --trace: var(--trace-1);
+  --haut: .28em;
+  --bas: .44em;
   color: var(--violet-sombre);
   border-style: solid;
   border-width: 0 15px;
-  border-image-source: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M3,2.4 L50,1.9 L61,30.1 L14,30.6 Z' fill='%23FFF3A8'/></svg>");
+  border-image-source: var(--trace);
   border-image-slice: 0 15 fill;
   border-image-width: 0 15px;
   border-image-repeat: stretch;
-  padding: .28em 0 .44em;
+  padding: var(--haut) 0 var(--bas);
   margin: 0 -7px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+/* Une main ne repete pas deux fois le meme geste : chaque surlignage de la
+   page porte sa pente et son epaisseur. Les deux cotes penchent toujours
+   ensemble, jamais en entonnoir. */
+.marqueur--2 { --trace: var(--trace-2); --haut: .24em; --bas: .40em; }
+.marqueur--3 { --trace: var(--trace-3); --haut: .30em; --bas: .48em; }
+.marqueur--4 { --trace: var(--trace-4); --haut: .26em; --bas: .42em; }
+.marqueur--5 { --trace: var(--trace-5); }
 
 /* Etat avant l'allumage du 07/09 : la ligne compteur disparait, rien d'autre. */
 html.etat-avant [data-compteur] { display: none; }
@@ -582,18 +601,111 @@ html.etat-avant [data-compteur] { display: none; }
 /* Sur cet aplat, seul le blanc tient : l'ocre tombe a 1,09:1 et le vert a
    1,42:1, les trois couleurs ont la meme luminosite. Essai clos le 04/09. */
 
-/* Essai de fond, ecran 5. « grain » ajoute le bruit colore de la charte sur
-   l'aplat ; « degrade » y ajoute la descente vers le violet sombre puis le
-   kaki, le kaki cantonne au coin bas droit, loin du texte. */
-html.fond-grain #le-pari > .grain__voile,
-html.fond-degrade #le-pari > .grain__voile {
+/* Essai de fond, ecran 5. Le grain colore de la charte se pose sur l'aplat ;
+   les « nuages » remplacent la diagonale par cinq nappes larges sans
+   direction commune, la couleur bouge sans qu'on voie ou elle commence.
+   Regle de composition : les nappes qui eclaircissent (kaki, blanc) restent
+   aux angles, hors des colonnes de texte ; celles qui assombrissent passent
+   partout, elles servent le contraste au lieu de le manger. */
+html.violet-grain #le-pari > .grain__voile,
+html.violet-nuages #le-pari > .grain__voile,
+html.violet-nuages-plus #le-pari > .grain__voile {
   background-image: var(--grain-couleur);
   background-size: 240px 240px;
-  opacity: .5;
+  opacity: .38;
   mix-blend-mode: overlay;
 }
-html.fond-degrade #le-pari {
-  background: linear-gradient(158deg, var(--violet) 0%, var(--violet) 34%, #5b5578 66%, var(--violet-sombre) 88%, var(--kaki) 100%);
+/* Le grain eclaircit autant qu'il fonce, et sur un aplat deja au ras du seuil
+   il fait tomber le blanc de 4,19 a 3,86:1. Huit pour cent de violet sombre
+   sous la texture rendent la marge perdue sans que la couleur change a
+   l'oeil : le blanc remonte a 4,33:1, au-dessus de l'aplat actuel (4,19).
+   Le seuil AA strict de 4,5 demanderait 14 % de voile, donc un violet qui
+   n'est plus celui de la charte : arbitrage a l'audit, pas ici. */
+html.violet-grain #le-pari { background-image: linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)); }
+/* Deux registres se superposent. Les nappes de VALEUR (kaki qui eclaircit,
+   violet sombre qui fonce) sont poussees hors des colonnes de texte, en
+   haut et en bas. Les nappes de TEINTE passent au milieu : #6C6BAC vire au
+   bleu, #836D96 vire au rouge, toutes deux a la luminance du violet de la
+   charte. La couleur bouge partout, la valeur ne bouge que la ou il n'y a
+   rien a lire. */
+html.violet-nuages #le-pari {
+  background:
+    radial-gradient(64% 34% at 86% 108%, rgba(157,150,105,.42), rgba(157,150,105,0) 66%),
+    radial-gradient(52% 26% at 14% -12%, rgba(157,150,105,.30), rgba(157,150,105,0) 68%),
+    radial-gradient(78% 40% at 92% 4%, rgba(56,54,72,.30), rgba(56,54,72,0) 70%),
+    radial-gradient(86% 46% at 8% 96%, rgba(56,54,72,.26), rgba(56,54,72,0) 72%),
+    radial-gradient(66% 74% at 74% 46%, rgba(108,107,172,.44), rgba(108,107,172,0) 72%),
+    radial-gradient(60% 70% at 26% 58%, rgba(131,109,150,.40), rgba(131,109,150,0) 74%),
+    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    var(--violet);
+}
+html.violet-nuages-plus #le-pari {
+  background:
+    radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
+    radial-gradient(58% 30% at 12% -10%, rgba(157,150,105,.52), rgba(157,150,105,0) 66%),
+    radial-gradient(82% 44% at 94% 2%, rgba(56,54,72,.52), rgba(56,54,72,0) 68%),
+    radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
+    radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
+    radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
+    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    var(--violet);
+}
+
+/* Fonds clairs. Meme principe, amplitude divisee : le blanc reste blanc,
+   il respire. Aucune teinte nouvelle, ce sont le terracotta et le violet de
+   la charte a 10 % qui donnent le rose. Le grain passe en couleur, en mode
+   normal : sur du clair, « overlay » ne se verrait pas. */
+html.clair-rose .hero,
+html.clair-rose #le-lieu,
+html.clair-rose #les-etapes,
+html.clair-rose #prendre-part,
+html.clair-rose-plus .hero,
+html.clair-rose-plus #le-lieu,
+html.clair-rose-plus #les-etapes,
+html.clair-rose-plus #prendre-part { position: relative; }
+html.clair-rose .hero > .grain__voile,
+html.clair-rose #le-lieu > .grain__voile,
+html.clair-rose #les-etapes > .grain__voile,
+html.clair-rose #prendre-part > .grain__voile,
+html.clair-rose-plus .hero > .grain__voile,
+html.clair-rose-plus #le-lieu > .grain__voile,
+html.clair-rose-plus #les-etapes > .grain__voile,
+html.clair-rose-plus #prendre-part > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+}
+html.clair-rose #le-lieu,
+html.clair-rose #prendre-part {
+  background:
+    radial-gradient(72% 58% at 88% 6%, rgba(163,113,106,.15), rgba(163,113,106,0) 64%),
+    radial-gradient(66% 54% at 6% 88%, rgba(118,109,160,.14), rgba(118,109,160,0) 66%),
+    radial-gradient(80% 64% at 24% 12%, rgba(186,255,228,.22), rgba(186,255,228,0) 62%),
+    var(--blanc);
+}
+html.clair-rose .hero,
+html.clair-rose #les-etapes {
+  background:
+    radial-gradient(74% 60% at 92% 12%, rgba(163,113,106,.17), rgba(163,113,106,0) 62%),
+    radial-gradient(70% 56% at 8% 82%, rgba(118,109,160,.16), rgba(118,109,160,0) 64%),
+    radial-gradient(64% 52% at 40% 40%, rgba(255,255,255,.85), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+html.clair-rose-plus #le-lieu,
+html.clair-rose-plus #prendre-part {
+  background:
+    radial-gradient(76% 62% at 90% 4%, rgba(163,113,106,.30), rgba(163,113,106,0) 62%),
+    radial-gradient(70% 58% at 4% 90%, rgba(118,109,160,.28), rgba(118,109,160,0) 64%),
+    radial-gradient(84% 68% at 22% 10%, rgba(186,255,228,.40), rgba(186,255,228,0) 60%),
+    var(--blanc);
+}
+html.clair-rose-plus .hero,
+html.clair-rose-plus #les-etapes {
+  background:
+    radial-gradient(78% 64% at 94% 10%, rgba(163,113,106,.32), rgba(163,113,106,0) 60%),
+    radial-gradient(74% 60% at 6% 84%, rgba(118,109,160,.30), rgba(118,109,160,0) 62%),
+    radial-gradient(62% 50% at 42% 42%, rgba(255,255,255,.9), rgba(255,255,255,0) 68%),
+    var(--violace);
 }
 
 /* ================================================================== */
@@ -634,16 +746,12 @@ h2 .marqueur::before {
   right: .17em;
   top: .3em;
   bottom: -.2em;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M3,2 L92,1 L97,29 L8,30 Z' fill='%23FFF3A8'/></svg>");
-}
-/* Essai d'angles, hors maquette. */
-html.biais-evase h2 .marqueur::before {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M8,2 L92,1 L98,29 L2,30 Z' fill='%23FFF3A8'/></svg>");
-}
-html.biais-gauche h2 .marqueur::before {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M9,2 L98,1 L92,29 L3,30 Z' fill='%23FFF3A8'/></svg>");
+  border-style: solid;
+  border-width: 0 20px;
+  border-image-source: var(--trace);
+  border-image-slice: 0 15 fill;
+  border-image-width: 0 20px;
+  border-image-repeat: stretch;
 }
 
 /* ---------- commutateur d'arbitrage, hors maquette ---------- */
@@ -865,7 +973,7 @@ html.biais-gauche h2 .marqueur::before {
           <img src="../assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
           <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
         </figure>
-        <p class="hero__phrase">La Maison Audacieuse&nbsp;: un lieu de vie pour prendre soin, créer du lien et <span class="marqueur">bousculer les inégalités de genre</span>.</p>
+        <p class="hero__phrase">La Maison Audacieuse&nbsp;: un lieu de vie pour prendre soin, créer du lien et <span class="marqueur marqueur--1">bousculer les inégalités de genre</span>.</p>
         <div class="hero__actions">
           <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
           <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
@@ -883,7 +991,7 @@ html.biais-gauche h2 .marqueur::before {
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
-            <p class="lieu__reponse"><span class="marqueur">Nous créons le lieu qui manque.</span> Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
+            <p class="lieu__reponse"><span class="marqueur marqueur--4">Nous créons le lieu qui manque.</span> Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
           </div>
         </div>
       </div>
@@ -910,7 +1018,7 @@ html.biais-gauche h2 .marqueur::before {
         <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
         <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
         <p>Le projet architectural préserve l'identité du lieu&nbsp;: ses murs en pierre et sa charpente d'origine. Tout en le modernisant pour le rendre plus accessible et performant.</p>
-        <p><span class="bail"><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span>&nbsp;: le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
+        <p><span class="bail"><span class="marqueur marqueur--3">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span>&nbsp;: le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
         <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
       </div>
       <figure class="apres">
@@ -997,7 +1105,7 @@ html.biais-gauche h2 .marqueur::before {
         <div class="pari__texte">
           <p>Rénover un bâtiment tel que celui-ci coûte extrêmement cher.</p>
           <p>Dans un projet classique, nous aurions ouvert le capital à de gros investisseurs, en échange de contreparties importantes.</p>
-          <p class="pari__fort">Pour servir l'intérêt général et garder ce lieu accessible, <span class="marqueur">nous faisons le pari inverse</span>&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
+          <p class="pari__fort">Pour servir l'intérêt général et garder ce lieu accessible, <span class="marqueur marqueur--2">nous faisons le pari inverse</span>&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
           <p><strong>Ici, personne ne s'enrichit</strong>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
           <p>Le pari est déjà lancé&nbsp;: plus de <strong>1 700 personnes</strong> ont signé la lettre de soutien, plus de <strong>650</strong> ont contribué financièrement. Aujourd'hui, chacune et chacun peut participer à la création de ce bien commun.</p>
         </div>
@@ -1010,7 +1118,7 @@ html.biais-gauche h2 .marqueur::before {
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="part__bloc">
-        <h2>Prendre <span class="marqueur">part</span> au projet</h2>
+        <h2>Prendre <span class="marqueur marqueur--5">part</span> au projet</h2>
         <p class="part__question">Vous partagez nos valeurs et vous avez envie de soutenir le projet&nbsp;?</p>
         <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse et copropriétaire du lieu avec nous.</p>
         <p class="part__texte">Chaque part sociale en appelle d'autres&nbsp;: plus nous sommes nombreux·ses, plus le projet a de poids.</p>
@@ -1029,14 +1137,15 @@ html.biais-gauche h2 .marqueur::before {
 </main>
 
 <div class="commut" role="group" aria-label="Essais en cours">
-  <span>BIAIS DU TITRE</span>
-  <button type="button" data-axe="biais" data-val="droite" aria-pressed="true">Droite</button>
-  <button type="button" data-axe="biais" data-val="evase" aria-pressed="false">Évasé</button>
-  <button type="button" data-axe="biais" data-val="gauche" aria-pressed="false">Gauche</button>
-  <span>FOND, ÉCRAN 5</span>
-  <button type="button" data-axe="fond" data-val="aplat" aria-pressed="true">Aplat</button>
-  <button type="button" data-axe="fond" data-val="grain" aria-pressed="false">Grain</button>
-  <button type="button" data-axe="fond" data-val="degrade" aria-pressed="false">Dégradé</button>
+  <span>FOND VIOLET</span>
+  <button type="button" data-axe="violet" data-val="aplat" aria-pressed="true">Aplat</button>
+  <button type="button" data-axe="violet" data-val="grain" aria-pressed="false">Grain</button>
+  <button type="button" data-axe="violet" data-val="nuages" aria-pressed="false">Nuages</button>
+  <button type="button" data-axe="violet" data-val="nuages-plus" aria-pressed="false">Nuages +</button>
+  <span>FONDS CLAIRS</span>
+  <button type="button" data-axe="clair" data-val="neutre" aria-pressed="true">Neutre</button>
+  <button type="button" data-axe="clair" data-val="rose" aria-pressed="false">Rosé</button>
+  <button type="button" data-axe="clair" data-val="rose-plus" aria-pressed="false">Rosé +</button>
 </div>
 
 <div class="barre-mobile">
@@ -1053,8 +1162,11 @@ html.biais-gauche h2 .marqueur::before {
   maj();
   window.addEventListener('scroll', maj, { passive: true });
 
-  var valeurs = { biais: ['droite', 'evase', 'gauche'], fond: ['aplat', 'grain', 'degrade'] };
-  var choix = { biais: 'droite', fond: 'aplat' };
+  var valeurs = {
+    violet: ['aplat', 'grain', 'nuages', 'nuages-plus'],
+    clair: ['neutre', 'rose', 'rose-plus']
+  };
+  var choix = { violet: 'aplat', clair: 'neutre' };
   Object.keys(valeurs).forEach(function (a) {
     var v = q.get(a);
     if (v && valeurs[a].indexOf(v) >= 0) { choix[a] = v; }
