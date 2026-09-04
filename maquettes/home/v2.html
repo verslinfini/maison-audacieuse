@@ -14,7 +14,7 @@
 /* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
 /* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
 /* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel,       */
-/* 4 les etapes du projet.                                             */
+/* 4 les etapes du projet, 5 le pari du bien commun.                   */
 /* ------------------------------------------------------------------ */
 
 :root {
@@ -523,6 +523,53 @@ html.etat-avant [data-compteur] { display: none; }
 
 .etapes__lien { margin-top: .5rem; text-align: center; }
 
+/* ================================================================== */
+/* Ecran 5, le pari du bien commun                                     */
+/* Le seul ecran sans image ni dispositif : la couleur fait tout le     */
+/* travail. Fond violet de marque, texte blanc, une seule zone chaude   */
+/* (le surlignage), et la chute detachee sous un filet.                 */
+/* ================================================================== */
+#le-pari {
+  position: relative;
+  background: var(--violet);
+  color: var(--blanc);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+}
+#le-pari > .contenu { position: relative; z-index: 1; width: 100%; }
+/* Sur un aplat colore, le grain doit texturer sans salir. */
+#le-pari > .grain__voile { opacity: .2; }
+#le-pari h2 { color: var(--blanc); max-width: 11ch; }
+.pari__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 4.2fr) minmax(0, 6.4fr);
+  gap: clamp(1.8rem, 3.4vw, 3.4rem);
+  align-items: start;
+}
+.pari__texte {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  font-size: clamp(1.05rem, 1.1vw, 1.14rem);
+  line-height: 1.58;
+}
+/* Blanc sur violet, 4,7:1 : les chiffres se detachent par la graisse, pas
+   par une couleur qui tomberait sous le seuil. */
+.pari__texte strong { font-weight: 700; }
+.pari__chute {
+  margin-top: clamp(1.6rem, 4vh, 2.8rem);
+  padding-top: clamp(1.3rem, 2.8vh, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, .34);
+  max-width: 41ch;
+  font-size: clamp(1.38rem, 2.05vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.28;
+}
+
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
   position: absolute;
@@ -547,6 +594,9 @@ html.etat-avant [data-compteur] { display: none; }
   .ferme__contenu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: start; }
   .apres { margin-left: 0; width: min(62%, 380px); }
   .jalon__texte { font-size: .86rem; }
+  .pari__grille { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  #le-pari h2 { max-width: 100%; }
+  .pari__chute { max-width: 100%; }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -601,6 +651,7 @@ html.etat-avant [data-compteur] { display: none; }
   .jalon--maintenant .jalon__bloc { width: auto; margin-right: 1rem; }
   .etapes__chute { text-align: left; margin-left: 0; }
   .etapes__lien { text-align: left; }
+  #le-pari { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -657,16 +708,16 @@ html.etat-avant [data-compteur] { display: none; }
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier">prochain palier : 1 700</span>
+            <span class="jauge__palier">prochain palier&nbsp;: 1 700</span>
           </p>
         </div>
       </div>
       <div class="hero__colonne">
         <figure class="figure">
-          <img src="../assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové : la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
+          <img src="../assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
           <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
         </figure>
-        <p class="hero__phrase">La Maison Audacieuse : un lieu de vie pour prendre soin, créer du lien et <span class="marqueur">bousculer les inégalités de genre</span>.</p>
+        <p class="hero__phrase">La Maison Audacieuse&nbsp;: un lieu de vie pour prendre soin, créer du lien et <span class="marqueur">bousculer les inégalités de genre</span>.</p>
         <div class="hero__actions">
           <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
           <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
@@ -701,21 +752,21 @@ html.etat-avant [data-compteur] { display: none; }
     </div>
   </section>
 
-  <!-- Ecran 3, renover un lieu emblematique : la Ferme de Novel -->
+  <!-- Ecran 3, renover un lieu emblematique&nbsp;: la Ferme de Novel -->
   <section id="la-ferme">
-    <img class="ferme__fond" src="../assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui : un long corps de ferme en pierre sous un large toit de tuiles, en bord de rue" width="1368" height="857">
+    <img class="ferme__fond" src="../assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui&nbsp;: un long corps de ferme en pierre sous un large toit de tuiles, en bord de rue" width="1368" height="857">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu ferme__contenu">
       <div class="panneau">
-        <h2>Rénover un lieu emblématique : la&nbsp;Ferme de&nbsp;Novel</h2>
+        <h2>Rénover un lieu emblématique&nbsp;: la&nbsp;Ferme de&nbsp;Novel</h2>
         <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
         <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
-        <p>Le projet architectural préserve l'identité du lieu : ses murs en pierre et sa charpente d'origine. Tout en le modernisant pour le rendre plus accessible et performant.</p>
-        <p><span class="bail"><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span> : le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
+        <p>Le projet architectural préserve l'identité du lieu&nbsp;: ses murs en pierre et sa charpente d'origine. Tout en le modernisant pour le rendre plus accessible et performant.</p>
+        <p><span class="bail"><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span>&nbsp;: le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
         <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
       </div>
       <figure class="apres">
-        <img src="../assets/img/visuel-dauphine-1.jpg" alt="Le même bâtiment une fois rénové, vu par l'architecte : façades claires, toit neuf, cour plantée" width="900" height="563">
+        <img src="../assets/img/visuel-dauphine-1.jpg" alt="Le même bâtiment une fois rénové, vu par l'architecte&nbsp;: façades claires, toit neuf, cour plantée" width="900" height="563">
         <div class="apres__pied">
           <span class="apres__mot">demain</span>
           <figcaption>© Basa Architecture</figcaption>
@@ -783,6 +834,24 @@ html.etat-avant [data-compteur] { display: none; }
       </ol>
       <p class="etapes__chute">Le don a lancé les études. <strong>La part sociale nous rassemble.</strong></p>
       <p class="etapes__lien"><a class="lien-texte" href="#les-etapes" title="Page « Prochaines étapes et modèle économique » à créer">Prochaines étapes et modèle économique</a></p>
+    </div>
+  </section>
+
+  <!-- Ecran 5, le pari du bien commun -->
+  <section id="le-pari">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="pari__grille">
+        <h2>Le pari du bien commun</h2>
+        <div class="pari__texte">
+          <p>Rénover un bâtiment tel que celui-ci coûte extrêmement cher.</p>
+          <p>Dans un projet classique, nous aurions ouvert le capital à de gros investisseurs, en échange de contreparties importantes.</p>
+          <p>Pour servir l'intérêt général et garder ce lieu accessible, nous faisons le pari inverse&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
+          <p><span class="marqueur">Ici, personne ne s'enrichit</span>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
+          <p>Le pari est déjà lancé&nbsp;: plus de <strong>1 700 personnes</strong> ont signé la lettre de soutien, plus de <strong>650</strong> ont contribué financièrement. Aujourd'hui, chacune et chacun peut participer à la création de ce bien commun.</p>
+        </div>
+      </div>
+      <p class="pari__chute">Face au repli et à l'isolement, construisons ensemble ce dont notre société a réellement besoin.</p>
     </div>
   </section>
 </main>
