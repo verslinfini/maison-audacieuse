@@ -441,7 +441,7 @@ html.etat-avant [data-compteur] { display: none; }
   transform: rotate(4deg);
 }
 .apres img { border-radius: 1px; }
-.apres__pied { display: flex; align-items: flex-end; justify-content: space-between; gap: .8rem; padding: 0 .15rem .5rem; }
+.apres__pied { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: .4rem .8rem; padding: 0 .15rem .5rem; }
 .apres__mot {
   font-family: "Meow Script", "Onest", cursive;
   font-size: clamp(2.1rem, 2.9vw, 3.1rem);
@@ -926,6 +926,16 @@ h2 .marqueur::before {
   font: 400 .93rem/1 "Onest", system-ui, sans-serif;
 }
 .infolettre input::placeholder { color: #8a889c; }
+/* Sous 340 px le champ et le bouton ne tiennent plus cote a cote. Un
+   flex-grow reglerait l'etirement sans seuil a caler, mais il deplace le
+   bouton d'une fraction de pixel sur les larges : seuil explicite. */
+@media (max-width: 359px) {
+  .infolettre { flex-direction: column; }
+  .infolettre .bouton--contour { width: 100%; }
+  /* En colonne, la taille par defaut d'un input (20 caracteres) l'emporte
+     sur l'etirement : a police agrandie il sortait de l'encart. */
+  .infolettre input { width: 100%; }
+}
 .porte .lien-texte { margin-top: auto; }
 /* Meme violet que le soulignement des liens texte : le trait de bordure
    et le trait sous les liens sont le meme geste. Le libelle reste en
@@ -970,7 +980,7 @@ h2 .marqueur::before {
    fond sombre, on le blanchit au filtre plutot que d'ajouter un fichier. */
 .pied__logo img { width: clamp(150px, 13vw, 196px); height: auto; filter: brightness(0) invert(1); }
 .pied__phrase { margin-top: 1rem; max-width: 32ch; line-height: 1.55; }
-.pied__reseaux { display: flex; gap: 1.1rem; margin-top: 1.1rem; }
+.pied__reseaux { display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; margin-top: 1.1rem; }
 .pied__reseaux a { color: rgba(255,255,255,.86); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.34); padding-bottom: 2px; }
 .pied__reseaux a:hover { color: var(--blanc); border-bottom-color: var(--blanc); }
 .pied__titre { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; color: var(--jaune); margin-bottom: .7rem; }
@@ -1009,8 +1019,24 @@ h2 .marqueur::before {
   box-shadow: 0 6px 18px rgba(56,54,72,.3);
   pointer-events: none;
 }
-@media (max-width: 767px) {
-  .ruban { bottom: calc(66px + env(safe-area-inset-bottom, 0px)); right: .7rem; font-size: .62rem; }
+/* Ecran court aussi : en paysage sur telephone, le flottant retombe sur le
+   contenu comme en portrait. */
+@media (max-width: 767px), (max-height: 520px) {
+  /* Flottant, il tombait sur la jauge et masquait le libelle du palier. Un
+     element fixe masque toujours quelque chose : celui-ci sort du fixe et
+     se pose dans les 32 px de vide qui separent l'entete du sur-titre. */
+  .ruban {
+    position: absolute;
+    top: var(--h-entete);
+    left: 0;
+    right: 0;
+    bottom: auto;
+    padding: .34rem var(--marge);
+    border-radius: 0;
+    box-shadow: none;
+    font-size: .6rem;
+    letter-spacing: .07em;
+  }
 }
 
 /* Le libelle du champ existe pour les lecteurs d'ecran, pas a l'ecran. */
@@ -1057,6 +1083,9 @@ h2 .marqueur::before {
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
+  /* Sans cette reserve, un element atteint au clavier ou par une ancre
+     s arrete pile sous la barre du bas et reste invisible. */
+  html { scroll-padding-bottom: 86px; }
   .nav, .entete__cta { display: none; }
   .menu-bouton { display: inline-flex; }
   .barre-mobile { display: block; padding: .5rem var(--marge) calc(.5rem + env(safe-area-inset-bottom, 0px)); }
@@ -1092,10 +1121,24 @@ h2 .marqueur::before {
   #les-etapes { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
   #les-etapes h2 { text-align: left; }
   .frise { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; padding-left: 1.75rem; }
-  .frise::before, .frise::after { top: 0; bottom: 0; left: 7px; width: 0; height: auto; border-top: 0; border-left: 2px solid var(--vert); }
-  .frise::before { height: 64.3%; }
-  .frise::after { top: 64.3%; height: auto; border-left-style: dashed; }
+  /* Deux traits calibres en pourcentage de la frise placaient la cesure a
+     64,3 % quand le gros point tombe a 73,1 % : le pointille commencait
+     128 px avant « maintenant ». Chaque jalon porte desormais son propre
+     segment, la cesure suit le point quelle que soit la longueur des textes. */
+  .frise::before, .frise::after { display: none; }
   .jalon { min-height: 0; padding: 0 0 1.5rem; }
+  .jalon::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem + 6.5px);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 2px solid var(--vert);
+  }
+  /* Le trait part du premier point, pas du bord haut du premier jalon. */
+  .jalon:first-child::before { top: calc(.45rem + 7px); }
+  .jalon--maintenant::before, .jalon--maintenant ~ .jalon::before { border-left-style: dashed; }
   .jalon__point { top: .45rem; left: -1.75rem; margin: 0; }
   .jalon--maintenant .jalon__point { left: calc(-1.75rem - 2px); top: .3rem; }
   .jalon__bloc, .jalon:nth-child(odd) .jalon__bloc, .jalon:nth-child(even) .jalon__bloc,
@@ -1131,8 +1174,107 @@ h2 .marqueur::before {
 
   .part__bloc { align-items: flex-start; }
   .equations { justify-content: flex-start; }
-  .part__actions { justify-content: flex-start; }
+  /* align-items: center du large centrait le lien sous un bouton etire :
+     seul element de l ecran a ne pas partir du bord gauche. */
+  .part__actions { justify-content: flex-start; align-items: flex-start; }
   .part__actions .bouton { width: 100%; }
+
+  /* ---------- passe telephone du 05/09 ---------- */
+  /* Le heros etait une grille alignee sur la fin ; passe en colonne, ce
+     align-items poussait le sur-titre et la photo contre le bord droit,
+     seuls contre un texte cale a gauche. */
+  .hero__contenu { align-items: stretch; }
+  .hero__actions { gap: 1rem 1.7rem; }
+  /* Le CTA principal prend la largeur : c'est la cible du pouce, et les
+     six autres boutons de la page la prennent deja. */
+  .hero__actions .bouton { width: 100%; }
+
+  /* Deux colonnes de 145 px hachaient l'inventaire, un mot par ligne. Le
+     nom passe dans la ligne : chaque usage redevient une phrase. */
+  .niveaux { grid-template-columns: minmax(0, 1fr); gap: .95rem; }
+  .niveaux .nom-structure {
+    display: inline;
+    margin: 0 .45rem 0 0;
+    font-size: .82rem;
+    white-space: normal;
+  }
+
+  /* Le credit legende la photo du haut : il la suit, au lieu d'atterrir
+     sous la vignette du projet renove, qui n'est pas la meme image. */
+  #la-ferme { display: flex; flex-direction: column; align-items: stretch; }
+  .ferme__fond { order: 1; margin-bottom: 0; }
+  /* Sorti de la photo, le credit n'a plus besoin de sa pastille : le fond
+     de la section fait deja le contraste. */
+  .ferme__credit { order: 2; margin: .6rem 0 1.3rem var(--marge); padding: 0; background: none; }
+  .ferme__contenu { order: 3; }
+  /* 4 degres sur 300 px de large sortent la vignette de la marge. */
+  .apres { transform: rotate(2.5deg); }
+
+  /* La marge negative du gros point venait du large, ou elle le centrait
+     sur un trait horizontal ; a la verticale elle le decalait de 9 px. */
+  .jalon--maintenant .jalon__point { margin: 0; }
+
+  /* Le grand vide sous le titre servait a poser l'accroche en bas de la
+     colonne de gauche. Sans colonne, c'est un trou. */
+  .pari__chute { margin-top: 1.5rem; }
+
+  /* Empilees, deux pastilles de largeurs differentes se lisent comme un
+     defaut d'alignement. */
+  .equations li { width: 100%; }
+  .part__actions { align-self: stretch; }
+  /* Coupes dictees pour le large : a 375 px elles laissent un mot seul. */
+  br.coupe-large { display: none; }
+
+  /* 13vh d'air avant les gestes disaient le changement de registre sur un
+     ecran large ; en lecture verticale, le defilement le dit deja. */
+  .gestes { margin-top: 2.6rem; row-gap: 1.7rem; }
+  /* 1vw ne vaut plus rien a 375 px : le chiffre venait toucher le titre. */
+  .geste h3 { gap: .7rem; }
+  .geste--cta { margin-top: .9rem; }
+  .portes { margin-top: 3.2rem; gap: .85rem; }
+
+  /* Legendes et credits tombaient a 10,9 px, sous le confort de lecture d'un
+     ecran tenu a bout de bras. Le rapport a leur texte d'appui est conserve. */
+  .figure figcaption { font-size: .78rem; }
+  .apres figcaption, .ferme__credit { font-size: .76rem; }
+
+  /* Taille de police systeme agrandie (courante sur Android, et le beguinage
+     s'adresse a des femmes de 65 ans et plus) : a 150 %, le mot manuscrit et
+     la legende sortaient de la jauge et se faisaient couper par l'overflow de
+     la section. Ils peuvent desormais passer a la ligne. */
+  .jauge { flex-wrap: wrap; justify-content: flex-start; }
+  .jauge__deja { margin-right: 0; }
+  .jauge__legende { flex: 1 1 9rem; min-width: 0; }
+  /* Meme cause : justify-items: start dimensionne le panneau sur son contenu,
+     sans plafond. */
+  .panneau { max-width: 100%; }
+
+  /* Les nappes sont dimensionnees en pourcentage de la section. Sur un ecran
+     etroit, la meme section fait trois fois la hauteur : la nappe verte
+     descendait sur tout l'inventaire et lui coutait 0,46 point de contraste,
+     la lavande 1,3 point a la frise. On les rend au format. */
+  #le-lieu {
+    background:
+      radial-gradient(66% 24% at 96% 2%, rgba(163,113,106,.34), rgba(163,113,106,0) 62%),
+      radial-gradient(72% 24% at 2% 97%, rgba(94,158,133,.21), rgba(94,158,133,0) 64%),
+      radial-gradient(54% 18% at 92% 99%, rgba(255,243,168,.42), rgba(255,243,168,0) 66%),
+      var(--blanc);
+  }
+  #les-etapes {
+    background:
+      radial-gradient(64% 22% at 98% 4%, rgba(157,150,105,.32), rgba(157,150,105,0) 62%),
+      radial-gradient(70% 24% at 2% 96%, rgba(118,109,160,.26), rgba(118,109,160,0) 64%),
+      radial-gradient(96% 46% at 46% 46%, rgba(255,255,255,.94), rgba(255,255,255,0) 74%),
+      var(--violace);
+  }
+
+  /* Cibles du pouce : 25 px de haut, c'est la moitie de ce qu'il faut. */
+  .pied__liste { gap: 0; }
+  .pied__liste a { padding: .68rem 0; }
+  .pied__reseaux { gap: 1.5rem; }
+  .pied__reseaux a { position: relative; }
+  .pied__reseaux a::after { content: ""; position: absolute; inset: -9px -7px; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -1347,8 +1489,8 @@ h2 .marqueur::before {
     <div class="contenu">
       <div class="part__bloc">
         <h2>Prendre part au projet</h2>
-        <p class="part__question">Vous partagez nos valeurs<br>et vous avez envie de soutenir le projet&nbsp;?</p>
-        <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse<br>et copropriétaire du lieu avec nous.</p>
+        <p class="part__question">Vous partagez nos valeurs <br class="coupe-large">et vous avez envie de soutenir le projet&nbsp;?</p>
+        <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse <br class="coupe-large">et copropriétaire du lieu avec nous.</p>
         <p class="part__texte part__texte--pivot">Chaque part sociale en appelle d'autres.<br><span class="marqueur marqueur--5">Plus nous sommes nombreux·ses, plus le projet a de poids.</span></p>
         <ul class="equations">
           <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b><small>une seule suffit, on peut en prendre plusieurs</small></li>
@@ -1446,7 +1588,7 @@ h2 .marqueur::before {
   </div>
 </footer>
 
-<p class="ruban" title="Maquette de travail : chiffres d'exemple, aucune mise en ligne décidée.">Maquette · chiffres d'exemple</p>
+<p class="ruban" title="Maquette de travail : chiffres d'exemple, aucune mise en ligne décidée.">Maquette<span class="ruban__suite"> · chiffres d'exemple</span></p>
 
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
@@ -1465,20 +1607,55 @@ h2 .marqueur::before {
 
 
   var barre = document.querySelector('.barre-mobile');
-  var boutonsFlux = document.querySelectorAll('main .bouton--primaire');
-  if (barre && boutonsFlux.length && 'IntersectionObserver' in window) {
-    // Un compteur incremental partirait dans le negatif : a l'attachement,
-    // l'observateur emet une entree « hors ecran » par cible.
-    var vus = [];
-    var oeil = new IntersectionObserver(function (entrees) {
-      entrees.forEach(function (e) {
-        var i = vus.indexOf(e.target);
-        if (e.isIntersecting && i < 0) { vus.push(e.target); }
-        if (!e.isIntersecting && i >= 0) { vus.splice(i, 1); }
+  var boutonsFlux = [].slice.call(document.querySelectorAll('main .bouton--primaire'));
+  if (barre && boutonsFlux.length) {
+    // Un seuil de visibilite ne suffisait pas : le bouton du heros tombe pile
+    // sous la barre sur un ecran de 812 px, visible a 37 %, donc compte comme
+    // absent, et on voyait deux boutons empiles. On compare les positions.
+    // Un bouton du flux emerge au-dessus de la barre  -> la barre s'efface.
+    // Il est encore coince derriere elle              -> lui qui s'efface.
+    // Dans tous les cas un seul bouton a l'ecran, toujours au meme endroit.
+    var enAttente = false;
+    // display:none ne discrimine pas : la barre est masquee aussi bien parce
+    // qu'on est sur un large que parce qu'elle s'est effacee elle-meme. Le
+    // media query dit lequel des deux.
+    var regimeTelephone = window.matchMedia('(max-width: 767px)');
+    var majBarre = function () {
+      enAttente = false;
+      if (!regimeTelephone.matches) {
+        boutonsFlux.forEach(function (b) { b.style.visibility = ''; });
+        barre.dataset.double = 'non';
+        return;
+      }
+      var bas = window.innerHeight;
+      var hautBarre = bas - (barre.offsetHeight || 66);
+      var libre = false, caches = [];
+      boutonsFlux.forEach(function (b) {
+        var r = b.getBoundingClientRect();
+        if (r.bottom <= 0 || r.top >= bas) { return; }
+        if (r.bottom > hautBarre) { caches.push(b); } else { libre = true; }
       });
-      barre.dataset.double = vus.length ? 'oui' : 'non';
-    }, { threshold: .6 });
-    Array.prototype.forEach.call(boutonsFlux, function (e) { oeil.observe(e); });
+      barre.dataset.double = libre ? 'oui' : 'non';
+      boutonsFlux.forEach(function (b) {
+        b.style.visibility = (!libre && caches.indexOf(b) >= 0) ? 'hidden' : '';
+      });
+    };
+    var planifier = function () {
+      if (enAttente) { return; }
+      enAttente = true;
+      requestAnimationFrame(majBarre);
+    };
+    majBarre();
+    window.addEventListener('scroll', planifier, { passive: true });
+    window.addEventListener('resize', planifier);
+    window.addEventListener('orientationchange', planifier);
+    if (regimeTelephone.addEventListener) { regimeTelephone.addEventListener('change', planifier); }
+    // Un seul calcul au chargement du script ne suffit pas : les polices web
+    // et la photo du heros deplacent encore le bouton apres coup, et sans
+    // defilement rien ne redeclenche le calcul. On suit la hauteur reelle.
+    window.addEventListener('load', planifier);
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(planifier); }
+    if ('ResizeObserver' in window) { new ResizeObserver(planifier).observe(document.body); }
   }
 
   var infolettre = document.getElementById('infolettre');
