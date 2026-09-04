@@ -561,14 +561,14 @@ html.etat-avant [data-compteur] { display: none; }
    par une couleur qui tomberait sous le seuil. */
 .pari__texte strong { font-weight: 700; }
 .pari__chute {
-  margin-top: clamp(1.6rem, 4vh, 2.8rem);
-  padding-top: clamp(1.3rem, 2.8vh, 2rem);
-  border-top: 1px solid rgba(255, 255, 255, .34);
-  max-width: 41ch;
-  font-size: clamp(1.38rem, 2.05vw, 2.1rem);
+  margin-top: clamp(1.3rem, 3.2vh, 2.3rem);
+  max-width: 27ch;
+  font-size: clamp(1.1rem, 1.45vw, 1.45rem);
   font-weight: 500;
-  line-height: 1.28;
+  line-height: 1.36;
 }
+/* Le paragraphe pivot : tout en gras, le retournement seul surligne. */
+.pari__fort { font-weight: 700; }
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
@@ -842,16 +842,18 @@ html.etat-avant [data-compteur] { display: none; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="pari__grille">
-        <h2>Le pari du bien commun</h2>
+        <div class="pari__gauche">
+          <h2>Le pari du bien commun</h2>
+          <p class="pari__chute">Face au repli et à l'isolement, construisons ensemble ce dont notre société a réellement besoin.</p>
+        </div>
         <div class="pari__texte">
           <p>Rénover un bâtiment tel que celui-ci coûte extrêmement cher.</p>
           <p>Dans un projet classique, nous aurions ouvert le capital à de gros investisseurs, en échange de contreparties importantes.</p>
-          <p>Pour servir l'intérêt général et garder ce lieu accessible, nous faisons le pari inverse&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
-          <p><span class="marqueur">Ici, personne ne s'enrichit</span>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
+          <p class="pari__fort">Pour servir l'intérêt général et garder ce lieu accessible, <span class="marqueur">nous faisons le pari inverse</span>&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
+          <p><strong class="marqueur">Ici, personne ne s'enrichit</strong>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
           <p>Le pari est déjà lancé&nbsp;: plus de <strong>1 700 personnes</strong> ont signé la lettre de soutien, plus de <strong>650</strong> ont contribué financièrement. Aujourd'hui, chacune et chacun peut participer à la création de ce bien commun.</p>
         </div>
       </div>
-      <p class="pari__chute">Face au repli et à l'isolement, construisons ensemble ce dont notre société a réellement besoin.</p>
     </div>
   </section>
 </main>
