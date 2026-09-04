@@ -834,16 +834,20 @@ h2 .marqueur::before {
    au violet le detachement qui lui manque sans changer sa couleur. */
 #agir .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 #agir .bouton--primaire:hover { background: #FFEB7E; }
-html.cta-vert #agir .bouton--primaire { background: var(--vert); color: var(--violet-sombre); }
-html.cta-vert #agir .bouton--primaire:hover { background: #6FAF95; }
+/* Le meme jaune, laisse transparent : le terracotta remonte a travers et
+   l'eteint. Le violet sombre y tient encore 8,1:1. */
+html.cta-jaune-doux #agir .bouton--primaire { background: rgba(255,243,168,.82); color: var(--violet-sombre); }
+html.cta-jaune-doux #agir .bouton--primaire:hover { background: rgba(255,243,168,.95); }
 html.cta-violet #agir .bouton--primaire { background: var(--violet); color: var(--blanc); }
 html.cta-violet #agir .bouton--primaire:hover { background: #6A6294; }
-html.cta-contour #agir .bouton--primaire {
+/* Pas un cerne mais une lueur : elle decolle le bouton du fond sans lui
+   dessiner de bord. */
+html.cta-halo #agir .bouton--primaire {
   background: var(--violet);
   color: var(--blanc);
-  box-shadow: 0 0 0 3px var(--blanc);
+  box-shadow: 0 0 16px 2px rgba(255,255,255,.38);
 }
-html.cta-contour #agir .bouton--primaire:hover { background: #6A6294; }
+html.cta-halo #agir .bouton--primaire:hover { background: #6A6294; box-shadow: 0 0 20px 3px rgba(255,255,255,.46); }
 
 /* ---- les gestes et les fleches ---- */
 .gestes {
@@ -872,25 +876,21 @@ html.agir-ligne .fleche--b .fleche__z { display: none; }
 /* Disposition en Z : quatre cases, l'oeil fait le parcours qu'il ferait
    de toute facon, la fleche du milieu ramene a la ligne. */
 html.agir-z .gestes {
-  /* Colonnes etroites et ramenees vers l'axe : le Z se lit d'un coup d'oeil
-     quand ses quatre coins sont proches, pas quand ils touchent les bords. */
-  grid-template-columns: minmax(0, 33%) auto minmax(0, 33%);
+  /* Quatre cases, rien entre elles : le parcours de l'oeil suffit, les
+     fleches ne faisaient que redire ce que la disposition dit deja. */
+  grid-template-columns: minmax(0, 36%) minmax(0, 36%);
   justify-content: center;
   grid-template-areas:
-    "g1 fa g2"
-    "fb fb fb"
-    "g3 fc g4";
-  column-gap: clamp(.7rem, 1.5vw, 1.4rem);
-  row-gap: clamp(.2rem, .6vh, .5rem);
+    "g1 g2"
+    "g3 g4";
+  column-gap: clamp(1.6rem, 5vw, 5rem);
+  row-gap: clamp(1.6rem, 4vh, 3rem);
 }
+html.agir-z .fleche { display: none; }
 html.agir-z .geste--1 { grid-area: g1; }
-html.agir-z .fleche--a { grid-area: fa; }
 html.agir-z .geste--2 { grid-area: g2; }
-html.agir-z .fleche--b { grid-area: fb; }
 html.agir-z .geste--3 { grid-area: g3; }
-html.agir-z .fleche--c { grid-area: fc; }
-html.agir-z .geste--cta { grid-area: g4; justify-self: start; }
-html.agir-z .fleche--b .fleche__ligne { display: none; }
+html.agir-z .geste--cta { grid-area: g4; justify-self: center; align-self: center; }
 
 .geste h3 {
   font-size: clamp(1.05rem, 1.2vw, 1.2rem);
@@ -920,8 +920,6 @@ html.agir-z .fleche--b .fleche__ligne { display: none; }
 .fleche--a { width: clamp(40px, 4.4vw, 62px); }
 .fleche--b { width: clamp(54px, 6.2vw, 88px); }
 .fleche--c { width: clamp(46px, 5.2vw, 74px); }
-html.agir-z .fleche--a, html.agir-z .fleche--c { width: clamp(58px, 6.6vw, 96px); }
-html.agir-z .fleche--b { width: clamp(92px, 10.5vw, 146px); justify-self: center; }
 
 /* ---- les deux encarts du bas ---- */
 .portes {
@@ -1391,9 +1389,9 @@ html.agir-z .fleche--b { width: clamp(92px, 10.5vw, 146px); justify-self: center
   <button type="button" data-axe="agir" data-val="z" aria-pressed="false">En Z</button>
   <span>BOUTON, ÉCRAN 7</span>
   <button type="button" data-axe="cta" data-val="jaune" aria-pressed="true">Jaune</button>
-  <button type="button" data-axe="cta" data-val="vert" aria-pressed="false">Vert</button>
+  <button type="button" data-axe="cta" data-val="jaune-doux" aria-pressed="false">Jaune passé</button>
   <button type="button" data-axe="cta" data-val="violet" aria-pressed="false">Violet</button>
-  <button type="button" data-axe="cta" data-val="contour" aria-pressed="false">Violet cerné</button>
+  <button type="button" data-axe="cta" data-val="halo" aria-pressed="false">Violet halo</button>
 </div>
 
 <div class="barre-mobile">
@@ -1411,7 +1409,7 @@ html.agir-z .fleche--b { width: clamp(92px, 10.5vw, 146px); justify-self: center
   window.addEventListener('scroll', maj, { passive: true });
 
 
-  var valeurs = { agir: ['ligne', 'z'], cta: ['jaune', 'vert', 'violet', 'contour'] };
+  var valeurs = { agir: ['ligne', 'z'], cta: ['jaune', 'jaune-doux', 'violet', 'halo'] };
   var choix = { agir: 'ligne', cta: 'jaune' };
   Object.keys(valeurs).forEach(function (a) {
     var v = q.get(a);
