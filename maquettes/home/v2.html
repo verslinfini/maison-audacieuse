@@ -320,7 +320,7 @@ html.etat-avant [data-compteur] { display: none; }
 .usages {
   margin-top: clamp(1.8rem, 4vh, 3.2rem);
   padding-top: clamp(1.4rem, 3vh, 2.2rem);
-  border-top: 2px solid var(--vert);
+  border-top: 1px solid rgba(56, 54, 72, .14);
 }
 .niveaux {
   display: grid;
@@ -344,14 +344,19 @@ html.etat-avant [data-compteur] { display: none; }
   margin-bottom: .7rem;
 }
 html.noms-verts .nom-structure { color: var(--vert); }
+html.noms-violets .nom-structure { color: var(--violet); }
 .niveaux .nom-structure {
   display: block;
-  font-size: .78rem;
+  font-size: .82rem;
   font-weight: 700;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--violet);
-  margin-bottom: .45rem;
+  color: var(--terracotta);
+  line-height: 1.25;
+  /* Deux lignes reservees : les paragraphes demarrent tous a la meme hauteur,
+     que le nom tienne sur une ligne ou deux. */
+  min-height: 2.5em;
+  margin-bottom: .35rem;
 }
 /* Variante logos : la vignette remplace le tiret vert. */
 html.usages-logos .niveaux li { padding-top: 0; }
@@ -509,6 +514,7 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   if (q.get('etat') === 'avant') { document.documentElement.className += ' etat-avant'; }
   if (q.get('u') === 'logos') { document.documentElement.className += ' usages-logos'; }
   if (q.get('v') === 'vert') { document.documentElement.className += ' noms-verts'; }
+  if (q.get('v') === 'violet') { document.documentElement.className += ' noms-violets'; }
   var entete = document.getElementById('entete');
   var seuil = 120;
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
