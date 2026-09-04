@@ -389,16 +389,19 @@ html.etat-avant [data-compteur] { display: none; }
   position: relative;
   z-index: 3;
   width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .82fr);
-  align-items: end;
+  max-width: 1400px;
+  padding: 0 clamp(1rem, 2.2vw, 2rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
 }
 .panneau {
   background: var(--blanc);
   padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.35rem, 2.3vw, 2.3rem);
   border-radius: 3px;
   box-shadow: 0 26px 60px rgba(56, 54, 72, .34);
-  max-width: 615px;
+  flex: 0 1 615px;
   display: flex;
   flex-direction: column;
   gap: .8rem;
@@ -409,9 +412,10 @@ html.etat-avant [data-compteur] { display: none; }
 /* La vignette du projet renove, posee a cheval sur le panneau. */
 .apres {
   position: relative;
-  width: min(100%, 424px);
-  margin: 0 0 clamp(1rem, 3.4vh, 2.6rem) clamp(-3.4rem, -2.6vw, -1.4rem);
-  padding: 10px 10px 0;
+  flex: 0 0 auto;
+  width: min(42%, 272px);
+  margin: 0 0 clamp(1rem, 3.4vh, 2.6rem);
+  padding: 9px 9px 0;
   background: var(--blanc);
   border-radius: 3px;
   box-shadow: 0 20px 44px rgba(56, 54, 72, .38);
@@ -451,8 +455,8 @@ html.etat-avant [data-compteur] { display: none; }
   .hero__phrase { max-width: 46ch; }
   .lieu__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   .niveaux { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
-  .ferme__contenu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: start; }
-  .apres { margin-left: 0; width: min(62%, 380px); }
+  .ferme__contenu { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+  .apres { width: min(52%, 250px); }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -485,7 +489,7 @@ html.etat-avant [data-compteur] { display: none; }
   .ferme__fond { position: relative; height: clamp(190px, 32vh, 260px); margin-bottom: 1.3rem; }
   .ferme__voile { display: none; }
   .panneau { padding: 1.25rem 1.15rem; }
-  .apres { width: min(74%, 300px); margin-bottom: 0; }
+  .apres { width: min(58%, 210px); margin-bottom: 0; }
   .ferme__credit { position: static; display: inline-block; margin: .9rem 0 0 var(--marge); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -598,14 +602,14 @@ html.etat-avant [data-compteur] { display: none; }
         <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
         <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
         <p>Le projet architectural préserve l'identité du lieu, ses murs en pierre, sa charpente d'origine. Et le modernise, de l'accessibilité à la performance énergétique.</p>
-        <p>La Ville d'Annecy nous confie le bâtiment pour 99 ans : le foncier ne nous coûte rien, <span class="marqueur">chaque euro finance la rénovation</span>. L'ensemble du projet est estimé à 3,2 millions d'euros.</p>
+        <p><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span> : le foncier ne nous coûte rien, chaque euro finance la rénovation. L'ensemble du projet est estimé à 3,2 millions d'euros.</p>
         <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
       </div>
       <figure class="apres">
-        <img src="../assets/img/visuel-dauphine-1.jpg" alt="Le même bâtiment une fois rénové, vu par l'architecte : façades claires, toit neuf, cour plantée" width="900" height="563">
+        <img src="../assets/img/dessin.jpg" alt="Croquis du projet : la rue intérieure vitrée, ses coursives plantées, des tables en bas et des personnes qui s'y croisent" width="747" height="1107">
         <div class="apres__pied">
           <span class="apres__mot">demain</span>
-          <figcaption>© Basa Architecture</figcaption>
+          <figcaption>Croquis du projet</figcaption>
         </div>
       </figure>
     </div>
