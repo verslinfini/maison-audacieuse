@@ -42,6 +42,7 @@
   --t-petit: .875rem;
 
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+  --grain-couleur: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23c)'/></svg>");
 }
 
 * { box-sizing: border-box; }
@@ -581,6 +582,20 @@ html.etat-avant [data-compteur] { display: none; }
 /* Sur cet aplat, seul le blanc tient : l'ocre tombe a 1,09:1 et le vert a
    1,42:1, les trois couleurs ont la meme luminosite. Essai clos le 04/09. */
 
+/* Essai de fond, ecran 5. « grain » ajoute le bruit colore de la charte sur
+   l'aplat ; « degrade » y ajoute la descente vers le violet sombre puis le
+   kaki, le kaki cantonne au coin bas droit, loin du texte. */
+html.fond-grain #le-pari > .grain__voile,
+html.fond-degrade #le-pari > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .5;
+  mix-blend-mode: overlay;
+}
+html.fond-degrade #le-pari {
+  background: linear-gradient(158deg, var(--violet) 0%, var(--violet) 34%, #5b5578 66%, var(--violet-sombre) 88%, var(--kaki) 100%);
+}
+
 /* ================================================================== */
 /* Ecran 6, prendre part au projet                                     */
 /* L'ecran de conversion. Composition centree et fond blanc : tout      */
@@ -615,10 +630,10 @@ h2 .marqueur::before {
   content: "";
   position: absolute;
   z-index: -1;
-  left: -.26em;
-  right: .1em;
-  top: .16em;
-  bottom: -.14em;
+  left: -.3em;
+  right: .17em;
+  top: .3em;
+  bottom: -.2em;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M3,2 L92,1 L97,29 L8,30 Z' fill='%23FFF3A8'/></svg>");
@@ -1013,11 +1028,15 @@ html.biais-gauche h2 .marqueur::before {
   </section>
 </main>
 
-<div class="commut" role="group" aria-label="Essai de biais, titre de l'écran 6">
+<div class="commut" role="group" aria-label="Essais en cours">
   <span>BIAIS DU TITRE</span>
-  <button type="button" data-val="droite" aria-pressed="true">Les deux à droite</button>
-  <button type="button" data-val="evase" aria-pressed="false">Évasé</button>
-  <button type="button" data-val="gauche" aria-pressed="false">Les deux à gauche</button>
+  <button type="button" data-axe="biais" data-val="droite" aria-pressed="true">Droite</button>
+  <button type="button" data-axe="biais" data-val="evase" aria-pressed="false">Évasé</button>
+  <button type="button" data-axe="biais" data-val="gauche" aria-pressed="false">Gauche</button>
+  <span>FOND, ÉCRAN 5</span>
+  <button type="button" data-axe="fond" data-val="aplat" aria-pressed="true">Aplat</button>
+  <button type="button" data-axe="fond" data-val="grain" aria-pressed="false">Grain</button>
+  <button type="button" data-axe="fond" data-val="degrade" aria-pressed="false">Dégradé</button>
 </div>
 
 <div class="barre-mobile">
@@ -1034,20 +1053,26 @@ html.biais-gauche h2 .marqueur::before {
   maj();
   window.addEventListener('scroll', maj, { passive: true });
 
-  var biais = ['droite', 'evase', 'gauche'];
-  var b = biais.indexOf(q.get('biais')) >= 0 ? q.get('biais') : 'droite';
+  var valeurs = { biais: ['droite', 'evase', 'gauche'], fond: ['aplat', 'grain', 'degrade'] };
+  var choix = { biais: 'droite', fond: 'aplat' };
+  Object.keys(valeurs).forEach(function (a) {
+    var v = q.get(a);
+    if (v && valeurs[a].indexOf(v) >= 0) { choix[a] = v; }
+  });
   var boutons = document.querySelectorAll('.commut button');
-  var majBiais = function () {
+  var majEssais = function () {
     var r = document.documentElement;
-    biais.forEach(function (v) { r.classList.toggle('biais-' + v, b === v); });
+    Object.keys(valeurs).forEach(function (a) {
+      valeurs[a].forEach(function (v) { r.classList.toggle(a + '-' + v, choix[a] === v); });
+    });
     Array.prototype.forEach.call(boutons, function (e) {
-      e.setAttribute('aria-pressed', String(e.dataset.val === b));
+      e.setAttribute('aria-pressed', String(choix[e.dataset.axe] === e.dataset.val));
     });
   };
   Array.prototype.forEach.call(boutons, function (e) {
-    e.addEventListener('click', function () { b = e.dataset.val; majBiais(); });
+    e.addEventListener('click', function () { choix[e.dataset.axe] = e.dataset.val; majEssais(); });
   });
-  majBiais();
+  majEssais();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
