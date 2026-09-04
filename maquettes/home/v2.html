@@ -244,7 +244,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 .figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: rgba(86, 84, 107, .72); text-align: right; }
 
 /* Compteur : anneau et chiffre en vert, le palier en cours pour denominateur.
-   812 sur 1 700, l'arc couvre 47,8 % du cercle (156,1 de 326,7). */
+   124 sur 667, l'arc couvre 18,6 % du cercle (60,8 de 326,7). */
 .jauge {
   margin-top: 1.9rem;
   padding-top: 1.35rem;
@@ -269,7 +269,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 .jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
 .jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .jauge__piste { fill: none; stroke: rgba(56, 54, 72, .13); stroke-width: 8; }
-.jauge__arc { fill: none; stroke: var(--vert); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 156.1 326.7; }
+.jauge__arc { fill: none; stroke: var(--vert); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 60.8 326.7; }
 .jauge__nombre {
   position: absolute;
   inset: 0;
@@ -690,8 +690,91 @@ html.etat-avant [data-compteur] { display: none; }
     var(--blanc);
 }
 
+
 /* ================================================================== */
-/* Ecran 6, prendre part au projet                                     */
+/* Ecran 6, pourquoi ces nombres                                       */
+/* La jauge du heros affiche un palier : sans cet ecran, c'est un       */
+/* chiffre sans echelle. Chaque palier a une raison d'etre, et ces      */
+/* raisons sont deja arrivees (les donateurs, les signataires) sauf la  */
+/* derniere, qui est la seule promesse de la page.                      */
+/* ================================================================== */
+#paliers {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + .8rem) 0 clamp(1.6rem, 3vh, 2.6rem);
+  overflow: hidden;
+  background:
+    radial-gradient(56% 46% at 96% 8%, rgba(186,255,228,.50), rgba(186,255,228,0) 62%),
+    radial-gradient(52% 44% at 4% 92%, rgba(255,243,168,.44), rgba(255,243,168,0) 64%),
+    radial-gradient(48% 40% at 8% 6%, rgba(94,158,133,.22), rgba(94,158,133,0) 66%),
+    radial-gradient(72% 56% at 48% 48%, rgba(255,255,255,.9), rgba(255,255,255,0) 72%),
+    var(--violace);
+}
+#paliers > .contenu { position: relative; z-index: 1; width: 100%; }
+#paliers > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+#paliers h2 { max-width: 22ch; }
+.paliers__intro { margin-top: clamp(.8rem, 2vh, 1.3rem); max-width: 54ch; line-height: 1.6; }
+/* Trois marches : la hauteur monte avec le nombre, l'echelle se voit
+   avant d'etre lue. */
+.marches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+  margin-top: clamp(2rem, 5vh, 3.6rem);
+  align-items: end;
+}
+.marche {
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: clamp(1rem, 2.2vh, 1.5rem) clamp(1rem, 1.8vw, 1.6rem) clamp(1.1rem, 2.4vh, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.marche--1 { margin-bottom: 0; }
+.marche--2 { margin-bottom: clamp(1rem, 2.4vh, 1.8rem); }
+.marche--3 { margin-bottom: clamp(2rem, 4.8vh, 3.6rem); }
+.marche__nombre {
+  font-size: clamp(2.3rem, 3.6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--violet-sombre);
+}
+.marche--1 .marche__nombre { color: var(--vert); }
+.marche__quoi { font-weight: 700; color: var(--violet-sombre); line-height: 1.3; }
+.marche p { font-size: .95rem; line-height: 1.55; }
+.marche__afiger {
+  align-self: flex-start;
+  margin-top: .2rem;
+  padding: .18rem .5rem;
+  border-radius: 5px;
+  background: var(--jaune);
+  color: var(--violet-sombre);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.paliers__chute {
+  margin-top: clamp(1.6rem, 4vh, 2.8rem);
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.32rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--violet-sombre);
+}
+
+/* ================================================================== */
+/* Ecran 7, prendre part au projet                                     */
 /* L'ecran de conversion. Composition centree et fond blanc : tout      */
 /* converge vers un seul bouton, rien ne tire l'oeil de cote.           */
 /* ================================================================== */
@@ -776,7 +859,7 @@ h2 .marqueur::before {
 }
 .part__actions .bouton { min-height: 58px; padding: 0 2.1rem; font-size: .95rem; }
 /* ================================================================== */
-/* Ecran 7, pour agir                                                  */
+/* Ecran 8, pour agir                                                  */
 /* Trois gestes puis le bouton, relies par des fleches tracees a la     */
 /* main. Deux dispositions et quatre fonds en essai : la page alterne   */
 /* clair, photo, clair, violet, clair, et un sixieme ecran clair de     */
@@ -1105,6 +1188,10 @@ h2 .marqueur::before {
   .etapes__chute { text-align: left; margin-left: 0; }
   .etapes__lien { text-align: left; }
   #le-pari { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+
+  #paliers { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+  .marches { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .marche--2, .marche--3 { margin-bottom: 0; }
   #prendre-part { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; text-align: left; }
   #agir { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
   /* Deux fois le meme bouton l'un sur l'autre : la barre s'efface quand un
@@ -1172,7 +1259,10 @@ h2 .marqueur::before {
         <p class="kicker">À ANNECY, QUARTIER DE NOVEL</p>
         <h1>Et si ce lieu était le nôtre ?</h1>
         <p class="hero__lead">Devenons-en toutes et tous coopérateur·ices.</p>
-        <!-- 812 = valeur d'exemple, chiffre reel fige au 07/09, palier 666 puis 1 700 -->
+        <!-- Le compteur ne compte que les coopeatrices et cooperateurs, il part
+             donc de zero le 07/09 : 124 est une valeur d'exemple. Le 667 est
+             le PALIER, c'est-a-dire le nombre de donatrices et donateurs de la
+             campagne close en avril. -->
         <div class="jauge" data-compteur>
           <span class="jauge__deja">déjà</span>
           <div class="jauge__anneau">
@@ -1180,11 +1270,11 @@ h2 .marqueur::before {
               <circle class="jauge__piste" cx="60" cy="60" r="52"></circle>
               <circle class="jauge__arc" cx="60" cy="60" r="52"></circle>
             </svg>
-            <span class="jauge__nombre">812</span>
+            <span class="jauge__nombre">124</span>
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier">prochain palier&nbsp;: 1 700</span>
+            <span class="jauge__palier">premier palier&nbsp;: 667, autant que de donateur·ices</span>
           </p>
         </div>
       </div>
@@ -1276,7 +1366,7 @@ h2 .marqueur::before {
           <span class="jalon__point" aria-hidden="true"></span>
           <div class="jalon__bloc">
             <span class="jalon__date">Avril 2026</span>
-            <span class="jalon__texte">120 000 € de dons réunis<br>par plus de 650 contributeur·ices<br><span class="jalon__fleche" aria-hidden="true">&#8594;</span> les études démarrent</span>
+            <span class="jalon__texte">120 000 € réunis, dons<br>et mécénat de compétences<br><span class="jalon__fleche" aria-hidden="true">&#8594;</span> les études démarrent</span>
           </div>
         </li>
         <li class="jalon">
@@ -1333,7 +1423,35 @@ h2 .marqueur::before {
     </div>
   </section>
 
-  <!-- Ecran 6, prendre part au projet -->
+  <!-- Ecran 6, pourquoi ces nombres -->
+  <section id="paliers">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <h2>Pourquoi ces nombres</h2>
+      <p class="paliers__intro">Les paliers de la campagne ne sont pas des objectifs ronds tirés au hasard. Chacun est un groupe de personnes qui existe déjà, et qu'on invite à faire un pas de plus.</p>
+      <div class="marches">
+        <div class="marche marche--1">
+          <span class="marche__nombre">667</span>
+          <span class="marche__quoi">autant que de donateur·ices</span>
+          <p>Celles et ceux qui ont financé les études deviennent copropriétaires du lieu qu'ils ont lancé.</p>
+        </div>
+        <div class="marche marche--2">
+          <span class="marche__nombre">1 700</span>
+          <span class="marche__quoi">autant que de signataires</span>
+          <p>Toutes les personnes qui ont signé la lettre de soutien passent du soutien à l'engagement.</p>
+        </div>
+        <div class="marche marche--3">
+          <span class="marche__nombre">3 000</span>
+          <span class="marche__afiger">chiffre à figer</span>
+          <span class="marche__quoi">ce qu'il nous faut vraiment</span>
+          <p>Une banque ne finance que la moitié d'un lieu comme celui-ci. L'autre moitié, c'est nous.</p>
+        </div>
+      </div>
+      <p class="paliers__chute">Moins d'emprunt, ce sont des loyers accessibles, et un lieu qui reste ouvert à tout le monde.</p>
+    </div>
+  </section>
+
+  <!-- Ecran 7, prendre part au projet -->
   <section id="prendre-part">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
@@ -1355,7 +1473,7 @@ h2 .marqueur::before {
     </div>
   </section>
 
-  <!-- Ecran 7, pour agir -->
+  <!-- Ecran 8, pour agir -->
   <section id="agir">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
