@@ -347,9 +347,9 @@ html.noms-verts .nom-structure { color: var(--vert); }
 html.noms-violets .nom-structure { color: var(--violet); }
 .niveaux .nom-structure {
   display: block;
-  font-size: clamp(.7rem, .58vw, .78rem);
+  font-size: clamp(.85rem, .72vw, .94rem);
   font-weight: 700;
-  letter-spacing: .045em;
+  letter-spacing: .025em;
   text-transform: uppercase;
   color: var(--terracotta);
   line-height: 1.3;
@@ -358,6 +358,9 @@ html.noms-violets .nom-structure { color: var(--violet); }
 }
 html.acc-vert .nom-structure { color: var(--vert); }
 .reponse--courte, .reponse--longue { display: none; }
+.mot--elargir { display: none; }
+html.titre-elargir .mot--repenser { display: none; }
+html.titre-elargir .mot--elargir { display: inline; }
 html.accent-court .reponse--validee, html.accent-court .reponse--longue { display: none; }
 html.accent-court .reponse--courte { display: block; }
 html.accent-long .reponse--validee, html.accent-long .reponse--courte { display: none; }
@@ -532,21 +535,21 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
-        <h2>Un lieu pour <span class="mot-main">repenser</span> la place des femmes</h2>
+        <h2>Un lieu pour <span class="mot-main mot--repenser">repenser</span><span class="mot-main mot--elargir">élargir</span> la place des femmes</h2>
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
             <p class="lieu__reponse reponse--validee">Nous créons un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
-          <p class="lieu__reponse reponse--courte"><span class="marqueur">Nous créons le lieu qui manque.</span> Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
-          <p class="lieu__reponse reponse--longue"><span class="marqueur">Nous créons le lieu qui manque.</span> Un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
+          <p class="lieu__reponse reponse--courte"><span class="marqueur">Nous créons le lieu qui manque.</span> Tout au même endroit : être accueillie, soignée, logée. Se rencontrer, créer du lien, et faire société autrement.</p>
+          <p class="lieu__reponse reponse--longue"><span class="marqueur">Nous créons le lieu qui manque.</span> Un lieu unique, capable de répondre à tout cela d'un seul tenant. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
           </div>
         </div>
       </div>
       <div class="usages">
         <ul class="niveaux">
             <li><img class="logo-structure" src="../assets/img/part_ostara.jpg" alt="Ostara" width="440" height="440"><span class="nom-structure">Ostara</span>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
-            <li><img class="logo-structure" src="../assets/img/part_beguinage.jpg" alt="Le béguinage" width="440" height="440"><span class="nom-structure">Le béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
-            <li><img class="logo-structure" src="../assets/img/part_cafe.jpg" alt="Le Café des Audacieuses" width="440" height="440"><span class="nom-structure">Le Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
+            <li><img class="logo-structure" src="../assets/img/part_beguinage.jpg" alt="Le béguinage" width="440" height="440"><span class="nom-structure">Béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
+            <li><img class="logo-structure" src="../assets/img/part_cafe.jpg" alt="Le Café des Audacieuses" width="440" height="440"><span class="nom-structure">Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
             <li><img class="logo-structure" src="../assets/img/part_sante.jpg" alt="Maison En-Santé" width="440" height="440"><span class="nom-structure">Maison En-Santé</span>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
           <li><img class="logo-structure" src="../assets/img/part_banjo.jpg" alt="Banjo" width="440" height="440"><span class="nom-structure">Banjo</span>un espace de créativité et d'éveil pour les enfants et les familles.</li>
         </ul>
@@ -563,6 +566,9 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   <span>TRAIT</span>
   <button type="button" data-axe="trait" data-val="avec" aria-pressed="true">Avec</button>
   <button type="button" data-axe="trait" data-val="sans" aria-pressed="false">Sans</button>
+  <span>TITRE</span>
+  <button type="button" data-axe="titre" data-val="repenser" aria-pressed="true">Repenser</button>
+  <button type="button" data-axe="titre" data-val="elargir" aria-pressed="false">Élargir</button>
   <span>ACCENT</span>
   <button type="button" data-axe="accent" data-val="main" aria-pressed="true">Manuscrit</button>
   <button type="button" data-axe="accent" data-val="court" aria-pressed="false">Surligné</button>
@@ -585,8 +591,8 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
-  var axes = { acc: 'terracotta', trait: 'avec', accent: 'main' };
-  var classes = { 'acc:vert': 'acc-vert', 'trait:sans': 'sans-trait', 'accent:main': 'accent-main', 'accent:court': 'accent-court', 'accent:long': 'accent-long' };
+  var axes = { acc: 'vert', trait: 'avec', accent: 'court', titre: 'elargir' };
+  var classes = { 'acc:vert': 'acc-vert', 'trait:sans': 'sans-trait', 'accent:main': 'accent-main', 'accent:court': 'accent-court', 'accent:long': 'accent-long', 'titre:elargir': 'titre-elargir' };
   var applique = function () {
     var r = document.documentElement;
     Object.keys(classes).forEach(function (k) { r.classList.remove(classes[k]); });
@@ -601,7 +607,7 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
     b.addEventListener('click', function () { axes[b.dataset.axe] = b.dataset.val; applique(); });
   });
-  ['acc', 'trait', 'accent'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
+  ['acc', 'trait', 'accent', 'titre'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
   applique();
 
   var bouton = document.getElementById('menu-bouton');
