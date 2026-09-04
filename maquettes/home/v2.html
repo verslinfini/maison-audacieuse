@@ -561,11 +561,13 @@ html.etat-avant [data-compteur] { display: none; }
    par une couleur qui tomberait sous le seuil. */
 .pari__texte strong { font-weight: 700; }
 .pari__chute {
-  margin-top: clamp(1.3rem, 3.2vh, 2.3rem);
+  margin-top: clamp(1.9rem, 4.8vh, 3.5rem);
   max-width: 27ch;
   font-size: clamp(1.1rem, 1.45vw, 1.45rem);
   font-weight: 500;
   line-height: 1.36;
+  /* Onest n'a pas d'italique dessine : le navigateur penche la romaine. */
+  font-style: italic;
 }
 /* Le paragraphe pivot : tout en gras, le retournement seul surligne. */
 .pari__fort { font-weight: 700; }
@@ -850,7 +852,7 @@ html.etat-avant [data-compteur] { display: none; }
           <p>Rénover un bâtiment tel que celui-ci coûte extrêmement cher.</p>
           <p>Dans un projet classique, nous aurions ouvert le capital à de gros investisseurs, en échange de contreparties importantes.</p>
           <p class="pari__fort">Pour servir l'intérêt général et garder ce lieu accessible, <span class="marqueur">nous faisons le pari inverse</span>&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
-          <p><strong class="marqueur">Ici, personne ne s'enrichit</strong>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
+          <p><strong>Ici, personne ne s'enrichit</strong>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
           <p>Le pari est déjà lancé&nbsp;: plus de <strong>1 700 personnes</strong> ont signé la lettre de soutien, plus de <strong>650</strong> ont contribué financièrement. Aujourd'hui, chacune et chacun peut participer à la création de ce bien commun.</p>
         </div>
       </div>
