@@ -44,12 +44,15 @@
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
   /* Traces du surlignage. Cadre 64x32, les 15 unites de chaque bord ne
      s'etirent pas : le biais garde son angle quelle que soit la longueur
-     du texte, seul le milieu s'allonge. */
-  --trace-1: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M4,2.5 L50,2.1 L60,29.9 L13,30.4 Z' fill='%23FFF3A8'/></svg>");
-  --trace-2: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M14,2.1 L62,2.5 L50,30.3 L2,29.9 Z' fill='%23FFF3A8'/></svg>");
-  --trace-3: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M2,2.7 L50,1.9 L62,30.1 L14,30.7 Z' fill='%23FFF3A8'/></svg>");
-  --trace-4: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M12,2.3 L61,2 L52,30.2 L3,30.5 Z' fill='%23FFF3A8'/></svg>");
-  --trace-5: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M3,2.2 L50,2.6 L61,30.5 L14,30.1 Z' fill='%23FFF3A8'/></svg>");
+     du texte, seul le milieu s'allonge. Dans un meme bloc, les deux cotes
+     penchent toujours du meme cote mais jamais du meme angle : l'un est
+     court, l'autre long. La largeur de rendu de chaque bord (--bg, --bd)
+     etire encore la pente, ce qui porte l'ecart de 4 a 17 px. */
+  --trace-1: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M3,2.5 L49,2.1 L61,29.9 L10,30.4 Z' fill='%23FFF3A8'/></svg>"); /* droite, biais gauche court, biais droit long */
+  --trace-2: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M14,2.1 L62,2.5 L55,30.3 L1,29.9 Z' fill='%23FFF3A8'/></svg>"); /* gauche, biais gauche long, biais droit court */
+  --trace-3: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M1,2.7 L51,1.9 L56,30.1 L13,30.7 Z' fill='%23FFF3A8'/></svg>"); /* droite, le plus dissymetrique */
+  --trace-4: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M13,2.3 L63,2 L51,30.2 L8,30.5 Z' fill='%23FFF3A8'/></svg>"); /* gauche, biais gauche presque droit */
+  --trace-5: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M1,2.2 L49,2.6 L62,30.5 L14,30.1 Z' fill='%23FFF3A8'/></svg>"); /* droite, les deux bords marques, pour le titre */
 
   --grain-couleur: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23c)'/></svg>");
 }
@@ -207,7 +210,6 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   padding: calc(var(--h-entete) + 3rem) 0 clamp(3rem, 12vh, 7rem);
   overflow: hidden;
   isolation: isolate;
-  background: var(--violace);
 }
 .hero__contenu {
   position: relative;
@@ -291,27 +293,30 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
    bas que haut, comme un marqueur passe a la main sous le texte. */
 .marqueur {
   --trace: var(--trace-1);
-  --haut: .28em;
-  --bas: .44em;
+  --bg: 14px;
+  --bd: 19px;
+  --haut: .20em;
+  --bas: .34em;
   color: var(--violet-sombre);
   border-style: solid;
-  border-width: 0 15px;
+  border-width: 0 var(--bd) 0 var(--bg);
   border-image-source: var(--trace);
   border-image-slice: 0 15 fill;
-  border-image-width: 0 15px;
+  border-image-width: 0 var(--bd) 0 var(--bg);
   border-image-repeat: stretch;
   padding: var(--haut) 0 var(--bas);
-  margin: 0 -7px;
+  margin-left: calc(var(--bg) / -2);
+  margin-right: calc(var(--bd) / -2);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 /* Une main ne repete pas deux fois le meme geste : chaque surlignage de la
    page porte sa pente et son epaisseur. Les deux cotes penchent toujours
    ensemble, jamais en entonnoir. */
-.marqueur--2 { --trace: var(--trace-2); --haut: .24em; --bas: .40em; }
-.marqueur--3 { --trace: var(--trace-3); --haut: .30em; --bas: .48em; }
-.marqueur--4 { --trace: var(--trace-4); --haut: .26em; --bas: .42em; }
-.marqueur--5 { --trace: var(--trace-5); }
+.marqueur--2 { --trace: var(--trace-2); --bg: 20px; --bd: 14px; --haut: .24em; --bas: .40em; }
+.marqueur--3 { --trace: var(--trace-3); --bg: 19px; --bd: 13px; --haut: .30em; --bas: .48em; }
+.marqueur--4 { --trace: var(--trace-4); --bg: 13px; --bd: 18px; --haut: .26em; --bas: .42em; }
+.marqueur--5 { --trace: var(--trace-5); --bg: 15px; --bd: 19px; }
 
 /* Etat avant l'allumage du 07/09 : la ligne compteur disparait, rien d'autre. */
 html.etat-avant [data-compteur] { display: none; }
@@ -321,7 +326,6 @@ html.etat-avant [data-compteur] { display: none; }
 /* ================================================================== */
 #le-lieu {
   position: relative;
-  background: var(--blanc);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -331,7 +335,6 @@ html.etat-avant [data-compteur] { display: none; }
 }
 #le-lieu > .contenu { position: relative; z-index: 1; width: 100%; }
 /* Sur le blanc, le grain gris doit rester une texture, pas un voile. */
-#le-lieu > .grain__voile { opacity: .16; }
 #le-lieu h2 { max-width: 13ch; }
 .lieu__grille {
   display: grid;
@@ -464,7 +467,6 @@ html.etat-avant [data-compteur] { display: none; }
 /* ================================================================== */
 #les-etapes {
   position: relative;
-  background: var(--violace);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -558,7 +560,6 @@ html.etat-avant [data-compteur] { display: none; }
 /* ================================================================== */
 #le-pari {
   position: relative;
-  background: var(--violet);
   color: var(--blanc);
   min-height: 100vh;
   min-height: 100svh;
@@ -569,7 +570,6 @@ html.etat-avant [data-compteur] { display: none; }
 }
 #le-pari > .contenu { position: relative; z-index: 1; width: 100%; }
 /* Sur un aplat colore, le grain doit texturer sans salir. */
-#le-pari > .grain__voile { opacity: .2; }
 #le-pari h2 { color: var(--blanc); max-width: 11ch; }
 .pari__grille {
   display: grid;
@@ -601,45 +601,41 @@ html.etat-avant [data-compteur] { display: none; }
 /* Sur cet aplat, seul le blanc tient : l'ocre tombe a 1,09:1 et le vert a
    1,42:1, les trois couleurs ont la meme luminosite. Essai clos le 04/09. */
 
-/* Essai de fond, ecran 5. Le grain colore de la charte se pose sur l'aplat ;
-   les « nuages » remplacent la diagonale par cinq nappes larges sans
-   direction commune, la couleur bouge sans qu'on voie ou elle commence.
-   Regle de composition : les nappes qui eclaircissent (kaki, blanc) restent
-   aux angles, hors des colonnes de texte ; celles qui assombrissent passent
-   partout, elles servent le contraste au lieu de le manger. */
-html.violet-grain #le-pari > .grain__voile,
-html.violet-nuages #le-pari > .grain__voile,
-html.violet-nuages-plus #le-pari > .grain__voile {
+/* ---------------- fonds textures, figes le 04/09 ------------------ */
+/* Deux registres se superposent. Les nappes de VALEUR (celles qui
+   eclaircissent ou foncent) sont poussees hors des colonnes de texte ;
+   au centre, seule la TEINTE bouge, a luminance egale. La couleur respire
+   partout, le contraste ne bouge que la ou il n'y a rien a lire.
+   Chaque ecran a sa propre composition : ni les memes teintes, ni les
+   memes positions. Un fond qui se repeterait d'un ecran a l'autre se
+   verrait comme un motif, ce qui est exactement ce qu'on evite. */
+
+/* Le grain colore de la charte, en fusion sur le violet, en mode normal sur
+   les fonds clairs ou « overlay » ne se verrait pas. */
+#le-pari > .grain__voile {
   background-image: var(--grain-couleur);
   background-size: 240px 240px;
   opacity: .38;
   mix-blend-mode: overlay;
 }
-/* Le grain eclaircit autant qu'il fonce, et sur un aplat deja au ras du seuil
-   il fait tomber le blanc de 4,19 a 3,86:1. Huit pour cent de violet sombre
-   sous la texture rendent la marge perdue sans que la couleur change a
-   l'oeil : le blanc remonte a 4,33:1, au-dessus de l'aplat actuel (4,19).
-   Le seuil AA strict de 4,5 demanderait 14 % de voile, donc un violet qui
-   n'est plus celui de la charte : arbitrage a l'audit, pas ici. */
-html.violet-grain #le-pari { background-image: linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)); }
-/* Deux registres se superposent. Les nappes de VALEUR (kaki qui eclaircit,
-   violet sombre qui fonce) sont poussees hors des colonnes de texte, en
-   haut et en bas. Les nappes de TEINTE passent au milieu : #6C6BAC vire au
-   bleu, #836D96 vire au rouge, toutes deux a la luminance du violet de la
-   charte. La couleur bouge partout, la valeur ne bouge que la ou il n'y a
-   rien a lire. */
-html.violet-nuages #le-pari {
-  background:
-    radial-gradient(64% 34% at 86% 108%, rgba(157,150,105,.42), rgba(157,150,105,0) 66%),
-    radial-gradient(52% 26% at 14% -12%, rgba(157,150,105,.30), rgba(157,150,105,0) 68%),
-    radial-gradient(78% 40% at 92% 4%, rgba(56,54,72,.30), rgba(56,54,72,0) 70%),
-    radial-gradient(86% 46% at 8% 96%, rgba(56,54,72,.26), rgba(56,54,72,0) 72%),
-    radial-gradient(66% 74% at 74% 46%, rgba(108,107,172,.44), rgba(108,107,172,0) 72%),
-    radial-gradient(60% 70% at 26% 58%, rgba(131,109,150,.40), rgba(131,109,150,0) 74%),
-    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
-    var(--violet);
+.hero > .grain__voile,
+#le-lieu > .grain__voile,
+#les-etapes > .grain__voile,
+#prendre-part > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
 }
-html.violet-nuages-plus #le-pari {
+
+/* Ecran 5, le violet. Kaki et ombre aux quatre angles, deux virages de
+   teinte au centre : #6C6BAC vers le bleu, #836D96 vers le rouge, tous
+   deux a la luminance du violet de la charte.
+   Les 8 % de violet sombre rendent ce que la texture coute : sans eux le
+   blanc tombe a 3,86:1, avec eux il tient 4,04:1, au-dessus de l'aplat
+   d'origine. Le seuil AA strict de 4,5 demanderait 14 % de voile, donc un
+   violet qui n'est plus celui de la charte : arbitrage a l'audit. */
+#le-pari {
   background:
     radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
     radial-gradient(58% 30% at 12% -10%, rgba(157,150,105,.52), rgba(157,150,105,0) 66%),
@@ -651,61 +647,47 @@ html.violet-nuages-plus #le-pari {
     var(--violet);
 }
 
-/* Fonds clairs. Meme principe, amplitude divisee : le blanc reste blanc,
-   il respire. Aucune teinte nouvelle, ce sont le terracotta et le violet de
-   la charte a 10 % qui donnent le rose. Le grain passe en couleur, en mode
-   normal : sur du clair, « overlay » ne se verrait pas. */
-html.clair-rose .hero,
-html.clair-rose #le-lieu,
-html.clair-rose #les-etapes,
-html.clair-rose #prendre-part,
-html.clair-rose-plus .hero,
-html.clair-rose-plus #le-lieu,
-html.clair-rose-plus #les-etapes,
-html.clair-rose-plus #prendre-part { position: relative; }
-html.clair-rose .hero > .grain__voile,
-html.clair-rose #le-lieu > .grain__voile,
-html.clair-rose #les-etapes > .grain__voile,
-html.clair-rose #prendre-part > .grain__voile,
-html.clair-rose-plus .hero > .grain__voile,
-html.clair-rose-plus #le-lieu > .grain__voile,
-html.clair-rose-plus #les-etapes > .grain__voile,
-html.clair-rose-plus #prendre-part > .grain__voile {
-  background-image: var(--grain-couleur);
-  background-size: 240px 240px;
-  opacity: .18;
-}
-html.clair-rose #le-lieu,
-html.clair-rose #prendre-part {
+/* Ecran 1, le heros : menthe au-dessus du kicker, terracotta le long du
+   bord droit, lavande sous l'image. Le centre reste blanc, le titre y est. */
+.hero {
   background:
-    radial-gradient(72% 58% at 88% 6%, rgba(163,113,106,.15), rgba(163,113,106,0) 64%),
-    radial-gradient(66% 54% at 6% 88%, rgba(118,109,160,.14), rgba(118,109,160,0) 66%),
-    radial-gradient(80% 64% at 24% 12%, rgba(186,255,228,.22), rgba(186,255,228,0) 62%),
-    var(--blanc);
-}
-html.clair-rose .hero,
-html.clair-rose #les-etapes {
-  background:
-    radial-gradient(74% 60% at 92% 12%, rgba(163,113,106,.17), rgba(163,113,106,0) 62%),
-    radial-gradient(70% 56% at 8% 82%, rgba(118,109,160,.16), rgba(118,109,160,0) 64%),
-    radial-gradient(64% 52% at 40% 40%, rgba(255,255,255,.85), rgba(255,255,255,0) 70%),
+    radial-gradient(58% 46% at 6% 4%, rgba(186,255,228,.52), rgba(186,255,228,0) 62%),
+    radial-gradient(46% 62% at 104% 48%, rgba(163,113,106,.30), rgba(163,113,106,0) 64%),
+    radial-gradient(64% 40% at 78% 102%, rgba(118,109,160,.26), rgba(118,109,160,0) 66%),
+    radial-gradient(60% 52% at 38% 46%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
     var(--violace);
 }
-html.clair-rose-plus #le-lieu,
-html.clair-rose-plus #prendre-part {
+
+/* Ecran 2 : terracotta en haut a droite, vert dilue en bas a gauche, une
+   trace de jaune au coin bas droit. Ni menthe ni lavande, c'est le seul
+   ecran sans elles. */
+#le-lieu {
   background:
+    radial-gradient(56% 50% at 96% 2%, rgba(163,113,106,.34), rgba(163,113,106,0) 62%),
+    radial-gradient(62% 54% at 2% 96%, rgba(94,158,133,.26), rgba(94,158,133,0) 64%),
+    radial-gradient(44% 38% at 92% 98%, rgba(255,243,168,.42), rgba(255,243,168,0) 66%),
+    var(--blanc);
+}
+
+/* Ecran 4 : kaki en haut a droite, lavande en bas a gauche, une large nappe
+   blanche au centre. Elle sert la frise, qui gagne 0,24 point de contraste
+   sur le violace nu. */
+#les-etapes {
+  background:
+    radial-gradient(54% 44% at 98% 6%, rgba(157,150,105,.34), rgba(157,150,105,0) 62%),
+    radial-gradient(60% 50% at 2% 94%, rgba(118,109,160,.32), rgba(118,109,160,0) 64%),
+    radial-gradient(78% 58% at 46% 44%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+
+/* Ecran 6 : menthe et terracotta en haut, lavande dessous. Composition la
+   plus ouverte de la page, l'ecran de l'appel. */
+#prendre-part {
+  background:
+    radial-gradient(84% 68% at 22% 10%, rgba(186,255,228,.40), rgba(186,255,228,0) 60%),
     radial-gradient(76% 62% at 90% 4%, rgba(163,113,106,.30), rgba(163,113,106,0) 62%),
     radial-gradient(70% 58% at 4% 90%, rgba(118,109,160,.28), rgba(118,109,160,0) 64%),
-    radial-gradient(84% 68% at 22% 10%, rgba(186,255,228,.40), rgba(186,255,228,0) 60%),
     var(--blanc);
-}
-html.clair-rose-plus .hero,
-html.clair-rose-plus #les-etapes {
-  background:
-    radial-gradient(78% 64% at 94% 10%, rgba(163,113,106,.32), rgba(163,113,106,0) 60%),
-    radial-gradient(74% 60% at 6% 84%, rgba(118,109,160,.30), rgba(118,109,160,0) 62%),
-    radial-gradient(62% 50% at 42% 42%, rgba(255,255,255,.9), rgba(255,255,255,0) 68%),
-    var(--violace);
 }
 
 /* ================================================================== */
@@ -715,7 +697,6 @@ html.clair-rose-plus #les-etapes {
 /* ================================================================== */
 #prendre-part {
   position: relative;
-  background: var(--blanc);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -725,7 +706,6 @@ html.clair-rose-plus #les-etapes {
   text-align: center;
 }
 #prendre-part > .contenu { position: relative; z-index: 1; width: 100%; }
-#prendre-part > .grain__voile { opacity: .16; }
 .part__bloc { max-width: 47rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 #prendre-part h2 { max-width: 18ch; position: relative; z-index: 0; }
 
@@ -743,44 +723,17 @@ h2 .marqueur::before {
   position: absolute;
   z-index: -1;
   left: -.3em;
-  right: .17em;
+  right: -.02em;
   top: .3em;
   bottom: -.2em;
   border-style: solid;
-  border-width: 0 20px;
+  border-width: 0 var(--bd) 0 var(--bg);
   border-image-source: var(--trace);
   border-image-slice: 0 15 fill;
-  border-image-width: 0 20px;
+  border-image-width: 0 var(--bd) 0 var(--bg);
   border-image-repeat: stretch;
 }
 
-/* ---------- commutateur d'arbitrage, hors maquette ---------- */
-.commut {
-  position: fixed;
-  z-index: 90;
-  left: 1rem; bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  padding: .35rem .45rem;
-  background: #383648;
-  border-radius: 8px;
-  font-size: .72rem;
-  color: #fff;
-}
-.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
-.commut button {
-  min-height: 44px;
-  padding: 0 .7rem;
-  border: 0;
-  border-radius: 5px;
-  background: rgba(255,255,255,.16);
-  color: #fff;
-  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
-  cursor: pointer;
-}
-.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
-@media (max-width: 900px) { .commut { display: none; } }
 .part__question {
   margin-top: clamp(1.3rem, 3vh, 2.1rem);
   font-size: var(--t-lead);
@@ -1136,18 +1089,6 @@ h2 .marqueur::before {
   </section>
 </main>
 
-<div class="commut" role="group" aria-label="Essais en cours">
-  <span>FOND VIOLET</span>
-  <button type="button" data-axe="violet" data-val="aplat" aria-pressed="true">Aplat</button>
-  <button type="button" data-axe="violet" data-val="grain" aria-pressed="false">Grain</button>
-  <button type="button" data-axe="violet" data-val="nuages" aria-pressed="false">Nuages</button>
-  <button type="button" data-axe="violet" data-val="nuages-plus" aria-pressed="false">Nuages +</button>
-  <span>FONDS CLAIRS</span>
-  <button type="button" data-axe="clair" data-val="neutre" aria-pressed="true">Neutre</button>
-  <button type="button" data-axe="clair" data-val="rose" aria-pressed="false">Rosé</button>
-  <button type="button" data-axe="clair" data-val="rose-plus" aria-pressed="false">Rosé +</button>
-</div>
-
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
@@ -1162,29 +1103,6 @@ h2 .marqueur::before {
   maj();
   window.addEventListener('scroll', maj, { passive: true });
 
-  var valeurs = {
-    violet: ['aplat', 'grain', 'nuages', 'nuages-plus'],
-    clair: ['neutre', 'rose', 'rose-plus']
-  };
-  var choix = { violet: 'aplat', clair: 'neutre' };
-  Object.keys(valeurs).forEach(function (a) {
-    var v = q.get(a);
-    if (v && valeurs[a].indexOf(v) >= 0) { choix[a] = v; }
-  });
-  var boutons = document.querySelectorAll('.commut button');
-  var majEssais = function () {
-    var r = document.documentElement;
-    Object.keys(valeurs).forEach(function (a) {
-      valeurs[a].forEach(function (v) { r.classList.toggle(a + '-' + v, choix[a] === v); });
-    });
-    Array.prototype.forEach.call(boutons, function (e) {
-      e.setAttribute('aria-pressed', String(choix[e.dataset.axe] === e.dataset.val));
-    });
-  };
-  Array.prototype.forEach.call(boutons, function (e) {
-    e.addEventListener('click', function () { choix[e.dataset.axe] = e.dataset.val; majEssais(); });
-  });
-  majEssais();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
