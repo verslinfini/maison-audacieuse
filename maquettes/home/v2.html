@@ -600,10 +600,64 @@ html.etat-avant [data-compteur] { display: none; }
 #prendre-part > .contenu { position: relative; z-index: 1; width: 100%; }
 #prendre-part > .grain__voile { opacity: .16; }
 .part__bloc { max-width: 47rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-#prendre-part h2 { max-width: 18ch; }
-/* A ce corps, le debordement vertical d'un surlignage de paragraphe ferait
-   une tache : il se resserre, et les biais s'elargissent a proportion. */
-#prendre-part h2 .marqueur { padding: .1em 0 .17em; border-width: 0 22px; border-image-width: 0 22px; }
+#prendre-part h2 { max-width: 18ch; position: relative; z-index: 0; }
+
+/* ---- surlignage de titre : libre, decale, incomplet ---- */
+h2 .marqueur {
+  position: relative;
+  z-index: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+h2 .marqueur::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -.26em;
+  right: .1em;
+  top: .16em;
+  bottom: -.14em;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M3,2 L92,1 L97,29 L8,30 Z' fill='%23FFF3A8'/></svg>");
+}
+/* Essai d'angles, hors maquette. */
+html.biais-evase h2 .marqueur::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M8,2 L92,1 L98,29 L2,30 Z' fill='%23FFF3A8'/></svg>");
+}
+html.biais-gauche h2 .marqueur::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' preserveAspectRatio='none'><path d='M9,2 L98,1 L92,29 L3,30 Z' fill='%23FFF3A8'/></svg>");
+}
+
+/* ---------- commutateur d'arbitrage, hors maquette ---------- */
+.commut {
+  position: fixed;
+  z-index: 90;
+  left: 1rem; bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .35rem .45rem;
+  background: #383648;
+  border-radius: 8px;
+  font-size: .72rem;
+  color: #fff;
+}
+.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
+.commut button {
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
+  cursor: pointer;
+}
+.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
+@media (max-width: 900px) { .commut { display: none; } }
 .part__question {
   margin-top: clamp(1.3rem, 3vh, 2.1rem);
   font-size: var(--t-lead);
@@ -959,6 +1013,13 @@ html.etat-avant [data-compteur] { display: none; }
   </section>
 </main>
 
+<div class="commut" role="group" aria-label="Essai de biais, titre de l'écran 6">
+  <span>BIAIS DU TITRE</span>
+  <button type="button" data-val="droite" aria-pressed="true">Les deux à droite</button>
+  <button type="button" data-val="evase" aria-pressed="false">Évasé</button>
+  <button type="button" data-val="gauche" aria-pressed="false">Les deux à gauche</button>
+</div>
+
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
@@ -972,6 +1033,21 @@ html.etat-avant [data-compteur] { display: none; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
+
+  var biais = ['droite', 'evase', 'gauche'];
+  var b = biais.indexOf(q.get('biais')) >= 0 ? q.get('biais') : 'droite';
+  var boutons = document.querySelectorAll('.commut button');
+  var majBiais = function () {
+    var r = document.documentElement;
+    biais.forEach(function (v) { r.classList.toggle('biais-' + v, b === v); });
+    Array.prototype.forEach.call(boutons, function (e) {
+      e.setAttribute('aria-pressed', String(e.dataset.val === b));
+    });
+  };
+  Array.prototype.forEach.call(boutons, function (e) {
+    e.addEventListener('click', function () { b = e.dataset.val; majBiais(); });
+  });
+  majBiais();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
