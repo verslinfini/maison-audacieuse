@@ -207,7 +207,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   min-height: 100svh;
   display: flex;
   align-items: flex-end;
-  padding: calc(var(--h-entete) + 3rem) 0 clamp(3rem, 12vh, 7rem);
+  padding: calc(var(--h-entete) + 1.6rem) 0 clamp(2.2rem, 8vh, 5.4rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -233,7 +233,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 .figure { margin: 0 0 1.4rem; }
 .figure img {
   width: 100%;
-  max-height: 300px;
+  max-height: 268px;
   object-fit: cover;
   object-position: 50% 56%;
   border: 10px solid var(--blanc);
@@ -701,7 +701,7 @@ html.etat-avant [data-compteur] { display: none; }
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  padding: calc(var(--h-entete) + .8rem) 0 clamp(1.6rem, 3vh, 2.6rem);
   overflow: hidden;
   text-align: center;
 }
@@ -736,24 +736,24 @@ h2 .marqueur::before {
 }
 
 .part__question {
-  margin-top: clamp(1.3rem, 3vh, 2.1rem);
+  margin-top: clamp(1rem, 2.4vh, 1.8rem);
   font-size: var(--t-lead);
   font-weight: 600;
   line-height: 1.34;
   color: var(--violet-sombre);
   max-width: 30ch;
 }
-.part__texte { margin-top: 1rem; max-width: 46ch; line-height: 1.6; }
+.part__texte { margin-top: .8rem; max-width: 46ch; line-height: 1.6; }
 /* La phrase qui porte l'idee du nombre : tout en gras, le retournement
    surligne. Interligne desserre, deux blocs de surlignage se suivent. */
-.part__texte--pivot { font-weight: 700; color: var(--violet-sombre); line-height: 1.9; margin-top: 1.4rem; }
+.part__texte--pivot { font-weight: 700; color: var(--violet-sombre); line-height: 1.78; margin-top: 1.2rem; }
 /* Les deux equations : un fait chacune, le chiffre porte, le signe colore. */
 .equations {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: clamp(.7rem, 1.6vw, 1.3rem);
-  margin: clamp(1.5rem, 3.6vh, 2.6rem) 0 0;
+  margin: clamp(1.2rem, 2.8vh, 2.2rem) 0 0;
 }
 .equations li {
   background: var(--violace);
@@ -766,7 +766,7 @@ h2 .marqueur::before {
 .equations b { font-size: clamp(1.5rem, 2.1vw, 2rem); font-weight: 700; color: var(--violet-sombre); letter-spacing: -.02em; }
 .equations .eq { font-size: 1.35rem; font-weight: 700; color: var(--violet); padding: 0 .18em; }
 .equations small { display: block; margin-top: .35rem; font-size: .8rem; color: var(--texte); }
-.part__reassurance { margin-top: clamp(1.3rem, 3vh, 2rem); max-width: 44ch; font-size: .95rem; line-height: 1.55; }
+.part__reassurance { margin-top: clamp(1rem, 2.4vh, 1.7rem); max-width: 44ch; font-size: .95rem; line-height: 1.55; }
 .part__actions {
   display: flex;
   flex-direction: column;
@@ -775,6 +775,113 @@ h2 .marqueur::before {
   margin-top: clamp(1.4rem, 3.2vh, 2.2rem);
 }
 .part__actions .bouton { min-height: 58px; padding: 0 2.1rem; font-size: .95rem; }
+/* ================================================================== */
+/* Ecran 7, pour agir                                                  */
+/* Trois gestes, puis un bandeau plus bas de ton pour celles et ceux    */
+/* qui ne franchissent pas le pas aujourd'hui. Deux registres, deux     */
+/* fonds, une seule zone chaude : le bouton.                            */
+/* ================================================================== */
+#agir {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + .8rem) 0 clamp(1.6rem, 3vh, 2.6rem);
+  overflow: hidden;
+  background:
+    radial-gradient(58% 46% at 4% 8%, rgba(157,150,105,.30), rgba(157,150,105,0) 64%),
+    radial-gradient(52% 44% at 98% 88%, rgba(186,255,228,.44), rgba(186,255,228,0) 62%),
+    radial-gradient(46% 40% at 88% 6%, rgba(255,243,168,.40), rgba(255,243,168,0) 66%),
+    radial-gradient(70% 56% at 44% 50%, rgba(255,255,255,.86), rgba(255,255,255,0) 72%),
+    var(--violace);
+}
+#agir > .contenu { position: relative; z-index: 1; width: 100%; }
+#agir > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+#agir h2 { text-align: center; max-width: 20ch; margin: 0 auto; }
+
+/* Les trois gestes. Le chiffre est ecrit a la main, comme le « deja » du
+   heros et le « demain » de l'ecran 3 : la pastille numerotee ferait
+   diaporama. */
+.gestes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.3rem, 3vw, 2.9rem);
+  margin-top: clamp(1.5rem, 3.4vh, 2.5rem);
+}
+.geste__no {
+  display: block;
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(2.9rem, 4vw, 4rem);
+  line-height: .7;
+  /* Terracotta plutot que kaki : la couleur manquait a la page, et elle
+     tient 3,5:1 sur le violace la ou le kaki tombait a 2,5. */
+  color: var(--terracotta);
+}
+.geste h3 { margin-top: .5rem; font-size: clamp(1.08rem, 1.25vw, 1.26rem); line-height: 1.2; }
+.geste p { margin-top: .45rem; font-size: .98rem; line-height: 1.52; }
+
+.agir__cta { display: flex; justify-content: center; margin-top: clamp(1.3rem, 3vh, 2.1rem); }
+.agir__cta .bouton { min-height: 58px; padding: 0 2.1rem; font-size: .95rem; }
+
+/* Le bandeau des portes douces : fond blanc sur le violace, jamais la
+   couleur du bouton. Trois issues pour qui ne souscrit pas aujourd'hui. */
+.portes {
+  margin-top: clamp(1.4rem, 3.2vh, 2.3rem);
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: clamp(.9rem, 2vh, 1.4rem) clamp(1.1rem, 2.2vw, 1.9rem) clamp(1rem, 2.2vh, 1.5rem);
+}
+.portes__titre { font-weight: 700; color: var(--violet-sombre); font-size: 1.02rem; }
+.portes__liste {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+  margin-top: .7rem;
+  font-size: .93rem;
+  line-height: 1.5;
+}
+.portes__liste li { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+.infolettre { display: flex; flex-wrap: wrap; gap: .45rem; width: 100%; }
+.infolettre input {
+  flex: 1 1 9rem;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 1px solid var(--filet);
+  border-radius: 7px;
+  background: var(--blanc);
+  color: var(--texte);
+  font: 400 .93rem/1 "Onest", system-ui, sans-serif;
+}
+.infolettre input::placeholder { color: #8a889c; }
+.bouton--contour {
+  min-height: 44px;
+  padding: 0 1rem;
+  background: var(--blanc);
+  color: var(--violet-sombre);
+  border: 2px solid var(--violet-sombre);
+  font-size: .88rem;
+}
+.bouton--contour:hover { background: var(--violace); }
+/* Le libelle du champ existe pour les lecteurs d'ecran, pas a l'ecran. */
+.visuellement-cache {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
@@ -860,6 +967,16 @@ h2 .marqueur::before {
   .etapes__lien { text-align: left; }
   #le-pari { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
   #prendre-part { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; text-align: left; }
+  #agir { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+  /* Deux fois le meme bouton l'un sur l'autre : la barre s'efface quand un
+     bouton du flux est a l'ecran. */
+  .barre-mobile[data-double="oui"] { display: none; }
+  .gestes { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  #agir h2 { text-align: left; max-width: 100%; margin: 0; }
+  .agir__cta { justify-content: stretch; }
+  .agir__cta .bouton { width: 100%; }
+  .portes__liste { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+
   .part__bloc { align-items: flex-start; }
   .equations { justify-content: flex-start; }
   .part__actions { justify-content: flex-start; }
@@ -929,7 +1046,7 @@ h2 .marqueur::before {
           <img src="../assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
           <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
         </figure>
-        <p class="hero__phrase">La Maison Audacieuse&nbsp;: un lieu de vie pour prendre soin, créer du lien et <span class="marqueur marqueur--1">bousculer les inégalités de genre</span>.</p>
+        <p class="hero__phrase">La Maison Audacieuse&nbsp;: un lieu de vie pour prendre soin, créer du lien et <span class="marqueur marqueur--1">bousculer les inégalités de genre.</span></p>
         <div class="hero__actions">
           <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
           <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
@@ -1075,18 +1192,64 @@ h2 .marqueur::before {
     <div class="contenu">
       <div class="part__bloc">
         <h2>Prendre part au projet</h2>
-        <p class="part__question">Vous partagez nos valeurs et vous avez envie de soutenir le projet&nbsp;?</p>
-        <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse et copropriétaire du lieu avec nous.</p>
-        <p class="part__texte part__texte--pivot">Chaque part sociale en appelle d'autres&nbsp;: <span class="marqueur marqueur--5">plus nous sommes nombreux·ses, plus le projet a de poids</span>.</p>
+        <p class="part__question">Vous partagez nos valeurs<br>et vous avez envie de soutenir le projet&nbsp;?</p>
+        <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse<br>et copropriétaire du lieu avec nous.</p>
+        <p class="part__texte part__texte--pivot">Chaque part sociale en appelle d'autres.<br><span class="marqueur marqueur--5">Plus nous sommes nombreux·ses, plus le projet a de poids.</span></p>
         <ul class="equations">
-          <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b></li>
+          <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b><small>une seule suffit, on peut en prendre plusieurs</small></li>
           <li><b>1</b> personne <span class="eq" aria-hidden="true">=</span> <b>1</b> voix<small>quel que soit le nombre de parts</small></li>
         </ul>
         <p class="part__reassurance">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
         <div class="part__actions">
           <a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
-          <a class="lien-texte" href="/part-sociale/#faq">Toutes vos questions sur la part sociale</a>
+          <a class="lien-texte" href="/part-sociale/#faq">Toutes vos questions sur les parts sociales</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecran 7, pour agir -->
+  <section id="agir">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <h2>Pour agir, rien de plus simple</h2>
+      <ol class="gestes">
+        <li class="geste">
+          <span class="geste__no" aria-hidden="true">1</span>
+          <h3>Prenez votre part sociale</h3>
+          <p>Quelques minutes suffisent pour devenir coopérateur·ice.</p>
+        </li>
+        <li class="geste">
+          <span class="geste__no" aria-hidden="true">2</span>
+          <h3>Passez le mot</h3>
+          <p>Parlez du projet à trois personnes&nbsp;: c'est l'effet boule de neige qui fera naître le lieu.</p>
+        </li>
+        <li class="geste">
+          <span class="geste__no" aria-hidden="true">3</span>
+          <h3>Entrez dans la vie du lieu</h3>
+          <p>En devenant coopérateur·ice, vous pouvez participer aux rencontres et aux prises de décision. Vous recevrez une invitation après votre souscription.</p>
+        </li>
+      </ol>
+      <div class="agir__cta">
+        <a class="bouton bouton--primaire" href="#agir" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+      </div>
+      <div class="portes">
+        <p class="portes__titre">Pas encore décidé·e&nbsp;?</p>
+        <ul class="portes__liste">
+          <li>
+            <span>Suivez l'aventure&nbsp;: votre adresse suffit.</span>
+            <form class="infolettre" id="infolettre" title="Formulaire Brevo à câbler">
+              <label class="visuellement-cache" for="courriel">Votre adresse électronique</label>
+              <input id="courriel" name="email" type="email" autocomplete="email" placeholder="prenom@exemple.fr">
+              <button class="bouton bouton--contour" type="submit">Je m'inscris</button>
+            </form>
+          </li>
+          <li><span>Rencontrez-nous le samedi 19 septembre à la Fête de l'Audace, devant la ferme de Novel, à partir de 9&nbsp;h.</span></li>
+          <li>
+            <span>Le don reste possible, en complément&nbsp;: chaque don est doublé jusqu'au 22 septembre.</span>
+            <a class="lien-texte" href="/soutenir/">Je fais un don</a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1105,6 +1268,26 @@ h2 .marqueur::before {
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
+
+  var barre = document.querySelector('.barre-mobile');
+  var boutonsFlux = document.querySelectorAll('main .bouton--primaire');
+  if (barre && boutonsFlux.length && 'IntersectionObserver' in window) {
+    // Un compteur incremental partirait dans le negatif : a l'attachement,
+    // l'observateur emet une entree « hors ecran » par cible.
+    var vus = [];
+    var oeil = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        var i = vus.indexOf(e.target);
+        if (e.isIntersecting && i < 0) { vus.push(e.target); }
+        if (!e.isIntersecting && i >= 0) { vus.splice(i, 1); }
+      });
+      barre.dataset.double = vus.length ? 'oui' : 'non';
+    }, { threshold: .6 });
+    Array.prototype.forEach.call(boutonsFlux, function (e) { oeil.observe(e); });
+  }
+
+  var infolettre = document.getElementById('infolettre');
+  if (infolettre) { infolettre.addEventListener('submit', function (e) { e.preventDefault(); }); }
 
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
