@@ -850,37 +850,19 @@ h2 .marqueur::before {
   align-items: start;
 }
 /* Disposition en ligne : trois colonnes resserrees, deux fleches entre. */
-html.agir-ligne .gestes {
+/* Trois colonnes resserrees, deux fleches entre elles, le bouton centre
+   dessous. La disposition en Z, essayee le 04/09, est ecartee. */
+.gestes {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
   column-gap: clamp(.7rem, 1.6vw, 1.5rem);
   row-gap: clamp(1.8rem, 4.4vh, 3.2rem);
 }
-html.agir-ligne .geste--1 { grid-area: 1 / 1; }
-html.agir-ligne .fleche--a { grid-area: 1 / 2; }
-html.agir-ligne .geste--2 { grid-area: 1 / 3; }
-html.agir-ligne .fleche--b { grid-area: 1 / 4; }
-html.agir-ligne .geste--3 { grid-area: 1 / 5; }
-html.agir-ligne .geste--cta { grid-column: 1 / -1; justify-self: center; }
-html.agir-ligne .fleche--c { display: none; }
-html.agir-ligne .fleche--b .fleche__z { display: none; }
-/* Disposition en Z : quatre cases, l'oeil fait le parcours qu'il ferait
-   de toute facon, la fleche du milieu ramene a la ligne. */
-html.agir-z .gestes {
-  /* Quatre cases, rien entre elles : le parcours de l'oeil suffit, les
-     fleches ne faisaient que redire ce que la disposition dit deja. */
-  grid-template-columns: minmax(0, 36%) minmax(0, 36%);
-  justify-content: center;
-  grid-template-areas:
-    "g1 g2"
-    "g3 g4";
-  column-gap: clamp(1.6rem, 5vw, 5rem);
-  row-gap: clamp(1.6rem, 4vh, 3rem);
-}
-html.agir-z .fleche { display: none; }
-html.agir-z .geste--1 { grid-area: g1; }
-html.agir-z .geste--2 { grid-area: g2; }
-html.agir-z .geste--3 { grid-area: g3; }
-html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center; }
+.geste--1 { grid-area: 1 / 1; }
+.fleche--a { grid-area: 1 / 2; }
+.geste--2 { grid-area: 1 / 3; }
+.fleche--b { grid-area: 1 / 4; }
+.geste--3 { grid-area: 1 / 5; }
+.geste--cta { grid-column: 1 / -1; justify-self: center; }
 
 .geste h3 {
   font-size: clamp(1.05rem, 1.2vw, 1.2rem);
@@ -909,7 +891,6 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
 .fleche svg { display: block; width: 100%; height: auto; }
 .fleche--a { width: clamp(40px, 4.4vw, 62px); }
 .fleche--b { width: clamp(54px, 6.2vw, 88px); }
-.fleche--c { width: clamp(46px, 5.2vw, 74px); }
 
 /* ---- les deux encarts du bas ---- */
 .portes {
@@ -954,6 +935,58 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
   font-size: .88rem;
 }
 .bouton--contour:hover { background: var(--violace); }
+
+/* ================================================================== */
+/* Pied                                                                */
+/* Le pied du site est GLOBAL, partage par les six pages : il n'est pas */
+/* refait ici. Ce bloc reproduit celui de la production, aux deux ajouts */
+/* pres signales a Romain le 04/09 (la page part sociale, absente du    */
+/* menu du pied, et le lien newsletter dont l'URL est cassee).          */
+/* Il n'occupe pas une hauteur d'ecran : c'est une signature, pas un    */
+/* ecran de plus.                                                       */
+/* ================================================================== */
+#pied {
+  position: relative;
+  background: var(--violet-sombre);
+  color: rgba(255,255,255,.86);
+  padding: clamp(2.4rem, 5vh, 3.6rem) 0 clamp(1.4rem, 3vh, 2rem);
+  overflow: hidden;
+  font-size: .95rem;
+}
+#pied > .contenu { position: relative; z-index: 1; }
+#pied > .grain__voile { opacity: .3; mix-blend-mode: overlay; background-image: var(--grain-couleur); background-size: 240px 240px; }
+.pied__haut {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.6rem, 4vw, 3.4rem);
+  align-items: start;
+}
+.pied__logo { margin: 0; }
+/* Le logo n'existe qu'en violet et en version sur fond blanc : sur le
+   fond sombre, on le blanchit au filtre plutot que d'ajouter un fichier. */
+.pied__logo img { width: clamp(150px, 13vw, 196px); height: auto; filter: brightness(0) invert(1); }
+.pied__phrase { margin-top: 1rem; max-width: 32ch; line-height: 1.55; }
+.pied__reseaux { display: flex; gap: 1.1rem; margin-top: 1.1rem; }
+.pied__reseaux a { color: rgba(255,255,255,.86); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.34); padding-bottom: 2px; }
+.pied__reseaux a:hover { color: var(--blanc); border-bottom-color: var(--blanc); }
+.pied__titre { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; color: var(--jaune); margin-bottom: .7rem; }
+.pied__liste { display: flex; flex-direction: column; gap: .5rem; }
+.pied__liste a { color: rgba(255,255,255,.86); text-decoration: none; }
+.pied__liste a:hover { color: var(--blanc); text-decoration: underline; text-underline-offset: 3px; }
+.pied__bas {
+  margin-top: clamp(1.8rem, 4vh, 2.8rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255,255,255,.18);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem 1.6rem;
+  font-size: .86rem;
+  color: rgba(255,255,255,.7);
+}
+.pied__bas a { color: rgba(255,255,255,.7); }
+#pied :focus-visible { outline-color: var(--jaune); }
+
 /* Le libelle du champ existe pour les lecteurs d'ecran, pas a l'ecran. */
 .visuellement-cache {
   position: absolute;
@@ -964,33 +997,6 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
   white-space: nowrap;
 }
 
-/* ---------- commutateur d'arbitrage, hors maquette ---------- */
-.commut {
-  position: fixed;
-  z-index: 90;
-  left: 1rem; bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  padding: .35rem .45rem;
-  background: #383648;
-  border-radius: 8px;
-  font-size: .72rem;
-  color: #fff;
-}
-.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
-.commut button {
-  min-height: 44px;
-  padding: 0 .7rem;
-  border: 0;
-  border-radius: 5px;
-  background: rgba(255,255,255,.16);
-  color: #fff;
-  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
-  cursor: pointer;
-}
-.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
-@media (max-width: 900px) { .commut { display: none; } }
 
 
 
@@ -1082,19 +1088,18 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
   /* Deux fois le meme bouton l'un sur l'autre : la barre s'efface quand un
      bouton du flux est a l'ecran. */
   .barre-mobile[data-double="oui"] { display: none; }
-  html.agir-ligne .gestes, html.agir-z .gestes {
+  .gestes {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: none;
     row-gap: 1.3rem;
   }
-  html.agir-ligne .geste, html.agir-z .geste,
-  html.agir-ligne .fleche, html.agir-z .fleche,
-  html.agir-ligne .geste--cta, html.agir-z .geste--cta { grid-area: auto; }
+  .geste, .fleche, .geste--cta { grid-area: auto; }
   .fleche { display: none; }
   #agir h2 { text-align: left; max-width: 100%; margin: 0; }
   .geste--cta { justify-self: stretch; }
   .geste--cta .bouton { width: 100%; }
   .portes { grid-template-columns: minmax(0, 1fr); }
+  .pied__haut { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+
 
 
   .part__bloc { align-items: flex-start; }
@@ -1338,17 +1343,16 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
           <h3><span class="geste__no" aria-hidden="true">1</span>Prenez votre part sociale</h3>
           <p>Quelques minutes suffisent pour devenir coopérateur·ice.</p>
         </li>
-        <li class="fleche fleche--a" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 74 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,19 C18,8 34,24 54,12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M46,6 L57,11.4 L47,19" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li class="fleche fleche--a" aria-hidden="true"><svg viewBox="0 0 74 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,19 C18,8 34,24 54,12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M46,6 L57,11.4 L47,19" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
         <li class="geste geste--2">
           <h3><span class="geste__no" aria-hidden="true">2</span>Passez le mot</h3>
           <p>Parlez du projet à trois personnes&nbsp;: c'est l'effet boule de neige qui fera naître le lieu.</p>
         </li>
-        <li class="fleche fleche--b" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 104 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,11 C30,25 52,4 84,17" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M75,10 L87,17.6 L74,23" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="fleche__z" viewBox="0 0 210 104" fill="none" aria-hidden="true" focusable="false"><path d="M196,10 C176,42 118,58 30,88" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M52,70 L26,90 L58,95" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+        <li class="fleche fleche--b" aria-hidden="true"><svg viewBox="0 0 104 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,11 C30,25 52,4 84,17" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M75,10 L87,17.6 L74,23" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
         <li class="geste geste--3">
           <h3><span class="geste__no" aria-hidden="true">3</span>Entrez dans la vie du lieu</h3>
           <p>En devenant coopérateur·ice, vous pouvez participer aux rencontres et aux prises de décision. Vous recevrez une invitation après votre souscription.</p>
         </li>
-        <li class="fleche fleche--c" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 88 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,15 C26,6 44,23 68,14" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M59,7 L71,13.4 L60,21" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
         <li class="geste geste--cta">
           <a class="bouton bouton--primaire" href="#agir" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
         </li>
@@ -1373,11 +1377,45 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
   </section>
 </main>
 
-<div class="commut" role="group" aria-label="Essais en cours">
-  <span>DISPOSITION</span>
-  <button type="button" data-axe="agir" data-val="ligne" aria-pressed="true">En ligne</button>
-  <button type="button" data-axe="agir" data-val="z" aria-pressed="false">En Z</button>
-</div>
+<footer id="pied">
+  <div class="grain__voile" aria-hidden="true"></div>
+  <div class="contenu">
+    <div class="pied__haut">
+      <div>
+        <p class="pied__logo"><img src="../assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099"></p>
+        <p class="pied__phrase">Un lieu de vie à Annecy pour prendre soin, créer du lien et bousculer les inégalités de genre.</p>
+        <p class="pied__reseaux">
+          <a href="https://www.facebook.com/profile.php?id=61588455459969">Facebook</a>
+          <a href="https://www.instagram.com/la_maison_audacieuse/">Instagram</a>
+          <a href="https://www.linkedin.com/company/maison-audacieuse/">LinkedIn</a>
+        </p>
+      </div>
+      <nav aria-label="Pages du site">
+        <p class="pied__titre">Le site</p>
+        <span class="pied__liste">
+          <a href="/le-projet-architectural/">Le projet architectural</a>
+          <a href="/part-sociale/">La part sociale</a>
+          <a href="/lequipe-projet/">L'équipe projet</a>
+          <a href="/les-medias/">Les médias</a>
+          <a href="/contacts/">Contacts</a>
+        </span>
+      </nav>
+      <div>
+        <p class="pied__titre">Prendre part</p>
+        <span class="pied__liste">
+          <a href="#agir" title="Tunnel /prendre-part/ en construction">Souscrire une part sociale</a>
+          <a href="/soutenir/">Faire un don</a>
+          <a href="#agir">S'inscrire à la newsletter</a>
+          <a href="/politique-de-confidentialite-mentions-legales/">Confidentialité et mentions légales</a>
+        </span>
+      </div>
+    </div>
+    <p class="pied__bas">
+      <span>© 2026 La Maison Audacieuse, Annecy. La Coop Audacieuse, société coopérative d'intérêt collectif.</span>
+      <span>Site créé par <a href="https://pitchweb-creation.fr/">Pitch Web Création</a>.</span>
+    </p>
+  </div>
+</footer>
 
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
@@ -1394,26 +1432,6 @@ html.agir-z .geste--cta { grid-area: g4; justify-self: start; align-self: center
   window.addEventListener('scroll', maj, { passive: true });
 
 
-  var valeurs = { agir: ['ligne', 'z'] };
-  var choix = { agir: 'ligne' };
-  Object.keys(valeurs).forEach(function (a) {
-    var v = q.get(a);
-    if (v && valeurs[a].indexOf(v) >= 0) { choix[a] = v; }
-  });
-  var boutonsEssai = document.querySelectorAll('.commut button');
-  var majEssais = function () {
-    var r = document.documentElement;
-    Object.keys(valeurs).forEach(function (a) {
-      valeurs[a].forEach(function (v) { r.classList.toggle(a + '-' + v, choix[a] === v); });
-    });
-    Array.prototype.forEach.call(boutonsEssai, function (e) {
-      e.setAttribute('aria-pressed', String(choix[e.dataset.axe] === e.dataset.val));
-    });
-  };
-  Array.prototype.forEach.call(boutonsEssai, function (e) {
-    e.addEventListener('click', function () { choix[e.dataset.axe] = e.dataset.val; majEssais(); });
-  });
-  majEssais();
 
   var barre = document.querySelector('.barre-mobile');
   var boutonsFlux = document.querySelectorAll('main .bouton--primaire');
