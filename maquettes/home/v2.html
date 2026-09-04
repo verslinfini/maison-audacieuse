@@ -347,17 +347,44 @@ html.noms-verts .nom-structure { color: var(--vert); }
 html.noms-violets .nom-structure { color: var(--violet); }
 .niveaux .nom-structure {
   display: block;
-  font-size: .82rem;
+  font-size: .95rem;
   font-weight: 700;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  letter-spacing: -.005em;
   color: var(--terracotta);
-  line-height: 1.25;
-  /* Deux lignes reservees : les paragraphes demarrent tous a la meme hauteur,
-     que le nom tienne sur une ligne ou deux. */
-  min-height: 2.5em;
-  margin-bottom: .35rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  margin-bottom: .3rem;
 }
+html.acc-vert .nom-structure { color: var(--vert); }
+
+/* Sans le filet, la bande a besoin d'un peu plus d'air au-dessus. */
+html.sans-trait .usages { border-top: 0; padding-top: 0; margin-top: clamp(2.4rem, 5.4vh, 4.2rem); }
+
+/* Gestes : les cinq espaces numerotes, et un mot du titre a la main. */
+.niveaux { counter-reset: usage; }
+html.gestes:not(.usages-logos) .niveaux li { counter-increment: usage; padding-top: 2.5rem; }
+html.gestes .niveaux li::before {
+  content: "0" counter(usage);
+  position: absolute;
+  top: -.1rem;
+  left: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--terracotta);
+  opacity: .42;
+}
+html.gestes.acc-vert .niveaux li::before { color: var(--vert); opacity: .55; }
+html.gestes .mot-main {
+  font-family: "Meow Script", "Onest", cursive;
+  font-weight: 400;
+  font-size: 1.16em;
+  color: var(--terracotta);
+  letter-spacing: 0;
+  padding: 0 .08em;
+}
+html.gestes.acc-vert .mot-main { color: var(--vert); }
+html.gestes #le-lieu h2 { line-height: 1.14; }
 /* Variante logos : la vignette remplace le tiret vert. */
 html.usages-logos .niveaux li { padding-top: 0; }
 
@@ -369,6 +396,34 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
 
 /* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
    comme des niveaux. Un seul geste graphique, pose sur un panneau clair. */
+
+/* ---------- commutateur d'arbitrage, hors maquette ---------- */
+.commut {
+  position: fixed;
+  z-index: 90;
+  right: 1rem; bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .35rem .45rem;
+  background: #383648;
+  border-radius: 8px;
+  font-size: .72rem;
+  color: #fff;
+}
+.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
+.commut button {
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
+  cursor: pointer;
+}
+.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
+@media (max-width: 900px) { .commut { display: none; } }
 
 /* ---------- etroit ---------- */
 @media (max-width: 1080px) {
@@ -482,7 +537,7 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
-        <h2>Un lieu pour repenser la place des femmes</h2>
+        <h2>Un lieu pour <span class="mot-main">repenser</span> la place des femmes</h2>
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
@@ -504,6 +559,18 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   </section>
 </main>
 
+<div class="commut" role="group" aria-label="Essais de traitement">
+  <span>ACCENT</span>
+  <button type="button" data-axe="acc" data-val="terracotta" aria-pressed="true">Terracotta</button>
+  <button type="button" data-axe="acc" data-val="vert" aria-pressed="false">Vert</button>
+  <span>TRAIT</span>
+  <button type="button" data-axe="trait" data-val="avec" aria-pressed="true">Avec</button>
+  <button type="button" data-axe="trait" data-val="sans" aria-pressed="false">Sans</button>
+  <span>ECRAN 2</span>
+  <button type="button" data-axe="gestes" data-val="sobre" aria-pressed="true">Sobre</button>
+  <button type="button" data-axe="gestes" data-val="gestes" aria-pressed="false">Gestes</button>
+</div>
+
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
@@ -520,6 +587,25 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
+  var axes = { acc: 'terracotta', trait: 'avec', gestes: 'sobre' };
+  var classes = { 'acc:vert': 'acc-vert', 'trait:sans': 'sans-trait', 'gestes:gestes': 'gestes' };
+  var applique = function () {
+    var r = document.documentElement;
+    Object.keys(classes).forEach(function (k) { r.classList.remove(classes[k]); });
+    Object.keys(axes).forEach(function (a) {
+      var c = classes[a + ':' + axes[a]];
+      if (c) { r.classList.add(c); }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
+      b.setAttribute('aria-pressed', String(axes[b.dataset.axe] === b.dataset.val));
+    });
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
+    b.addEventListener('click', function () { axes[b.dataset.axe] = b.dataset.val; applique(); });
+  });
+  ['acc', 'trait', 'gestes'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
+  applique();
+
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
