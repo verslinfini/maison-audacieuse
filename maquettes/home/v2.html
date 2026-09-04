@@ -13,7 +13,8 @@
 /* Copy verbatim : « Copy home validée écran par écran », 20/08/2026,  */
 /* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
 /* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
-/* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel.       */
+/* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel,       */
+/* 4 les etapes du projet.                                             */
 /* ------------------------------------------------------------------ */
 
 :root {
@@ -415,8 +416,8 @@ html.etat-avant [data-compteur] { display: none; }
   font-family: "Meow Script", "Onest", cursive;
   font-size: clamp(2.1rem, 2.9vw, 3.1rem);
   line-height: 1;
-  color: var(--violet);
-  -webkit-text-stroke: .8px currentColor;
+  color: var(--vert);
+  -webkit-text-stroke: 1px currentColor;
   paint-order: stroke fill;
   transform: rotate(-4deg);
   margin: .35rem 0 0 .2rem;
@@ -425,6 +426,101 @@ html.etat-avant [data-compteur] { display: none; }
 /* Essai en cours : la mise en avant du bail, surlignee ou en gras seul. */
 /* Mise en avant du bail : la phrase entiere en gras, les 99 ans surlignes. */
 #la-ferme .bail { font-weight: 700; }
+
+/* ================================================================== */
+/* Ecran 4, les etapes du projet                                       */
+/* La frise porte l'ecran, seule. Deux etats seulement : ce qui est     */
+/* acquis (trait plein, point plein) et ce qui vient (trait pointille,  */
+/* point creux). Une seule case en couleur, le 31 decembre, comme le    */
+/* demande la copy : c'est la couleur qui dit « c'est maintenant »,     */
+/* jamais une phrase d'interpellation.                                  */
+/* ================================================================== */
+#les-etapes {
+  position: relative;
+  background: var(--violace);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+}
+#les-etapes > .contenu { position: relative; z-index: 1; width: 100%; }
+#les-etapes h2 { text-align: center; }
+.frise {
+  position: relative;
+  list-style: none;
+  margin: clamp(2.4rem, 6vh, 4.4rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+/* Le trait : plein jusqu'au jalon de septembre, pointille ensuite. */
+.frise::before,
+.frise::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 0;
+  border-top: 2px solid var(--vert);
+}
+.frise::before { left: 0; width: 64.3%; }
+.frise::after { left: 64.3%; right: 0; border-top-style: dashed; }
+.jalon {
+  position: relative;
+  min-height: clamp(230px, 34vh, 300px);
+  padding: 0 .45rem;
+}
+.jalon__point {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  border-radius: 50%;
+  background: var(--vert);
+}
+.jalon--vient .jalon__point { background: var(--violace); border: 2px solid var(--vert); }
+.jalon__bloc {
+  position: absolute;
+  left: 50%;
+  width: 175%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.jalon:first-child .jalon__bloc { left: 0; width: 150%; transform: none; }
+.jalon:last-child .jalon__bloc { left: auto; right: 0; width: 150%; transform: none; }
+.jalon:nth-child(odd) .jalon__bloc { bottom: calc(50% + 22px); }
+.jalon:nth-child(even) .jalon__bloc { top: calc(50% + 22px); }
+.jalon__date {
+  display: block;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--violet-sombre);
+  letter-spacing: -.005em;
+  margin-bottom: .3rem;
+}
+.jalon__texte { display: block; font-size: .92rem; line-height: 1.45; }
+/* La seule case en couleur de la frise. */
+.jalon--maintenant .jalon__bloc {
+  background: var(--menthe);
+  border-radius: 8px;
+  padding: .7rem .9rem .8rem;
+  width: 152%;
+}
+.jalon--maintenant .jalon__point { background: var(--vert); border: 0; width: 19px; height: 19px; margin: -9.5px 0 0 -9.5px; }
+.jalon__fleche { color: var(--vert); font-weight: 700; }
+.etapes__chute {
+  margin: clamp(2.2rem, 5.5vh, 4rem) auto 0;
+  max-width: 44ch;
+  text-align: center;
+  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  line-height: 1.42;
+}
+.etapes__chute strong { color: var(--violet-sombre); }
+.etapes__lien { margin-top: .5rem; text-align: center; }
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
@@ -449,6 +545,7 @@ html.etat-avant [data-compteur] { display: none; }
   .niveaux { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
   .ferme__contenu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: start; }
   .apres { margin-left: 0; width: min(62%, 380px); }
+  .jalon__texte { font-size: .86rem; }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -482,6 +579,27 @@ html.etat-avant [data-compteur] { display: none; }
   .panneau { padding: 1.25rem 1.15rem; }
   .apres { width: min(74%, 300px); margin-bottom: 0; }
   .ferme__credit { position: static; display: inline-block; margin: .9rem 0 0 var(--marge); }
+  /* La frise bascule a la verticale : le trait passe a gauche, les jalons
+     s'empilent dans l'ordre de lecture. */
+  #les-etapes { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+  #les-etapes h2 { text-align: left; }
+  .frise { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; padding-left: 1.75rem; }
+  .frise::before, .frise::after { top: 0; bottom: 0; left: 7px; width: 0; height: auto; border-top: 0; border-left: 2px solid var(--vert); }
+  .frise::before { height: 64.3%; }
+  .frise::after { top: 64.3%; height: auto; border-left-style: dashed; }
+  .jalon { min-height: 0; padding: 0 0 1.5rem; }
+  .jalon__point { top: .45rem; left: -1.75rem; margin: 0; }
+  .jalon--maintenant .jalon__point { left: calc(-1.75rem - 2px); top: .3rem; }
+  .jalon__bloc, .jalon:nth-child(odd) .jalon__bloc, .jalon:nth-child(even) .jalon__bloc,
+  .jalon:first-child .jalon__bloc, .jalon:last-child .jalon__bloc {
+    position: static;
+    width: auto;
+    transform: none;
+    text-align: left;
+  }
+  .jalon--maintenant .jalon__bloc { width: auto; margin-right: 1rem; }
+  .etapes__chute { text-align: left; margin-left: 0; }
+  .etapes__lien { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -604,6 +722,67 @@ html.etat-avant [data-compteur] { display: none; }
       </figure>
     </div>
     <p class="ferme__credit">La ferme aujourd'hui</p>
+  </section>
+
+  <!-- Ecran 4, les etapes du projet -->
+  <section id="les-etapes">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <h2>Les étapes du projet</h2>
+      <ol class="frise">
+        <li class="jalon">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">2025</span>
+            <span class="jalon__texte">lauréate de l'appel à projets lancé par la Ville d'Annecy</span>
+          </div>
+        </li>
+        <li class="jalon">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">Début 2026</span>
+            <span class="jalon__texte">signature de la promesse de bail emphytéotique de 99 ans</span>
+          </div>
+        </li>
+        <li class="jalon">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">Avril 2026</span>
+            <span class="jalon__texte">120 000 € de dons réunis par plus de 650 contributeur·ices <span class="jalon__fleche" aria-hidden="true">&#8594;</span> les études démarrent</span>
+          </div>
+        </li>
+        <li class="jalon">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">Juillet 2026</span>
+            <span class="jalon__texte">la coopérative est immatriculée</span>
+          </div>
+        </li>
+        <li class="jalon">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">Septembre 2026</span>
+            <span class="jalon__texte">lancement des parts sociales, dépôt du permis de construire</span>
+          </div>
+        </li>
+        <li class="jalon jalon--vient jalon--maintenant">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">D'ici le 31 décembre</span>
+            <span class="jalon__texte">le tour de table citoyen</span>
+          </div>
+        </li>
+        <li class="jalon jalon--vient">
+          <span class="jalon__point" aria-hidden="true"></span>
+          <div class="jalon__bloc">
+            <span class="jalon__date">Été 2027</span>
+            <span class="jalon__texte">début des travaux</span>
+          </div>
+        </li>
+      </ol>
+      <p class="etapes__chute">Le don a lancé les études. <strong>La part sociale nous rassemble.</strong></p>
+      <p class="etapes__lien"><a class="lien-texte" href="#les-etapes" title="Page « Prochaines étapes et modèle économique » à créer">Prochaines étapes et modèle économique</a></p>
+    </div>
   </section>
 </main>
 
