@@ -374,17 +374,9 @@ html.etat-avant [data-compteur] { display: none; }
   object-fit: cover;
   object-position: 50% 82%;
 }
-/* Le panneau est opaque : le voile ne sert qu'a poser son bord droit et a
-   empecher la photo de partir en blanc autour du texte. */
-.ferme__voile {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to top, rgba(56, 54, 72, .62) 0%, rgba(56, 54, 72, .18) 20%, rgba(56, 54, 72, 0) 38%),
-    linear-gradient(102deg, rgba(118, 109, 160, .62) 0%, rgba(118, 109, 160, .32) 46%, rgba(118, 109, 160, 0) 76%);
-}
-#la-ferme > .grain__voile { z-index: 2; opacity: .34; }
+/* Aucun voile sur la photo : elle reste telle qu'elle a ete prise. Le grain
+   descend a .12, au-dela il ternit l'image au lieu de la texturer. */
+#la-ferme > .grain__voile { z-index: 2; opacity: .12; }
 .ferme__contenu {
   position: relative;
   z-index: 3;
@@ -394,9 +386,7 @@ html.etat-avant [data-compteur] { display: none; }
   align-items: end;
 }
 .panneau {
-  background: rgba(255, 255, 255, .75);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  background: var(--blanc);
   padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.35rem, 2.3vw, 2.3rem);
   border-radius: 3px;
   box-shadow: 0 26px 60px rgba(56, 54, 72, .34);
@@ -414,12 +404,10 @@ html.etat-avant [data-compteur] { display: none; }
   width: min(100%, 424px);
   margin: 0 0 clamp(1rem, 3.4vh, 2.6rem) clamp(-3.4rem, -2.6vw, -1.4rem);
   padding: 10px 10px 0;
-  background: rgba(255, 255, 255, .75);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  background: var(--blanc);
   border-radius: 3px;
   box-shadow: 0 20px 44px rgba(56, 54, 72, .38);
-  transform: rotate(1.5deg);
+  transform: rotate(4deg);
 }
 .apres img { border-radius: 1px; }
 .apres__pied { display: flex; align-items: flex-end; justify-content: space-between; gap: .8rem; padding: 0 .15rem .5rem; }
@@ -435,50 +423,8 @@ html.etat-avant [data-compteur] { display: none; }
 }
 .apres figcaption { font-size: .72rem; letter-spacing: .03em; color: var(--texte); text-align: right; padding-bottom: .35rem; }
 /* Essai en cours : la mise en avant du bail, surlignee ou en gras seul. */
-/* Essai d'opacite des cadres, 75 % par defaut. */
-html.op-100 .panneau, html.op-100 .apres {
-  background: var(--blanc);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-html.op-50 .panneau, html.op-50 .apres { background: rgba(255, 255, 255, .5); }
-html.op-25 .panneau, html.op-25 .apres { background: rgba(255, 255, 255, .25); }
-/* Essai de mise en avant : surlignage seul, gras seul, ou les deux. */
-html.avant-gras #la-ferme .marqueur {
-  background-image: none;
-  padding: 0;
-  margin: 0;
-  font-weight: 700;
-}
-html.avant-mixte #la-ferme .bail { font-weight: 700; }
-
-/* ---------- commutateur d'arbitrage, hors maquette ---------- */
-.commut {
-  position: fixed;
-  z-index: 90;
-  left: 1rem; bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-  padding: .35rem .45rem;
-  background: #383648;
-  border-radius: 8px;
-  font-size: .72rem;
-  color: #fff;
-}
-.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
-.commut button {
-  min-height: 44px;
-  padding: 0 .7rem;
-  border: 0;
-  border-radius: 5px;
-  background: rgba(255,255,255,.16);
-  color: #fff;
-  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
-  cursor: pointer;
-}
-.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
-@media (max-width: 900px) { .commut { display: none; } }
+/* Mise en avant du bail : la phrase entiere en gras, les 99 ans surlignes. */
+#la-ferme .bail { font-weight: 700; }
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
@@ -533,7 +479,6 @@ html.avant-mixte #la-ferme .bail { font-weight: 700; }
      haut, sinon le panneau la recouvre entierement. */
   #la-ferme { display: block; min-height: 0; padding: 0 0 2.5rem; }
   .ferme__fond { position: relative; height: clamp(190px, 32vh, 260px); margin-bottom: 1.3rem; }
-  .ferme__voile { display: none; }
   .panneau { padding: 1.25rem 1.15rem; }
   .apres { width: min(74%, 300px); margin-bottom: 0; }
   .ferme__credit { position: static; display: inline-block; margin: .9rem 0 0 var(--marge); }
@@ -640,7 +585,6 @@ html.avant-mixte #la-ferme .bail { font-weight: 700; }
   <!-- Ecran 3, renover un lieu emblematique : la Ferme de Novel -->
   <section id="la-ferme">
     <img class="ferme__fond" src="../assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui : un long corps de ferme en pierre sous un large toit de tuiles, en bord de rue" width="1368" height="857">
-    <div class="ferme__voile" aria-hidden="true"></div>
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu ferme__contenu">
       <div class="panneau">
@@ -663,18 +607,6 @@ html.avant-mixte #la-ferme .bail { font-weight: 700; }
   </section>
 </main>
 
-<div class="commut" role="group" aria-label="Essai de mise en avant">
-  <span>BAIL 99 ANS</span>
-  <button type="button" data-axe="avant" data-val="surligne" aria-pressed="true">Surligné</button>
-  <button type="button" data-axe="avant" data-val="gras" aria-pressed="false">Gras</button>
-  <button type="button" data-axe="avant" data-val="mixte" aria-pressed="false">Les deux</button>
-  <span>CADRES</span>
-  <button type="button" data-axe="op" data-val="100" aria-pressed="false">100 %</button>
-  <button type="button" data-axe="op" data-val="75" aria-pressed="true">75 %</button>
-  <button type="button" data-axe="op" data-val="50" aria-pressed="false">50 %</button>
-  <button type="button" data-axe="op" data-val="25" aria-pressed="false">25 %</button>
-</div>
-
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
@@ -688,29 +620,6 @@ html.avant-mixte #la-ferme .bail { font-weight: 700; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
-
-  var valides = { avant: ['surligne', 'gras', 'mixte'], op: ['100', '75', '50', '25'] };
-  var essais = { avant: 'surligne', op: '75' };
-  Object.keys(valides).forEach(function (a) {
-    var v = q.get(a);
-    if (v && valides[a].indexOf(v) >= 0) { essais[a] = v; }
-  });
-  var boutons = document.querySelectorAll('.commut button');
-  var majEssais = function () {
-    var r = document.documentElement;
-    r.classList.toggle('avant-gras', essais.avant === 'gras');
-    r.classList.toggle('avant-mixte', essais.avant === 'mixte');
-    ['100', '75', '50', '25'].forEach(function (o) {
-      r.classList.toggle('op-' + o, essais.op === o);
-    });
-    Array.prototype.forEach.call(boutons, function (b) {
-      b.setAttribute('aria-pressed', String(essais[b.dataset.axe] === b.dataset.val));
-    });
-  };
-  Array.prototype.forEach.call(boutons, function (b) {
-    b.addEventListener('click', function () { essais[b.dataset.axe] = b.dataset.val; majEssais(); });
-  });
-  majEssais();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
