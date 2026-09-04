@@ -508,7 +508,7 @@ html.etat-avant [data-compteur] { display: none; }
   background: var(--menthe);
   border-radius: 8px;
   padding: .7rem .9rem .8rem;
-  width: 152%;
+  width: 168%;
 }
 .jalon--maintenant .jalon__point { background: var(--vert); border: 0; width: 19px; height: 19px; margin: -9.5px 0 0 -9.5px; }
 .jalon__fleche { color: var(--vert); font-weight: 700; }
@@ -520,6 +520,39 @@ html.etat-avant [data-compteur] { display: none; }
   line-height: 1.42;
 }
 .etapes__chute strong { color: var(--violet-sombre); }
+.chute--rassemble, .chute--nombre { display: none; }
+html.chute-rassemble .chute--lieu { display: none; }
+html.chute-rassemble .chute--rassemble { display: block; }
+html.chute-nombre .chute--lieu { display: none; }
+html.chute-nombre .chute--nombre { display: block; }
+
+/* ---------- commutateur d'arbitrage, hors maquette ---------- */
+.commut {
+  position: fixed;
+  z-index: 90;
+  left: 1rem; bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .35rem .45rem;
+  background: #383648;
+  border-radius: 8px;
+  font-size: .72rem;
+  color: #fff;
+}
+.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
+.commut button {
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
+  cursor: pointer;
+}
+.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
+@media (max-width: 900px) { .commut { display: none; } }
 .etapes__lien { margin-top: .5rem; text-align: center; }
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
@@ -768,8 +801,8 @@ html.etat-avant [data-compteur] { display: none; }
         <li class="jalon jalon--vient jalon--maintenant">
           <span class="jalon__point" aria-hidden="true"></span>
           <div class="jalon__bloc">
-            <span class="jalon__date">D'ici le 31 décembre</span>
-            <span class="jalon__texte">le tour de table citoyen</span>
+            <span class="jalon__date">Jusqu'au 31 décembre</span>
+            <span class="jalon__texte">le plus grand nombre possible de coopérateur·ices</span>
           </div>
         </li>
         <li class="jalon jalon--vient">
@@ -780,11 +813,20 @@ html.etat-avant [data-compteur] { display: none; }
           </div>
         </li>
       </ol>
-      <p class="etapes__chute">Le don a lancé les études. <strong>La part sociale nous rassemble.</strong></p>
+      <p class="etapes__chute chute--rassemble">Le don a lancé les études. <strong>La part sociale nous rassemble.</strong></p>
+      <p class="etapes__chute chute--lieu">Le don a lancé les études. <strong>La part fait exister le lieu.</strong></p>
+      <p class="etapes__chute chute--nombre">Le don a lancé les études. <strong>Plus nous sommes nombreux, plus le lieu est à nous.</strong></p>
       <p class="etapes__lien"><a class="lien-texte" href="#les-etapes" title="Page « Prochaines étapes et modèle économique » à créer">Prochaines étapes et modèle économique</a></p>
     </div>
   </section>
 </main>
+
+<div class="commut" role="group" aria-label="Essai de chute">
+  <span>CHUTE</span>
+  <button type="button" data-val="lieu" aria-pressed="true">Fait exister le lieu</button>
+  <button type="button" data-val="rassemble" aria-pressed="false">Nous rassemble</button>
+  <button type="button" data-val="nombre" aria-pressed="false">Le nombre</button>
+</div>
 
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
@@ -799,6 +841,21 @@ html.etat-avant [data-compteur] { display: none; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
+
+  var chutes = ['lieu', 'rassemble', 'nombre'];
+  var chute = chutes.indexOf(q.get('chute')) >= 0 ? q.get('chute') : 'lieu';
+  var boutons = document.querySelectorAll('.commut button');
+  var majChute = function () {
+    var r = document.documentElement;
+    chutes.forEach(function (c) { r.classList.toggle('chute-' + c, chute === c); });
+    Array.prototype.forEach.call(boutons, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.val === chute));
+    });
+  };
+  Array.prototype.forEach.call(boutons, function (b) {
+    b.addEventListener('click', function () { chute = b.dataset.val; majChute(); });
+  });
+  majChute();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
