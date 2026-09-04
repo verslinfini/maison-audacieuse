@@ -806,60 +806,38 @@ h2 .marqueur::before {
 }
 #agir h2 { text-align: center; max-width: 20ch; margin: 0 auto; }
 
-/* ---- essais de fond, ecran 7 ---- */
-/* Terracotta plein : le blanc y tient 4,10:1, comme sur le violet. Les
-   huit pour cent de violet sombre rendent ce que la texture coute. */
-html.fond7-terracotta #agir {
+/* Fond retenu le 04/09 : terracotta plein, la couleur qui manquait, et la
+   rupture qu'exigeait l'alternance de la page. Cinq nappes le font bouger
+   comme les autres ecrans, plus le grain colore.
+   Reserve tenue : le blanc n'y atteint pas le seuil AA. Le voile sombre
+   passe de 8 a 16 % pour ramener le corps de texte au niveau du violet de
+   l'ecran 5, qui est notre plancher assume. */
+#agir {
   background:
     radial-gradient(66% 38% at 88% 104%, rgba(56,54,72,.44), rgba(56,54,72,0) 66%),
-    radial-gradient(56% 30% at 10% -8%, rgba(255,243,168,.30), rgba(255,243,168,0) 68%),
+    radial-gradient(56% 30% at 10% -8%, rgba(255,243,168,.26), rgba(255,243,168,0) 68%),
     radial-gradient(74% 42% at 6% 96%, rgba(56,54,72,.34), rgba(56,54,72,0) 70%),
     radial-gradient(68% 74% at 74% 44%, rgba(150,101,110,.52), rgba(150,101,110,0) 72%),
     radial-gradient(62% 70% at 26% 56%, rgba(172,124,100,.48), rgba(172,124,100,0) 74%),
-    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    linear-gradient(rgba(56,54,72,.16), rgba(56,54,72,.16)),
     var(--terracotta);
+  color: var(--blanc);
 }
-/* Terracotta dilue a 22 % sur du blanc : la couleur reste, le texte garde
-   ses 5,2:1. C'est la voie mediane, elle n'existait pas dans la demande. */
-html.fond7-terracotta-clair #agir {
-  background:
-    radial-gradient(60% 48% at 6% 6%, rgba(163,113,106,.34), rgba(163,113,106,0) 64%),
-    radial-gradient(54% 46% at 96% 92%, rgba(157,150,105,.30), rgba(157,150,105,0) 62%),
-    radial-gradient(48% 42% at 90% 4%, rgba(255,243,168,.34), rgba(255,243,168,0) 66%),
-    radial-gradient(72% 58% at 44% 52%, rgba(255,255,255,.72), rgba(255,255,255,0) 74%),
-    #EBE0DE;
-}
-/* Vert plein : le blanc n'y atteint que 3,1:1, le violet sombre 3,7. Aucun
-   texte de corps ne s'y lit au seuil AA, l'essai le montre a l'oeil. */
-html.fond7-vert #agir {
-  background:
-    radial-gradient(66% 38% at 90% 104%, rgba(56,54,72,.42), rgba(56,54,72,0) 66%),
-    radial-gradient(56% 30% at 8% -8%, rgba(186,255,228,.44), rgba(186,255,228,0) 68%),
-    radial-gradient(74% 42% at 4% 96%, rgba(56,54,72,.32), rgba(56,54,72,0) 70%),
-    radial-gradient(68% 74% at 74% 44%, rgba(84,146,132,.54), rgba(84,146,132,0) 72%),
-    radial-gradient(62% 70% at 26% 56%, rgba(110,160,116,.46), rgba(110,160,116,0) 74%),
-    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
-    var(--vert);
-}
-html.fond7-terracotta #agir > .grain__voile,
-html.fond7-vert #agir > .grain__voile { opacity: .34; mix-blend-mode: overlay; }
-html.fond7-terracotta #agir,
-html.fond7-vert #agir { color: var(--blanc); }
-html.fond7-terracotta #agir h2, html.fond7-terracotta #agir h3,
-html.fond7-vert #agir h2, html.fond7-vert #agir h3 { color: var(--blanc); }
-html.fond7-terracotta .geste__no,
-html.fond7-vert .geste__no { color: var(--jaune); }
-html.fond7-terracotta .fleche,
-html.fond7-vert .fleche { color: rgba(255,255,255,.82); }
+#agir > .grain__voile { opacity: .34; mix-blend-mode: overlay; }
+#agir h2, #agir .geste h3 { color: var(--blanc); }
 /* Les encarts restent blancs : leurs titres ne suivent pas le fond de la
    section, sinon ils passent en blanc sur blanc. */
-html.fond7-terracotta #agir .porte h3,
-html.fond7-vert #agir .porte h3 { color: var(--violet-sombre); }
+#agir .porte h3 { color: var(--violet-sombre); }
+/* Le bouton violet flottait sur le terracotta, deux teintes moyennes qui se
+   disputent. Le jaune de la charte est deja la couleur d'accent de l'ecran,
+   et il porte le violet sombre a 10,7:1. */
+#agir .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
+#agir .bouton--primaire:hover { background: #FFEB7E; }
 
 /* ---- les gestes et les fleches ---- */
 .gestes {
   list-style: none;
-  margin: clamp(1.4rem, 3.2vh, 2.4rem) 0 0;
+  margin: clamp(2rem, 4.6vh, 3.4rem) 0 0;
   padding: 0;
   display: grid;
   /* Les gestes se calent en haut, sinon des textes de longueurs inegales
@@ -883,7 +861,8 @@ html.agir-ligne .fleche--b .fleche__z { display: none; }
 /* Disposition en Z : quatre cases, l'oeil fait le parcours qu'il ferait
    de toute facon, la fleche du milieu ramene a la ligne. */
 html.agir-z .gestes {
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 40%) auto minmax(0, 40%);
+  justify-content: space-between;
   grid-template-areas:
     "g1 fa g2"
     "fb fb fb"
@@ -899,39 +878,41 @@ html.agir-z .geste--3 { grid-area: g3; }
 html.agir-z .fleche--c { grid-area: fc; }
 html.agir-z .geste--cta { grid-area: g4; justify-self: start; }
 html.agir-z .fleche--b .fleche__ligne { display: none; }
-html.agir-z .geste {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: clamp(.7rem, 1.4vw, 1.1rem);
-  align-items: baseline;
-}
-html.agir-z .geste__no { grid-row: 1 / span 2; align-self: center; }
-html.agir-z .geste h3 { margin-top: 0; }
 
-.geste__no {
-  display: block;
-  font-family: "Meow Script", "Segoe Script", cursive;
-  font-size: clamp(2.9rem, 4vw, 4rem);
-  line-height: .7;
-  color: var(--terracotta);
-  /* La Meow Script n'a qu'une graisse : le trait s'epaissit au contour. */
-  -webkit-text-stroke: 1.1px currentColor;
+.geste h3 {
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  line-height: 1.2;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(.45rem, 1vw, .85rem);
 }
-.geste h3 { margin-top: .5rem; font-size: clamp(1.05rem, 1.2vw, 1.2rem); line-height: 1.2; }
-.geste p { margin-top: .4rem; font-size: .95rem; line-height: 1.5; }
+.geste__no {
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(3.2rem, 4.6vw, 4.6rem);
+  /* Hauteur nulle : le chiffre deborde de la ligne sans la pousser. */
+  line-height: 0;
+  position: relative;
+  top: .06em;
+  color: var(--jaune);
+  /* La Meow Script n'a qu'une graisse : le trait s'epaissit au contour. */
+  -webkit-text-stroke: 1.4px currentColor;
+}
+.geste p { margin-top: .5rem; font-size: .95rem; line-height: 1.5; }
 .geste--cta { display: flex; }
 .geste--cta .bouton { min-height: 58px; padding: 0 1.9rem; font-size: .95rem; }
-.fleche { color: var(--terracotta); display: flex; justify-content: center; align-self: center; }
-.fleche svg { display: block; }
-.fleche--a svg, .fleche--c svg, .fleche__ligne { width: clamp(46px, 5vw, 74px); height: auto; }
-.fleche__z { width: 100%; height: auto; }
+.fleche { color: var(--jaune); display: flex; justify-content: center; align-self: center; }
+.fleche svg { display: block; width: 100%; height: auto; }
+.fleche--a { width: clamp(40px, 4.4vw, 62px); }
+.fleche--b { width: clamp(54px, 6.2vw, 88px); }
+.fleche--c { width: clamp(46px, 5.2vw, 74px); }
+html.agir-z .fleche--b { width: clamp(130px, 16vw, 210px); justify-self: center; }
 
 /* ---- les deux encarts du bas ---- */
 .portes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(.7rem, 1.6vw, 1.2rem);
-  margin-top: clamp(1.3rem, 3vh, 2.2rem);
+  margin-top: clamp(2.2rem, 5vh, 3.6rem);
   align-items: stretch;
 }
 .porte {
@@ -1350,23 +1331,20 @@ html.agir-z .geste h3 { margin-top: 0; }
       <h2>Pour agir, rien de plus simple</h2>
       <ol class="gestes">
         <li class="geste geste--1">
-          <span class="geste__no" aria-hidden="true">1</span>
-          <h3>Prenez votre part sociale</h3>
+          <h3><span class="geste__no" aria-hidden="true">1</span>Prenez votre part sociale</h3>
           <p>Quelques minutes suffisent pour devenir coopérateur·ice.</p>
         </li>
-        <li class="fleche fleche--a" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 92 30" fill="none" aria-hidden="true" focusable="false"><path d="M5,17 C24,8 46,23 72,13" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M63,7 L74,12.6 L64,20" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li class="fleche fleche--a" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 74 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,19 C18,8 34,24 54,12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M46,6 L57,11.4 L47,19" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
         <li class="geste geste--2">
-          <span class="geste__no" aria-hidden="true">2</span>
-          <h3>Passez le mot</h3>
+          <h3><span class="geste__no" aria-hidden="true">2</span>Passez le mot</h3>
           <p>Parlez du projet à trois personnes&nbsp;: c'est l'effet boule de neige qui fera naître le lieu.</p>
         </li>
-        <li class="fleche fleche--b" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 92 30" fill="none" aria-hidden="true" focusable="false"><path d="M5,17 C24,8 46,23 72,13" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M63,7 L74,12.6 L64,20" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="fleche__z" viewBox="0 0 900 78" fill="none" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M872,20 C844,54 630,72 60,62" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/><path d="M84,48 L58,60 L86,71" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></li>
+        <li class="fleche fleche--b" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 104 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,11 C30,25 52,4 84,17" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M75,10 L87,17.6 L74,23" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="fleche__z" viewBox="0 0 210 104" fill="none" aria-hidden="true" focusable="false"><path d="M196,10 C176,42 118,58 30,88" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M52,70 L26,90 L58,95" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
         <li class="geste geste--3">
-          <span class="geste__no" aria-hidden="true">3</span>
-          <h3>Entrez dans la vie du lieu</h3>
+          <h3><span class="geste__no" aria-hidden="true">3</span>Entrez dans la vie du lieu</h3>
           <p>En devenant coopérateur·ice, vous pouvez participer aux rencontres et aux prises de décision. Vous recevrez une invitation après votre souscription.</p>
         </li>
-        <li class="fleche fleche--c" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 92 30" fill="none" aria-hidden="true" focusable="false"><path d="M5,17 C24,8 46,23 72,13" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M63,7 L74,12.6 L64,20" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li class="fleche fleche--c" aria-hidden="true"><span class="fleche__ligne"><svg viewBox="0 0 88 30" fill="none" aria-hidden="true" focusable="false"><path d="M4,15 C26,6 44,23 68,14" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M59,7 L71,13.4 L60,21" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
         <li class="geste geste--cta">
           <a class="bouton bouton--primaire" href="#agir" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
         </li>
@@ -1392,12 +1370,7 @@ html.agir-z .geste h3 { margin-top: 0; }
 </main>
 
 <div class="commut" role="group" aria-label="Essais en cours">
-  <span>FOND, ÉCRAN 7</span>
-  <button type="button" data-axe="fond7" data-val="clair" aria-pressed="true">Clair</button>
-  <button type="button" data-axe="fond7" data-val="terracotta-clair" aria-pressed="false">Terracotta clair</button>
-  <button type="button" data-axe="fond7" data-val="terracotta" aria-pressed="false">Terracotta</button>
-  <button type="button" data-axe="fond7" data-val="vert" aria-pressed="false">Vert</button>
-  <span>DISPOSITION</span>
+  <span>DISPOSITION, ÉCRAN 7</span>
   <button type="button" data-axe="agir" data-val="ligne" aria-pressed="true">En ligne</button>
   <button type="button" data-axe="agir" data-val="z" aria-pressed="false">En Z</button>
 </div>
@@ -1417,11 +1390,8 @@ html.agir-z .geste h3 { margin-top: 0; }
   window.addEventListener('scroll', maj, { passive: true });
 
 
-  var valeurs = {
-    fond7: ['clair', 'terracotta-clair', 'terracotta', 'vert'],
-    agir: ['ligne', 'z']
-  };
-  var choix = { fond7: 'clair', agir: 'ligne' };
+  var valeurs = { agir: ['ligne', 'z'] };
+  var choix = { agir: 'ligne' };
   Object.keys(valeurs).forEach(function (a) {
     var v = q.get(a);
     if (v && valeurs[a].indexOf(v) >= 0) { choix[a] = v; }
