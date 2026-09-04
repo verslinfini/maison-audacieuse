@@ -347,41 +347,51 @@ html.noms-verts .nom-structure { color: var(--vert); }
 html.noms-violets .nom-structure { color: var(--violet); }
 .niveaux .nom-structure {
   display: block;
-  font-size: .95rem;
+  font-size: clamp(.7rem, .58vw, .78rem);
   font-weight: 700;
-  letter-spacing: -.005em;
+  letter-spacing: .045em;
+  text-transform: uppercase;
   color: var(--terracotta);
   line-height: 1.3;
   white-space: nowrap;
-  margin-bottom: .3rem;
+  margin-bottom: .45rem;
 }
 html.acc-vert .nom-structure { color: var(--vert); }
+.reponse--proposee { display: none; }
+html.reponse-neuve .reponse--validee { display: none; }
+html.reponse-neuve .reponse--proposee { display: block; }
 
 /* Sans le filet, la bande a besoin d'un peu plus d'air au-dessus. */
 html.sans-trait .usages { border-top: 0; padding-top: 0; margin-top: clamp(2.4rem, 5.4vh, 4.2rem); }
 
 /* Gestes : les cinq espaces numerotes, et un mot du titre a la main. */
 .niveaux { counter-reset: usage; }
-html.gestes:not(.usages-logos) .niveaux li { counter-increment: usage; padding-top: 2.5rem; }
+html.gestes:not(.usages-logos) .niveaux li { counter-increment: usage; padding-top: 1.1rem; z-index: 0; }
 html.gestes .niveaux li::before {
-  content: "0" counter(usage);
+  content: counter(usage);
   position: absolute;
-  top: -.1rem;
-  left: 0;
-  font-size: 1.7rem;
+  z-index: -1;
+  top: -1.1rem;
+  left: -1rem;
+  font-size: 7.4rem;
   font-weight: 700;
-  letter-spacing: -.03em;
+  line-height: 1;
+  letter-spacing: -.06em;
   color: var(--terracotta);
-  opacity: .42;
+  opacity: .17;
+  transform: rotate(-9deg);
+  pointer-events: none;
 }
-html.gestes.acc-vert .niveaux li::before { color: var(--vert); opacity: .55; }
+html.gestes.acc-vert .niveaux li::before { color: var(--vert); opacity: .2; }
 html.gestes .mot-main {
   font-family: "Meow Script", "Onest", cursive;
   font-weight: 400;
-  font-size: 1.16em;
+  font-size: 1.2em;
   color: var(--terracotta);
   letter-spacing: 0;
-  padding: 0 .08em;
+  padding: 0 .1em;
+  -webkit-text-stroke: 2.4px currentColor;
+  paint-order: stroke fill;
 }
 html.gestes.acc-vert .mot-main { color: var(--vert); }
 html.gestes #le-lieu h2 { line-height: 1.14; }
@@ -541,7 +551,8 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
-            <p class="lieu__reponse">Nous créons un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
+            <p class="lieu__reponse reponse--validee">Nous créons un lieu unique, capable d'y répondre de manière globale. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
+          <p class="lieu__reponse reponse--proposee">Nous créons le lieu qui manque. Un lieu pour être accueillie, soignée, logée. Un lieu pour se rencontrer, créer du lien et faire société autrement.</p>
           </div>
         </div>
       </div>
@@ -566,9 +577,12 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   <span>TRAIT</span>
   <button type="button" data-axe="trait" data-val="avec" aria-pressed="true">Avec</button>
   <button type="button" data-axe="trait" data-val="sans" aria-pressed="false">Sans</button>
-  <span>ECRAN 2</span>
-  <button type="button" data-axe="gestes" data-val="sobre" aria-pressed="true">Sobre</button>
-  <button type="button" data-axe="gestes" data-val="gestes" aria-pressed="false">Gestes</button>
+  <span>PHRASE</span>
+  <button type="button" data-axe="reponse" data-val="validee" aria-pressed="true">Validée</button>
+  <button type="button" data-axe="reponse" data-val="neuve" aria-pressed="false">Proposée</button>
+  <span>CHIFFRES</span>
+  <button type="button" data-axe="gestes" data-val="gestes" aria-pressed="true">Avec</button>
+  <button type="button" data-axe="gestes" data-val="sobre" aria-pressed="false">Sans</button>
 </div>
 
 <div class="barre-mobile">
@@ -587,8 +601,8 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
-  var axes = { acc: 'terracotta', trait: 'avec', gestes: 'sobre' };
-  var classes = { 'acc:vert': 'acc-vert', 'trait:sans': 'sans-trait', 'gestes:gestes': 'gestes' };
+  var axes = { acc: 'terracotta', trait: 'avec', gestes: 'gestes', reponse: 'validee' };
+  var classes = { 'acc:vert': 'acc-vert', 'trait:sans': 'sans-trait', 'gestes:gestes': 'gestes', 'reponse:neuve': 'reponse-neuve' };
   var applique = function () {
     var r = document.documentElement;
     Object.keys(classes).forEach(function (k) { r.classList.remove(classes[k]); });
@@ -603,7 +617,7 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
     b.addEventListener('click', function () { axes[b.dataset.axe] = b.dataset.val; applique(); });
   });
-  ['acc', 'trait', 'gestes'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
+  ['acc', 'trait', 'gestes', 'reponse'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
   applique();
 
   var bouton = document.getElementById('menu-bouton');
