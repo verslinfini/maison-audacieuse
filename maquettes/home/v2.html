@@ -313,14 +313,14 @@ html.etat-avant [data-compteur] { display: none; }
 .lieu__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 40rem; }
 .lieu__texte p { line-height: 1.66; }
 /* Meme corps que le constat : seule la couleur dit que c'est la reponse. */
-.lieu__reponse { color: var(--violet-sombre); font-weight: 500; }
+.lieu__reponse { color: var(--violet-sombre); font-weight: 600; }
 
 /* Les cinq usages en bande, sous le texte : un inventaire, pas une colonne
    de lecture qui concurrence la premiere. */
 .usages {
   margin-top: clamp(1.8rem, 4vh, 3.2rem);
   padding-top: clamp(1.4rem, 3vh, 2.2rem);
-  border-top: 1px solid rgba(56, 54, 72, .14);
+  border-top: 2px solid var(--vert);
 }
 .niveaux {
   display: grid;
@@ -334,16 +334,7 @@ html.etat-avant [data-compteur] { display: none; }
   font-size: 1rem;
   line-height: 1.5;
 }
-.niveaux li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 22px;
-  height: 8px;
-  border-radius: 2px;
-  background: var(--vert);
-}
+
 .niveaux .logo-structure {
   height: 46px;
   width: auto;
@@ -352,6 +343,7 @@ html.etat-avant [data-compteur] { display: none; }
   object-position: left center;
   margin-bottom: .7rem;
 }
+html.noms-verts .nom-structure { color: var(--vert); }
 .niveaux .nom-structure {
   display: block;
   font-size: .78rem;
@@ -363,11 +355,11 @@ html.etat-avant [data-compteur] { display: none; }
 }
 /* Variante logos : la vignette remplace le tiret vert. */
 html.usages-logos .niveaux li { padding-top: 0; }
-html.usages-logos .niveaux li::before { display: none; }
+
 html.usages-logos .nom-structure { display: none; }
 /* Variante noms : le tiret reste, le nom s'intercale. */
 html:not(.usages-logos) .logo-structure { display: none; }
-html:not(.usages-logos) .niveaux li { padding-top: 1.5rem; }
+html:not(.usages-logos) .niveaux li { padding-top: 0; }
 .lieu__lien { margin-top: clamp(1.2rem, 2.6vh, 1.9rem); }
 
 /* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
@@ -515,7 +507,8 @@ html:not(.usages-logos) .niveaux li { padding-top: 1.5rem; }
 (function () {
   var q = new URLSearchParams(window.location.search);
   if (q.get('etat') === 'avant') { document.documentElement.className += ' etat-avant'; }
-  if (q.get('u') !== 'noms') { document.documentElement.className += ' usages-logos'; }
+  if (q.get('u') === 'logos') { document.documentElement.className += ' usages-logos'; }
+  if (q.get('v') === 'vert') { document.documentElement.className += ' noms-verts'; }
   var entete = document.getElementById('entete');
   var seuil = 120;
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
