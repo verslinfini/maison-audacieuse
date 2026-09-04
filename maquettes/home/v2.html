@@ -14,7 +14,7 @@
 /* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
 /* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
 /* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel,       */
-/* 4 les etapes du projet, 5 le pari du bien commun.                   */
+/* 4 les etapes, 5 le pari du bien commun, 6 prendre part au projet.   */
 /* ------------------------------------------------------------------ */
 
 :root {
@@ -281,11 +281,14 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
    bas que haut, comme un marqueur passe a la main sous le texte. */
 .marqueur {
   color: var(--violet-sombre);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 32' preserveAspectRatio='none'><path d='M3,2.3 L226,1.7 L237,30.3 L9,30.9 Z' fill='%23FFF3A8'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding: .28em .34em .44em .42em;
-  margin: 0 -.34em 0 -.42em;
+  border-style: solid;
+  border-width: 0 15px;
+  border-image-source: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M3,2.4 L50,1.9 L61,30.1 L14,30.6 Z' fill='%23FFF3A8'/></svg>");
+  border-image-slice: 0 15 fill;
+  border-image-width: 0 15px;
+  border-image-repeat: stretch;
+  padding: .28em 0 .44em;
+  margin: 0 -7px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -578,6 +581,68 @@ html.etat-avant [data-compteur] { display: none; }
 /* Sur cet aplat, seul le blanc tient : l'ocre tombe a 1,09:1 et le vert a
    1,42:1, les trois couleurs ont la meme luminosite. Essai clos le 04/09. */
 
+/* ================================================================== */
+/* Ecran 6, prendre part au projet                                     */
+/* L'ecran de conversion. Composition centree et fond blanc : tout      */
+/* converge vers un seul bouton, rien ne tire l'oeil de cote.           */
+/* ================================================================== */
+#prendre-part {
+  position: relative;
+  background: var(--blanc);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+  text-align: center;
+}
+#prendre-part > .contenu { position: relative; z-index: 1; width: 100%; }
+#prendre-part > .grain__voile { opacity: .16; }
+.part__bloc { max-width: 47rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+#prendre-part h2 { max-width: 18ch; }
+/* A ce corps, le debordement vertical d'un surlignage de paragraphe ferait
+   une tache : il se resserre, et les biais s'elargissent a proportion. */
+#prendre-part h2 .marqueur { padding: .1em 0 .17em; border-width: 0 22px; border-image-width: 0 22px; }
+.part__question {
+  margin-top: clamp(1.3rem, 3vh, 2.1rem);
+  font-size: var(--t-lead);
+  font-weight: 600;
+  line-height: 1.34;
+  color: var(--violet-sombre);
+  max-width: 30ch;
+}
+.part__texte { margin-top: 1rem; max-width: 46ch; line-height: 1.6; }
+/* Les deux equations : un fait chacune, le chiffre porte, le signe colore. */
+.equations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(.7rem, 1.6vw, 1.3rem);
+  margin: clamp(1.5rem, 3.6vh, 2.6rem) 0 0;
+}
+.equations li {
+  background: var(--violace);
+  border-radius: 10px;
+  padding: clamp(.8rem, 1.6vh, 1.15rem) clamp(1.1rem, 2vw, 1.9rem);
+  font-size: 1.05rem;
+  color: var(--texte);
+  line-height: 1.25;
+}
+.equations b { font-size: clamp(1.5rem, 2.1vw, 2rem); font-weight: 700; color: var(--violet-sombre); letter-spacing: -.02em; }
+.equations .eq { font-size: 1.35rem; font-weight: 700; color: var(--violet); padding: 0 .18em; }
+.equations small { display: block; margin-top: .35rem; font-size: .8rem; color: var(--texte); }
+.part__reassurance { margin-top: clamp(1.3rem, 3vh, 2rem); max-width: 44ch; font-size: .95rem; line-height: 1.55; }
+.part__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: .6rem 1.8rem;
+  margin-top: clamp(1.4rem, 3.2vh, 2.2rem);
+}
+.part__actions .bouton { min-height: 58px; padding: 0 2.1rem; font-size: .95rem; }
+
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
   position: absolute;
@@ -605,6 +670,7 @@ html.etat-avant [data-compteur] { display: none; }
   .pari__grille { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
   #le-pari h2 { max-width: 100%; }
   .pari__chute { max-width: 100%; }
+  #prendre-part h2 { max-width: 100%; }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -660,6 +726,11 @@ html.etat-avant [data-compteur] { display: none; }
   .etapes__chute { text-align: left; margin-left: 0; }
   .etapes__lien { text-align: left; }
   #le-pari { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+  #prendre-part { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; text-align: left; }
+  .part__bloc { align-items: flex-start; }
+  .equations { justify-content: flex-start; }
+  .part__actions { justify-content: flex-start; }
+  .part__actions .bouton { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -860,6 +931,28 @@ html.etat-avant [data-compteur] { display: none; }
           <p class="pari__fort">Pour servir l'intérêt général et garder ce lieu accessible, <span class="marqueur">nous faisons le pari inverse</span>&nbsp;: ouvrir le capital à une multitude de personnes qui partagent nos valeurs.</p>
           <p><strong>Ici, personne ne s'enrichit</strong>&nbsp;: la rentabilité est un seuil à atteindre, pas un objectif à dépasser.</p>
           <p>Le pari est déjà lancé&nbsp;: plus de <strong>1 700 personnes</strong> ont signé la lettre de soutien, plus de <strong>650</strong> ont contribué financièrement. Aujourd'hui, chacune et chacun peut participer à la création de ce bien commun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecran 6, prendre part au projet -->
+  <section id="prendre-part">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="part__bloc">
+        <h2>Prendre <span class="marqueur">part</span> au projet</h2>
+        <p class="part__question">Vous partagez nos valeurs et vous avez envie de soutenir le projet&nbsp;?</p>
+        <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse et copropriétaire du lieu avec nous.</p>
+        <p class="part__texte">Chaque part sociale en appelle d'autres&nbsp;: plus nous sommes nombreux·ses, plus le projet a de poids.</p>
+        <ul class="equations">
+          <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b></li>
+          <li><b>1</b> personne <span class="eq" aria-hidden="true">=</span> <b>1</b> voix<small>quel que soit le nombre de parts</small></li>
+        </ul>
+        <p class="part__reassurance">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+        <div class="part__actions">
+          <a class="bouton bouton--primaire" href="#prendre-part" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
+          <a class="lien-texte" href="/part-sociale/#faq">Toutes vos questions sur la part sociale</a>
         </div>
       </div>
     </div>
