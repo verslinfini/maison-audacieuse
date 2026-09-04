@@ -13,7 +13,7 @@
 /* Copy verbatim : « Copy home validée écran par écran », 20/08/2026,  */
 /* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
 /* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
-/* Ecrans presents : 1 heros, 2 la place des femmes.                   */
+/* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel.       */
 /* ------------------------------------------------------------------ */
 
 :root {
@@ -59,6 +59,7 @@ h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-sp
 h1 { font-size: var(--t-display); line-height: .98; }
 h2 { font-size: var(--t-titre); line-height: 1.04; }
 p { margin: 0; }
+sup { font-size: .62em; line-height: 0; }
 ul { margin: 0; padding: 0; list-style: none; }
 section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 :focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; border-radius: 2px; }
@@ -329,95 +330,119 @@ html.etat-avant [data-compteur] { display: none; }
 }
 .niveaux li {
   position: relative;
-  padding-top: 1.4rem;
   color: var(--violet-sombre);
   font-size: 1rem;
   line-height: 1.5;
 }
 
-.niveaux .logo-structure {
-  height: 46px;
-  width: auto;
-  max-width: 130px;
-  object-fit: contain;
-  object-position: left center;
-  margin-bottom: .7rem;
-}
-html.noms-verts .nom-structure { color: var(--vert); }
-html.noms-violets .nom-structure { color: var(--violet); }
 .niveaux .nom-structure {
   display: block;
   font-size: clamp(.85rem, .72vw, .94rem);
   font-weight: 700;
   letter-spacing: .025em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--vert);
   line-height: 1.3;
   white-space: nowrap;
   margin-bottom: .45rem;
 }
-html.acc-vert .nom-structure { color: var(--vert); }
-/* En manuscrit, le mot est plus large : sans coupe forcee il remonte sur la
-   premiere ligne et desequilibre le titre. La coupe garde les trois lignes
-   « Un lieu pour / elargir la place / des femmes ». */
-html.titre-main .coupe::after { content: "\A"; white-space: pre; }
-
-/* Sans le filet, la bande a besoin d'un peu plus d'air au-dessus. */
-/* Deux facons d'accentuer l'ecran, jamais les deux ensemble : un mot du titre
-   a la main, ou la premiere phrase de la reponse surlignee comme au heros. */
-html.titre-main .mot-main {
-  font-family: "Meow Script", "Onest", cursive;
-  font-weight: 400;
-  font-size: 1.2em;
-  color: var(--terracotta);
-  letter-spacing: 0;
-  padding: 0 .06em 0 0;
-  -webkit-text-stroke: 2.4px currentColor;
-  paint-order: stroke fill;
-}
-html.titre-main.acc-vert .mot-main { color: var(--vert); }
-/* Le mot manuscrit est plus large : la colonne du titre s ouvre d autant,
-   sinon « elargir la place » ne tient plus sur la deuxieme ligne. */
-html.titre-main #le-lieu h2 { line-height: 1.16; max-width: 15ch; }
-/* Variante logos : la vignette remplace le tiret vert. */
-html.usages-logos .niveaux li { padding-top: 0; }
-
-html.usages-logos .nom-structure { display: none; }
-/* Variante noms : le tiret reste, le nom s'intercale. */
-html:not(.usages-logos) .logo-structure { display: none; }
-html:not(.usages-logos) .niveaux li { padding-top: 0; }
 .lieu__lien { margin-top: clamp(1.2rem, 2.6vh, 1.9rem); }
 
-/* « Sous un meme toit » : la ligne de faitage, puis les cinq usages empiles
-   comme des niveaux. Un seul geste graphique, pose sur un panneau clair. */
-
-/* ---------- commutateur d'arbitrage, hors maquette ---------- */
-.commut {
-  position: fixed;
-  z-index: 90;
-  right: 1rem; bottom: 1rem;
+/* ================================================================== */
+/* Ecran 3, renover un lieu emblematique : la Ferme de Novel           */
+/* Le seul ecran ou l'image tient tout le cadre. Le texte vit dans un  */
+/* panneau pose dessus, le projet renove en vignette a cheval : le     */
+/* futur se pose sur le present, c'est tout l'avant-apres.             */
+/* ================================================================== */
+#la-ferme {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
-  align-items: center;
-  gap: .3rem;
-  padding: .35rem .45rem;
-  background: #383648;
-  border-radius: 8px;
-  font-size: .72rem;
-  color: #fff;
+  align-items: flex-end;
+  padding: calc(var(--h-entete) + 1.5rem) 0 clamp(2.4rem, 6vh, 4.4rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--violet-sombre);
 }
-.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
-.commut button {
-  min-height: 44px;
-  padding: 0 .7rem;
-  border: 0;
-  border-radius: 5px;
-  background: rgba(255,255,255,.16);
-  color: #fff;
-  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
-  cursor: pointer;
+.ferme__fond {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 82%;
 }
-.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
-@media (max-width: 900px) { .commut { display: none; } }
+/* Le panneau est opaque : le voile ne sert qu'a poser son bord droit et a
+   empecher la photo de partir en blanc autour du texte. */
+.ferme__voile {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(56, 54, 72, .62) 0%, rgba(56, 54, 72, .18) 20%, rgba(56, 54, 72, 0) 38%),
+    linear-gradient(102deg, rgba(56, 54, 72, .58) 0%, rgba(56, 54, 72, .3) 44%, rgba(56, 54, 72, 0) 74%);
+}
+#la-ferme > .grain__voile { z-index: 2; opacity: .34; }
+.ferme__contenu {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .82fr);
+  align-items: end;
+}
+.panneau {
+  background: var(--blanc);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.35rem, 2.3vw, 2.3rem);
+  border-radius: 3px;
+  box-shadow: 0 26px 60px rgba(56, 54, 72, .34);
+  max-width: 615px;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.panneau h2 { font-size: clamp(1.6rem, 2.35vw, 2.25rem); line-height: 1.08; margin-bottom: .25rem; }
+.panneau p { line-height: 1.56; }
+.panneau .lien-texte { margin-top: .3rem; align-self: flex-start; }
+/* La vignette du projet renove, posee a cheval sur le panneau. */
+.apres {
+  position: relative;
+  width: min(100%, 424px);
+  margin: 0 0 clamp(1rem, 3.4vh, 2.6rem) clamp(-3.4rem, -2.6vw, -1.4rem);
+  padding: 10px 10px 0;
+  background: var(--blanc);
+  border-radius: 3px;
+  box-shadow: 0 20px 44px rgba(56, 54, 72, .38);
+  transform: rotate(1.5deg);
+}
+.apres img { border-radius: 1px; }
+.apres__pied { display: flex; align-items: flex-end; justify-content: space-between; gap: .8rem; padding: 0 .15rem .5rem; }
+.apres__mot {
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(2.1rem, 2.9vw, 3.1rem);
+  line-height: 1;
+  color: var(--terracotta);
+  -webkit-text-stroke: .8px currentColor;
+  paint-order: stroke fill;
+  transform: rotate(-4deg);
+  margin: .35rem 0 0 .2rem;
+}
+.apres figcaption { font-size: .72rem; letter-spacing: .03em; color: var(--texte); text-align: right; padding-bottom: .35rem; }
+/* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
+.ferme__credit {
+  position: absolute;
+  z-index: 3;
+  right: var(--marge);
+  bottom: 1rem;
+  padding: .3rem .6rem;
+  border-radius: 4px;
+  background: var(--violet-sombre);
+  color: var(--blanc);
+  font-size: .68rem;
+  letter-spacing: .03em;
+}
 
 /* ---------- etroit ---------- */
 @media (max-width: 1080px) {
@@ -426,6 +451,8 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   .hero__phrase { max-width: 46ch; }
   .lieu__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   .niveaux { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
+  .ferme__contenu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: start; }
+  .apres { margin-left: 0; width: min(62%, 380px); }
 }
 @media (max-width: 767px) {
   :root { --h-entete: 58px; }
@@ -452,6 +479,14 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
   .jauge__nombre { font-size: 1.75rem; }
   .jauge__deja { font-size: 2.4rem; margin-bottom: .3rem; }
   .lieu__reponse { font-size: 1.1rem; }
+  /* En etroit, la photo cesse d'etre un fond : elle devient le bandeau du
+     haut, sinon le panneau la recouvre entierement. */
+  #la-ferme { display: block; min-height: 0; padding: 0 0 2.5rem; }
+  .ferme__fond { position: relative; height: clamp(190px, 32vh, 260px); margin-bottom: 1.3rem; }
+  .ferme__voile { display: none; }
+  .panneau { padding: 1.25rem 1.15rem; }
+  .apres { width: min(74%, 300px); margin-bottom: 0; }
+  .ferme__credit { position: static; display: inline-block; margin: .9rem 0 0 var(--marge); }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -531,7 +566,7 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
-        <h2>Un lieu pour<span class="coupe"> </span><span class="mot-main">élargir</span> la place des&nbsp;femmes</h2>
+        <h2>Un lieu pour élargir la place des&nbsp;femmes</h2>
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
@@ -541,26 +576,42 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
       </div>
       <div class="usages">
         <ul class="niveaux">
-            <li><img class="logo-structure" src="../assets/img/part_ostara.jpg" alt="Ostara" width="440" height="440"><span class="nom-structure">Ostara</span>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
-            <li><img class="logo-structure" src="../assets/img/part_beguinage.jpg" alt="Le béguinage" width="440" height="440"><span class="nom-structure">Béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
-            <li><img class="logo-structure" src="../assets/img/part_cafe.jpg" alt="Le Café des Audacieuses" width="440" height="440"><span class="nom-structure">Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
-            <li><img class="logo-structure" src="../assets/img/part_sante.jpg" alt="Maison En-Santé" width="440" height="440"><span class="nom-structure">Maison En-Santé</span>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
-          <li><img class="logo-structure" src="../assets/img/part_banjo.jpg" alt="Banjo" width="440" height="440"><span class="nom-structure">Banjo</span>un espace de créativité et d'éveil pour les enfants et les familles.</li>
+            <li><span class="nom-structure">Ostara</span>un espace d'accueil et d'accompagnement pour les femmes victimes de violences,</li>
+            <li><span class="nom-structure">Béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
+            <li><span class="nom-structure">Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
+            <li><span class="nom-structure">Maison En-Santé</span>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
+          <li><span class="nom-structure">Banjo</span>un espace de créativité et d'éveil pour les enfants et les familles.</li>
         </ul>
         <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
       </div>
     </div>
   </section>
-</main>
 
-<div class="commut" role="group" aria-label="Essais de traitement">
-  <span>COULEUR</span>
-  <button type="button" data-axe="acc" data-val="terracotta" aria-pressed="true">Terracotta</button>
-  <button type="button" data-axe="acc" data-val="vert" aria-pressed="false">Vert</button>
-  <span>TITRE</span>
-  <button type="button" data-axe="titre" data-val="normal" aria-pressed="true">Normal</button>
-  <button type="button" data-axe="titre" data-val="main" aria-pressed="false">Manuscrit</button>
-</div>
+  <!-- Ecran 3, renover un lieu emblematique : la Ferme de Novel -->
+  <section id="la-ferme">
+    <img class="ferme__fond" src="../assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui : un long corps de ferme en pierre sous un large toit de tuiles, en bord de rue" width="1368" height="857">
+    <div class="ferme__voile" aria-hidden="true"></div>
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu ferme__contenu">
+      <div class="panneau">
+        <h2>Rénover un lieu emblématique : la&nbsp;Ferme de&nbsp;Novel</h2>
+        <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
+        <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
+        <p>Le projet architectural préserve l'identité du lieu, ses murs en pierre, sa charpente d'origine. Et le modernise, de l'accessibilité à la performance énergétique.</p>
+        <p>La Ville d'Annecy nous confie le bâtiment pour 99 ans : le foncier ne nous coûte rien, <span class="marqueur">chaque euro finance la rénovation</span>. L'ensemble du projet est estimé à 3,2 millions d'euros.</p>
+        <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
+      </div>
+      <figure class="apres">
+        <img src="../assets/img/visuel-dauphine-1.jpg" alt="Le même bâtiment une fois rénové, vu par l'architecte : façades claires, toit neuf, cour plantée" width="900" height="563">
+        <div class="apres__pied">
+          <span class="apres__mot">demain</span>
+          <figcaption>© Basa Architecture</figcaption>
+        </div>
+      </figure>
+    </div>
+    <p class="ferme__credit">La ferme aujourd'hui. Photo du collectif.</p>
+  </section>
+</main>
 
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
@@ -570,33 +621,11 @@ html:not(.usages-logos) .niveaux li { padding-top: 0; }
 (function () {
   var q = new URLSearchParams(window.location.search);
   if (q.get('etat') === 'avant') { document.documentElement.className += ' etat-avant'; }
-  if (q.get('u') === 'logos') { document.documentElement.className += ' usages-logos'; }
-  if (q.get('v') === 'vert') { document.documentElement.className += ' noms-verts'; }
-  if (q.get('v') === 'violet') { document.documentElement.className += ' noms-violets'; }
   var entete = document.getElementById('entete');
   var seuil = 120;
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
-  var axes = { acc: 'vert', titre: 'normal' };
-  var classes = { 'acc:vert': 'acc-vert', 'titre:main': 'titre-main' };
-  var applique = function () {
-    var r = document.documentElement;
-    Object.keys(classes).forEach(function (k) { r.classList.remove(classes[k]); });
-    Object.keys(axes).forEach(function (a) {
-      var c = classes[a + ':' + axes[a]];
-      if (c) { r.classList.add(c); }
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
-      b.setAttribute('aria-pressed', String(axes[b.dataset.axe] === b.dataset.val));
-    });
-  };
-  Array.prototype.forEach.call(document.querySelectorAll('.commut button'), function (b) {
-    b.addEventListener('click', function () { axes[b.dataset.axe] = b.dataset.val; applique(); });
-  });
-  ['acc', 'titre'].forEach(function (a) { var v = q.get(a); if (v) { axes[a] = v; } });
-  applique();
-
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
