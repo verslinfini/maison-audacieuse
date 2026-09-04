@@ -381,7 +381,6 @@ html.etat-avant [data-compteur] { display: none; }
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(rgba(118, 109, 160, .26), rgba(118, 109, 160, .26)),
     linear-gradient(to top, rgba(56, 54, 72, .62) 0%, rgba(56, 54, 72, .18) 20%, rgba(56, 54, 72, 0) 38%),
     linear-gradient(102deg, rgba(118, 109, 160, .62) 0%, rgba(118, 109, 160, .32) 46%, rgba(118, 109, 160, 0) 76%);
 }
@@ -395,7 +394,7 @@ html.etat-avant [data-compteur] { display: none; }
   align-items: end;
 }
 .panneau {
-  background: rgba(255, 255, 255, .84);
+  background: rgba(255, 255, 255, .75);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.35rem, 2.3vw, 2.3rem);
@@ -415,7 +414,7 @@ html.etat-avant [data-compteur] { display: none; }
   width: min(100%, 424px);
   margin: 0 0 clamp(1rem, 3.4vh, 2.6rem) clamp(-3.4rem, -2.6vw, -1.4rem);
   padding: 10px 10px 0;
-  background: rgba(255, 255, 255, .82);
+  background: rgba(255, 255, 255, .75);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   border-radius: 3px;
@@ -436,18 +435,22 @@ html.etat-avant [data-compteur] { display: none; }
 }
 .apres figcaption { font-size: .72rem; letter-spacing: .03em; color: var(--texte); text-align: right; padding-bottom: .35rem; }
 /* Essai en cours : la mise en avant du bail, surlignee ou en gras seul. */
-html.cadres-opaques .panneau,
-html.cadres-opaques .apres {
+/* Essai d'opacite des cadres, 75 % par defaut. */
+html.op-100 .panneau, html.op-100 .apres {
   background: var(--blanc);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+html.op-50 .panneau, html.op-50 .apres { background: rgba(255, 255, 255, .5); }
+html.op-25 .panneau, html.op-25 .apres { background: rgba(255, 255, 255, .25); }
+/* Essai de mise en avant : surlignage seul, gras seul, ou les deux. */
 html.avant-gras #la-ferme .marqueur {
   background-image: none;
   padding: 0;
   margin: 0;
   font-weight: 700;
 }
+html.avant-mixte #la-ferme .bail { font-weight: 700; }
 
 /* ---------- commutateur d'arbitrage, hors maquette ---------- */
 .commut {
@@ -645,7 +648,7 @@ html.avant-gras #la-ferme .marqueur {
         <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
         <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
         <p>Le projet architectural préserve l'identité du lieu : ses murs en pierre et sa charpente d'origine. Tout en le modernisant pour le rendre plus accessible et performant.</p>
-        <p><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span> : le foncier ne nous coûte rien, chaque euro finance la rénovation. L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
+        <p><span class="bail"><span class="marqueur">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span> : le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
         <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
       </div>
       <figure class="apres">
@@ -664,9 +667,12 @@ html.avant-gras #la-ferme .marqueur {
   <span>BAIL 99 ANS</span>
   <button type="button" data-axe="avant" data-val="surligne" aria-pressed="true">Surligné</button>
   <button type="button" data-axe="avant" data-val="gras" aria-pressed="false">Gras</button>
+  <button type="button" data-axe="avant" data-val="mixte" aria-pressed="false">Les deux</button>
   <span>CADRES</span>
-  <button type="button" data-axe="cadres" data-val="translucides" aria-pressed="true">Translucides</button>
-  <button type="button" data-axe="cadres" data-val="opaques" aria-pressed="false">Opaques</button>
+  <button type="button" data-axe="op" data-val="100" aria-pressed="false">100 %</button>
+  <button type="button" data-axe="op" data-val="75" aria-pressed="true">75 %</button>
+  <button type="button" data-axe="op" data-val="50" aria-pressed="false">50 %</button>
+  <button type="button" data-axe="op" data-val="25" aria-pressed="false">25 %</button>
 </div>
 
 <div class="barre-mobile">
@@ -683,15 +689,20 @@ html.avant-gras #la-ferme .marqueur {
   maj();
   window.addEventListener('scroll', maj, { passive: true });
 
-  var essais = {
-    avant: q.get('avant') === 'gras' ? 'gras' : 'surligne',
-    cadres: q.get('cadres') === 'opaques' ? 'opaques' : 'translucides'
-  };
+  var valides = { avant: ['surligne', 'gras', 'mixte'], op: ['100', '75', '50', '25'] };
+  var essais = { avant: 'surligne', op: '75' };
+  Object.keys(valides).forEach(function (a) {
+    var v = q.get(a);
+    if (v && valides[a].indexOf(v) >= 0) { essais[a] = v; }
+  });
   var boutons = document.querySelectorAll('.commut button');
   var majEssais = function () {
     var r = document.documentElement;
     r.classList.toggle('avant-gras', essais.avant === 'gras');
-    r.classList.toggle('cadres-opaques', essais.cadres === 'opaques');
+    r.classList.toggle('avant-mixte', essais.avant === 'mixte');
+    ['100', '75', '50', '25'].forEach(function (o) {
+      r.classList.toggle('op-' + o, essais.op === o);
+    });
     Array.prototype.forEach.call(boutons, function (b) {
       b.setAttribute('aria-pressed', String(essais[b.dataset.axe] === b.dataset.val));
     });
