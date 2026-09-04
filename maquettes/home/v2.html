@@ -927,15 +927,18 @@ h2 .marqueur::before {
 }
 .infolettre input::placeholder { color: #8a889c; }
 .porte .lien-texte { margin-top: auto; }
+/* Meme violet que le soulignement des liens texte : le trait de bordure
+   et le trait sous les liens sont le meme geste. Le libelle reste en
+   violet sombre, qui tient 11,7:1 la ou le violet plafonne a 4,7. */
 .bouton--contour {
   min-height: 44px;
   padding: 0 1rem;
   background: var(--blanc);
   color: var(--violet-sombre);
-  border: 2px solid var(--violet-sombre);
+  border: 2px solid var(--violet);
   font-size: .88rem;
 }
-.bouton--contour:hover { background: var(--violace); }
+.bouton--contour:hover { background: var(--violace); border-color: var(--violet-sombre); }
 
 /* ================================================================== */
 /* Pied                                                                */
