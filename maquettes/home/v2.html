@@ -274,14 +274,17 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 .jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
 .jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); color: var(--texte); }
 
-/* Surlignage marqueur, trait irregulier trace en SVG, jaune pale de la charte. */
+/* Surlignage de la charte, releve sur les affiches de la Fete de l'audace :
+   bords haut et bas presque droits, cotes obliques et de pentes inegales,
+   epaisseur legerement irreguliere. Il deborde plus bas que haut, comme un
+   marqueur passe a la main sous le texte. */
 .marqueur {
   color: var(--violet-sombre);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40' preserveAspectRatio='none'><path d='M2,11 C42,4 88,9 138,6 C188,3 244,10 298,3 L297,32 C252,38 196,31 142,35 C92,38 44,32 3,36 Z' fill='%23FFF3A8'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 44' preserveAspectRatio='none'><path d='M2.5,5 L252,1 L259,37.5 L170,41 L90,42.8 L6,42 Z' fill='%23FFF3A8'/></svg>");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding: .24em .3em .28em;
-  margin: 0 -.12em;
+  padding: .28em .34em .44em .42em;
+  margin: 0 -.34em 0 -.42em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -561,7 +564,7 @@ html.etat-avant [data-compteur] { display: none; }
    par une couleur qui tomberait sous le seuil. */
 .pari__texte strong { font-weight: 700; }
 .pari__chute {
-  margin-top: clamp(1.9rem, 4.8vh, 3.5rem);
+  margin-top: clamp(2.6rem, 7vh, 5rem);
   max-width: 27ch;
   font-size: clamp(1.1rem, 1.45vw, 1.45rem);
   font-weight: 500;
@@ -571,6 +574,38 @@ html.etat-avant [data-compteur] { display: none; }
 }
 /* Le paragraphe pivot : tout en gras, le retournement seul surligne. */
 .pari__fort { font-weight: 700; }
+/* Essai en cours : couleur des gras sur l'aplat violet. Le surlignage garde
+   sa propre couleur de texte, il n'herite pas. */
+html.gras-ocre .pari__fort, html.gras-ocre .pari__texte strong { color: var(--terracotta); }
+html.gras-vert .pari__fort, html.gras-vert .pari__texte strong { color: var(--vert); }
+
+/* ---------- commutateur d'arbitrage, hors maquette ---------- */
+.commut {
+  position: fixed;
+  z-index: 90;
+  left: 1rem; bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .35rem .45rem;
+  background: #383648;
+  border-radius: 8px;
+  font-size: .72rem;
+  color: #fff;
+}
+.commut span { padding: 0 .3rem 0 .5rem; opacity: .65; letter-spacing: .04em; font-size: .62rem; }
+.commut button {
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 0;
+  border-radius: 5px;
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  font: 600 .76rem/1 "Onest", system-ui, sans-serif;
+  cursor: pointer;
+}
+.commut button[aria-pressed="true"] { background: #fff; color: #383648; }
+@media (max-width: 900px) { .commut { display: none; } }
 
 /* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
 .ferme__credit {
@@ -860,6 +895,13 @@ html.etat-avant [data-compteur] { display: none; }
   </section>
 </main>
 
+<div class="commut" role="group" aria-label="Essai de couleur des gras">
+  <span>GRAS, ÉCRAN 5</span>
+  <button type="button" data-val="blanc" aria-pressed="true">Blanc</button>
+  <button type="button" data-val="ocre" aria-pressed="false">Ocre</button>
+  <button type="button" data-val="vert" aria-pressed="false">Vert</button>
+</div>
+
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
 </div>
@@ -873,6 +915,21 @@ html.etat-avant [data-compteur] { display: none; }
   var maj = function () { entete.dataset.solide = window.scrollY > seuil ? 'oui' : 'non'; };
   maj();
   window.addEventListener('scroll', maj, { passive: true });
+
+  var teintes = ['blanc', 'ocre', 'vert'];
+  var teinte = teintes.indexOf(q.get('gras')) >= 0 ? q.get('gras') : 'blanc';
+  var boutons = document.querySelectorAll('.commut button');
+  var majTeinte = function () {
+    var r = document.documentElement;
+    teintes.forEach(function (t) { r.classList.toggle('gras-' + t, teinte === t); });
+    Array.prototype.forEach.call(boutons, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.val === teinte));
+    });
+  };
+  Array.prototype.forEach.call(boutons, function (b) {
+    b.addEventListener('click', function () { teinte = b.dataset.val; majTeinte(); });
+  });
+  majTeinte();
   var bouton = document.getElementById('menu-bouton');
   var menu = document.getElementById('menu-mobile');
   bouton.addEventListener('click', function () {
