@@ -12,6 +12,7 @@ Règle : un chiffre absent de ce fichier ou marqué interdit est RETIRÉ de la p
 | lauréat AMI Ville d'Annecy 2025 | preuve institutionnelle | délibération D.CN.2025-134 du 30/06/2025 | autorisé |
 | 10/07/2026 | immatriculation de la SCIC La Coop Audacieuse au RCS d'Annecy | Kbis, CLAUDE.md LMA jalon J3 | autorisé |
 | 3,2 M€ | coût du projet, référentiel public | plan de campagne 14/08 section 1 | autorisé |
+| « une banque ne finance que la moitié » | le levier bancaire, dit en fraction et jamais en pourcentage | plan de campagne du 14/08, section 2, « le levier, dit simplement et validé » ; message verbatim du 14/08 | autorisé sous cette forme seulement. C'est le seul ratio publiable : tout chiffrage du levier (pourcentage d'apport, « 1 € en débloque 5 », multiple) reste INTERDIT |
 | 66 % | déduction fiscale du DON (jamais de la part) | régime fiscal du don, landing V1 bloc 7 | autorisé pour le don seulement |
 | 1 700 | signataires de la lettre de soutien 2025 | plan de campagne 14/08 section 3 ; fichier interne | autorisé (arrondi « près de 1 700 » comme sur la home actuelle) |
 | 666 → 1 700 → 3 000 → 5 000 | cascade des paliers de coopératrices | plan de campagne 14/08 section 3 | autorisé (lectures des paliers 3 000 et 5 000 à valider le 24/08) |

@@ -83,6 +83,13 @@ for (const fichier of pages) {
     .replaceAll('{{ feuille }}', champs.feuille || nom)
     .replaceAll('{{ robots }}', PROD ? 'index, follow' : 'noindex, nofollow');
 
+  // « barre: non » retire l'appel permanent du bas d'ecran. Une page legale
+  // ou une page de conditions ne vend rien : lui coller un bouton de
+  // souscription en permanence est au mieux inutile, au pire deplace.
+  if ((champs.barre || '').toLowerCase() === 'non') {
+    page = page.replace(/\{\{>\s*barre-mobile\s*\}\}\s*/g, '');
+  }
+
   // Les partials apres le contenu : une page peut en appeler un.
   page = page.replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, cle) => {
     if (!(cle in partials)) throw new Error(`${fichier} : partial « ${cle} » introuvable.`);

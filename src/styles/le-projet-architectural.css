@@ -142,14 +142,16 @@
 
 /* ---------- le trou nomme ---------- */
 
-/* .a-sourcer vient du socle, ou il marque un fragment de phrase. Ici il
-   porte un paragraphe entier : il lui faut sa mesure et son air au-dessus,
-   rien d'autre. Couleur, cadre et taille restent ceux du socle, sinon deux
-   pages afficheraient deux marqueurs differents pour le meme manque. */
-.a-sourcer {
+/* .a-sourcer vient du socle, ou il marque un fragment de phrase. Le trou de
+   la coupe transversale tient un paragraphe entier : il lui faut sa mesure
+   et son air au-dessus, rien d'autre. Couleur, cadre et taille restent ceux
+   du socle, sinon deux pages afficheraient deux marqueurs differents pour
+   le meme manque. A remonter dans base.css a la deuxieme page qui en a un. */
+.a-sourcer--bloc {
   display: block;
   max-width: 68ch;
   margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
+  padding: .8rem 1rem;
   line-height: 1.55;
 }
 

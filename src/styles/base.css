@@ -611,7 +611,7 @@ h2 .marqueur::before {
 .bloc--sombre .puces li::before { background: var(--jaune); }
 
 /* Liste numerotee, pour les etapes d'un parcours. */
-.etapes { counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
+.etapes { list-style: none; counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
 
 .etapes > li {
   counter-increment: etape;
@@ -789,6 +789,31 @@ h2 .marqueur::before {
 .bloc--sombre .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 .bloc--sombre .bouton--primaire:hover { background: #FFEB7E; }
 
+/* ---------- liens dans le fil du texte ---------- */
+
+.prose a:not([class]),
+.mesure a:not([class]),
+.question__reponse a:not([class]) {
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.prose a:not([class]):hover,
+.mesure a:not([class]):hover,
+.question__reponse a:not([class]):hover { text-decoration-color: var(--violet-sombre); }
+
+.bloc--sombre .prose a:not([class]),
+.bloc--sombre .mesure a:not([class]) {
+  color: var(--jaune);
+  text-decoration-color: rgba(255, 243, 168, .55);
+}
+
+.bloc--sombre .prose a:not([class]):hover,
+.bloc--sombre .mesure a:not([class]):hover { text-decoration-color: var(--jaune); }
+
 /* ---------- trous nommes ---------- */
 
 /* Une information qui manque se montre, elle ne se devine pas. Ce marqueur
@@ -798,7 +823,7 @@ h2 .marqueur::before {
   padding: .05em .3em;
   border: 1px dashed var(--terracotta);
   border-radius: 3px;
-  color: var(--terracotta);
+  color: var(--violet-sombre);
   font-size: .92em;
   font-style: normal;
   -webkit-box-decoration-break: clone;

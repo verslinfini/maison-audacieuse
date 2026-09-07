@@ -48,10 +48,14 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
-.sommaire__liste li { counter-increment: renvoi; }
+/* Le renvoi occupe toute la hauteur de sa cellule : sans cela, un intitule
+   sur deux lignes desaligne le filet de ses voisins de rangee. */
+.sommaire__liste li { counter-increment: renvoi; display: flex; }
 
 .sommaire__liste a {
+  flex: 1;
   display: flex;
+  align-items: baseline;
   gap: .8rem;
   padding: .42rem 0;
   color: var(--violet-sombre);
