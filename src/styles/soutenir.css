@@ -1,7 +1,72 @@
 /* ------------------------------------------------------------------ */
 /* /soutenir/ : ancienne redirection vers HelloAsso, devenue page.     */
-/* Elle ne porte presque rien en propre : tout vient du socle. Si ce   */
-/* fichier grossit, c'est que la page invente au lieu de reutiliser.   */
+/* La page compare trois gestes qui ne pesent pas pareil. Trois blocs   */
+/* de meme forme les rendaient equivalents : le lecteur lisait trois    */
+/* fois la meme chose. Ce qui suit ne sert qu'a leur donner trois       */
+/* poids differents, avec les composants du socle et rien de plus :     */
+/* la part garde un chapo, une image et un bouton, le don une fiche et  */
+/* un lien, le bouche a oreille une liste et deux liens.                */
 /* ------------------------------------------------------------------ */
 
+/* ---------- texte et image cote a cote ---------- */
+
+/* Une colonne de lecture a 48ch laisse les deux tiers droits de l'ecran
+   vides sur un portable. Le duo y pose l'objet du bloc : l'image du lieu
+   pour la part, la fiche pour le don. Sous 900 px, tout s'empile et le
+   socle range la figure apres le texte (.figure { order: 4 }). */
+.soutenir__duo { display: grid; gap: clamp(1.8rem, 4vw, 3.4rem); }
+
+@media (min-width: 900px) {
+  .soutenir__duo { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); align-items: start; }
+  .soutenir__duo--fiche { grid-template-columns: minmax(0, 1fr) minmax(0, 21rem); }
+}
+
 .soutenir__geste { margin-top: clamp(1.6rem, 2.6vw, 2.2rem); }
+
+
+/* ---------- fiche du don ---------- */
+
+/* Trois lignes de fait dans une .carte du socle : ce qui distingue le don
+   de la part se lit d'un coup d'oeil, sans le chercher dans le paragraphe.
+   Le dl remplace la prose, c'est ce qui donne au bloc sa forme propre. */
+.fiche { gap: 0; }
+
+.fiche__ligne + .fiche__ligne { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--filet); }
+
+.fiche__quoi {
+  color: var(--violet-sombre);
+  font-size: var(--t-petit);
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* dd porte une marge gauche de 40 px par defaut : elle decalerait la
+   valeur sous son intitule. */
+.fiche__valeur { margin: .25rem 0 0; line-height: 1.45; }
+
+
+/* ---------- faire circuler ---------- */
+
+/* Quatre actions courtes sur deux colonnes : la liste ne ressemble ni au
+   duo texte-image de la part, ni a la fiche du don. C'est le geste le plus
+   leger de la page, il se lit en diagonale. */
+.soutenir__relais {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: .7rem clamp(1.5rem, 3vw, 2.8rem);
+  max-width: 54rem;
+  margin-top: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.soutenir__apres { margin-top: clamp(1.5rem, 2.6vw, 2.1rem); }
+
+/* Les portes de bloc : des liens, jamais un bouton. Le bouton de la page
+   est celui de la part, et il est le seul. */
+.soutenir__portes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 clamp(1.4rem, 3vw, 2.4rem);
+  margin-top: clamp(1.2rem, 2.2vw, 1.8rem);
+}

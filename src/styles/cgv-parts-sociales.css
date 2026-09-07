@@ -1,105 +1,230 @@
 /* ------------------------------------------------------------------ */
 /* Conditions de souscription des parts sociales.                       */
-/* Page de document : on ne cherche pas le rythme d'une page de recit,   */
-/* on cherche la lisibilite d'un texte long qui engage. Le corps tient   */
-/* donc dans un seul bloc violace, et ce sont les titres d'article qui   */
-/* donnent les reperes, pas l'alternance des fonds.                      */
+/* Page de document : la lisibilite d'un texte long qui engage. Le corps */
+/* tenait dans un seul bloc violace de treize mille pixels, au motif     */
+/* qu'un document se lit d'un trait. Un lecteur ne lit pas onze metres   */
+/* d'un trait : il s'y perd. Le document est donc rendu par ses cinq     */
+/* parties, chacune sur son fond, chacune annoncant son rang et le       */
+/* chemin du retour au sommaire. Les titres de partie prennent l'echelle */
+/* du site (.bloc__titre, 48 px), les quinze articles passent en h3.     */
 /* ------------------------------------------------------------------ */
 
-/* ---------- encadre de portee ---------- */
+/* ---------- ce qui fait foi ---------- */
 
-/* Ce qui fait foi se dit avant tout le reste. Le filet jaune a gauche
-   marque l'avertissement sans ouvrir une deuxieme zone chaude. */
-.encadre {
-  max-width: 68ch;
-  padding: clamp(1.1rem, 2vw, 1.5rem) clamp(1.1rem, 2vw, 1.6rem);
-  border-left: 5px solid var(--jaune);
-  border-radius: 0 8px 8px 0;
-  background: var(--gris);
-  color: var(--violet-sombre);
+/* Vingt marqueurs de trou a filet jaune vivent sur cette page. Un
+   vingt-et-unieme encadre jaune se serait lu comme un trou de plus.
+   L'avertissement prend donc le violet sombre de la charte : c'est le seul
+   objet de la page a le porter avec la partie 4 et la cloture, et c'est
+   exactement ce qu'on veut dire de lui. */
+.foi {
+  max-width: 52ch;
+  padding: clamp(1.3rem, 2.2vw, 1.8rem) clamp(1.3rem, 2.2vw, 1.9rem);
+  border-radius: 10px;
+  background: var(--violet-sombre);
+  color: rgba(255, 255, 255, .9);
 }
 
-.encadre > * + * { margin-top: .9rem; }
+.foi > * + * { margin-top: .9rem; }
 
-/* Le renvoi vers les statuts vit dans l'encadre : gris sur gris s'y perdrait. */
-.encadre .trou { background: var(--blanc); }
+.foi__label {
+  color: var(--jaune);
+  font-size: var(--t-petit);
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
 
 
 /* ---------- sommaire ---------- */
 
-.sommaire { margin-top: clamp(2.2rem, 3.6vw, 3rem); }
+/* Groupe par partie, numerote de 1 a 15 en continu : le sommaire est la
+   carte du document, il annonce les cinq etapes qu'on va traverser et non
+   une liste de quinze renvois sans relief. */
+.sommaire { margin-top: clamp(2.4rem, 4vw, 3.4rem); counter-reset: renvoi; }
 
 .sommaire__titre {
-  margin: 0 0 1.1rem;
+  margin: 0 0 clamp(1.2rem, 2vw, 1.7rem);
   color: var(--violet-sombre);
-  font-size: 1.06rem;
+  font-size: 1.02rem;
   font-weight: 600;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
-.sommaire__liste {
-  counter-reset: renvoi;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.sommaire__grille {
   display: grid;
-  gap: .1rem clamp(1.5rem, 4vw, 3.5rem);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: clamp(1.6rem, 3vw, 2.4rem) clamp(1.5rem, 3vw, 2.8rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
 }
 
+.sommaire__partie { margin: 0 0 .5rem; }
+
+.sommaire__partie a {
+  display: block;
+  color: var(--violet-sombre);
+  font-weight: 600;
+  line-height: 1.28;
+  text-decoration: none;
+}
+
+.sommaire__partie a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .28em; }
+
+.sommaire__rang {
+  display: block;
+  margin-bottom: .2rem;
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.sommaire__liste { margin: 0; padding: 0; list-style: none; }
+
 /* Le renvoi occupe toute la hauteur de sa cellule : sans cela, un intitule
-   sur deux lignes desaligne le filet de ses voisins de rangee. */
+   sur deux lignes desaligne le filet de ses voisins. */
 .sommaire__liste li { counter-increment: renvoi; display: flex; }
 
 .sommaire__liste a {
   flex: 1;
   display: flex;
-  align-items: baseline;
-  gap: .8rem;
-  padding: .42rem 0;
+  align-items: center;
+  gap: .6rem;
+  min-height: 44px;
+  padding: .3rem 0;
   color: var(--violet-sombre);
+  font-size: .95rem;
+  line-height: 1.35;
   text-decoration: none;
   border-bottom: 1px solid var(--filet);
 }
 
 .sommaire__liste a::before {
   content: counter(renvoi) ".";
-  flex: 0 0 1.6rem;
-  color: var(--violet);
+  flex: 0 0 1.5rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
-.sommaire__liste a:hover { color: var(--violet); }
+.sommaire__liste a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .28em; }
+
+
+/* ---------- parties ---------- */
+
+/* La partie se rejoint par son bord haut, sans la reserve du socle : on
+   veut voir la couture de fond, c'est elle qui dit qu'on change de partie. */
+.cgv__partie { scroll-margin-top: 0; }
+
+/* Le reperage reste a l'ecran tant qu'on est dans sa partie. Il ne repete
+   pas le titre juste en dessous : il porte le rang, qui ne se lit nulle
+   part ailleurs, et le retour au sommaire, qui est ce dont on a besoin au
+   milieu de onze metres de texte. Fond opaque obligatoire : le texte defile
+   dessous. */
+.cgv__reperage {
+  position: sticky;
+  /* Collee sous l'entete, sans jeu : le moindre interstice laisse defiler
+     une tranche de ligne entre les deux barres, et ca se lit comme un bug. */
+  top: var(--h-entete);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  /* La barre couvre exactement la colonne de lecture : plus etroite, elle
+     laisserait passer la moitie d'une ligne a cote d'elle, et le texte
+     paraitrait coupe. */
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 0 clamp(1.1rem, 1.8vw, 1.6rem);
+  padding: .34rem 1rem;
+  border: 1px solid var(--violet);
+  border-radius: 8px;
+  background: var(--blanc);
+  box-shadow: 0 8px 20px rgba(56, 54, 72, .12);
+  color: var(--violet-sombre);
+  font-size: var(--t-petit);
+  line-height: 1.5;
+}
+
+.cgv__rang { font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+
+.cgv__vers-sommaire {
+  position: relative;
+  color: var(--violet-sombre);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .28em;
+}
+
+.cgv__vers-sommaire:hover { text-decoration-color: var(--violet-sombre); }
+
+/* La pastille fait 30 px de haut : la cible du pouce se rattrape autour. */
+.cgv__vers-sommaire::after { content: ""; position: absolute; inset: -11px -10px; }
+
+/* Sur le fond sombre, le contour blanc a 40 % tient 3,28 sur le violet
+   sombre, le seuil des elements graphiques. */
+.bloc--sombre .cgv__reperage {
+  background: var(--violet-sombre);
+  border-color: rgba(255, 255, 255, .4);
+  box-shadow: none;
+  color: rgba(255, 255, 255, .9);
+}
+
+.bloc--sombre .cgv__vers-sommaire {
+  color: var(--jaune);
+  text-decoration-color: rgba(255, 243, 168, .55);
+}
+
+.bloc--sombre .cgv__vers-sommaire:hover { text-decoration-color: var(--jaune); }
 
 
 /* ---------- articles ---------- */
 
+/* Le premier article d'une partie se decolle de son titre de partie : 48 px
+   puis 35 px se suivent de trop pres sans cette respiration. */
+.cgv__partie .cgv__article:first-of-type { margin-top: clamp(1.1rem, 2vw, 1.8rem); }
+
 .cgv__article + .cgv__article {
-  margin-top: clamp(2.4rem, 4vw, 3.6rem);
-  padding-top: clamp(2.4rem, 4vw, 3.6rem);
+  margin-top: clamp(2.2rem, 3.4vw, 3rem);
+  padding-top: clamp(2.2rem, 3.4vw, 3rem);
   border-top: 1px solid var(--filet);
 }
 
-/* Plus petit que .bloc__titre : ce sont des articles a l'interieur d'un
-   document, pas des sections de page. */
+/* Un cran sous le titre de partie, un cran au-dessus des h3 du socle :
+   l'article est une section du document, pas un intertitre de paragraphe. */
 .cgv__titre {
-  margin: 0 0 1.2rem;
-  max-width: 30ch;
+  display: flex;
+  align-items: center;
+  gap: clamp(.7rem, 1.2vw, 1rem);
+  margin: 0 0 clamp(1rem, 1.8vw, 1.5rem);
+  max-width: 28ch;
   color: var(--violet-sombre);
-  font-size: clamp(1.32rem, 1.9vw, 1.7rem);
+  font-size: clamp(1.32rem, 2.4vw, 2.16rem);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -.01em;
+  line-height: 1.18;
+  letter-spacing: -.015em;
 }
 
+/* Meme pastille que les etapes du socle : violet plein, chiffre blanc a
+   4,70. Le numero portait le violet en texte sur fond clair, ou il tombait
+   a 4,04. */
 .cgv__num {
-  display: inline-block;
-  min-width: 2.1ch;
-  color: var(--violet);
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--violet);
+  color: var(--blanc);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
+
+.bloc--sombre .cgv__num { background: var(--jaune); color: var(--violet-sombre); }
 
 /* Le renvoi d'article : une citation, pas une note de bas de page. Il
    reste dans la ligne et ne se coupe jamais en deux. */
@@ -109,15 +234,18 @@
   white-space: nowrap;
 }
 
+/* Blanc a 72 % sur le violet sombre : 6,97. */
+.bloc--sombre .ref { color: rgba(255, 255, 255, .72); }
+
 
 /* ---------- trous a combler ---------- */
 
 /* Provisoire. Chaque bloc marque une information que les statuts ne
    donnent pas, ou une question que le conseil de la cooperative doit
-   trancher. Aucun ne doit rester le jour de la mise en ligne. */
+   trancher. Aucun ne doit rester le jour de la mise en ligne. Le fond du
+   marqueur change avec celui de la partie : gris sur gris ne se voit pas. */
 .trou {
-  max-width: 68ch;
-  padding: .85rem 1.1rem;
+  padding: .8rem 1.05rem;
   border-left: 5px solid var(--jaune);
   border-radius: 0 6px 6px 0;
   background: var(--gris);
@@ -126,21 +254,27 @@
   line-height: 1.5;
 }
 
+.bloc--violace .trou,
+.bloc--gris .trou { background: var(--blanc); }
+
+.bloc--sombre .trou,
+.foi .trou {
+  background: rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .88);
+}
+
 .prose > .trou + .trou { margin-top: .6em; }
 
 
 /* ---------- tableau des colleges ---------- */
 
 /* Le tableau reste dans la mesure du document : etale sur 1240 px, il se
-   lirait comme un tableau de bord et plus comme une clause. */
-.tableau-cadre {
+   lirait comme un tableau de bord et plus comme une clause. Regles portees
+   par l'article, pas par la classe du socle : rien n'est redefini ici. */
+#colleges .tableau-cadre {
   max-width: 52rem;
   margin: clamp(1.5rem, 2.6vw, 2.1rem) 0;
 }
-
-/* base.css ne ferme le filet de derniere ligne que sur les td : une ligne
-   ouverte par un th d'en-tete garde sinon un trait orphelin a gauche. */
-.tableau tbody tr:last-child th { border-bottom: 0; }
 
 .cgv__legende {
   margin-bottom: .8rem;
@@ -152,7 +286,7 @@
 /* Le pourcentage ne se coupe jamais. L'en-tete, lui, doit pouvoir passer a
    la ligne : le figer forcerait le tableau a deborder de son cadre sur
    telephone, et la legende avec lui. */
-.tableau tbody td:last-child { white-space: nowrap; }
+#colleges .tableau tbody td:last-child { white-space: nowrap; }
 
 
 /* ---------- date de mise a jour ---------- */
@@ -164,24 +298,18 @@
 }
 
 
-/* ---------- appoints du socle ---------- */
-
-/* .prose strong est violet sombre dans base.css : illisible sur fond
-   sombre. Si une deuxieme page pose du texte fort dans un bloc sombre,
-   cette regle monte dans le socle. */
-.bloc--sombre .prose strong { color: var(--blanc); }
-
 @media (max-width: 767px) {
   .cgv__titre { max-width: none; }
-  .tableau th,
-  .tableau td { padding: .7rem .8rem; }
+  .cgv__num { width: 2rem; height: 2rem; font-size: .92rem; }
+  #colleges .tableau th,
+  #colleges .tableau td { padding: .7rem .8rem; }
 }
 
 /* Sur les petits telephones, les quatre lignes du tableau tiennent dans la
    largeur : quatre pixels de scroll horizontal pour rien ne se voient pas
-   mais s'accrochent au doigt. */
-@media (max-width: 479px) {
-  .tableau { font-size: .92rem; }
-  .tableau th,
-  .tableau td { padding: .65rem .55rem; }
+   mais s'accrochent au doigt. Point de rupture du socle (.tableau--empile). */
+@media (max-width: 639px) {
+  #colleges .tableau { font-size: .92rem; }
+  #colleges .tableau th,
+  #colleges .tableau td { padding: .65rem .55rem; }
 }

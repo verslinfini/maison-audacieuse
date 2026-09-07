@@ -139,7 +139,33 @@
   font-weight: 600;
 }
 
-.cartouche dd { margin: .55rem 0 0; max-width: 46ch; }
+/* La marque a gauche, sur deux rangees : elle tient le nom et sa ligne
+   d'explication ensemble, comme la vignette d'un cartouche tient son
+   intitule. La colonne de texte garde sa mesure, d'ou le max-width
+   augmente de la largeur de la vignette et de sa gouttiere. */
+.cartouche dd {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(.8rem, 1.4vw, 1.1rem);
+  align-items: start;
+  margin: .55rem 0 0;
+  max-width: calc(46ch + 4.9rem);
+}
+
+/* Les cinq marques n'ont ni le meme fond ni le meme format : l'une est sur
+   un aplat beige, les autres sur blanc, aucune n'est carree de la meme
+   facon. La vignette leur donne le seul cadre commun qu'elles peuvent
+   avoir, et contain les montre entieres plutot que de les recadrer. */
+.cartouche__logo {
+  grid-row: 1 / span 2;
+  width: 58px;
+  height: 58px;
+  padding: 5px;
+  object-fit: contain;
+  background: var(--blanc);
+  border: 1px solid var(--filet);
+  border-radius: 8px;
+}
 
 .cartouche__nom {
   display: block;
@@ -148,6 +174,18 @@
   font-size: 1.14rem;
   font-weight: 600;
   line-height: 1.25;
+}
+
+.cartouche__dit { display: block; }
+
+/* Le credit des marques, une fois pour les cinq. SOURCES.md demande de ne
+   jamais les reattribuer au collectif : la ligne dit a qui elles sont, et
+   elle ne dit rien de plus. */
+.cartouche__marques {
+  margin-top: clamp(1.1rem, 2vw, 1.6rem);
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: rgba(86, 84, 107, .88);
 }
 
 .metiers__suite { margin-top: clamp(2rem, 3.4vw, 3rem); }
@@ -170,4 +208,10 @@
   .exploitantes dt:last-of-type { border-bottom: 0; }
 
   .cartouche__role { font-size: .74rem; }
+
+  /* Une colonne de 58 px prise sur 335 laisse 33 signes par ligne au texte.
+     La vignette passe donc au-dessus du nom, en pleine rangee. */
+  .cartouche dd { grid-template-columns: minmax(0, 1fr); row-gap: .5rem; }
+
+  .cartouche__logo { grid-row: auto; width: 48px; height: 48px; }
 }

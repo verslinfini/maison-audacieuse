@@ -159,6 +159,37 @@ ol.etapes { margin: 0; padding: 0; list-style: none; }
 .faq__sortie { margin-top: clamp(1.5rem, 2.6vw, 2.2rem); }
 
 
+/* ---------- les deux respirations en image ---------- */
+
+/* Dix blocs et 2 400 mots : deux images coupent la lecture, l'une au quart,
+   l'autre a la moitie. Elles sortent de la colonne de 48ch pour qu'on les
+   voie arriver, sans aller jusqu'au bord du bloc, ou elles se liraient
+   comme un bandeau d'entete et non comme une pause dans un texte.
+   Le socle plafonne .figure a 268 px, cadrage du heros de la home : ici
+   l'image est large et basse, c'est ce qui en fait une respiration et non
+   un ecran de plus. */
+.figure--bandeau {
+  max-width: min(100%, 56rem);
+  margin: clamp(2.2rem, 4vw, 3.2rem) auto 0;
+}
+
+/* Le cadrage se tient par un rapport, pas par une hauteur. Un plafond en
+   pixels donne un recadrage different a chaque largeur : mesure a 1440 il
+   valait 2,2, et 2,66 entre 768 et 1100 px, soit plus dur que le defaut
+   releve sur les-medias. Le rapport fixe donne la meme image partout, et
+   il tombe pile sur 400 px de haut a 1440. Le plafond ne sert plus que de
+   garde-fou.
+   Rotation reduite de moitie par rapport au socle : sur 880 px de large,
+   les 1,2 degres du heros font sortir les coins de la colonne et donnent
+   au cadre l'air d'avoir glisse. */
+.figure--bandeau img {
+  aspect-ratio: 11 / 5;
+  max-height: 400px;
+  object-position: 50% 52%;
+  transform: rotate(-.6deg);
+}
+
+
 /* ---------- second niveau de l'appel ---------- */
 
 /* Le lecteur qui ne souscrit pas aujourd'hui est l'adresse a capter. Le
@@ -197,6 +228,16 @@ ol.etapes { margin: 0; padding: 0; list-style: none; }
   .sommaire a { min-height: 44px; }
   .arbitrage { font-size: .82rem; }
   .limites strong { font-size: 1.08rem; }
+
+  /* Le socle rabat .figure a 158 px et la place en quatrieme position, deux
+     regles ecrites pour le heros de la home. Ici l'image est seule dans son
+     bloc et rien ne la presse : elle reprend son rapport d'origine et se
+     montre entiere, de 320 a 767 px, sans un seul recadrage. Tout plafond
+     en pixels reintroduit ici le defaut corrige au-dessus : a 210 px, la
+     meme image passait a 1,58 sur 375 px et a 2,60 sur 600. */
+  .figure--bandeau { order: 0; margin: 1.8rem auto 0; }
+
+  .figure--bandeau img { aspect-ratio: auto; max-height: none; border-width: 8px; transform: rotate(-.5deg); }
 
   /* Trois colonnes tiennent mal dans 335 px : le cadre du socle les met en
      scroll horizontal, et la lectrice de 65 ans qui tient son telephone perd

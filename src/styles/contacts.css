@@ -71,6 +71,15 @@
   align-items: start;
 }
 
+/* Ce qu'on reconnait de ce batiment, c'est la silhouette de son toit : un
+   large toit a quatre pans qui descend presque jusqu'a l'auvent. Le
+   plafond du socle, 268 px ici et 158 px sur telephone, est calibre sur le
+   heros de la home et coupe la faitiere. Une photo qui tient lieu
+   d'adresse et dont on a retire le repere ne sert plus a rien.
+   Les deux valeurs sont celles de la hauteur naturelle de l'image dans sa
+   colonne : elle se montre entiere, sans recadrage, aux deux largeurs. */
+.lieu .figure img { max-height: 300px; }
+
 
 /* ================================================================== */
 /* Suivre le projet                                                    */
@@ -178,6 +187,8 @@
   .voie { grid-template-columns: minmax(0, 1fr); gap: .25rem; padding: 1.1rem 0; }
 
   .lieu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+
+  .lieu .figure img { max-height: 215px; }
 
   .suivre { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; }
 

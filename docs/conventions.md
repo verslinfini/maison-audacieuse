@@ -123,6 +123,16 @@ Fermee. Sept couleurs, deux polices, toutes declarees en variables dans `base.cs
 
 Le detail et les usages sont dans <charte.md>.
 
+## Les trous nommes
+
+Une information qui manque s ecrit en clair sur la page, dans un `.a-sourcer`, plutot que d etre devinee. Un chiffre absent de `contenu/pages/chiffres-autorises.md`, une clause que les statuts ne portent pas, une date invérifiable : on marque, on ne comble pas.
+
+Trois regles :
+
+**Un marqueur est visible en ligne.** Il ne nomme donc jamais un prestataire, un conseil, un partenaire en negociation, ni une personne. « L avocate du projet », pas son nom.
+**Un marqueur dit ce qui manque et ou le trouver**, pas seulement qu il manque. « [A SOURCER : duree de conservation, a fixer avec le registre des traitements] » vaut mieux que « [A SOURCER : duree] ».
+**Aucun marqueur ne survit a la mise en ligne.** Le controle en compte le nombre a chaque passage : il doit tomber a zero avant la bascule.
+
 ## Ce qui ne se fait pas
 
 Recopier un entete ou un pied dans une page.

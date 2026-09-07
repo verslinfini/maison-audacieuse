@@ -62,16 +62,31 @@ ol.etapes { list-style: none; }
 .etapes p { margin-top: .35rem; }
 
 
-/* ---------- chiffre en attente de validation ---------- */
+/* ---------- trous nommes ---------- */
 
-/* Un trou assume, pas une coquille. Le pointille dit au relecteur que la
-   ligne attend une decision du collectif : il disparait avec le crochet. */
-.a-sourcer {
-  display: inline-block;
-  color: var(--texte);
-  letter-spacing: .04em;
-  text-transform: none;
-  border-bottom: 1px dashed rgba(86, 84, 107, .55);
+/* .a-sourcer etait redefini ici, avec un pointille et une couleur qui ne
+   sont pas ceux du socle : deux marqueurs differents pour le meme manque
+   sur deux pages voisines. La redefinition est retiree, le socle reprend
+   la main. Ne reste que ce que le socle ne peut pas savoir : dans une date
+   d'etape, qui est en capitales espacees, le crochet doit revenir en bas
+   de casse, sinon le trou se lit comme un intitule. */
+.etapes__quand.a-sourcer { text-transform: none; letter-spacing: normal; }
+
+/* Un trou qui tient un paragraphe entier, ici la commande du schema du
+   montage financier. Le socle donne au marqueur une respiration d'un
+   demi-mot, calibree sur un fragment de phrase : sur cinq lignes elle
+   colle le texte au pointille.
+   Regle identique a celle de le-projet-architectural.css, dont le
+   commentaire annonce qu'elle monte dans base.css a la deuxieme page qui
+   en aurait besoin. C'est cette page. Le socle est tenu par un autre
+   travail en cours : le deplacement se fait a la reunion des deux, en
+   supprimant les deux copies. */
+.a-sourcer--bloc {
+  display: block;
+  max-width: 68ch;
+  margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
+  padding: .8rem 1rem;
+  line-height: 1.55;
 }
 
 
