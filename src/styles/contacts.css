@@ -1,34 +1,78 @@
 /* ------------------------------------------------------------------ */
-/* Page /contacts/. Un aiguillage, pas un annuaire : une seule boite,   */
-/* et chaque intention part vers sa destination avec son objet deja     */
-/* rempli. Quatre blocs seulement, la page doit se lire debout.         */
-/* Ne contient que ce qui n'appartient qu'a cette page. Le commun est   */
-/* dans styles/base.css.                                                */
+/* Page /contacts/. Un aiguillage, pas un annuaire : une seule boite,    */
+/* et chaque intention part vers sa destination avec son objet deja      */
+/* rempli. Quatre blocs seulement, la page doit se lire debout.          */
+/*                                                                       */
+/* Rythme des fonds, pose le 07/09 : page-tete en aube, l'aiguillage en  */
+/* blanc parce qu'un tableau d'orientation demande le fond le plus       */
+/* calme, la porte de la cour en photo pleine largeur, l'infolettre en   */
+/* claire, l'appel en sombre. Pas de fond plein violet ni terracotta :   */
+/* le blanc plein n'y tient que 4,1 sur les zones eclaircies des         */
+/* degrades, et une page de contact est une page de lecture.             */
+/*                                                                       */
+/* Ne contient que ce qui n'appartient qu'a cette page. Le commun est    */
+/* dans styles/base.css.                                                 */
 /* ------------------------------------------------------------------ */
 
 
 /* ================================================================== */
-/* L'adresse                                                           */
-/* Elle est le point d'ancrage de la page : on la grossit, on ne la    */
-/* redessine pas. Le reste vient de .lien-texte.                        */
+/* La porte : adresse, qui repond, sous quel delai                     */
+/*                                                                     */
+/* Trois informations tenues dans un seul aplat menthe. Elles etaient   */
+/* dispersees, et le delai n'existait pas : un visiteur qui ecrit a une */
+/* association veut d'abord savoir si quelqu'un lira.                   */
+/* Menthe #BAFFE4 : le violet sombre y tient 10,3 et le violet 4,2,     */
+/* soit au-dessus du seuil des grands corps pour l'annotation.          */
 /* ================================================================== */
-.adresse { margin: 0 0 clamp(1.8rem, 3.4vw, 2.6rem); }
+.porte {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .4rem clamp(1.5rem, 3vw, 2.6rem);
+  margin-bottom: clamp(1.5rem, 2.4vw, 2rem);
+  padding: clamp(1.1rem, 1.9vw, 1.5rem) clamp(1.4rem, 2.6vw, 2.2rem);
+  border-radius: 12px;
+  background: var(--menthe);
+  color: var(--violet-sombre);
+}
+
+.porte__adresse { grid-column: 1; margin: 0; }
 
 /* 28 signes sans espace : a 320 px de fenetre le mot ne tient plus sur
    une ligne si on le laisse grossir librement, d'ou la borne basse du
    clamp et la coupure de secours. */
 .adresse__lien {
   max-width: 100%;
-  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  min-height: 44px;
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
   line-height: 1.3;
   overflow-wrap: anywhere;
+}
+
+/* L'annotation manuscrite dit ce que le paragraphe en dessous dit deja :
+   une police manuscrite se lit mal et certains ne la lisent pas du tout.
+   Elle est ici la seule de la page. */
+.porte__note {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+  text-align: right;
+}
+
+.porte__delai {
+  grid-column: 1;
+  max-width: 56ch;
+  font-size: .95rem;
+  line-height: 1.5;
 }
 
 
 /* ================================================================== */
 /* Les voies                                                           */
 /* Une rangee par intention : ce que vous cherchez a gauche, ou ca     */
-/* mene a droite. Une grille de cartes dirait que les six voies se     */
+/* mene a droite. Une grille de cartes dirait que les cinq voies se    */
 /* valent ; une liste de rangees dit qu'elles se lisent l'une apres    */
 /* l'autre, et se laisse survoler jusqu'a la bonne.                    */
 /* ================================================================== */
@@ -37,8 +81,8 @@
 .voie {
   display: grid;
   grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
-  gap: .2rem clamp(1.2rem, 3vw, 3.2rem);
-  padding: clamp(1rem, 1.7vw, 1.4rem) 0;
+  gap: .1rem clamp(1.2rem, 3vw, 3.2rem);
+  padding: clamp(.55rem, 1vw, .8rem) 0;
   border-bottom: 1px solid var(--filet);
 }
 
@@ -51,34 +95,60 @@
   letter-spacing: -.01em;
 }
 
-.voie__suite > * + * { margin-top: .35rem; }
+.voie__suite > * + * { margin-top: .2rem; }
 
 /* Deux liens sur la meme rangee quand la voie mene a une page ET a un
-   courriel. L'espace vertical est nul : .lien-texte porte deja ses 44 px
-   de cible tactile, les empiler creerait un trou. */
+   courriel. L'espace vertical est nul : .lien-texte porte deja sa cible
+   tactile, les empiler creerait un trou. */
 .voie__ou { display: flex; flex-wrap: wrap; gap: 0 clamp(1.2rem, 2.4vw, 2.2rem); }
 
-
-/* ================================================================== */
-/* La ferme de Novel                                                   */
-/* Sans numero de rue et sans carte, c'est la photo qui tient lieu     */
-/* d'adresse : on reconnait le batiment en arrivant dans la rue.       */
-/* ================================================================== */
-.lieu {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .82fr);
-  gap: clamp(1.6rem, 3.6vw, 3.6rem);
-  align-items: start;
+/* Cinq rangees a 44 px de cible tactile chacune ajoutent 220 px a une page
+   dont la cible est de 3 000. La cible pleine reste sur telephone, ou le
+   doigt vise ; au-dessus de 768 px, la souris se contente de la hauteur du
+   libelle souligne. Le raccourci est assume et borne a cette liste. */
+@media (min-width: 768px) {
+  .voie__ou .lien-texte { min-height: 34px; }
 }
 
-/* Ce qu'on reconnait de ce batiment, c'est la silhouette de son toit : un
-   large toit a quatre pans qui descend presque jusqu'a l'auvent. Le
-   plafond du socle, 268 px ici et 158 px sur telephone, est calibre sur le
-   heros de la home et coupe la faitiere. Une photo qui tient lieu
-   d'adresse et dont on a retire le repere ne sert plus a rien.
-   Les deux valeurs sont celles de la hauteur naturelle de l'image dans sa
-   colonne : elle se montre entiere, sans recadrage, aux deux largeurs. */
-.lieu .figure img { max-height: 300px; }
+
+/* ================================================================== */
+/* Venir voir la ferme, en photo pleine largeur                        */
+/*                                                                     */
+/* Sans numero de rue et sans carte, c'est la photo qui tient lieu     */
+/* d'adresse. Composant .bloc--photo du socle ; ne sont propres a      */
+/* cette page que trois reglages, tous mesures a l'ecran.              */
+/* ================================================================== */
+
+/* 1. Le socle donne 3,4 a 7 rem de respiration verticale. Sept rem de
+   chaque cote sur un panneau de quatre paragraphes poussent la page a
+   3 400 px pour une cible de 3 000 : ici la photo respire de 4 rem. */
+#venir-voir { padding: clamp(2.4rem, 5vw, 4rem) 0; }
+
+#venir-voir .panneau { padding: clamp(1.4rem, 2.4vw, 2.1rem); }
+
+/* 2. Le panneau passe a droite. L'ouverture est au centre du cliche : a
+   gauche, le panneau la recouvre et il ne reste qu'un mur. A droite, la
+   lumiere reste visible, et la page ne repete pas la composition de
+   l'ecran 3 de la home, ou le panneau est a gauche. */
+@media (min-width: 900px) {
+  #venir-voir .panneau { margin-left: auto; }
+}
+
+/* 3. Le cadrage. L'image est un portrait de 1400x1867 dans une bande de
+   460 px de haut : on n'en voit qu'un quart de la hauteur, il faut donc
+   choisir lequel. 60 % tient l'arche de brique et la fenetre entiere. */
+#venir-voir .bloc__fond img { object-position: 50% 60%; }
+
+/* Deux portes de sortie au bas du panneau, sur une seule ligne.
+   Composant candidat au socle : la page /soutenir/ pose le meme geste
+   sous le nom .soutenir__portes, et le modele economique en aurait
+   l'usage. A remonter dans base.css a la troisieme occurrence. */
+.panneau__gestes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 clamp(1.2rem, 2.6vw, 2.2rem);
+}
 
 
 /* ================================================================== */
@@ -86,7 +156,7 @@
 /* ================================================================== */
 .suivre {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
   gap: clamp(1.8rem, 4vw, 4.5rem);
   align-items: start;
 }
@@ -101,93 +171,112 @@
 
 .suivre__dit { max-width: 46ch; }
 
-.reseaux { display: flex; flex-wrap: wrap; gap: 0 clamp(1.2rem, 2.4vw, 2rem); margin-top: .2rem; }
+.reseaux { display: flex; flex-direction: column; margin-top: .1rem; }
 
 
 /* ================================================================== */
 /* Le formulaire d'infolettre                                          */
+/*                                                                     */
 /* Le libelle est visible : sur une page ou l'on demande une adresse    */
 /* personnelle, un champ sans etiquette a l'ecran se lit comme un       */
-/* champ de recherche.                                                  */
+/* champ de recherche. Le contour vient de .champ dans le socle, en     */
+/* violet plein : --filet plafonne a 1,33 sur blanc quand WCAG 1.4.11   */
+/* demande 3, le violet donne 4,70.                                     */
+/*                                                                     */
+/* Le consentement est une case, jamais une phrase : une phrase         */
+/* d'acceptation implicite n'est pas un consentement.                   */
 /* ================================================================== */
-.inscription { margin-top: 1.2rem; }
+.inscription { margin-top: 1rem; display: flex; flex-direction: column; gap: .65rem; }
 
-.inscription__rangee {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: .7rem;
-}
+.inscription__ligne { max-width: 24rem; }
 
-.inscription__bloc {
-  flex: 1 1 15rem;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: .4rem;
-}
+/* 48 px de haut : la cible tactile minimale est de 44 px, et le
+   remplissage du socle (.7rem) laisse le champ a 44,6 px, soit sans
+   marge. */
+.inscription input[type="email"] { min-height: 48px; }
 
-.inscription__bloc label {
-  font-size: var(--t-petit);
-  font-weight: 600;
-  color: var(--violet-sombre);
-}
+/* La case fait 22 px, mais c'est l'etiquette qui porte la cible : elle
+   est cliquable, elle fait au moins 44 px de haut, et elle occupe toute
+   la largeur restante. */
+.inscription .champ--case { align-items: center; gap: .7rem; }
 
-/* Bordure en violet plein plutot qu'en --filet : un contour de champ doit
-   tenir 3:1 contre son fond (WCAG 1.4.11), et --filet plafonne a 1,3 sur
-   blanc. Le violet donne 4,7 et rappelle le contour du bouton voisin. */
-.inscription__bloc input {
-  width: 100%;
-  min-height: 48px;
-  padding: 0 .8rem;
+/* La case native se dessine avec un contour gris #BBB, mesure a 1,92 sur
+   blanc quand WCAG 1.4.11 en demande 3. Elle est donc redessinee : meme
+   contour violet que le champ courriel, 4,70 sur blanc. La coche est un
+   SVG en donnees incluses, comme le grain du socle : aucune requete.
+   accent-color ne reglait rien, il ne teinte que l'etat coche. */
+.inscription .champ--case input {
+  appearance: none;
+  -webkit-appearance: none;
+  /* 24 px, pas 22 : c'est le plancher de la cible tactile minimale de
+     WCAG 2.5.8. L'etiquette a cote en fait 44, mais la case elle-meme est
+     une cible, et on la vise au doigt. */
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
   border: 1.5px solid var(--violet);
-  border-radius: 7px;
+  border-radius: 4px;
   background: var(--blanc);
-  color: var(--violet-sombre);
-  font: 400 1rem/1 "Onest", system-ui, sans-serif;
+  cursor: pointer;
 }
 
-.inscription__bloc input::placeholder { color: #8a889c; }
-
-.inscription .bouton--contour { flex: 0 0 auto; min-height: 48px; }
-
-.inscription__accord {
-  margin-top: .9rem;
-  max-width: 54ch;
-  font-size: .84rem;
-  line-height: 1.5;
-  color: var(--texte);
+.inscription .champ--case input:checked {
+  background: var(--violet) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3 8.6 L6.4 12 L13 4.4' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / .95rem .95rem no-repeat;
 }
 
-.inscription__accord a {
+.inscription .champ--case label {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 40ch;
+  line-height: 1.4;
+}
+
+.inscription__aide { max-width: 68ch; margin: -.2rem 0 0; }
+
+.inscription__aide a {
   color: var(--violet-sombre);
   text-decoration: underline;
   text-decoration-color: var(--violet);
   text-underline-offset: .22em;
 }
 
+.inscription__envoi { align-self: flex-start; }
+
 /* Le champ piege reste dans le flux du formulaire : un robot le trouve et
    le remplit, une personne ne le voit jamais. display:none et
    visibility:hidden sont lus par les robots courants, qui les evitent, donc
-   on le sort de l'ecran. Le decalage est negatif : vers la gauche, rien ne
-   fabrique de barre de defilement. Le retrait du parcours clavier et de
-   l'arbre d'accessibilite se fait dans le HTML (tabindex, aria-hidden). */
+   le socle le sort de l'ecran par la gauche. Le retrait du parcours clavier
+   et de l'arbre d'accessibilite se fait dans le HTML. */
 
+/* Le trou nomme est sous le bouton, pas dans un attribut : un marqueur
+   invisible en ligne ne se regle jamais. Il disparait le jour ou le point
+   d'envoi arrive, et le controle le compte jusque-la. */
+.inscription__trou {
+  max-width: 64ch;
+  margin-top: .9rem;
+  padding: .5rem .75rem;
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+
+@media (max-width: 900px) {
+  .suivre { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; }
+}
 
 @media (max-width: 767px) {
+  /* Le panneau menthe passe en colonne : l'annotation se range sous
+     l'adresse plutot que de la comprimer. */
+  .porte { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .porte__adresse,
+  .porte__delai { grid-column: 1; }
+  .porte__note { grid-column: 1; grid-row: auto; justify-self: start; text-align: left; }
+
   /* La rangee en deux colonnes se replie : l'intention passe au-dessus de
      sa destination, et la ligne de separation garde le rythme de lecture. */
-  .voie { grid-template-columns: minmax(0, 1fr); gap: .25rem; padding: 1.1rem 0; }
+  .voie { grid-template-columns: minmax(0, 1fr); gap: .25rem; padding: 1rem 0; }
 
-  .lieu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
-
-  .lieu .figure img { max-height: 215px; }
-
-  .suivre { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; }
-
-  /* Sous cette largeur le champ et le bouton ne tiennent plus cote a cote,
-     et un bouton a demi ligne se lit comme un bouton casse. */
-  .inscription__bloc { flex-basis: 100%; }
-
-  .inscription .bouton--contour { width: 100%; }
+  .inscription__ligne { max-width: none; }
+  .inscription__envoi { width: 100%; }
 }

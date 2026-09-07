@@ -1,88 +1,189 @@
 /* ------------------------------------------------------------------ */
-/* /le-modele-economique/                                               */
-/* Une page qui parle d'argent se lit debout : le socle porte presque   */
-/* tout, cette feuille ne pose que le rythme vertical et les deux       */
-/* elements que base.css n'a pas encore, la date d'une etape et la      */
-/* marque d'un chiffre non valide.                                      */
+/* /le-modele-economique/ — « Le projet »                               */
+/*                                                                      */
+/* La page du serieux. Elle montre que le montage tient, elle ne le      */
+/* demontre pas : trois nombres en tete, une phrase sur un aplat, deux   */
+/* photographies du batiment tel qu'il est. Le socle porte presque tout, */
+/* cette feuille ne pose que ce qu'il ne sait pas encore faire :         */
+/* la chaine des trois sources, la typographie de la phrase-cle et le    */
+/* grain de l'en-tete colore.                                            */
 /* ------------------------------------------------------------------ */
 
-/* ---------- les trois piliers ---------- */
 
-/* La grille suit le texte qui l'introduit : sans cette marge elle se colle
-   au dernier paragraphe et les cartes se lisent comme une suite de la
-   phrase, pas comme les trois appuis qu'elles decrivent. */
-.piliers { margin-top: clamp(1.8rem, 3.2vw, 2.6rem); }
+/* ---------- en-tete de page ---------- */
 
-
-/* ---------- reperes chiffres ---------- */
-
-/* Les trois seuls chiffres de la page, isoles entre deux filets. Ils
-   coupent la colonne de lecture, ce qui est le but : on doit pouvoir les
-   trouver sans lire le paragraphe qui les precede. */
-.reperes {
-  margin: clamp(2.2rem, 4vw, 3.2rem) 0;
-  padding: clamp(1.8rem, 3vw, 2.4rem) 0;
-  border-top: 1px solid var(--filet);
-  border-bottom: 1px solid var(--filet);
+/* Le voile du socle a ete calibre sur le .page-tete gris : un grain neutre
+   a 50 %. Sur l'aube, les trois nappes de couleur passent dessous et la
+   tete redevient grise. Meme traitement que sur la home : grain colore, en
+   fusion normale, quatre fois plus discret.
+   A REMONTER DANS base.css si une deuxieme page ouvre sur .page-tete--aube,
+   ce qui est probable : la regle ne depend de rien qui soit propre a cette
+   page. */
+.page-tete--aube > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
 }
 
-
-/* ---------- liste des espaces ---------- */
-
-/* La liste vit entre deux paragraphes de la meme section : elle respire
-   comme un paragraphe, pas comme un bloc. */
-.espaces { margin: 1.6rem 0 2rem; }
+/* Les trois seuls nombres de la page, en tete. Un lecteur qui ne lit que
+   l'en-tete doit repartir avec eux : le foncier est regle, la cooperative
+   existe, l'entree coute 100 €. */
+.tete__reperes { margin-top: clamp(1.8rem, 3.2vw, 2.6rem); }
 
 
-/* ---------- calendrier ---------- */
+/* ---------- 1. ce qui paie ---------- */
 
-/* DEFAUT DU SOCLE, a remonter dans base.css. .etapes numerote ses items par
-   un compteur CSS, mais le socle ne remet a zero que les puces de ul. Sur le
-   <ol> qui convient a un calendrier, le marqueur natif s'ajoute a la pastille
-   et la ligne s'ouvre sur « 1. 1 ». La regle vaut pour toute page qui datera
-   des etapes : sa place est dans le socle, pas ici. */
+/* Titre et chapeau a gauche, la chaine des sources a droite. En une seule
+   colonne, la meme matiere fait 340 px de plus et la page depasse sa
+   cible ; en deux, le regard voit l'ordre d'un coup. */
+.montage {
+  display: grid;
+  grid-template-columns: minmax(0, 4.4fr) minmax(0, 6.4fr);
+  gap: clamp(1.6rem, 3.4vw, 3.6rem);
+  align-items: start;
+}
+
+.montage__dire .bloc__titre { margin-bottom: 1rem; max-width: 13ch; }
+
+.montage__dire .bloc__intro { margin: 0; max-width: 32ch; }
+
+/* DEFAUT DU SOCLE, deja signale par la version precedente de cette page.
+   .etapes numerote par un compteur CSS, mais le socle ne remet a zero que
+   les puces de ul. Sur un <ol>, le marqueur natif s'ajoute a la pastille et
+   la ligne s'ouvre sur « 1. 1 ». La regle vaut pour toute page qui
+   numerote des etapes : sa place est dans base.css. */
 ol.etapes { list-style: none; }
 
-
-/* La date d'une etape, au-dessus de son intitule. Le socle ne porte que
-   .etapes__titre : si une deuxieme page date ses etapes, cette regle et
-   celle du dessous montent dans base.css. Violet sombre plutot que violet :
-   sur le fond violace, le violet plafonne sous 4,5. */
-.etapes__quand {
-  display: block;
-  margin-bottom: .25rem;
-  color: var(--violet-sombre);
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .09em;
-  line-height: 1.3;
-  text-transform: uppercase;
+/* La chaine. Le socle donne la pastille numerotee ; ce qui manque est le
+   trait qui relie les trois, et sans lui trois items numerotes se lisent
+   comme trois cartes de meme poids. La page dit exactement l'inverse :
+   la premiere ouvre les deux autres.
+   Le trait ne porte aucune proportion et aucune surface relative, ce qui
+   est la contrainte de fond de la page : tout chiffrage de la fraction
+   bancaire est interdit, y compris dessine. */
+.sources {
+  max-width: none;
+  gap: 0;
 }
 
-.etapes p { margin-top: .35rem; }
+.sources > li { padding-bottom: clamp(1.5rem, 2.6vw, 2.2rem); }
+
+.sources > li:last-child { padding-bottom: 0; }
+
+.sources > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1.15rem - 1px);
+  top: 2.45rem;
+  bottom: .35rem;
+  width: 2px;
+  background: var(--filet);
+}
+
+/* La premiere source est celle que le lecteur remplit. Elle est la seule a
+   porter la pastille sombre, un intitule plus grand et une annotation :
+   trois items de meme graisse diraient qu'elles se valent. */
+.sources > li.sources__notre::before { background: var(--violet-sombre); }
+
+.sources__notre > .etapes__titre { font-size: 1.28rem; }
+
+.sources__notre .annote { margin-top: .7rem; }
 
 
-/* ---------- trous nommes ---------- */
+/* ---------- 2. la phrase ---------- */
 
-/* .a-sourcer etait redefini ici, avec un pointille et une couleur qui ne
-   sont pas ceux du socle : deux marqueurs differents pour le meme manque
-   sur deux pages voisines. La redefinition est retiree, le socle reprend
-   la main. Ne reste que ce que le socle ne peut pas savoir : dans une date
-   d'etape, qui est en capitales espacees, le crochet doit revenir en bas
-   de casse, sinon le trou se lit comme un intitule. */
-.etapes__quand.a-sourcer { text-transform: none; letter-spacing: normal; }
+/* La seule zone chaude de la page. Elle ne porte qu'une phrase, et le bloc
+   est dimensionne pour qu'elle tienne un ecran sans le remplir : un aplat
+   qui deroule du texte long cesse d'etre une rupture.
+   Contrainte de contraste heritee du socle : sur cet aplat le blanc tient
+   4,04 pour 4,5 vise. Donc pas de gris, pas de corps sous 1,0625 rem. */
+#la-moitie { padding: clamp(3.6rem, 7.4vw, 6.4rem) 0; }
 
-/* Un trou qui tient un paragraphe entier, ici la commande du schema du
-   montage financier. Le socle donne au marqueur une respiration d'un
-   demi-mot, calibree sur un fragment de phrase : sur cinq lignes elle
-   colle le texte au pointille.
-   Regle identique a celle de le-projet-architectural.css, dont le
-   commentaire annonce qu'elle monte dans base.css a la deuxieme page qui
-   en aurait besoin. C'est cette page. Le socle est tenu par un autre
-   travail en cours : le deplacement se fait a la reunion des deux, en
-   supprimant les deux copies. */
+.moitie__phrase {
+  margin: 0;
+  max-width: 19ch;
+  font-size: clamp(2.05rem, 4.3vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.022em;
+}
 
+.moitie__reponse {
+  margin-top: clamp(1.3rem, 2.4vw, 2rem);
+  font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* La trace jaune du surlignage porte son libelle en violet sombre, qui tient
+   12,1 sur le jaune de la charte. Sur cette page, « nous » est donc le mot le
+   plus lisible, et c'est celui qu'on veut faire retenir. */
+.moitie__reponse .marqueur { font-size: 1em; }
+
+.moitie__qui {
+  margin-top: clamp(1.2rem, 2.2vw, 1.8rem);
+  max-width: 42ch;
+  font-size: var(--t-corps);
+  color: var(--blanc);
+}
+
+
+/* ---------- 3. ce que votre part finance ---------- */
+
+/* Le socle ouvre .bloc--photo a 7 rem en haut et en bas. Le panneau porte
+   ici quatre paragraphes courts : la respiration du socle ferait un ecran
+   de 900 px pour 90 mots. */
+#votre-part { padding: clamp(3rem, 6vw, 5rem) 0; }
+
+#votre-part .panneau { max-width: 37rem; }
+
+/* La grange est un cliche vertical de 1400 x 1867 : centre dans une bande
+   large, il ne montre que le sol et une barriere. Remonte a 36 %, il montre
+   la charpente, les lucarnes et le volume vide, qui est le sujet. */
+#votre-part .bloc__fond img { object-position: 50% 36%; }
+
+
+/* ---------- 4. une fois le lieu ouvert ---------- */
+
+/* Qui paye le loyer. Cinq noms empiles en colonne feraient cinq lignes de
+   vide a droite et 90 px de haut en plus : la liste du socle passe en
+   ligne, sous un filet, et rend la largeur de la page utile.
+   Le nom des exploitantes n'apparait pas : deux structures ont bouge depuis
+   le dessin de l'agence, les espaces se nomment donc par leur fonction. */
+.locataires {
+  flex-flow: row wrap;
+  gap: .5rem 1.9rem;
+  margin: clamp(1.4rem, 2.4vw, 2rem) 0 clamp(1.7rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.3rem, 2.2vw, 1.8rem);
+  border-bottom: 1px solid var(--filet);
+  color: var(--violet-sombre);
+  font-weight: 600;
+}
+
+
+/* ---------- 5. personne ne s'enrichit ---------- */
+
+/* Le texte d'abord dans le HTML, l'image a sa droite : au clavier et a la
+   lecture d'ecran, on lit la clause avant de voir la charpente. */
+#personne-ne-senrichit .bloc__titre { margin-bottom: .9rem; }
+
+#personne-ne-senrichit .figure img { max-height: 300px; }
+
+
+@media (max-width: 900px) {
+  .montage { grid-template-columns: minmax(0, 1fr); gap: clamp(1.3rem, 3vw, 2rem); }
+
+  .montage__dire .bloc__titre,
+  .montage__dire .bloc__intro { max-width: none; }
+}
 
 @media (max-width: 767px) {
-  .reperes { padding: 1.6rem 0; }
+  /* Trois reperes cote a cote tombent a 84 px de large : ils s'empilent
+     plutot que de se casser en trois lignes chacun. */
+  .tete__reperes { gap: 1.3rem; }
+
+  .tete__reperes .repere__quoi { max-width: 34ch; }
+
+  .moitie__qui { max-width: none; }
 }

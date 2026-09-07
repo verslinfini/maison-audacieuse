@@ -1,59 +1,89 @@
 /* ------------------------------------------------------------------ */
 /* Page /prendre-part/ : la declaration d'intention de souscription.    */
-/* La page est batie avec les composants du socle. Ne vivent ici que le */
-/* formulaire, le marquage de l'etape courante du parcours et les deux  */
-/* notes de reassurance. Aucun paiement n'est branche : cette feuille   */
-/* n'habille donc rien de bancaire.                                     */
+/*                                                                     */
+/* Page d'action. Tout ce qui explique y est de trop : le lecteur qui   */
+/* arrive ici a deja lu ce qu'il voulait lire. La feuille ne porte donc */
+/* que trois choses : l'en-tete avec l'image du lieu, le parcours en    */
+/* trois temps, et le formulaire.                                       */
+/*                                                                     */
+/* Regle de composition : l'image ne concurrence jamais le formulaire.  */
+/* Elle vit en haut, dans l'en-tete, et nulle part ailleurs.            */
 /* ------------------------------------------------------------------ */
 
 
-/* ---------- lien dans le fil du texte ---------- */
+/* ---------- en-tete : le titre et le lieu cote a cote ---------- */
 
-/* .lien-texte du socle est une cible de 44 px, faite pour vivre seule.
-   Dans une phrase elle gonfle la ligne. Meme trait violet, sans la boite.
-   Candidate a base.css des qu'une deuxieme page en aura besoin. */
-
-
-.bloc--sombre .lien-doux { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
-
-.bloc--sombre .lien-doux:hover { text-decoration-color: var(--jaune); }
-
-
-/* ---------- ecran 1, ce que vous prenez ---------- */
-
-/* La phrase du remboursement est la premiere objection de tous les lecteurs.
-   Elle se detache du texte courant sans encadre ni pictogramme : sur une page
-   qui demande de l'argent, la sobriete est l'argument. */
-.reassurance {
-  margin-top: clamp(1.6rem, 2.6vw, 2.2rem);
-  max-width: 42ch;
-  color: var(--violet-sombre);
-  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
-  font-weight: 500;
-  line-height: 1.4;
+/* Le visuel du lieu renove est la seule image de la page. Il est place
+   avant le formulaire, jamais a cote : une photo posee pres d'un champ
+   tire l'oeil hors du geste. */
+.tete-duo {
+  display: grid;
+  gap: clamp(1.5rem, 3.2vw, 3rem);
+  align-items: center;
 }
 
-.apres-mesure { margin-top: clamp(1.2rem, 2vw, 1.8rem); }
+.tete-duo__aller { margin-top: clamp(.5rem, 1.2vw, .9rem); }
+
+/* .figure du socle porte deja le cadre blanc incline et sa legende. */
+.tete-duo .figure { margin: 0; }
+
+@media (min-width: 900px) {
+  .tete-duo { grid-template-columns: minmax(0, 1fr) minmax(0, 25rem); }
+}
 
 
-/* ---------- ecran 2, le parcours ---------- */
+/* ---------- le parcours en trois temps ---------- */
 
-/* Le socle remet ul a zero, jamais ol. Sur une liste ordonnee, .etapes
-   affiche donc le marqueur natif « 1. » EN PLUS de sa pastille numerotee,
-   et herite du retrait de 40 px. Correctif de page : la regle a sa place
-   dans base.css, elle est signalee dans le retour de session. */
-.etapes { margin: 0; padding-left: 0; list-style: none; }
+/* Le socle remet ul a zero, jamais ol : sans ces trois lignes, la liste
+   affiche son marqueur natif « 1. » EN PLUS de la pastille numerotee, et
+   herite du retrait de 40 px.
+   Composant candidat a base.css : .etapes du socle est une colonne, celui-ci
+   est une bande de trois temps. Une page qui doit montrer un parcours court
+   sans le derouler sur 500 px n'a rien pour le faire aujourd'hui. */
+.parcours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.7rem, 3vw, 2.6rem);
+}
 
-.etapes li p + p { margin-top: .55rem; }
+.parcours__etape { position: relative; padding-top: 3.3rem; }
 
-/* L'etape ou se trouve le lecteur. Pastille pleine plutot que violet clair,
-   et une etiquette jaune : c'est la seule zone chaude de cet ecran. */
-.etapes > li.etape--ici::before { background: var(--violet-sombre); }
+.parcours__no {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  /* Meme pastille que .etapes du socle : blanc sur violet, 4,70 pour 1. Le
+     terracotta et le vert de la charte plafonnent tous deux a 3,1 et 4,1. */
+  background: var(--violet);
+  color: var(--blanc);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+}
 
-.etapes__ici {
+.parcours__titre {
+  margin: 0 0 .45rem;
+  color: var(--violet-sombre);
+  font-size: 1.16rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.parcours__phrase { line-height: 1.55; }
+
+/* L'etape ou se trouve le lecteur. Jaune plein, le seul de la section :
+   c'est la seule chose que l'oeil doit trouver avant de lire. */
+.parcours__ici {
   display: inline-block;
-  margin-left: .55rem;
-  padding: .16em .6em;
+  margin-left: .5rem;
+  padding: .2em .65em;
   border-radius: 999px;
   background: var(--jaune);
   color: var(--violet-sombre);
@@ -61,7 +91,7 @@
   font-weight: 600;
   letter-spacing: .07em;
   text-transform: uppercase;
-  vertical-align: .14em;
+  vertical-align: .16em;
   white-space: nowrap;
 }
 
@@ -70,143 +100,242 @@
 .parcours__alerte {
   margin-top: clamp(1.9rem, 3.2vw, 2.6rem);
   padding-left: 1.1rem;
-  max-width: 64ch;
+  max-width: 74ch;
   border-left: 3px solid var(--violet);
-  font-size: .95rem;
+  font-size: .98rem;
   line-height: 1.55;
 }
 
+@media (min-width: 860px) {
+  .parcours { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 
-/* ---------- ecran 3, la declaration ---------- */
 
-.declaration-grille { display: grid; gap: clamp(1.5rem, 3vw, 3rem); }
+/* ---------- la promesse, le fond plein ---------- */
 
-.declaration-intro .prose { max-width: 40ch; }
+/* La premiere objection de tout le monde, dite au mot pres et rien d'autre
+   dans le bloc. Le socle plafonne le blanc a 4,10 pour 1 sur le terracotta :
+   au-dessous de 24 px, WCAG demande 4,5 et la phrase serait hors seuil. Les
+   deux tailles ci-dessous ne descendent donc jamais sous 24 px, meme a
+   375 px de large. C'est la contrainte qui fait la composition, et elle
+   tombe bien : un fond plein ne porte pas de texte long. */
+/* Le titre porte 20 px en gras, soit le seuil du « grand texte » WCAG
+   (14 pt gras) : en dessous, il repasserait a 4,5 et tomberait. */
+.promesse__sur {
+  margin: 0 0 clamp(.9rem, 1.8vw, 1.4rem);
+  color: var(--blanc);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
 
-/* Ce que la page ne demande pas. Menthe pleine, une fois, en tete du
-   formulaire : c'est la seule zone chaude de cet ecran. */
-.garde {
-  margin-top: clamp(1.3rem, 2.4vw, 1.8rem);
-  padding: .95rem 1.15rem;
-  border-radius: 8px;
-  background: var(--menthe);
-  color: var(--violet-sombre);
+/* La phrase se dit au mot pres et d'un seul tenant : elle ne se coupe ni
+   entre un titre et un paragraphe, ni par un span en bloc. 27,2 px au plus
+   petit, donc « grand texte » a toutes les largeurs. */
+.promesse {
+  max-width: 28ch;
+  color: var(--blanc);
+  font-size: clamp(1.7rem, 2.9vw, 2.6rem);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.18;
+  letter-spacing: -.01em;
 }
 
-/* Le cadre est plafonne : au-dela, les libelles s'eloignent de leur champ
-   et les mentions legales se lisent sur 100 signes. */
-.declaration {
-  position: relative;
-  max-width: 40rem;
-  padding: clamp(1.4rem, 3vw, 2.6rem);
-  background: var(--blanc);
-  border-radius: 12px;
-  box-shadow: 0 18px 44px rgba(56, 54, 72, .10);
+
+/* ---------- la declaration ---------- */
+
+/* L'annotation manuscrite du socle, une seule fois sur la page. Elle ne dit
+   rien qu'on ne trouve ailleurs : le chapo porte deja « aucun paiement sur
+   cette page ». Une Meow Script se lit mal, et certains ne la lisent pas. */
+.declaration-tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .4rem 1.5rem;
+  margin-bottom: clamp(1.3rem, 2.4vw, 2.1rem);
 }
 
-.champs { display: grid; gap: clamp(1.1rem, 2vw, 1.5rem); }
+.declaration-tete .bloc__titre { margin-bottom: 0; }
 
-.champ { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+/* Le socle descend l'annotation a 1,35 rem sous 1140 px, soit 21,6 px : sous
+   les 24 px du « grand texte » WCAG, elle passe au seuil de 4,5 et le violet
+   de la charte n'y tient que 3,91 sur le fond « ouvert ». Plancher a 24,8 px
+   plutot que de sortir du violet, qui est la couleur de l'annotation. */
+.declaration-tete .annote { font-size: clamp(1.55rem, 2.1vw, 1.8rem); }
 
-.champ label {
+/* Colonne de gauche : ce que la page fait des informations, et le repli par
+   courriel. Elle vient AVANT le formulaire dans le HTML, donc avant lui au
+   clavier et sur telephone : on ne demande pas de remplir avant d'avoir dit
+   ce qu'on en fait. */
+.declaration-grille {
+  display: grid;
+  gap: clamp(1.8rem, 3.4vw, 3.2rem);
+  align-items: start;
+}
+
+.declaration-cote > * + * { margin-top: clamp(1.1rem, 2vw, 1.5rem); }
+
+.cote__titre {
+  margin: 0;
   color: var(--violet-sombre);
-  font-size: .95rem;
+  font-size: 1.14rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-/* Bordure a 3,4 pour 1 sur le blanc : sous ce seuil le champ se devine
-   plus qu'il ne se voit, et un formulaire d'argent ne se devine pas. */
-.champ input,
-.champ textarea {
-  width: 100%;
-  min-height: 50px;
-  padding: .7rem .85rem;
-  border: 1.5px solid #8A8896;
+.cote__prose {
+  margin-top: .7rem;
+  max-width: 42ch;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+/* Le repli. Menthe pleine, une seule fois sur la page : tant que le point
+   d'envoi n'est pas branche, c'est le seul chemin qui aboutit vraiment.
+   Violet sombre sur menthe : 10,3 pour 1. */
+.repli {
+  padding: 1rem 1.15rem;
   border-radius: 8px;
-  background: var(--blanc);
-  color: var(--texte);
-  font: 400 1rem/1.4 "Onest", "Segoe UI", system-ui, sans-serif;
-}
-
-.champ textarea { min-height: 7.5rem; resize: vertical; }
-
-.champ input:hover,
-.champ textarea:hover { border-color: var(--violet); }
-
-.champ input:focus,
-.champ textarea:focus { border-color: var(--violet); }
-
-.champ__aide {
-  max-width: 68ch;
-  color: #676579;
-  font-size: .86rem;
-  line-height: 1.45;
-}
-
-.champ__option { color: #676579; font-size: .84rem; font-weight: 400; }
-
-.champ--parts input { max-width: 9rem; }
-
-/* Le montant n'existe que si le script tourne : sans lui l'aide sous le
-   champ suffit, et la page ne raconte rien de faux. */
-.montant {
-  margin-top: .25rem;
+  background: var(--menthe);
   color: var(--violet-sombre);
-  font-size: 1.05rem;
+  font-size: .98rem;
+  line-height: 1.5;
+}
+
+/* Le cadre est plafonne : au-dela, les libelles s'eloignent de leur champ
+   et les mentions se lisent sur cent signes. Il est positionne pour que le
+   champ piege sorte par sa gauche sans jamais elargir la page. */
+.declaration {
+  position: relative;
+  max-width: 40rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  background: var(--blanc);
+  border: 1px solid var(--filet);
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(56, 54, 72, .12);
+}
+
+/* Les quatre champs sont obligatoires, donc la regle se dit une fois en tete
+   plutot que quatre fois en marge. Chaque champ porte « required » : la
+   mention a l'ecran et l'attribut disent la meme chose. */
+.declaration__regle {
+  margin-bottom: 1.15rem;
+  color: var(--violet-sombre);
+  font-size: .92rem;
   font-weight: 600;
 }
 
-.montant[hidden] { display: none; }
+.champs { display: grid; gap: clamp(1rem, 1.9vw, 1.35rem); }
 
-.champ--case { flex-direction: row; align-items: flex-start; gap: .8rem; }
+.champ { min-width: 0; }
 
-.champ--case input {
-  flex: 0 0 auto;
+.champ > label { font-size: .95rem; line-height: 1.3; }
+
+/* Le socle donne deja le contour a 1,5 px de violet, soit 4,70 pour 1 sur le
+   blanc du cadre, la ou le gris du socle plafonnait a 1,33. Ne reste que la
+   hauteur : 48 px pour un pouce, WCAG en demande 44. */
+.champ input:not([type="checkbox"]) { min-height: 48px; }
+
+.champ input:not([type="checkbox"]):hover { border-color: var(--violet-sombre); }
+
+.champ--parts input { max-width: 8rem; }
+
+/* Case a cocher dessinee : la case native de Chrome porte un contour a
+   #767676, soit 4,54 pour 1, mais il change d'un navigateur a l'autre et
+   d'un theme systeme a l'autre. Redessinee, elle tient le meme violet que
+   les autres champs, partout. */
+.champ--case { display: flex; flex-direction: row; align-items: flex-start; gap: .75rem; }
+
+.champ--case input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
   width: 24px;
   height: 24px;
-  min-height: 0;
-  margin-top: .16em;
+  margin: .15rem 0 0;
   padding: 0;
-  accent-color: var(--violet);
+  border: 1.5px solid var(--violet);
+  border-radius: 5px;
+  background: var(--blanc);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
 }
 
+.champ--case input[type="checkbox"]::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  transform: scale(0);
+  transition: transform 120ms ease;
+  box-shadow: inset 1em 1em var(--violet);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.champ--case input[type="checkbox"]:checked::before { transform: scale(1); }
+
 .champ--case label {
-  max-width: 62ch;
+  max-width: 60ch;
   color: var(--texte);
-  font-size: 1rem;
+  font-size: .98rem;
   font-weight: 400;
   line-height: 1.5;
+  cursor: pointer;
 }
 
 /* Enfant direct de la grille des champs : sans cette ligne, la mention se
    plie dans une demi-colonne et se lit sur quarante signes. */
 .champ__aide--case {
   grid-column: 1 / -1;
-  margin-top: -.55rem;
-  padding-left: calc(24px + .8rem);
+  margin-top: -.5rem;
+  padding-left: calc(24px + .75rem);
 }
 
-/* Champ piege : hors de l'ecran, jamais display:none, que les robots
-   apprennent a ignorer. La declaration est positionnee pour que le champ
-   sorte par sa gauche sans jamais elargir la page. */
+/* Le trou du point d'envoi se lit juste avant le bouton, la ou le geste se
+   fait. Ailleurs sur la page, il serait vrai et inutile. */
+.declaration__trou {
+  max-width: none;
+  margin-top: clamp(1.5rem, 2.6vw, 2rem);
+}
 
-.declaration__geste { margin-top: clamp(1.6rem, 3vw, 2.2rem); }
+.declaration__geste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .8rem 1.2rem;
+  margin-top: clamp(1.4rem, 2.6vw, 2rem);
+}
 
 .declaration__geste .bouton { min-height: 54px; padding: 0 2rem; }
 
+.declaration__geste .champ__aide { flex: 1 1 15rem; }
+
 .declaration__note {
   margin-top: 1.1rem;
-  max-width: 56ch;
-  color: #676579;
+  max-width: 58ch;
   font-size: .88rem;
   line-height: 1.5;
+  color: rgba(86, 84, 107, .86);
+}
+
+/* 20 rem plus 40 rem tiennent dans la colonne des 1000 px, gouttiere
+   comprise, et les deux pistes se retrecissent ensemble en dessous. */
+@media (min-width: 620px) {
+  .champs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .champ--large { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1000px) {
+  .declaration-grille {
+    grid-template-columns: minmax(0, 20rem) minmax(0, 40rem);
+    justify-content: space-between;
+  }
 }
 
 
-/* ---------- ecran 5, l'appel ---------- */
+/* ---------- l'appel ---------- */
 
 /* Le don ne concourt pas avec la part sur cette page : une ligne, en pied,
    sous un filet, apres l'appel principal. */
@@ -219,15 +348,6 @@
 }
 
 
-@media (min-width: 640px) {
-  .champs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .champ--large { grid-column: 1 / -1; }
-}
-
-@media (min-width: 980px) {
-  .declaration-grille { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); align-items: start; }
-}
-
 @media (max-width: 767px) {
   /* La barre d'appel pointe sur cette page meme, et elle recouvrirait le
      bouton d'envoi du formulaire. Elle disparait ici, seule page du site
@@ -238,7 +358,9 @@
 
   html { scroll-padding-bottom: 1.5rem; }
 
-  .etapes__ici { margin-left: 0; margin-top: .35rem; display: table; }
+  .parcours__ici { display: table; margin: .4rem 0 0; }
 
   .declaration__geste .bouton { width: 100%; }
+
+  .declaration__geste .champ__aide { flex: 1 1 100%; }
 }

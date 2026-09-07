@@ -1,82 +1,168 @@
 /* ------------------------------------------------------------------ */
-/* Page « L'equipe projet ».                                            */
-/* Trois cercles, trois formes. Le collectif se lit comme un registre   */
-/* de noms, la cooperative comme une page de statuts, les metiers       */
-/* comme le cartouche d'un plan. Aucune grille de cartes : ces trois    */
-/* groupes ne se ressemblent pas, ils ne doivent pas se presenter       */
-/* pareil.                                                              */
+/* Page « L'equipe ».                                                   */
+/*                                                                      */
+/* Refonte du 07/09/2026. La page presentait cinq structures la ou le    */
+/* lecteur cherche des personnes : elle presente d'abord des personnes.  */
+/* La matiere manque (prenoms, roles, portraits) et elle n'est pas       */
+/* inventee : la grille de portraits est construite pour l'accueillir.   */
+/* Un cadre vide bien fait dit ce qui manque mieux qu'un tableau qui     */
+/* fait semblant d'etre complet.                                         */
+/*                                                                      */
+/* Trois formes, trois cercles. Les personnes en grille de portraits,    */
+/* la cooperative en questions repliees avec son etat civil en regard,   */
+/* les metiers en cartouche de plan. Aucun des trois ne se presente      */
+/* comme les deux autres : ils ne sont pas de meme nature.               */
 /* ------------------------------------------------------------------ */
 
 
-/* ---------- ce qui manque encore ---------- */
+/* ================================================================== */
+/* LA GRILLE DE PORTRAITS                                              */
+/*                                                                     */
+/* Elle doit tenir vide. Un cadre reserve, calme, au format d'un        */
+/* portrait, avec la mention de ce qui viendra dedans : la page est en  */
+/* attente, pas en panne. Le jour ou les photos arrivent, le            */
+/* .portrait__cadre est remplace par <img class="portrait__photo">, et  */
+/* rien d'autre ne bouge : meme rapport, meme rayon, meme place.        */
+/* ================================================================== */
 
-/* Marque visible d'une information non sourcee. Volontairement neutre :
-   ce n'est pas un accent de charte, c'est un trou a combler. Le tirete
-   se lit comme un champ de formulaire vide. */
-.a-sourcer {
-  padding: .12em .45em;
-  border: 1px dashed rgba(56, 54, 72, .45);
-  border-radius: 3px;
-  background: rgba(56, 54, 72, .045);
-  color: var(--violet-sombre);
-  font-size: .86em;
-  text-transform: none;
-  letter-spacing: normal;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
-
-/* ---------- premier cercle : le registre des exploitantes ---------- */
-
-/* Le nom a gauche, ce qu'elle fait a droite, un filet entre chaque.
-   Les lignes n'ont pas la meme longueur et c'est voulu : une carte
-   impose la meme quantite de texte a tout le monde, pas un registre. */
-.collectif__manque { margin: 0 0 clamp(1.6rem, 2.8vw, 2.4rem); }
-
-.exploitantes {
+.portraits {
   display: grid;
-  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  gap: clamp(1.3rem, 2.4vw, 2.2rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   margin: 0;
 }
 
-.exploitantes dt,
-.exploitantes dd {
-  margin: 0;
-  padding: clamp(1rem, 1.9vw, 1.5rem) 0;
-  border-top: 1px solid var(--filet);
+/* La carte plafonne a 200 px : au-dela, quatre cadres vides font quatre
+   trous de la taille d'une affiche. A cette largeur ils se lisent comme
+   des portraits en attente. */
+.portrait { display: flex; flex-direction: column; max-width: 12.5rem; }
+
+.portrait__dit { margin-top: .85rem; }
+
+/* Le cadre en attente. Le carre est le format demande dans le marqueur,
+   pour que la photo recue entre sans recadrage, et il tient quatre fois
+   de suite sans faire une colonne de vide. Le tirete reprend celui des
+   trous nommes du socle, en plus discret : il annonce la meme chose,
+   il ne doit pas crier quatre fois. */
+.portrait__cadre,
+.portrait__photo {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 4px;
 }
 
-.exploitantes dt {
-  padding-right: clamp(1rem, 2.4vw, 2.4rem);
+.portrait__cadre {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: .5rem;
+  border: 1px dashed rgba(56, 54, 72, .34);
+  /* Deux nappes menthe et lavande sur le violace du socle : le cadre
+     appartient a la charte, il n'est pas un trou gris. Assez dense pour
+     se voir sur le blanc du bloc, assez calme pour ne pas concurrencer
+     le nom qu'il portera. */
+  background:
+    radial-gradient(76% 60% at 20% 12%, rgba(186, 255, 228, .48), rgba(186, 255, 228, 0) 70%),
+    radial-gradient(70% 58% at 86% 94%, rgba(118, 109, 160, .24), rgba(118, 109, 160, 0) 72%),
+    var(--violace);
+  color: var(--texte);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Ecrit maintenant pour que l'arrivee des photos soit un remplacement de
+   balise, pas une reprise de feuille. */
+.portrait__photo { object-fit: cover; object-position: 50% 30%; display: block; }
+
+.portrait__nom {
+  margin: 0;
   color: var(--violet-sombre);
-  font-size: clamp(1.16rem, 1.7vw, 1.4rem);
+  font-size: 1.14rem;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -.01em;
+  line-height: 1.25;
 }
 
-.exploitantes dd { max-width: 60ch; }
+.portrait__role {
+  margin: .18rem 0 0;
+  font-size: .78rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--texte);
+}
 
-.exploitantes dt:last-of-type,
-.exploitantes dd:last-of-type { border-bottom: 1px solid var(--filet); }
+.portrait__mot { margin: .6rem 0 0; font-size: .94rem; line-height: 1.45; }
 
-.collectif__suite { margin-top: clamp(1.8rem, 3vw, 2.6rem); }
+/* Sur une carte sans nom, le marqueur occupe la place du nom : sinon il
+   flotte sous un vide et la carte a l'air cassee plutot qu'en attente. */
+.portrait__dit > .portrait__mot:first-child { margin-top: 0; }
 
 
-/* ---------- deuxieme cercle : la cooperative ---------- */
+/* ================================================================== */
+/* LA BANDE PHOTO                                                      */
+/*                                                                     */
+/* Le credit de la photo tombe en bas a droite du cadre, la ou la      */
+/* grange montre son sol de beton clair : le blanc du socle y mesure   */
+/* 3,4 pour 4,5 vise. Un voile sombre sur le seul bas de l'image le    */
+/* remonte a 6,7, et il assied la photo sur la section suivante. Il    */
+/* passe au-dessus de l'image et sous le panneau, d'ou le z-index 1.   */
+/* ================================================================== */
 
-/* La demonstration a gauche, la fiche d'identite a droite. La fiche
-   n'est pas une carte de plus : c'est l'etat civil de la societe, et
-   elle se lit comme tel, libelle puis valeur. */
+#les-espaces::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: 26%;
+  background: linear-gradient(to top, rgba(31, 29, 45, .62), rgba(31, 29, 45, 0));
+  pointer-events: none;
+}
+
+
+/* ================================================================== */
+/* LA ZONE CHAUDE : UNE PERSONNE, UNE VOIX                             */
+/*                                                                     */
+/* Le seul fond plein de la page. Il porte une idee et une seule, celle */
+/* que le lecteur doit emporter : le nombre de parts ne change pas le   */
+/* poids d'une voix. La ponderation des quatre colleges est vraie et    */
+/* secondaire, elle vit dans la question repliee de l'ecran suivant.    */
+/* ================================================================== */
+
+/* Le blanc tient 4,04 sur le violet du socle, plancher assume le 04/09 :
+   sur ce fond, pas de corps de texte sous 1,0625 rem et pas de gris. */
+.voix { max-width: 46ch; }
+
+.voix .bloc__titre { margin-bottom: 1rem; }
+
+.voix__chute { margin-top: 1.1rem; font-size: 1.0625rem; }
+
+/* L'annotation manuscrite ne porte rien qu'on ne lise ailleurs : elle
+   repete le repere qui la suit. Une police cursive se lit mal, et
+   certains ne la lisent pas du tout. */
+.voix .annote { margin: 1.5rem 0 0; }
+
+#une-voix .reperes { margin-top: clamp(1.9rem, 3vw, 2.7rem); }
+
+
+/* ================================================================== */
+/* LES QUESTIONS ET L'ETAT CIVIL                                       */
+/*                                                                     */
+/* Les questions a gauche, la fiche a droite. La fiche n'est pas une    */
+/* carte de plus : c'est l'etat civil de la societe, et elle se lit     */
+/* comme tel, libelle puis valeur.                                     */
+/* ================================================================== */
+
 .coop {
   display: grid;
   gap: clamp(1.8rem, 3.4vw, 3.2rem);
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, .85fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr);
   align-items: start;
 }
 
-.coop__texte { max-width: 62ch; }
+/* Le premier filet de la liste de questions double le titre de section :
+   deux traits pour une seule separation. */
+.coop > .questions > .question:first-child { border-top: 0; }
 
 .fiche {
   padding: clamp(1.3rem, 2.2vw, 1.9rem);
@@ -116,16 +202,25 @@
 }
 
 
-/* ---------- troisieme cercle : le cartouche des metiers ---------- */
+/* ================================================================== */
+/* LE CARTOUCHE DES METIERS                                            */
+/*                                                                     */
+/* Inverse des portraits : le metier d'abord, la structure ensuite.     */
+/* C'est l'ordre du cartouche d'un plan d'architecte, et c'est l'ordre  */
+/* dans lequel on cherche une competence.                               */
+/* ================================================================== */
 
-/* Inverse du premier bloc : le metier d'abord, la structure ensuite.
-   C'est l'ordre du cartouche d'un plan d'architecte, et c'est l'ordre
-   dans lequel on cherche une competence. Deux colonnes au large, une
-   seule des que la ligne se serre. */
+.metiers__entree { margin-bottom: clamp(2.2rem, 4vw, 3.4rem); }
+
+/* La ferme est un batiment couche, la photo est debout : cadree a 268 px
+   comme les autres figures du site, elle ne montrerait que l'asphalte.
+   Le cadre monte un peu et se cale sur la hauteur du mur. */
+.metiers__vue img { max-height: clamp(140px, 11vw, 160px); object-position: 50% 46%; }
+
 .cartouche {
   display: grid;
   gap: clamp(1.4rem, 2.6vw, 2.2rem) clamp(1.6rem, 3vw, 3rem);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
   margin: 0;
 }
 
@@ -138,6 +233,10 @@
   color: var(--violet-sombre);
   font-weight: 600;
 }
+
+/* Le marqueur d'un role manquant casse la capitale et l'interlettrage :
+   sinon un trou nomme se lit comme une categorie de plus. */
+.cartouche__role .a-sourcer { text-transform: none; letter-spacing: normal; font-weight: 400; }
 
 /* La marque a gauche, sur deux rangees : elle tient le nom et sa ligne
    d'explication ensemble, comme la vignette d'un cartouche tient son
@@ -188,24 +287,18 @@
   color: rgba(86, 84, 107, .88);
 }
 
-.metiers__suite { margin-top: clamp(2rem, 3.4vw, 3rem); }
-
 
 @media (max-width: 899px) {
   .coop { grid-template-columns: minmax(0, 1fr); }
+
+  /* Entre la rangee de quatre et la pile du telephone, la grille tombe a
+     trois colonnes et laisse la quatrieme carte seule sur sa ligne. Deux
+     colonnes font un carre de quatre, qui se lit comme un groupe. */
+  .portraits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 767px) {
-  /* Le registre passe en pile : le nom, puis sa ligne, le filet au
-     dessus du nom seulement. Deux colonnes de 15 rem ne tiennent pas
-     dans 375 px sans couper les mots. */
-  .exploitantes { grid-template-columns: minmax(0, 1fr); }
-
-  .exploitantes dt { padding: 1.15rem 0 .35rem; }
-
-  .exploitantes dd { padding: 0 0 1.15rem; border-top: 0; }
-
-  .exploitantes dt:last-of-type { border-bottom: 0; }
+  .metiers__vue img { max-height: 190px; }
 
   .cartouche__role { font-size: .74rem; }
 
@@ -214,4 +307,20 @@
   .cartouche dd { grid-template-columns: minmax(0, 1fr); row-gap: .5rem; }
 
   .cartouche__logo { grid-row: auto; width: 48px; height: 48px; }
+}
+
+/* Sous 520 px, quatre cadres empiles font 1 100 px de vide avant le
+   premier mot. La carte bascule en rangee, vignette a gauche : la grille
+   de portraits reste une grille de portraits, elle tient sur un ecran. */
+@media (max-width: 519px) {
+  .portraits { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+
+  .portrait { flex-direction: row; align-items: flex-start; gap: 1rem; max-width: none; }
+
+  .portrait__cadre,
+  .portrait__photo { flex: 0 0 5.75rem; width: 5.75rem; }
+
+  .portrait__cadre { font-size: .58rem; letter-spacing: .06em; padding: .3rem; }
+
+  .portrait__dit { margin-top: 0; flex: 1 1 auto; }
 }

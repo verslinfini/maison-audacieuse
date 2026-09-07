@@ -1,25 +1,88 @@
 /* ------------------------------------------------------------------ */
 /* /les-medias/                                                         */
-/* La page se monte avec les composants du socle. Ne vivent ici que les */
-/* quatre manques : la ligne « organe de presse plus date » d'une carte */
-/* de parution, le marqueur [A SOURCER] destine a se voir puis a        */
-/* disparaitre, la reduction du fait chiffre quand c'est une date, et   */
-/* l'encadre du texte que la presse recopie.                            */
+/*                                                                      */
+/* La page se monte avec les composants du socle. Ne vivent ici que ceux */
+/* qu'il n'a pas : la composition des noms de medias sur le fond plein,  */
+/* la ligne de parution (source datee, titre, signature), le sous-titre  */
+/* de section hors « prose », les deux colonnes de l'espace presse,      */
+/* l'encadre du texte que la presse recopie, l'adresse presse en gros,   */
+/* et trois reglages de la galerie du socle.                             */
+/*                                                                      */
+/* Retire le 07/09 : la redefinition locale de « .a-sourcer », qui vit   */
+/* desormais dans base.css, et « .fait__nombre--date », dont la page     */
+/* n'a plus l'emploi depuis que les faits sont passes en reperes.        */
 /* ------------------------------------------------------------------ */
 
 
-/* ---------- carte de parution ---------- */
+/* ---------- la composition des noms de medias ---------- */
+
+/* Les captures d'articles portent le bandeau du journal incruste et leur
+   statut de droits est incertain. Une galerie de captures serait donc
+   laide et fragile : les medias sont nommes, ce qui se verifie, ne coute
+   aucun droit et se lit de loin.
+   Meme mecanique que « .faits » du socle, pour des mots et non des
+   nombres : la ligne haute en jaune, la ligne basse en blanc plein.
+   Le socle fixe le plancher de contraste du fond violet, on ne le
+   redescend pas ici : pas de gris, pas de corps sous 1,0625 rem.
+   Candidat a base.css des qu'une deuxieme page listera des noms. */
+.noms {
+  display: grid;
+  gap: clamp(1.3rem, 2.6vw, 2.3rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.nom {
+  padding-top: .95rem;
+  border-top: 1px solid rgba(255, 255, 255, .34);
+}
+
+/* Plafonne a 1,62 rem : « Le Dauphine Libere » fait 18 signes pour une
+   colonne de 256 px a 1440. Au-dela il passe sur deux lignes et decale
+   sa legende par rapport aux trois autres. */
+.nom__titre {
+  display: block;
+  color: var(--jaune);
+  font-size: clamp(1.25rem, 1.85vw, 1.62rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -.015em;
+}
+
+.nom__quoi {
+  display: block;
+  margin-top: .55rem;
+  max-width: 22ch;
+  font-size: var(--t-corps);
+  line-height: 1.4;
+}
+
+
+/* ---------- une parution ---------- */
 
 /* Une parution se lit dans cet ordre : qui l'a publiee, quand, puis le
    titre. La source passe donc AVANT le titre, contrairement a une carte
-   ordinaire ou le titre ouvre. Candidat a base.css des qu'une deuxieme
-   page listera des sources datees. */
-.carte__source {
+   ordinaire ou le titre ouvre. Et ce n'est pas une carte : six boites
+   pour six lignes de trois phrases feraient six boites vides, un filet
+   suffit a separer.
+   Candidat a base.css des qu'une deuxieme page listera des sources
+   datees. */
+.parutions {
+  display: grid;
+  gap: clamp(1.2rem, 2.2vw, 1.9rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  list-style: none;
+}
+
+.parution {
+  padding-top: 1rem;
+  border-top: 2px solid var(--filet);
+}
+
+.parution__ligne {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: .2rem .6rem;
-  margin: 0;
+  gap: .15rem .6rem;
   color: var(--violet-sombre);
   font-size: var(--t-petit);
   font-weight: 600;
@@ -27,115 +90,159 @@
   line-height: 1.35;
 }
 
-.carte__date {
+.parution__date {
   color: var(--texte);
   font-weight: 400;
   font-variant-numeric: tabular-nums;
 }
 
-/* Le titre porte le lien qui couvre la carte : il reste noir, le
-   soulignement ne vient qu'au survol, sinon six cartes soulignees font
-   un mur bleu. */
-.parutions .carte__titre a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.parutions .carte--lien:hover .carte__titre a,
-.parutions .carte--lien:focus-within .carte__titre a {
-  text-decoration: underline;
-  text-decoration-color: var(--violet);
-  text-decoration-thickness: 2px;
-  text-underline-offset: .18em;
-}
-
-/* Les titres de presse sont longs : 1,14 rem du socle les fait deborder
-   de la carte sur deux colonnes. */
-.parutions .carte__titre { font-size: 1.06rem; line-height: 1.32; }
-
-/* Le gris du socle (rgba(86,84,107,.78)) tombe a 4,0 sur le fond gris de la
-   carte : sous le seuil. La hierarchie tient deja au corps de 0,875 rem, la
-   couleur n'a pas besoin de l'appuyer. A remonter dans base.css. */
-.parutions .carte__note { color: var(--texte); }
-
-
-/* ---------- marqueur de chiffre manquant ---------- */
-
-/* Se voit, se lit, se retire. Le jaune de la charte tient 11,7:1 avec le
-   violet sombre : le marqueur est lisible et il derange, c'est le but. */
-.a-sourcer {
-  display: inline-block;
-  padding: .1em .45em;
-  border-radius: 3px;
-  background: var(--jaune);
+/* Les titres de presse sont longs : a 1,14 rem, celui du 6 juin 2025
+   prend quatre lignes dans une colonne sur deux. */
+.parution__titre {
+  margin: .45rem 0 0;
   color: var(--violet-sombre);
-  font-size: .78em;
+  font-size: 1.06rem;
   font-weight: 600;
-  letter-spacing: .01em;
+  line-height: 1.32;
 }
 
+/* Le reportage de France 3 est la seule entree dont nous n'avons pas le
+   titre exact : la ligne est notre description, pas un titre releve sur
+   la coupure. Le corps normal le dit sans avoir a l'ecrire. */
+.parution__titre--dit { font-weight: 400; }
 
-/* ---------- fait chiffre qui est une date ---------- */
-
-/* 10/07/2026 fait dix signes : a la taille du socle il sort de sa colonne
-   de 12 rem. Le fait garde son rang, il perd deux crans de corps. */
-.fait__nombre--date {
-  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
-  font-variant-numeric: tabular-nums;
+/* Le gris de legende du socle, rgba(86,84,107,.78), tombe a 5,0 sur le
+   blanc et la hierarchie tient deja au corps de 0,875 rem. La couleur
+   pleine n'y perd rien et gagne deux points de contraste. */
+.parution__note {
+  margin-top: .45rem;
+  color: var(--texte);
+  font-size: var(--t-petit);
+  line-height: 1.5;
 }
+
+/* Les noms des medias et le detail de leurs parutions sont un seul
+   mouvement : la respiration entre les deux se prend sur le fond plein,
+   pas une deuxieme fois sur le blanc. */
+#parutions { padding-top: clamp(2.2rem, 4vw, 3.6rem); }
+
+
+/* ---------- sous-titre de section ---------- */
+
+/* Le socle style les h3 dans « .prose » seulement. Cette page en ouvre
+   deux hors colonne de lecture, au-dessus d'un encadre et au-dessus
+   d'une bande d'images. Candidat a base.css : le manque est general, il
+   n'est pas propre a cette page. */
+.sous-titre {
+  margin: clamp(1.3rem, 2.2vw, 1.9rem) 0 clamp(.75rem, 1.2vw, 1rem);
+  color: var(--violet-sombre);
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+/* En tete d'une colonne de grille, le sous-titre n'a rien au-dessus de
+   lui : la reserve haute decalerait les deux colonnes l'une par rapport
+   a l'autre. */
+.sous-titre--premier { margin-top: 0; }
 
 
 /* ---------- espace presse ---------- */
 
-.presse { margin-top: clamp(2.4rem, 4vw, 3.4rem); }
+/* Le texte que la presse recopie a gauche, les deux services a droite.
+   Une seule section pour tout ce qui sert un journaliste : deux sections
+   separees coutaient 380 px de reserve et de titre pour la meme matiere. */
+.presse-grille { margin-top: clamp(1.4rem, 2.4vw, 2rem); }
 
-/* Le texte que le journaliste copie. Il est detache du reste pour qu'on
-   voie ou commence et ou finit ce qui se reprend tel quel. */
-.presse-apropos {
-  padding: clamp(1.3rem, 2.2vw, 1.9rem);
-  border-left: 4px solid var(--violet);
-  border-radius: 0 8px 8px 0;
-  background: var(--blanc);
+.presse-cartes {
+  display: grid;
+  align-content: start;
+  gap: clamp(1.1rem, 2vw, 1.8rem);
 }
 
-.presse-apropos > * + * { margin-top: .9em; }
+/* Deux encadres de service, pas deux ecrans : la reserve du socle est
+   dessinee pour une carte isolee au milieu d'une grille de trois. */
+#espace-presse .carte { padding: clamp(1.2rem, 1.9vw, 1.6rem); }
 
-.presse-apropos__libelle {
-  color: var(--violet-sombre);
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+/* Les trois chiffres et les deux references qui les etayent ouvrent la
+   section : un journaliste verifie avant de lire. */
+#espace-presse .reperes { margin-bottom: .9rem; }
+
+.verif-pieces {
+  max-width: 88ch;
+  color: var(--texte);
+  font-size: var(--t-petit);
+  line-height: 1.6;
 }
 
-/* L'adresse presse se donne seule sur sa ligne : un journaliste la copie,
-   il ne la cherche pas au milieu d'une phrase. */
+/* L'adresse se donne seule sur sa ligne : un journaliste la copie, il ne
+   la cherche pas au milieu d'une phrase. */
 .presse-contact a {
   display: inline-block;
   color: var(--violet-sombre);
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-size: clamp(1.08rem, 1.5vw, 1.3rem);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: var(--violet);
   text-decoration-thickness: 2px;
-  text-underline-offset: .28em;
+  text-underline-offset: .26em;
   overflow-wrap: anywhere;
 }
 
 .presse-contact a:hover { text-decoration-color: var(--violet-sombre); }
 
-/* Le cadre incline du socle est dessine pour le heros clair : sur le
-   violace il garde son geste, il perd l'ombre qui s'y voyait sale. */
-.presse .figure { margin-top: 1.6rem; }
-.presse .figure img { box-shadow: 0 14px 30px rgba(56, 54, 72, .14); }
 
-/* Meme cause que la note de carte : le gris de legende du socle tombe a 3,4
-   sur le violace. Le credit d'un visuel doit se lire, c'est ce qui autorise
-   sa reprise. */
-.presse .figure figcaption { color: var(--texte); }
+/* ---------- le texte que la presse recopie ---------- */
+
+/* Detache du reste pour qu'on voie ou commence et ou finit ce qui se
+   reprend tel quel. Le fond violace le decoupe sur la nappe blanche de
+   « bloc--claire », ou un encadre blanc serait invisible. */
+.apropos {
+  padding: clamp(1.2rem, 2.2vw, 1.8rem) clamp(1.2rem, 2.2vw, 1.9rem);
+  border-left: 4px solid var(--violet);
+  border-radius: 0 8px 8px 0;
+  background: var(--violace);
+}
+
+.apropos > * + * { margin-top: .9em; }
+
+
+/* ---------- les photographies offertes a la reprise ---------- */
+
+/* La bande du socle monte a 19 rem, dessinee pour une page qui fait
+   voir. Ici les images sont une planche-contact offerte a la presse et
+   non le sujet de la page : elles gardent leur rang, elles perdent trois
+   crans de hauteur. */
+.visuels img { height: clamp(10rem, 14vw, 12.5rem); }
+
+/* Quatre photographies hautes, sauf la charpente qui est large. Un
+   cadrage centre poserait le milieu de la rue sur la premiere et le sol
+   de la grange sur la derniere : le sujet remonte. */
+.visuels figure:nth-child(1) img { object-position: 50% 30%; }
+.visuels figure:nth-child(2) img { object-position: 50% 46%; }
+.visuels figure:nth-child(3) img { object-position: 50% 46%; }
+.visuels figure:nth-child(4) img { object-position: 50% 34%; }
+
+/* Le socle ne passe la bande en defilement qu'a 767 px. Entre 768 et
+   1023, quatre colonnes de 15 rem minimum reclament 992 px pour 697
+   disponibles, et la page deborde. Le reglage tient dans la feuille de
+   page tant que le socle n'a pas recule son seuil : signale a l'equipe,
+   la correction lui appartient. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .visuels { grid-auto-columns: minmax(0, 1fr); }
+}
+
+.credit-usage {
+  margin-top: 1.2rem;
+  max-width: 82ch;
+  color: var(--texte);
+  font-size: var(--t-petit);
+  line-height: 1.55;
+}
 
 
 @media (max-width: 767px) {
-  .parutions .carte__titre { font-size: 1rem; }
-  .presse-apropos { border-left-width: 3px; }
+  .parution__titre { font-size: 1rem; }
+  .apropos { border-left-width: 3px; }
 }

@@ -7,15 +7,50 @@
 /* parties, chacune sur son fond, chacune annoncant son rang et le       */
 /* chemin du retour au sommaire. Les titres de partie prennent l'echelle */
 /* du site (.bloc__titre, 48 px), les quinze articles passent en h3.     */
+/*                                                                      */
+/* Revision du 07/09/2026, tenue seulement : les fonds colores du socle  */
+/* remplacent le gris et le violace plein, les vingt marqueurs de trou   */
+/* passent au composant .a-sourcer du socle, les titres d'article        */
+/* descendent d'un cran. Pas une clause n'a bouge.                       */
 /* ------------------------------------------------------------------ */
+
+/* ---------- grain des fonds colores ---------- */
+
+/* DOUBLON ASSUME, A REMONTER DANS base.css.
+   Le voile du socle est calibre sur le .page-tete gris : grain neutre a
+   50 %. Pose sur l'aube, sur la nappe ou sur la claire, il eteint les
+   nappes de couleur et la section redevient grise, ce qu'on voulait
+   justement corriger. Mesure faite le 07/09 sur cette page : la partie 1
+   rendait #d2d0da au lieu du violace, et le texte y tombait a 4,79 quand il
+   tient 6,4 sans le voile. Meme traitement que sur la home : grain colore,
+   fusion normale, quatre fois plus discret.
+   /le-modele-economique/ et /le-projet-architectural/ portent deja cette
+   regle a l'identique depuis le 07/09. Trois pages l'ont inventee
+   separement : elle appartient au socle, elle ne depend de rien qui soit
+   propre a l'une d'elles. */
+.page-tete--aube > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+.bloc--aube > .grain__voile,
+.bloc--nappe > .grain__voile,
+.bloc--claire > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .16;
+  mix-blend-mode: normal;
+}
+
 
 /* ---------- ce qui fait foi ---------- */
 
-/* Vingt marqueurs de trou a filet jaune vivent sur cette page. Un
-   vingt-et-unieme encadre jaune se serait lu comme un trou de plus.
-   L'avertissement prend donc le violet sombre de la charte : c'est le seul
-   objet de la page a le porter avec la partie 5 et la cloture, et c'est
-   exactement ce qu'on veut dire de lui. */
+/* Vingt marqueurs de trou vivent sur cette page. Un vingt-et-unieme encadre
+   se serait lu comme un trou de plus. L'avertissement prend donc le violet
+   sombre de la charte : c'est le seul objet de la page a le porter avec la
+   partie 5 et la cloture, et c'est exactement ce qu'on veut dire de lui. */
 .foi {
   max-width: 52ch;
   padding: clamp(1.3rem, 2.2vw, 1.8rem) clamp(1.3rem, 2.2vw, 1.9rem);
@@ -33,6 +68,11 @@
   letter-spacing: .1em;
   text-transform: uppercase;
 }
+
+/* Le panneau est sombre sans etre un .bloc--sombre : le marqueur du socle y
+   resterait en terracotta sur violet sombre, soit 1,9. Meme bascule que
+   celle que le socle fait sur .bloc--sombre. */
+.foi .a-sourcer { border-color: var(--jaune); color: var(--jaune); }
 
 
 /* ---------- sommaire ---------- */
@@ -106,12 +146,23 @@
 
 .sommaire__liste a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .28em; }
 
+/* Un renvoi atteint au clavier doit se voir avant d'etre active : la mise au
+   point du socle passe autour du lien entier, pas seulement de son texte. */
+.sommaire a:focus-visible { outline-offset: 1px; }
+
 
 /* ---------- parties ---------- */
 
-/* La partie se rejoint par son bord haut, sans la reserve du socle : on
-   veut voir la couture de fond, c'est elle qui dit qu'on change de partie. */
-.cgv__partie { scroll-margin-top: 0; }
+/* La partie se rejoint par son bord haut : on veut voir la couture de fond,
+   c'est elle qui dit qu'on change de partie. Le selecteur porte l'element
+   parce que le socle vise section[id], de meme poids : sans la balise, la
+   regle ne s'appliquait pas et la reserve du socle restait en place. */
+section.cgv__partie { scroll-margin-top: 0; }
+
+/* L'article, lui, garde une reserve : la barre de reperage est collee sous
+   l'entete et mesure une trentaine de pixels. Sans ces 2,6 rem, un article
+   rejoint par une ancre de courriel s'arrete dessous. */
+section.cgv__article { scroll-margin-top: 2.6rem; }
 
 /* Le reperage reste a l'ecran tant qu'on est dans sa partie. Il ne repete
    pas le titre juste en dessous : il porte le rang, qui ne se lit nulle
@@ -181,9 +232,12 @@
 /* ---------- articles ---------- */
 
 /* Le premier article d'une partie se decolle de son titre de partie : 48 px
-   puis 35 px se suivent de trop pres sans cette respiration. */
+   puis 28 px se suivent de trop pres sans cette respiration. */
 .cgv__partie .cgv__article:first-of-type { margin-top: clamp(1.1rem, 2vw, 1.8rem); }
 
+/* Le filet entre deux articles est le seul separateur du document. Il vaut
+   mieux qu'un blanc plus large : sur quinze articles, un blanc se confond
+   avec l'interligne d'un paragraphe long. */
 .cgv__article + .cgv__article {
   margin-top: clamp(2.2rem, 3.4vw, 3rem);
   padding-top: clamp(2.2rem, 3.4vw, 3rem);
@@ -191,17 +245,20 @@
 }
 
 /* Un cran sous le titre de partie, un cran au-dessus des h3 du socle :
-   l'article est une section du document, pas un intertitre de paragraphe. */
+   l'article est une section du document, pas un intertitre de paragraphe.
+   Ramene de 34,5 px a 27,5 px le 07/09 : quinze titres de 34 px au-dessus
+   d'un corps de 17 px criaient l'un apres l'autre, et le rapport de 2 pour 1
+   faisait passer chaque article pour un chapitre. */
 .cgv__titre {
   display: flex;
   align-items: center;
   gap: clamp(.7rem, 1.2vw, 1rem);
   margin: 0 0 clamp(1rem, 1.8vw, 1.5rem);
-  max-width: 28ch;
+  max-width: 30ch;
   color: var(--violet-sombre);
-  font-size: clamp(1.32rem, 2.4vw, 2.16rem);
+  font-size: clamp(1.28rem, 1.9vw, 1.72rem);
   font-weight: 600;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -.015em;
 }
 
@@ -212,12 +269,12 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   background: var(--violet);
   color: var(--blanc);
-  font-size: 1rem;
+  font-size: .94rem;
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0;
@@ -240,30 +297,35 @@
 
 /* ---------- trous a combler ---------- */
 
-/* Provisoire. Chaque bloc marque une information que les statuts ne
+/* Provisoire. Chaque marqueur signale une information que les statuts ne
    donnent pas, ou une question que le conseil de la cooperative doit
-   trancher. Aucun ne doit rester le jour de la mise en ligne. Le fond du
-   marqueur change avec celui de la partie : gris sur gris ne se voit pas. */
-.trou {
-  padding: .8rem 1.05rem;
-  border-left: 5px solid var(--jaune);
-  border-radius: 0 6px 6px 0;
-  background: var(--gris);
-  color: var(--violet-sombre);
-  font-size: .95rem;
-  line-height: 1.5;
+   trancher. Aucun ne doit rester le jour de la mise en ligne.
+   Le rendu appartient au socle (.a-sourcer, .a-sourcer--bloc) depuis le
+   07/09 : la page portait un .trou a elle, qui disait la meme chose d'une
+   autre facon que les autres pages du site. Ne restent ici que les
+   distances, qui dependent du texte autour et de lui seul. */
+
+/* Le socle reserve 2,8 rem au-dessus d'un marqueur de bloc, ce qui vaut
+   quand il en tombe un en fin de section. Ici ils suivent un paragraphe de
+   la meme clause : la distance dit alors qu'ils s'y rapportent. */
+.prose > .a-sourcer--bloc { margin-top: clamp(1rem, 1.7vw, 1.35rem); }
+
+/* Jusqu'a trois marqueurs se suivent, a l'article 5 comme a l'article 2.
+   Espaces comme des paragraphes independants, ils cassaient la lecture de
+   l'article ; serres, ils se lisent comme la liste de ce qui manque. */
+.prose > .a-sourcer--bloc + .a-sourcer--bloc { margin-top: .55rem; }
+
+
+/* ---------- portes de fin de page ---------- */
+
+/* Pas de bouton : un document de conditions ne vend rien. Trois liens, qui
+   s'empilent des que la ligne ne les tient plus. */
+.cgv__portes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .1rem 2rem;
+  margin-top: clamp(1.6rem, 2.6vw, 2.2rem);
 }
-
-.bloc--violace .trou,
-.bloc--gris .trou { background: var(--blanc); }
-
-.bloc--sombre .trou,
-.foi .trou {
-  background: rgba(255, 255, 255, .08);
-  color: rgba(255, 255, 255, .88);
-}
-
-.prose > .trou + .trou { margin-top: .6em; }
 
 
 /* ---------- tableau des colleges ---------- */
@@ -300,9 +362,15 @@
 
 @media (max-width: 767px) {
   .cgv__titre { max-width: none; }
-  .cgv__num { width: 2rem; height: 2rem; font-size: .92rem; }
+  .cgv__num { width: 1.8rem; height: 1.8rem; font-size: .86rem; }
   #colleges .tableau th,
   #colleges .tableau td { padding: .7rem .8rem; }
+
+  /* Cote a cote sans gouttiere, les libelles se touchent et se lisent comme
+     un seul lien. Sur telephone les trois passent l'un sous l'autre, et la
+     cible du pouce se reprend en hauteur. */
+  .cgv__portes { flex-direction: column; align-items: flex-start; gap: 0; }
+  .cgv__portes .lien-texte { min-height: 48px; }
 }
 
 /* Sur les petits telephones, les quatre lignes du tableau tiennent dans la

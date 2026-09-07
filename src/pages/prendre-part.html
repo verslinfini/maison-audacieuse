@@ -1,79 +1,103 @@
 ---
 titre: Souscrire une part sociale | La Maison Audacieuse
-description: Déclarez votre intention de souscrire des parts de La Coop Audacieuse. Une part vaut 100 €. Aucune donnée bancaire sur cette page.
+description: Déclarez votre intention de souscrire des parts de La Coop Audacieuse. Une part vaut 100 €. Aucune donnée bancaire n'est demandée sur cette page.
 sortie: prendre-part/index.html
 ---
 <main>
-  <section class="page-tete">
+  <!-- Page d'action. Elle ne convainc pas, elle execute : ce qui va se
+       passer, le formulaire, ce qu'il advient de la declaration. Toute
+       pedagogie sur la part sociale vit sur /part-sociale/, tout le
+       contractuel sur /cgv-parts-sociales/. -->
+  <section class="page-tete page-tete--aube">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu tete-duo">
+      <div class="tete-duo__texte">
+        <span class="page-tete__sur">Souscription de parts sociales</span>
+        <h1 class="page-tete__titre">Devenir coopérateur·ice</h1>
+        <p class="page-tete__chapo">Une part vaut 100 €. Vous déclarez ici votre intention, nous vous envoyons le bulletin de souscription et vous décidez ensuite. Aucun paiement sur cette page.</p>
+        <p class="tete-duo__aller"><a class="lien-texte" href="#declarer">Aller au formulaire</a></p>
+      </div>
+      <figure class="figure">
+        <img src="/assets/img/visuel-dauphine-1.webp" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
+        <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Le parcours entier avant la moindre demande : quelqu'un qui
+       s'apprete a confier de l'argent veut savoir ou il met les pieds, et
+       jusqu'ou il peut reculer.
+       Fond « nappe », celui que le socle designe pour une liste d'etapes :
+       c'est le bloc le plus dense de la page, et le terracotta plein y
+       plafonnerait le blanc a 4,10 pour 1. Un parcours de souscription se
+       lit, il ne se devine pas. -->
+  <section class="bloc bloc--nappe" id="le-parcours">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <span class="page-tete__sur">Souscription de parts sociales</span>
-      <h1 class="page-tete__titre">Devenir coopérateur·ice</h1>
-      <p class="page-tete__chapo">Une part vaut 100 €. Vous déclarez ici votre intention et nous vous répondons avec la marche à suivre. Le paiement en ligne ouvre prochainement, alors aucune donnée bancaire ne vous est demandée aujourd'hui.</p>
-    </div>
-  </section>
-
-  <!-- Trois lignes de reassurance, pas de pedagogie : elle vit sur
-       /part-sociale/, vers laquelle ce bloc renvoie. -->
-  <section class="bloc bloc--blanc" id="la-part">
-    <div class="contenu">
-      <h2 class="bloc__titre">Ce que vous prenez</h2>
-      <div class="mesure prose">
-        <p>Une part sociale de La Coop Audacieuse vaut <span class="marqueur marqueur--3">100 €</span>. Vous en prenez autant que vous voulez.</p>
-        <p>Elle fait de vous associé·e de la coopérative à qui la Ville d'Annecy confie la Ferme de Novel. Vous devenez copropriétaire du lieu avec les autres coopérateur·ices.</p>
-        <p>Une personne, une voix en assemblée générale, quel que soit le nombre de parts que vous détenez.</p>
-      </div>
-      <p class="reassurance">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
-      <p class="apres-mesure"><a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale&nbsp;?</a></p>
-    </div>
-  </section>
-
-  <!-- Le parcours entier avant la moindre demande : qui va confier de
-       l'argent veut savoir ou il met les pieds, et jusqu'ou il peut reculer. -->
-  <section class="bloc bloc--gris" id="le-parcours">
-    <div class="contenu">
       <h2 class="bloc__titre">Ce qui se passe, du début à la fin</h2>
-      <p class="bloc__intro">Vous vous apprêtez à confier de l'argent à un collectif. Chaque étape dit ce qu'elle engage et jusqu'où vous pouvez encore reculer.</p>
-      <ol class="etapes">
-        <li class="etape--ici">
-          <span class="etapes__titre">Vous déclarez votre intention <span class="etapes__ici">vous êtes ici</span></span>
-          <p>Le formulaire ci-dessous vous demande votre nom, votre courriel et le nombre de parts que vous envisagez. Rien n'est signé, rien n'est payé.</p>
+      <ol class="parcours">
+        <li class="parcours__etape">
+          <span class="parcours__no" aria-hidden="true">1</span>
+          <h3 class="parcours__titre">Vous déclarez votre intention <span class="parcours__ici">vous êtes ici</span></h3>
+          <p class="parcours__phrase">Le formulaire demande votre nom, votre courriel et le nombre de parts que vous envisagez. Rien n'est signé, rien n'est payé.</p>
         </li>
-        <li>
-          <span class="etapes__titre">Nous vous répondons</span>
-          <p>La réponse arrive par courriel. Nous sommes une petite équipe, alors comptez quelques jours. Vous recevez le bulletin de souscription, les statuts de la coopérative et les coordonnées bancaires pour le virement.</p>
+        <li class="parcours__etape">
+          <span class="parcours__no" aria-hidden="true">2</span>
+          <h3 class="parcours__titre">Nous vous répondons</h3>
+          <p class="parcours__phrase">Vous recevez le bulletin de souscription, les statuts de la coopérative et les coordonnées bancaires. La réponse part sous <span class="a-sourcer">[À SOURCER&nbsp;: délai de réponse à une déclaration, à fixer par le collectif]</span>.</p>
         </li>
-        <li>
-          <span class="etapes__titre">Vous versez le montant par virement</span>
-          <p>Vous relisez, vous signez le bulletin et vous faites le virement. Vous vous engagez ici. Avant cette étape, un mot suffit pour tout arrêter.</p>
-          <p>Le paiement par carte ouvre prochainement sur cette page. Nous ne donnons pas de date tant qu'elle n'est pas sûre.</p>
-        </li>
-        <li>
-          <span class="etapes__titre">La coopérative se prononce sur votre admission</span>
-          <p>Devenir associé·e suppose l'accord de la coopérative. En cas de refus, votre versement vous est remboursé.</p>
-        </li>
-        <li>
-          <span class="etapes__titre">Vous entrez dans la vie du lieu</span>
-          <p>Votre nom rejoint le registre des associés. Vous recevez les convocations aux assemblées générales et vous y votez, sur place ou à distance.</p>
+        <li class="parcours__etape">
+          <span class="parcours__no" aria-hidden="true">3</span>
+          <h3 class="parcours__titre">Vous signez et vous versez</h3>
+          <p class="parcours__phrase">Vous vous engagez à cette étape, pas avant. La coopérative se prononce ensuite sur votre admission et vous rembourse si elle refuse.</p>
         </li>
       </ol>
-      <p class="parcours__alerte">Nos courriels partent tous de maison-audacieuse.fr. Si un message vous demande de virer sur un autre compte, écrivez-nous à contact@maison-audacieuse.fr avant de le faire.</p>
+      <p class="parcours__alerte">Nos courriels partent tous de maison-audacieuse.fr. Si un message vous demande de virer sur un autre compte, écrivez-nous avant de le faire.</p>
     </div>
   </section>
 
-  <section class="bloc bloc--violace" id="declarer">
+  <!-- Le seul fond plein de la page. Il porte la phrase qui leve la premiere
+       objection de tout le monde, au mot pres, juste avant le formulaire.
+       Rien d'autre : sur le terracotta le blanc plafonne a 4,10 pour 1, donc
+       seul le grand texte y a sa place (seuil WCAG de 3 pour 1 au-dela de
+       24 px). C'est aussi ce qui garde le bloc court. -->
+  <section class="bloc bloc--terracotta" id="votre-argent">
+    <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <h2 class="bloc__titre">Votre déclaration d'intention</h2>
+      <h2 class="promesse__sur">Avant de remplir</h2>
+      <p class="promesse">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+    </div>
+  </section>
+
+  <section class="bloc bloc--ouvert" id="declarer">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="declaration-tete">
+        <h2 class="bloc__titre">Votre déclaration d'intention</h2>
+        <p class="annote">rien à payer aujourd'hui</p>
+      </div>
       <div class="declaration-grille">
-        <div class="declaration-intro">
-          <div class="prose">
-            <p>Vous nous dites combien de parts vous envisagez et nous préparons votre bulletin. Rien de tout cela ne vous engage.</p>
+        <div class="declaration-cote">
+          <h3 class="cote__titre">Ce que deviennent vos informations</h3>
+          <div class="prose cote__prose">
+            <p>Elles servent à préparer votre bulletin et à vous recontacter à ce sujet. Rien d'autre. Elles ne partent chez aucun prestataire de marketing.</p>
+            <p>Nous les conservons <span class="a-sourcer">[À SOURCER&nbsp;: durée de conservation d'une déclaration d'intention, à fixer avec le registre des traitements]</span>, puis nous les effaçons.</p>
+            <p>Vous pouvez demander à les consulter, à les corriger ou à les effacer&nbsp;: <a class="lien-doux" href="/politique-de-confidentialite-mentions-legales/">confidentialité et mentions légales</a>.</p>
           </div>
-          <p class="garde">Aucune donnée bancaire sur cette page. Ni carte, ni RIB, ni pièce d'identité. Vous n'avez rien à payer aujourd'hui.</p>
+
+          <!-- Le repli. Tant que le point d'envoi n'est pas branche, c'est le
+               seul chemin qui aboutit vraiment : il est visible, pas replie.
+               Il porte aussi le cas de la personne morale, que le formulaire
+               ne sait pas traiter et qui se presenterait sans cela. -->
+          <p class="repli">Vous pouvez aussi écrire à <a class="lien-doux" href="mailto:contact@maison-audacieuse.fr">contact@maison-audacieuse.fr</a> sans passer par ce formulaire. La réponse est la même. Pour souscrire au nom d'une association, d'une entreprise ou d'une collectivité, c'est le seul chemin.</p>
         </div>
 
-        <!-- action : le traitement de la declaration n'existe pas encore. -->
-        <form class="declaration" id="declaration" method="post" action="[À BRANCHER : traitement de la déclaration]">
+        <!-- action : le point d'envoi n'existe pas encore. Le marqueur porte
+             « data-a-remplir » : « node build.mjs --prod » refuse de construire
+             tant qu'il est la. Une declaration perdue en silence couterait la
+             confiance de la premiere personne qui fait le geste. -->
+        <form class="declaration" id="declaration" method="post" action="[À BRANCHER : point d'envoi de la déclaration]">
+          <p class="declaration__regle">Les quatre champs sont obligatoires.</p>
           <div class="champs">
             <div class="champ">
               <label for="prenom">Prénom</label>
@@ -89,15 +113,9 @@ sortie: prendre-part/index.html
               <p class="champ__aide" id="courriel-aide">Notre réponse et le bulletin de souscription partent à cette adresse.</p>
             </div>
             <div class="champ champ--large champ--parts">
-              <label for="parts">Nombre de parts souhaité</label>
+              <label for="parts">Nombre de parts</label>
               <input id="parts" name="nb_parts" type="number" min="1" step="1" value="1" inputmode="numeric" autocomplete="off" required aria-describedby="parts-aide">
               <p class="champ__aide" id="parts-aide">Une part vaut 100 €. Vous en prenez autant que vous voulez.</p>
-              <p class="montant" id="montant" hidden>Soit <output for="parts" id="montant-valeur">100 €</output> au total.</p>
-            </div>
-            <div class="champ champ--large">
-              <label for="mot">Un mot pour l'équipe <span class="champ__option">facultatif</span></label>
-              <textarea id="mot" name="message" rows="4" autocomplete="off"></textarea>
-              <p class="champ__aide">Une question, une précision sur votre situation, une envie de donner un coup de main.</p>
             </div>
 
             <!-- Champ piege. Un robot remplit tout ce qu'il trouve, une
@@ -112,62 +130,30 @@ sortie: prendre-part/index.html
 
             <div class="champ champ--large champ--case">
               <input id="consentement" name="consentement" type="checkbox" value="oui" required aria-describedby="consentement-aide">
-              <label for="consentement">J'accepte que La Coop Audacieuse enregistre ces informations pour traiter ma déclaration et me recontacter au sujet de ma souscription.</label>
+              <label for="consentement">J'accepte que La Coop Audacieuse enregistre ces informations pour préparer mon bulletin de souscription et me recontacter à ce sujet.</label>
             </div>
-            <p class="champ__aide champ__aide--case" id="consentement-aide">Elles ne servent à rien d'autre et elles restent chez nous. Vous pouvez demander à les consulter, à les corriger ou à les effacer&nbsp;: <a class="lien-doux" href="/politique-de-confidentialite-mentions-legales/">confidentialité et mentions légales</a>.</p>
+            <p class="champ__aide champ__aide--case" id="consentement-aide">La case n'est pas cochée d'avance. Vous pouvez retirer votre accord en nous écrivant.</p>
           </div>
 
-          <p class="declaration__geste">
+          <p class="a-sourcer a-sourcer--bloc declaration__trou" data-a-remplir="point d'envoi du formulaire de déclaration">[À BRANCHER&nbsp;: point d'envoi de la déclaration. Tant qu'il manque, ce formulaire n'aboutit nulle part et la réponse passe par le courriel ci-contre.]</p>
+
+          <div class="declaration__geste">
             <button class="bouton bouton--primaire" type="submit">Je déclare mon intention</button>
-            <p class="champ__aide">En déclarant votre intention, vous prenez connaissance des <a class="lien-doux" href="/cgv-parts-sociales/">conditions de souscription des parts sociales</a>.</p>
-          </p>
-          <p class="declaration__note">Déclarer votre intention ne vous engage juridiquement à rien. Devenir associé·e suppose un bulletin signé, un versement et l'accord de la coopérative.</p>
+            <p class="champ__aide">Vous prenez connaissance des <a class="lien-doux" href="/cgv-parts-sociales/">conditions de souscription</a>.</p>
+          </div>
+          <p class="declaration__note">Déclarer votre intention ne vous engage à rien. Devenir associé·e suppose un bulletin signé, un versement et l'accord de la coopérative.</p>
         </form>
       </div>
     </div>
   </section>
 
-  <section class="bloc bloc--blanc" id="questions">
-    <div class="contenu">
-      <h2 class="bloc__titre">Questions avant de vous lancer</h2>
-      <div class="mesure">
-        <div class="questions">
-          <details class="question">
-            <summary>Est-ce que je m'engage en envoyant ce formulaire&nbsp;?</summary>
-            <div class="question__reponse">
-              <p>Non. Vous nous dites votre intention, nous vous répondons et vous décidez ensuite. Tant que vous n'avez ni signé ni versé, vous ne devez rien.</p>
-            </div>
-          </details>
-          <details class="question">
-            <summary>Et si je change d'avis&nbsp;?</summary>
-            <div class="question__reponse">
-              <p>Écrivez-nous et nous retirons votre déclaration. Rien n'a été versé, donc il n'y a rien à défaire.</p>
-            </div>
-          </details>
-          <details class="question">
-            <summary>Peut-on souscrire au nom d'une association, d'une entreprise ou d'une collectivité&nbsp;?</summary>
-            <div class="question__reponse">
-              <p>Oui. Le circuit est différent de celui-ci. Écrivez-nous à contact@maison-audacieuse.fr et nous vous envoyons la marche à suivre.</p>
-            </div>
-          </details>
-          <details class="question">
-            <summary>Que faites-vous de mes données&nbsp;?</summary>
-            <div class="question__reponse">
-              <p>Elles servent à traiter votre déclaration et à vous recontacter à ce sujet. Elles ne partent chez aucun prestataire de marketing.</p>
-              <p>La durée de conservation et vos droits sont détaillés sur la page <a class="lien-doux" href="/politique-de-confidentialite-mentions-legales/">confidentialité et mentions légales</a>.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="bloc bloc--sombre" id="une-question">
+    <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="appel">
         <div class="appel__texte">
           <h2 class="appel__titre">Une question avant de vous décider&nbsp;?</h2>
-          <p class="appel__sous">On répond aux courriels. Une part sociale se discute avant de se signer.</p>
+          <p class="appel__sous">Une part sociale se discute avant de se signer. On répond aux courriels.</p>
         </div>
         <p class="appel__gestes">
           <a class="bouton bouton--primaire" href="/contacts/">Nous écrire</a>
@@ -178,24 +164,3 @@ sortie: prendre-part/index.html
     </div>
   </section>
 </main>
-
-<!-- Le montant correspondant au nombre de parts. Sans dependance, et la page
-     reste juste sans lui : la ligne du montant n'apparait que si le script
-     tourne, l'aide « une part vaut 100 € » est ecrite en dur au-dessus. -->
-<script>
-(function () {
-  var champ = document.getElementById('parts');
-  var ligne = document.getElementById('montant');
-  var valeur = document.getElementById('montant-valeur');
-  if (!champ || !ligne || !valeur) { return; }
-  var maj = function () {
-    var n = parseInt(champ.value, 10);
-    if (!(n > 0)) { ligne.hidden = true; return; }
-    valeur.textContent = (n * 100).toLocaleString('fr-FR') + ' €';
-    ligne.hidden = false;
-  };
-  champ.addEventListener('input', maj);
-  champ.addEventListener('change', maj);
-  maj();
-})();
-</script>

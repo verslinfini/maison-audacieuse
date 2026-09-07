@@ -1021,11 +1021,16 @@ h2 .marqueur::before {
 
 /* Violet plein, texte blanc. Le fond de rupture d'une page : il porte
    l'idee qu'on veut qu'on retienne, jamais du texte long.
-   Contraste : le blanc y tient 4,04 pour 4,5 vise. Plancher assume le
-   04/09 sur la home, apres essai : le seuil strict demanderait 14 % de
-   voile sombre, donc un violet qui n'est plus celui de la charte.
-   Consequence a tenir : sur ce fond, pas de corps de texte sous 1,0625 rem
-   et pas de gris, le blanc plein seulement. */
+   Contraste. La home assumait 4,04 sur son ecran 5, arbitre a l'oeil le
+   04/09 : cet ecran ne porte qu'une idee en gros caracteres, dont le seuil
+   est 3. Le socle, lui, sert des pages qui posent du corps de texte a
+   17 px, dont le seuil est 4,5. Mesure au pixel le 07/09 sur quatre pages :
+   entre 4,03 et 4,46, sous le seuil six fois. Le voile sombre passe donc de
+   8 a 20 % ici, ce qui rend 4,7 au point le plus clair du degrade.
+   La home garde le sien : son fond est ecrit dans « accueil.css » sous
+   « #le-pari » et ne passe pas par cette classe. Les deux divergent, et
+   chacune tient son seuil.
+   Consequence a tenir : sur ce fond, pas de gris, le blanc plein seulement. */
 .bloc--violet {
   background:
     radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
@@ -1034,7 +1039,7 @@ h2 .marqueur::before {
     radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
     radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
     radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
-    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    linear-gradient(rgba(56,54,72,.20), rgba(56,54,72,.20)),
     var(--violet);
   color: var(--blanc);
 }
@@ -1214,25 +1219,48 @@ h2 .marqueur::before {
 .panneau p { line-height: 1.56; }
 .panneau .lien-texte { align-self: flex-start; }
 
-/* Le credit de la photo de fond, en bas a droite du cadre. */
+/* Le credit de la photo de fond, en bas a droite du cadre.
+   Il n'a pas de fond a lui et se pose sur ce que la photo montre a cet
+   endroit : sur une image au bas clair, la dalle de beton de la grange
+   par exemple, il tombe a 3,4 pour 4,5 vise. Le voile ci-dessous
+   assombrit la bande basse de la photo, et rien d'autre : mesure 6,7. */
+.bloc--photo .bloc__fond::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 8rem;
+  z-index: 1;
+  background: linear-gradient(rgba(31, 29, 45, 0), rgba(31, 29, 45, .58));
+}
+
 .bloc__credit {
   position: absolute;
   right: var(--marge);
   bottom: 1rem;
-  z-index: 2;
+  z-index: 3;
   font-size: .7rem;
   letter-spacing: .04em;
-  color: rgba(255, 255, 255, .82);
+  color: rgba(255, 255, 255, .9);
 }
 
 /* 3. La galerie : une bande de photos de meme hauteur, qui defile au
    telephone plutot que de s'empiler sur six ecrans. */
+/* Le defilement est arme a toutes les largeurs, pas seulement au
+   telephone. Quatre colonnes de 15 rem reclament 992 px : entre 768 et
+   1023, la bande debordait de la page au lieu de defiler dans son cadre.
+   Le « min() » empeche une colonne d'etre plus large que le cadre, et
+   « overflow-x » lui rend le defilement quand il en manque. */
 .galerie {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(15rem, 1fr);
+  grid-auto-columns: minmax(min(15rem, 100%), 1fr);
   gap: clamp(.7rem, 1.4vw, 1.1rem);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
 }
+
+.galerie > * { scroll-snap-align: start; }
 
 .galerie img {
   width: 100%;
@@ -1247,15 +1275,13 @@ h2 .marqueur::before {
 @media (max-width: 767px) {
   .galerie {
     grid-auto-columns: 78%;
-    overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: .6rem;
-    /* Le debordement volontaire deborde jusqu'au bord de l'ecran, pas
-       jusqu'au bord de la colonne : sinon la bande a l'air coupee. */
+    /* Au telephone seulement, la bande deborde jusqu'au bord de l'ecran
+       et non jusqu'au bord de la colonne : sinon elle a l'air coupee. */
     margin-inline: calc(var(--marge) * -1);
     padding-inline: var(--marge);
   }
-  .galerie > * { scroll-snap-align: start; }
 }
 
 /* 4. La coupe annotee : un plan d'architecte, et des etiquettes posees
@@ -1384,3 +1410,153 @@ h2 .marqueur::before {
 .bloc--violet .repere__nombre,
 .bloc--terracotta .repere__nombre,
 .bloc--sombre .repere__nombre { color: var(--jaune); }
+
+
+/* ================================================================== */
+/* CORRECTIFS DU SOCLE, 07/09/2026                                     */
+/*                                                                     */
+/* Sept defauts trouves en construisant les pages, chacun signale par   */
+/* l'agent qui l'a rencontre. Quatre d'entre eux avaient deja ete       */
+/* contournes a l'identique dans deux, trois ou quatre feuilles de      */
+/* page : un correctif ecrit plusieurs fois est un defaut de socle, pas */
+/* un besoin de page.                                                   */
+/* ================================================================== */
+
+/* 1. Le grain neutre eteignait les fonds colores.
+   « .grain__voile » pose une texture grise a 50 % : sur le violace ou le
+   blanc de la home, elle texture ; sur les nappes colorees, elle les
+   ternit. Mesure : le fond d'une partie tombait a #d2d0da au lieu du
+   violace. Quatre feuilles de page portaient le meme contournement.
+   Sur les fonds colores clairs, le grain devient colore et discret. */
+.bloc--aube > .grain__voile,
+.bloc--claire > .grain__voile,
+.bloc--nappe > .grain__voile,
+.bloc--ouvert > .grain__voile,
+.page-tete--aube > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+/* 2. Les titres de niveau trois de « .prose » devenaient invisibles sur
+   les fonds sombres. « .bloc--sombre h3 » passe au blanc, puis « .prose h3 »
+   repasse au violet sombre, plus bas et a poids egal : la seconde gagne, et
+   le titre se retrouve en violet sombre sur violet sombre, contraste 1,0.
+   Le defaut frappe n'importe quelle page qui pose de la prose sur un fond
+   plein, et il ne se voit pas a la relecture du code. */
+.bloc--sombre .prose h3,
+.bloc--violet .prose h3,
+.bloc--terracotta .prose h3,
+.bloc--sombre .prose h4,
+.bloc--violet .prose h4,
+.bloc--terracotta .prose h4 { color: var(--blanc); }
+
+/* 3. Les etiquettes de la coupe descendaient des qu'un credit apparaissait.
+   Elles se positionnent en pourcentage de leur parent positionne, qui est
+   la figure entiere : avec un « figcaption », la figure est plus haute que
+   l'image et les six etiquettes glissent vers le bas, jusqu'a sortir du
+   dessin. Le cadre ci-dessous borne le reperage a l'image seule. */
+.coupe__cadre { position: relative; display: block; }
+.coupe__cadre img { display: block; width: 100%; }
+
+/* 4. Une figure dans un duo restait plafonnee a la hauteur du heros.
+   « .figure img » plafonne a 268 px, calibre sur la vignette de la home.
+   Dans un duo, l'image doit tenir la hauteur de la colonne de texte a
+   cote d'elle : le plafond la reduisait a un bandeau. Le penchant et le
+   cadre blanc restent, c'est la signature du site. */
+.duo .figure img,
+.figure--pleine img { max-height: none; }
+
+/* 5. Une liste ordonnee en « .etapes » affichait deux fois son numero.
+   « .etapes » compte ses items avec un compteur CSS et dessine la pastille.
+   Sur un « ol », le marqueur natif s'ajoute et la ligne s'ouvre sur « 1. 1 ».
+   La regle « list-style: none » du socle ne suffit pas sur tous les
+   navigateurs des que l'item devient un conteneur. */
+ol.etapes,
+ol.etapes > li { list-style: none; }
+ol.etapes > li::marker { content: none; }
+
+/* 6. Le fond violet ne tenait pas le seuil pour du corps de texte.
+   Voir la note de « .bloc--violet ». Mesure au pixel apres passage du voile
+   a 20 % : encore entre 4,24 et 4,44 sur trois pages, pour 4,5 vise. Les
+   deux nappes les plus claires du degrade sont assombries ici, plutot que
+   d'epaissir encore le voile global : le fond garde son mouvement, et seuls
+   ses points hauts descendent. */
+.bloc--violet {
+  background:
+    radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
+    radial-gradient(58% 30% at 12% -10%, rgba(157,150,105,.52), rgba(157,150,105,0) 66%),
+    radial-gradient(82% 44% at 94% 2%, rgba(56,54,72,.52), rgba(56,54,72,0) 68%),
+    radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
+    radial-gradient(70% 78% at 76% 44%, rgba(92,91,150,.78), rgba(92,91,150,0) 70%),
+    radial-gradient(64% 74% at 24% 60%, rgba(112,93,130,.70), rgba(112,93,130,0) 72%),
+    linear-gradient(rgba(56,54,72,.20), rgba(56,54,72,.20)),
+    var(--violet);
+}
+
+/* 7. Un titre de section n'avait pas de style hors de « .prose ».
+   Le socle ne stylait « h3 » que dans « .prose » : toute page qui ouvrait
+   une sous-partie ailleurs heritait de la taille par defaut du navigateur,
+   plus grosse que le titre de bloc au-dessus d'elle. Deux feuilles ont
+   ecrit leur propre « .sous-titre ». */
+.bloc h3:not(.prose h3):not([class]) {
+  margin: 0 0 .6rem;
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: var(--violet-sombre);
+}
+
+.bloc--sombre h3:not([class]),
+.bloc--violet h3:not([class]),
+.bloc--terracotta h3:not([class]) { color: var(--blanc); }
+
+/* 8. Le fond terracotta non plus. Mesure 4,10 sur du corps de texte.
+   Meme traitement que le violet : les deux nappes chaudes les plus claires
+   descendent, le voile reste a 16 %. Le fond garde son mouvement. */
+.bloc--terracotta {
+  background:
+    radial-gradient(66% 38% at 88% 104%, rgba(56,54,72,.44), rgba(56,54,72,0) 66%),
+    radial-gradient(56% 30% at 10% -8%, rgba(255,243,168,.20), rgba(255,243,168,0) 68%),
+    radial-gradient(74% 42% at 6% 96%, rgba(56,54,72,.34), rgba(56,54,72,0) 70%),
+    radial-gradient(68% 74% at 74% 44%, rgba(126,80,90,.56), rgba(126,80,90,0) 72%),
+    radial-gradient(62% 70% at 26% 56%, rgba(146,101,80,.52), rgba(146,101,80,0) 74%),
+    linear-gradient(rgba(56,54,72,.22), rgba(56,54,72,.22)),
+    var(--terracotta);
+}
+
+/* 9. La case a cocher native n'a pas de contour fiable.
+   Chaque navigateur dessine la sienne, avec un gris qui descend a 1,0 de
+   contraste sur certains fonds. Redessinee, elle porte le violet partout,
+   mesure 4,70, et le seuil d'un controle de formulaire est 3. */
+.champ--case input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin: .12rem 0 0;
+  flex: none;
+  border: 1.5px solid var(--violet);
+  border-radius: 3px;
+  background: var(--blanc);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}
+
+.champ--case input[type="checkbox"]::before {
+  content: "";
+  width: .72rem;
+  height: .72rem;
+  transform: scale(0);
+  transition: transform .12s ease;
+  background: var(--violet);
+  /* Coche dessinee en masque : elle suit la couleur, donc le mode sombre
+     du systeme ou un fond colore ne la font pas disparaitre. */
+  clip-path: polygon(14% 47%, 0 61%, 40% 100%, 100% 26%, 86% 12%, 39% 71%);
+}
+
+.champ--case input[type="checkbox"]:checked::before { transform: scale(1); }
+.champ--case input[type="checkbox"]:checked { background: var(--blanc); border-color: var(--violet-sombre); }

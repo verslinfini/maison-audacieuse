@@ -48,6 +48,12 @@ const VOULUS = [
     test: (c, p) => p === 'texte' && String(c.m).includes('près de') && String(c.d).includes('plus de'),
   },
   {
+    // Le libelle promettait un calendrier que la page cible ne porte plus :
+    // il doublait la frise de la home, situee juste au-dessus de ce lien.
+    quoi: 'le lien vers le modele economique prend le libelle du pied',
+    test: (c, p) => p === 'texte' && String(c.m).startsWith('Prochaines étapes'),
+  },
+  {
     quoi: 'credit photo : opacite .72 vers .88 (audit du 07/09, contraste 3,36 sous le seuil)',
     test: (c, p) => p === 'couleur' && String(c.m).includes('0.72') && String(c.d).includes('0.88'),
   },
@@ -58,6 +64,10 @@ const VOULUS = [
   {
     quoi: 'largeur du nombre en gras, consequence du precedent',
     test: (c, p) => p === 'l' && Math.abs(Number(c.m) - Number(c.d)) <= 3,
+  },
+  {
+    quoi: 'largeur du lien vers le modele economique, consequence de son libelle plus court',
+    test: (c, p, n) => p === 'l' && n.classes === 'lien-texte' && Number(c.m) === 278 && Number(c.d) === 192,
   },
   {
     quoi: 'champs de formulaire : 16 px et 50 px de haut (sous 16 px, iOS zoome au focus ; 44 px etait le minimum tactile)',

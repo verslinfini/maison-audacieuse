@@ -2,10 +2,43 @@
 /* Mentions legales et politique de confidentialite.                    */
 /* Page longue, dense, sans image : tout se joue sur la hierarchie et    */
 /* sur la capacite a retrouver une rubrique. Le socle porte deja les     */
-/* blocs, la prose, les puces et le tableau. Ne restent ici que le       */
-/* sommaire a ancres, le lien dans le fil du texte et le marqueur des    */
-/* informations qui manquent encore.                                     */
+/* blocs, la prose, les puces, le tableau et le marqueur de trou. Ne     */
+/* restent ici que le sommaire a ancres, le lien dans le fil du texte,   */
+/* la nappe blanche du tableau et les distances entre rubriques.        */
+/*                                                                      */
+/* Revision du 07/09/2026, tenue seulement : fonds colores du socle a la */
+/* place du gris et du violace plein, filet entre les rubriques,         */
+/* marqueurs de trou en forme bloc, cloture sur le violet sombre.        */
+/* Pas une phrase du texte n'a bouge.                                    */
 /* ------------------------------------------------------------------ */
+
+/* ---------- grain des fonds colores ---------- */
+
+/* DOUBLON ASSUME, A REMONTER DANS base.css.
+   Le voile du socle est calibre sur le .page-tete gris : grain neutre a
+   50 %. Pose sur l'aube ou sur la nappe, il eteint les nappes de couleur et
+   la section redevient grise, ce qu'on voulait justement corriger. Mesure
+   faite le 07/09 sur cette page : le bloc des mentions rendait #dcdce2 au
+   lieu du violace, celui des durees #d1d4d8, ou le texte tombait a 4,91.
+   Meme traitement que sur la home : grain colore, fusion normale, quatre
+   fois plus discret.
+   /le-modele-economique/, /le-projet-architectural/ et
+   /cgv-parts-sociales/ portent la meme regle depuis le 07/09. Quatre pages
+   l'ont inventee separement : elle appartient au socle. */
+.page-tete--aube > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+.bloc--aube > .grain__voile,
+.bloc--nappe > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .16;
+  mix-blend-mode: normal;
+}
 
 /* ---------- date de version ---------- */
 
@@ -52,11 +85,18 @@
 
 .sommaire__groupe ul { display: flex; flex-direction: column; }
 
-.sommaire__groupe li { line-height: 1.35; }
+.sommaire__groupe li { line-height: 1.35; display: flex; }
 
+/* Le renvoi tient la hauteur d'une cible de doigt et non celle de son seul
+   texte : a 28 px de haut, un sommaire de quatorze lignes se rate une fois
+   sur trois au telephone. Le lien occupe toute la largeur de sa colonne,
+   ce qui donne aussi a la mise au point du clavier une forme lisible. */
 .sommaire a {
-  display: inline-block;
-  padding: .28rem 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: .2rem 0;
   color: var(--texte);
   font-size: var(--t-petit);
   text-decoration: underline;
@@ -66,7 +106,11 @@
   transition: text-decoration-color 150ms ease, color 150ms ease;
 }
 
+.sommaire__partie a { min-height: 0; }
+
 .sommaire a:hover { color: var(--violet-sombre); text-decoration-color: var(--violet); }
+
+.sommaire a:focus-visible { outline-offset: 1px; }
 
 /* ---------- rubriques ---------- */
 
@@ -74,7 +118,28 @@
    et recoit donc le decalage de scroll que le socle pose sur section[id].
    .prose est mis sur la section elle-meme, sinon l'espacement du texte
    courant ne descendrait pas jusqu'aux paragraphes. */
-.legal__rubrique + .legal__rubrique { margin-top: clamp(2.4rem, 4vw, 3.4rem); }
+
+/* Le filet, ajoute le 07/09, remplace un blanc seul. Sur quatorze rubriques
+   d'inegale longueur, un blanc ne dit pas si l'on change de sujet ou si l'on
+   lit un paragraphe detache : le trait, lui, le dit. */
+.legal__rubrique + .legal__rubrique {
+  margin-top: clamp(1.8rem, 3vw, 2.4rem);
+  padding-top: clamp(1.3rem, 2.2vw, 1.8rem);
+  border-top: 1px solid var(--filet);
+}
+
+.bloc--sombre .legal__rubrique + .legal__rubrique { border-top-color: rgba(255, 255, 255, .22); }
+
+/* A SIGNALER AU SOCLE. base.css passe les titres au blanc sur .bloc--sombre
+   (section « sections »), puis redeclare .prose h3 en violet sombre plus bas
+   (section « colonne de lecture »). Les deux regles pesent le meme poids :
+   la seconde gagne, et un h3 de .prose pose sur un bloc sombre devient un
+   titre violet sombre sur fond violet sombre, soit 1,0. Constate ici le
+   07/09 quand la section des droits est passee sur le fond de cloture. Le
+   correctif appartient au socle, ou il vaudra pour toutes les pages ; en
+   attendant il est ici. */
+.legal .bloc--sombre .prose h3,
+.legal .bloc--sombre .prose h4 { color: var(--blanc); }
 
 /* Titre de rubrique quand elle n'est pas dans .prose, comme au-dessus du
    tableau des durees. */
@@ -87,12 +152,25 @@
   letter-spacing: -.01em;
 }
 
+/* ---------- retour au sommaire ---------- */
+
+/* Un renvoi en bas de chaque section. Huit mille pixels de texte legal se
+   parcourent par sauts, et le sommaire est en haut : sans ce lien, on y
+   remonte a la molette ou pas du tout. */
+.legal__vers-sommaire {
+  margin-top: clamp(1.5rem, 2.6vw, 2.1rem);
+  padding-top: clamp(.8rem, 1.4vw, 1.1rem);
+  border-top: 1px solid var(--filet);
+}
+
+.legal__portes { display: flex; flex-wrap: wrap; gap: .1rem 2rem; }
+
 /* ---------- lien dans le fil du texte ---------- */
 
 /* Le socle n'a que .lien-texte, un lien-action de 44 px de haut : dans un
    paragraphe il casserait la ligne. Ici les liens sont des references,
    pas des gestes, et ils restent dans le texte. */
-.legal .prose a,
+.legal .prose a:not(.lien-texte),
 .legal .tableau a {
   color: var(--violet-sombre);
   font-weight: 500;
@@ -103,8 +181,16 @@
   transition: text-decoration-thickness 150ms ease;
 }
 
-.legal .prose a:hover,
+.legal .prose a:not(.lien-texte):hover,
 .legal .tableau a:hover { text-decoration-thickness: 3px; }
+
+/* Sur le bloc de cloture, le violet sombre serait du sombre sur du sombre. */
+.legal .bloc--sombre .prose a:not(.lien-texte) {
+  color: var(--jaune);
+  text-decoration-color: rgba(255, 243, 168, .55);
+}
+
+.legal .bloc--sombre .prose a:not(.lien-texte):hover { text-decoration-color: var(--jaune); }
 
 /* Une adresse electronique ne se coupe pas n'importe ou. */
 .legal a[href^="mailto:"] { word-break: break-word; }
@@ -112,17 +198,46 @@
 /* Le lien de retour reprend .lien-texte, qui redevient un geste. */
 .legal .retour { color: var(--violet-sombre); }
 
+.legal .bloc--sombre .retour,
+.legal .bloc--sombre .lien-texte { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
+
 /* ---------- ce qui manque encore ---------- */
 
 /* Le marqueur .a-sourcer appartient au socle, la page ne le redefinit pas.
-   Une seule correction : le socle pose le texte en terracotta, qui donne
-   4,1 sur blanc et 3,5 sur le fond violace, sous le minimum de 4,5 exige
-   pour du texte. Le pointille garde la couleur du marqueur, le texte passe
-   au violet sombre. A remonter dans le socle si une autre page fait le
-   meme constat. */
-.legal .a-sourcer { color: var(--violet-sombre); }
+   Depuis le 07/09 les douze marqueurs de cette page prennent la forme bloc :
+   en ligne, un marqueur de quatre lignes se decoupait en quatre encadres
+   pointilles empiles, et le pointille devenait un motif au lieu d'un signal.
+   Ne restent ici que les distances, qui dependent de leur voisinage. */
+
+/* Dans une liste ou une cellule, le marqueur suit immediatement ce qu'il
+   complete : la reserve de 2,8 rem du socle l'en detacherait. */
+.legal li > .a-sourcer--bloc,
+.legal td > .a-sourcer--bloc { margin-top: .45rem; }
+
+.legal td > .a-sourcer--bloc { max-width: none; }
+
+/* Deux marqueurs de suite dans une meme rubrique se lisent comme la liste
+   de ce qui manque, pas comme deux paragraphes sans rapport. */
+.legal .prose > .a-sourcer--bloc { margin-top: clamp(1rem, 1.7vw, 1.35rem); }
+
+.legal .prose > .a-sourcer--bloc + .a-sourcer--bloc { margin-top: .55rem; }
+
+/* Le socle bascule le marqueur au jaune sur .bloc--sombre. Cette page se
+   ferme sur ce fond : la regle du socle doit rester gagnante. */
+.legal .bloc--sombre .a-sourcer { border-color: var(--jaune); color: var(--jaune); }
 
 /* ---------- tableau des durees ---------- */
+
+/* La section a pris un fond colore : le tableau garde une nappe blanche a
+   lui. Cinq colonnes de filets de 1 px sur un degrade se lisent moins bien
+   que sur du blanc plein, et c'est le seul objet de la page ou le lecteur
+   compare des lignes entre elles. */
+.legal__tableau {
+  padding: clamp(.8rem, 1.4vw, 1.2rem);
+  border: 1px solid var(--filet);
+  border-radius: 10px;
+  background: var(--blanc);
+}
 
 /* Cinq colonnes ne tiennent pas sous 700 px. La largeur minimale force le
    defilement dans .tableau-cadre plutot que l'ecrasement des cellules,
@@ -140,11 +255,13 @@
    premiers plans, en background-attachment local, suivent le contenu et
    masquent l'ombre du bord atteint ; les deux ombres, fixes au cadre,
    restent visibles tant qu'il reste quelque chose a lire de ce cote.
+   Le degrade de masque prend la couleur de la nappe, pas celle de la
+   section : depuis le 07/09 la section est coloree, la nappe reste blanche.
    Aucun script : l'indice se calcule tout seul. */
 .legal .tableau-cadre {
   background:
-    linear-gradient(to right, var(--gris) 40%, rgba(245, 245, 246, 0)) left center / 3rem 100% no-repeat local,
-    linear-gradient(to left, var(--gris) 40%, rgba(245, 245, 246, 0)) right center / 3rem 100% no-repeat local,
+    linear-gradient(to right, var(--blanc) 40%, rgba(255, 255, 255, 0)) left center / 3rem 100% no-repeat local,
+    linear-gradient(to left, var(--blanc) 40%, rgba(255, 255, 255, 0)) right center / 3rem 100% no-repeat local,
     radial-gradient(farthest-side at 0 50%, rgba(56, 54, 72, .3), rgba(56, 54, 72, 0)) left center / 1.1rem 100% no-repeat scroll,
     radial-gradient(farthest-side at 100% 50%, rgba(56, 54, 72, .3), rgba(56, 54, 72, 0)) right center / 1.1rem 100% no-repeat scroll;
 }
@@ -152,8 +269,20 @@
 .legal .tableau-cadre:focus-visible { outline-offset: 2px; }
 
 /* L'ombre de bord signale qu'il reste du tableau a droite, elle ne le dit
-   pas. Sur un ecran ou la moitie des colonnes est hors champ, on le dit. */
+   pas. Sur un ecran ou la moitie des colonnes est hors champ, on le dit.
+   La phrase ne vaut que la ou le tableau defile pour de bon : entre 640 et
+   767 px. En dessous il s'empile et plus rien ne defile, la note demandait
+   alors un geste sans effet. Corrige le 07/09. */
 .legal__note-tableau { display: none; }
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .legal__note-tableau {
+    display: block;
+    margin-bottom: .9rem;
+    font-size: var(--t-petit);
+    color: rgba(86, 84, 107, .82);
+  }
+}
 
 .tableau--durees th[scope="row"] { width: 10rem; }
 
@@ -163,10 +292,9 @@
   .sommaire__grille { gap: 1.4rem; }
   .tableau--durees { font-size: .92rem; }
 
-  .legal__note-tableau {
-    display: block;
-    margin-bottom: .9rem;
-    font-size: var(--t-petit);
-    color: rgba(86, 84, 107, .82);
-  }
+  /* Cote a cote sans gouttiere, les deux libelles se touchent et se lisent
+     comme un seul lien. Sur telephone ils passent l'un sous l'autre, et la
+     cible du pouce se reprend en hauteur. */
+  .legal__portes { flex-direction: column; align-items: flex-start; gap: 0; }
+  .legal__portes .lien-texte { min-height: 48px; }
 }

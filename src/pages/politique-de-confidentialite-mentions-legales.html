@@ -6,7 +6,14 @@ barre: non
 ---
 
 <main class="legal">
-  <section class="page-tete">
+  <!-- L'en-tete prend le fond d'ouverture du socle (.page-tete--aube) plutot
+       que le gris plein. Une page d'obligations legales reste sobre, elle n'a
+       aucune raison d'etre plus grise que les autres pages du site.
+       Fonds de la page, depuis le 07/09 : aube, blanc, nappe, blanc, aube,
+       sombre. Aucun fond plein colore ne porte de texte : le blanc n'y tient
+       que 4,04 sur le violet et 4,20 sur le terracotta, sous le minimum de
+       4,5. Le seul aplat est le violet sombre de la fin, ou il tient 11:1. -->
+  <section class="page-tete page-tete--aube">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <span class="page-tete__sur">Informations légales</span>
@@ -64,7 +71,8 @@ barre: non
     </div>
   </section>
 
-  <section class="bloc bloc--violace" id="mentions-legales">
+  <section class="bloc bloc--nappe" id="mentions-legales">
+    <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <h2 class="bloc__titre">Mentions légales</h2>
       <div class="mesure">
@@ -88,18 +96,18 @@ barre: non
             <li>Siège social&nbsp;: 3, impasse des Rochers, 74960 Annecy</li>
             <li>Immatriculée au registre du commerce et des sociétés d'Annecy le 10/07/2026</li>
             <li>SIREN&nbsp;: 107 280 208</li>
-            <li>Capital social&nbsp;: variable. <span class="a-sourcer">[À SOURCER&nbsp;: montant du capital social à la date de mise en ligne. Le capital d'une coopérative à capital variable évolue à chaque souscription et à chaque remboursement de parts, la mention doit donc être datée.]</span></li>
+            <li>Capital social&nbsp;: variable. <span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: montant du capital social à la date de mise en ligne. Le capital d'une coopérative à capital variable évolue à chaque souscription et à chaque remboursement de parts, la mention doit donc être datée.]</span></li>
             <li>Représentée par Morgane Craye, présidente</li>
           </ul>
 
-          <p><span class="a-sourcer">[À SOURCER&nbsp;: laquelle des deux structures édite le site, ou formalisation d'une co-édition. La mention détermine qui répond du contenu publié et qui est responsable des traitements décrits plus bas.]</span></p>
-          <p><span class="a-sourcer">[À SOURCER&nbsp;: numéro de téléphone de l'éditeur, exigé par l'article 6 III de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.]</span></p>
+          <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: laquelle des deux structures édite le site, ou formalisation d'une co-édition. La mention détermine qui répond du contenu publié et qui est responsable des traitements décrits plus bas.]</p>
+          <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: numéro de téléphone de l'éditeur, exigé par l'article 6 III de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.]</p>
           <p>Contact&nbsp;: <a href="mailto:contact@maison-audacieuse.fr">contact@maison-audacieuse.fr</a></p>
         </section>
 
         <section class="prose legal__rubrique" id="directeur-publication">
           <h3>Direction de la publication</h3>
-          <p><span class="a-sourcer">[À SOURCER&nbsp;: nom, prénom et qualité de la personne qui assure la direction de la publication, désignée par la structure éditrice.]</span></p>
+          <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: nom, prénom et qualité de la personne qui assure la direction de la publication, désignée par la structure éditrice.]</p>
         </section>
 
         <section class="prose legal__rubrique" id="hebergeur">
@@ -108,7 +116,7 @@ barre: non
           <ul class="puces">
             <li>o2switch, société par actions simplifiée</li>
             <li>222-224 boulevard Gustave Flaubert, 63000 Clermont-Ferrand</li>
-            <li><span class="a-sourcer">[À SOURCER&nbsp;: numéro de téléphone de l'hébergeur, exigé par la même disposition.]</span></li>
+            <li><span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: numéro de téléphone de l'hébergeur, exigé par la même disposition.]</span></li>
           </ul>
           <p>Les serveurs qui hébergent ce site sont situés en France.</p>
         </section>
@@ -125,9 +133,11 @@ barre: non
           <ul class="puces">
             <li>Visuels du projet architectural&nbsp;: Basa Architecture</li>
             <li>Polices de caractères&nbsp;: Onest et Meow Script, sous licence SIL Open Font License, servies par ce site</li>
-            <li><span class="a-sourcer">[À SOURCER&nbsp;: crédits des photographies et des illustrations reprises du site précédent, qui mentionnait Freepik.com sans préciser lesquelles.]</span></li>
+            <li><span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: crédits des photographies et des illustrations reprises du site précédent, qui mentionnait Freepik.com sans préciser lesquelles.]</span></li>
           </ul>
         </section>
+
+        <p class="legal__vers-sommaire"><a class="lien-texte" href="#sommaire">Revenir au sommaire</a></p>
 
       </div>
     </div>
@@ -168,30 +178,37 @@ barre: non
         <section class="prose legal__rubrique" id="dons">
           <h3>Les dons</h3>
           <p>La page de don renvoie vers une plateforme de collecte extérieure. Les données que vous y saisissez sont traitées par cette plateforme, selon sa propre politique de confidentialité. Ce site ne les collecte pas lui-même.</p>
-          <p><span class="a-sourcer">[À SOURCER&nbsp;: plateforme de collecte des dons en service, lien vers sa politique de confidentialité, liste des données qu'elle nous retransmet, notamment pour l'établissement des reçus fiscaux. La version précédente du site désignait HelloAsso.]</span></p>
+          <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: plateforme de collecte des dons en service, lien vers sa politique de confidentialité, liste des données qu'elle nous retransmet, notamment pour l'établissement des reçus fiscaux. La version précédente du site désignait HelloAsso.]</p>
         </section>
 
         <section class="prose legal__rubrique" id="souscription">
           <h3>La souscription de parts sociales</h3>
           <p>La souscription en ligne de parts sociales n'est pas encore ouverte. Lorsqu'elle le sera, elle collectera votre identité, vos coordonnées et les données nécessaires au paiement&nbsp;: la souscription au capital d'une coopérative suppose de connaître chaque associé·e et de tenir le registre des associé·es.</p>
           <p>Les données concernées, leur durée de conservation et le traitement du paiement figureront dans les <a href="/cgv-parts-sociales/">conditions de souscription</a> et dans une mise à jour de cette page, publiées avant l'ouverture de la souscription.</p>
-          <p><span class="a-sourcer">[À SOURCER&nbsp;: prestataire de paiement retenu, pays d'hébergement de ses données et existence d'une vérification d'identité au titre de la lutte contre le blanchiment.]</span></p>
+          <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: prestataire de paiement retenu, pays d'hébergement de ses données et existence d'une vérification d'identité au titre de la lutte contre le blanchiment.]</p>
         </section>
+
+        <p class="legal__vers-sommaire"><a class="lien-texte" href="#sommaire">Revenir au sommaire</a></p>
 
       </div>
     </div>
   </section>
 
-  <section class="bloc bloc--gris" id="conservation">
+  <section class="bloc bloc--aube" id="conservation">
+    <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <h2 class="bloc__titre">Conservation et destinataires</h2>
 
       <section id="durees">
         <h3 class="legal__soustitre">Durées de conservation</h3>
         <p class="legal__note-tableau">Le tableau se lit en le faisant défiler vers la droite.</p>
-        <!-- Le cadre est atteignable au clavier : sous 700 px le tableau
-             defile a l'interieur et un contenu qui defile doit pouvoir se
-             parcourir sans souris. -->
+        <!-- Le tableau est pose sur une nappe blanche a lui : la section a
+             pris un fond colore le 07/09, et cinq colonnes de filets fins sur
+             un degrade se lisent moins bien que sur du blanc plein.
+             Le cadre interieur est atteignable au clavier : sous 700 px le
+             tableau defile et un contenu qui defile doit pouvoir se parcourir
+             sans souris. -->
+        <div class="legal__tableau">
         <div class="tableau-cadre" role="region" aria-label="Tableau des durées de conservation, défilement horizontal" tabindex="0">
           <table class="tableau tableau--durees tableau--empile">
             <thead>
@@ -209,31 +226,32 @@ barre: non
                 <td data-col="Données">Prénom, adresse électronique</td>
                 <td data-col="Finalité">Envoyer des nouvelles du projet</td>
                 <td data-col="Base légale">Consentement</td>
-                <td data-col="Durée de conservation">Jusqu'à votre désinscription. <span class="a-sourcer">[À SOURCER&nbsp;: durée après désinscription et après inactivité prolongée, à fixer avec le registre des traitements.]</span></td>
+                <td data-col="Durée de conservation">Jusqu'à votre désinscription. <span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: durée après désinscription et après inactivité prolongée, à fixer avec le registre des traitements.]</span></td>
               </tr>
               <tr>
                 <th scope="row">Messages reçus par courriel</th>
                 <td data-col="Données">Adresse électronique, nom, contenu du message</td>
                 <td data-col="Finalité">Répondre et suivre l'échange</td>
                 <td data-col="Base légale">Intérêt légitime</td>
-                <td data-col="Durée de conservation"><span class="a-sourcer">[À SOURCER&nbsp;: durée de conservation des échanges par courriel, à fixer avec le registre des traitements.]</span></td>
+                <td data-col="Durée de conservation"><span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: durée de conservation des échanges par courriel, à fixer avec le registre des traitements.]</span></td>
               </tr>
               <tr>
                 <th scope="row">Déclaration d'intention de souscription</th>
                 <td data-col="Données">Nom, prénom, courriel, nombre de parts envisagé, message libre</td>
                 <td data-col="Finalité">Vous recontacter et préparer votre bulletin de souscription</td>
                 <td data-col="Base légale">Consentement, recueilli par une case non pré-cochée</td>
-                <td data-col="Durée de conservation"><span class="a-sourcer">[À SOURCER&nbsp;: durée de conservation des déclarations restées sans suite, à fixer avec le registre des traitements.]</span></td>
+                <td data-col="Durée de conservation"><span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: durée de conservation des déclarations restées sans suite, à fixer avec le registre des traitements.]</span></td>
               </tr>
               <tr>
                 <th scope="row">Souscription de parts sociales, à venir</th>
                 <td data-col="Données">Identité, coordonnées, données nécessaires au paiement</td>
                 <td data-col="Finalité">Tenir le registre des associé·es et la comptabilité</td>
                 <td data-col="Base légale">Exécution du contrat de souscription et obligation légale</td>
-                <td data-col="Durée de conservation"><span class="a-sourcer">[À SOURCER&nbsp;: durées du registre des associé·es et des pièces liées au paiement, à fixer avec le registre des traitements.]</span></td>
+                <td data-col="Durée de conservation"><span class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: durées du registre des associé·es et des pièces liées au paiement, à fixer avec le registre des traitements.]</span></td>
               </tr>
             </tbody>
           </table>
+        </div>
         </div>
       </section>
 
@@ -244,11 +262,18 @@ barre: non
           <p>À l'extérieur, elles ne vont qu'aux prestataires qui les traitent pour notre compte, dans le cadre d'un contrat de sous-traitance&nbsp;: Brevo pour l'envoi de l'infolettre, o2switch pour l'hébergement du site. Les données confiées à ces deux prestataires restent dans l'Union européenne.</p>
           <p>Il n'y a aucun autre destinataire, en dehors des autorités qui en feraient la demande dans les cas prévus par la loi.</p>
         </section>
+
+        <p class="legal__vers-sommaire"><a class="lien-texte" href="#sommaire">Revenir au sommaire</a></p>
       </div>
     </div>
   </section>
 
-  <section class="bloc bloc--blanc" id="droits">
+  <!-- La page se ferme sur le violet sombre, comme les autres pages du site.
+       Elle ne porte aucun appel : le bloc de fin est celui des droits, la
+       seule chose qu'un lecteur doit emporter d'une politique de
+       confidentialite. Le blanc y tient 11:1, ce qu'aucun aplat colore de la
+       charte ne donne. -->
+  <section class="bloc bloc--sombre" id="droits">
     <div class="contenu">
       <h2 class="bloc__titre">Vos droits</h2>
       <div class="mesure">
@@ -269,7 +294,10 @@ barre: non
           <p>Cette page est mise à jour à chaque changement de traitement, de prestataire ou de structure éditrice. La date de version figure en haut de page.</p>
         </section>
 
-        <p><a class="retour lien-texte" href="/">Retour à l'accueil</a></p>
+        <p class="legal__portes">
+          <a class="retour lien-texte" href="/">Retour à l'accueil</a>
+          <a class="retour lien-texte" href="#sommaire">Revenir au sommaire</a>
+        </p>
       </div>
     </div>
   </section>

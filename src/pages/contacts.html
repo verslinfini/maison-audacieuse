@@ -3,34 +3,52 @@ titre: Contact | La Maison Audacieuse
 description: Écrire au collectif de La Maison Audacieuse à Annecy : une adresse, l'infolettre, les réseaux et où se trouve la ferme de Novel.
 sortie: contacts/index.html
 ---
+<!-- La page de contact d'une association se juge sur deux choses : est-ce
+     qu'on trouve a qui parler, et est-ce qu'on sent qu'il y a quelqu'un
+     derriere. La premiere se regle par l'aiguillage ci-dessous, la seconde
+     par ce que la page avoue : qui releve la boite, et sous quel delai.
+     Le delai n'est pas connu au 07/09 : il est marque, pas invente. -->
 <main>
-  <section class="page-tete">
+  <section class="page-tete page-tete--aube">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <span class="page-tete__sur">Contact</span>
       <h1 class="page-tete__titre">Dites-nous ce qui vous amène</h1>
-      <p class="page-tete__chapo">Une adresse, quelques réseaux et une lettre quand il y a du neuf. L'objet de votre message suffit à l'envoyer à la bonne personne. On répond nous-mêmes, parfois avec du retard.</p>
+      <p class="page-tete__chapo">Une adresse, quelques réseaux, une lettre quand il y a du neuf. L'objet de votre message suffit à l'envoyer à la bonne personne.</p>
     </div>
   </section>
 
   <!-- L'aiguillage. Une page de contact n'est pas un annuaire : chaque
        intention part vers sa destination et les liens de courriel
-       remplissent l'objet pour que le collectif trie sans lire. -->
+       remplissent l'objet pour que le collectif trie sans lire.
+       « Venir voir la ferme » a quitte cette liste le 07/09 : la section en
+       photo, plus bas, porte la visite en entier. Une intention qui figure
+       a deux endroits fait hesiter au lieu d'orienter.
+       Les lignes d'explication ont saute le meme jour : ce que le libelle du
+       lien dit deja n'a pas a etre dit une ligne au-dessus, et cinq rangees
+       de trois lignes coutaient trois cents pixels sur une page qui vise
+       trois mille. Le libelle porte donc l'information en entier. -->
   <section class="bloc bloc--blanc" id="ecrire">
     <div class="contenu">
       <h2 class="bloc__titre">Où va votre message</h2>
-      <p class="bloc__intro">Tout arrive dans la même boîte. L'objet du message dit qui vous répond. Les liens ci-dessous le remplissent pour vous.</p>
 
-      <p class="adresse"><a class="lien-texte adresse__lien" href="mailto:contact@maison-audacieuse.fr">contact@maison-audacieuse.fr</a></p>
+      <!-- Le panneau menthe est le point d'ancrage de la page : l'adresse,
+           qui repond, sous quel delai. Trois informations, un seul aplat.
+           Il a absorbe le chapo de section le 07/09 : la meme phrase deux
+           fois a vingt centimetres d'intervalle coute deux ecrans par page. -->
+      <div class="porte">
+        <p class="porte__adresse"><a class="lien-texte adresse__lien" href="mailto:contact@maison-audacieuse.fr">contact@maison-audacieuse.fr</a></p>
+        <p class="annote porte__note">on répond nous-mêmes</p>
+        <p class="porte__delai">Tout arrive dans la même boîte, que le collectif relève lui-même entre deux réunions et deux chantiers. L'objet du message dit qui vous répond. Vous recevez une réponse sous <span class="a-sourcer">[À SOURCER&nbsp;: délai de réponse annoncé, à arrêter par le collectif avant la mise en ligne]</span>.</p>
+      </div>
 
       <ul class="voies">
         <li class="voie">
           <h3 class="voie__quoi">Une question avant de souscrire</h3>
           <div class="voie__suite">
-            <p>La page part sociale répond aux questions les plus fréquentes.</p>
             <p class="voie__ou">
               <a class="lien-texte" href="/part-sociale/#faq">Les questions déjà posées</a>
-              <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Part%20sociale">Poser la vôtre</a>
+              <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Part%20sociale">Poser la vôtre par courriel</a>
             </p>
           </div>
         </li>
@@ -38,9 +56,8 @@ sortie: contacts/index.html
         <li class="voie">
           <h3 class="voie__quoi">Un souci avec une souscription en cours</h3>
           <div class="voie__suite">
-            <p>Un paiement qui bloque, un document qui manque, une adresse à corriger.</p>
             <p class="voie__ou">
-              <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Souscription">Écrire au sujet d'une souscription</a>
+              <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Souscription">Signaler un paiement ou un document bloqué</a>
             </p>
           </div>
         </li>
@@ -48,7 +65,6 @@ sortie: contacts/index.html
         <li class="voie">
           <h3 class="voie__quoi">Du temps, un savoir-faire, un coup de main</h3>
           <div class="voie__suite">
-            <p>Dites ce que vous savez faire et le temps dont vous disposez.</p>
             <p class="voie__ou">
               <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Coup%20de%20main">Proposer un coup de main</a>
             </p>
@@ -58,20 +74,9 @@ sortie: contacts/index.html
         <li class="voie">
           <h3 class="voie__quoi">Un article, une interview, des visuels</h3>
           <div class="voie__suite">
-            <p>Passez d'abord par la page médias. Pour une demande précise, écrivez.</p>
             <p class="voie__ou">
-              <a class="lien-texte" href="/les-medias/">Les médias</a>
+              <a class="lien-texte" href="/les-medias/">L'espace presse et les parutions</a>
               <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Presse">Demander une interview</a>
-            </p>
-          </div>
-        </li>
-
-        <li class="voie">
-          <h3 class="voie__quoi">Venir voir la ferme</h3>
-          <div class="voie__suite">
-            <p>Le bâtiment est à Annecy, dans le quartier de Novel.</p>
-            <p class="voie__ou">
-              <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Visite">Demander à visiter</a>
             </p>
           </div>
         </li>
@@ -79,9 +84,8 @@ sortie: contacts/index.html
         <li class="voie">
           <h3 class="voie__quoi">Soutenir sans prendre de part</h3>
           <div class="voie__suite">
-            <p>Le don reste possible et il passe par HelloAsso.</p>
             <p class="voie__ou">
-              <a class="lien-texte" href="/soutenir/">Les trois façons de soutenir</a>
+              <a class="lien-texte" href="/soutenir/">Le don et les deux autres façons de soutenir</a>
             </p>
           </div>
         </li>
@@ -91,49 +95,60 @@ sortie: contacts/index.html
 
   <!-- Pas de carte : elle irait chercher ses images chez un tiers quand le
        site n'appelle aucun hote exterieur. Pas de numero de rue non plus,
-       tant que personne ne l'a confirme. -->
-  <section class="bloc bloc--violace" id="le-lieu">
+       tant que personne ne l'a confirme. C'est la photo qui dit le lieu.
+       Le cliche de la porte de la cour a ete essaye le 07/09 et ecarte : la
+       section fait 460 px de haut pour 1 440 de large, on n'y voit qu'un
+       quart de la hauteur d'un portrait, et cette bande-la est occupee par
+       une camionnette blanche dont la plaque se lit. La fenetre du
+       rez-de-chaussee tient le meme role, sans vehicule et sans plaque.
+       Elle est marquee « au choix » dans le catalogue des images, donc
+       aucune autre page n'en a besoin. -->
+  <section class="bloc bloc--photo" id="venir-voir">
+    <div class="bloc__fond" aria-hidden="true">
+      <img src="/assets/img/fenetre.webp" alt="" width="1400" height="1867">
+    </div>
+    <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <h2 class="bloc__titre">La ferme de Novel</h2>
-      <div class="lieu">
-        <div class="mesure prose">
-          <p>Le lieu est à Annecy, dans le quartier de Novel. La Ville d'Annecy nous confie le bâtiment pour 99&nbsp;ans.</p>
-          <p>Les travaux n'ont pas commencé et il n'y a <span class="marqueur marqueur--3">pas encore de bureau</span> où pousser une porte. Ni accueil ni permanence.</p>
-          <p>Si vous voulez voir le bâtiment, écrivez-nous et on vous dira ce qui est possible.</p>
-          <p><a class="lien-texte" href="/le-projet-architectural/">Ce que la ferme va devenir</a></p>
-        </div>
-        <!-- La photo sert a reconnaitre le batiment depuis la rue, faute
-             d'un numero de rue et d'une carte. Elle vaut l'adresse. -->
-        <figure class="figure">
-          <img src="/assets/img/exterieur3-1.jpg" alt="La ferme de Novel aujourd'hui&nbsp;: un long corps de ferme en pierre sous un large toit de tuiles, au bord de la rue" width="1368" height="857">
-          <figcaption>La ferme aujourd'hui, quartier de Novel.</figcaption>
-        </figure>
+      <div class="panneau">
+        <h2 class="bloc__titre">Venir voir la ferme</h2>
+        <p>Le bâtiment est à Annecy, dans le quartier de Novel. La Ville d'Annecy a signé la promesse de bail de 99&nbsp;ans. Les travaux n'ont pas commencé.</p>
+        <p>Il n'y a donc ni bureau, ni accueil, ni permanence. Écrivez-nous et nous vous dirons ce qui est possible.</p>
+        <p class="panneau__gestes">
+          <a class="lien-texte" href="mailto:contact@maison-audacieuse.fr?subject=Visite">Demander à visiter</a>
+          <a class="lien-texte" href="/le-projet-architectural/">Ce que la ferme va devenir</a>
+        </p>
       </div>
     </div>
+    <p class="bloc__credit">Une fenêtre du rez-de-chaussée, mars 2025</p>
   </section>
 
-  <section class="bloc bloc--blanc" id="suivre">
+  <section class="bloc bloc--claire" id="suivre">
     <div class="contenu">
       <h2 class="bloc__titre">Les nouvelles du projet</h2>
       <div class="suivre">
-        <div>
+        <div class="suivre__lettre">
           <h3 class="suivre__titre">Par courriel</h3>
-          <p class="suivre__dit">On écrit quand il y a du neuf : une étape franchie, une date à retenir.</p>
+          <p class="suivre__dit">On écrit quand il y a du neuf, quelques envois par an.</p>
 
-          <!-- Le point d'envoi Brevo n'est pas branche. L'identifiant
-               infolettre est celui que scripts/socle.js bloque au submit,
-               le meme que sur la home, donc rien ne part vers le libelle
-               de l'attribut action. Le jour ou l'URL Brevo arrive ici, ce
-               blocage est a retirer de socle.js, sinon le formulaire se
-               remplit et ne fait rien. -->
-          <form class="inscription" id="infolettre" method="post" action="[À BRANCHER : point d'envoi Brevo]">
-            <div class="inscription__rangee">
-              <div class="inscription__bloc">
-                <label for="lettre-courriel">Votre adresse électronique</label>
-                <input id="lettre-courriel" name="EMAIL" type="email" autocomplete="email" placeholder="prenom@exemple.fr" required>
-              </div>
-              <button class="bouton bouton--contour" type="submit">Je m'inscris</button>
+          <!-- Le point d'envoi Brevo n'est pas branche et l'attribut action a
+               ete retire le 07/09 : une URL inventee vaut moins qu'un trou
+               nomme, et un formulaire qui poste sur lui-meme perd l'adresse
+               en silence. L'identifiant « infolettre » est celui que
+               scripts/socle.js bloque au submit, comme sur la home. Le jour
+               ou l'URL Brevo arrive, la poser en « action », retirer le
+               marqueur ci-dessous et retirer le blocage de socle.js. -->
+          <form class="inscription" id="infolettre" method="post">
+            <div class="champ inscription__ligne">
+              <label for="lettre-courriel">Votre adresse électronique</label>
+              <input id="lettre-courriel" name="EMAIL" type="email" autocomplete="email" required>
             </div>
+
+            <div class="champ champ--case inscription__accord">
+              <input id="lettre-accord" name="accord" type="checkbox" value="oui" autocomplete="off" required>
+              <label for="lettre-accord">J'accepte de recevoir les nouvelles du projet par courriel.</label>
+            </div>
+
+            <p class="champ__aide inscription__aide">Votre adresse ne sert qu'à cet envoi et chaque lettre porte un lien de désinscription. <a href="/politique-de-confidentialite-mentions-legales/">Confidentialité et mentions légales</a></p>
 
             <!-- CHAMP PIEGE, NE PAS RETIRER. Un robot remplit tous les champs
                  qu'il trouve, une personne ne voit jamais celui-ci : cote
@@ -149,16 +164,23 @@ sortie: contacts/index.html
               <input id="lettre-site" name="site-web" type="text" tabindex="-1" autocomplete="off">
             </div>
 
-            <p class="inscription__accord">En vous inscrivant, vous acceptez de recevoir les nouvelles du projet par courriel. Votre adresse ne sert qu'à ça et chaque envoi porte un lien de désinscription. <a href="/politique-de-confidentialite-mentions-legales/">Confidentialité et mentions légales</a></p>
+            <button class="bouton bouton--contour inscription__envoi" type="submit">Je m'inscris</button>
           </form>
+
+          <!-- Le repli par courriel n'est pas repete ici : l'adresse est en
+               grand deux ecrans plus haut, sur cette page-la meme. Le
+               marqueur ci-dessous disparait le jour du branchement, et avec
+               lui le seul moment ou ce formulaire ne fait rien. -->
+          <p class="a-sourcer a-sourcer--bloc inscription__trou">[À BRANCHER&nbsp;: adresse de soumission et identifiant de liste, à relever dans le compte Brevo du collectif. Tant qu'ils manquent, ce formulaire n'envoie rien.]</p>
         </div>
-        <div>
+
+        <div class="suivre__reseaux">
           <h3 class="suivre__titre">Sur les réseaux</h3>
-          <p class="suivre__dit">Les photos et les rencontres passent par là.</p>
+          <p class="suivre__dit">Les photos, les rencontres et les dates passent par là.</p>
           <ul class="reseaux">
-            <li><a class="lien-texte" href="https://www.facebook.com/profile.php?id=61588455459969" rel="noopener">Facebook</a></li>
-            <li><a class="lien-texte" href="https://www.instagram.com/la_maison_audacieuse/" rel="noopener">Instagram</a></li>
-            <li><a class="lien-texte" href="https://www.linkedin.com/company/maison-audacieuse/" rel="noopener">LinkedIn</a></li>
+            <li><a class="lien-texte" href="https://www.facebook.com/profile.php?id=61588455459969" rel="noopener">La page Facebook du projet</a></li>
+            <li><a class="lien-texte" href="https://www.instagram.com/la_maison_audacieuse/" rel="noopener">Le compte Instagram</a></li>
+            <li><a class="lien-texte" href="https://www.linkedin.com/company/maison-audacieuse/" rel="noopener">La page LinkedIn</a></li>
           </ul>
         </div>
       </div>
@@ -174,7 +196,7 @@ sortie: contacts/index.html
         </div>
         <p class="appel__gestes">
           <a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a>
-          <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale ?</a>
+          <a class="lien-texte" href="/part-sociale/">C'est quoi, une part sociale&nbsp;?</a>
         </p>
       </div>
     </div>

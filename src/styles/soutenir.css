@@ -1,30 +1,87 @@
 /* ------------------------------------------------------------------ */
-/* /soutenir/ : ancienne redirection vers HelloAsso, devenue page.     */
-/* La page compare trois gestes qui ne pesent pas pareil. Trois blocs   */
-/* de meme forme les rendaient equivalents : le lecteur lisait trois    */
-/* fois la meme chose. Ce qui suit ne sert qu'a leur donner trois       */
-/* poids differents, avec les composants du socle et rien de plus :     */
-/* la part garde un chapo, une image et un bouton, le don une fiche et  */
-/* un lien, le bouche a oreille une liste et deux liens.                */
+/* /soutenir/ : ancienne redirection vers HelloAsso, devenue page.      */
+/*                                                                      */
+/* La page compare trois gestes qui ne pesent pas pareil. Trois blocs    */
+/* de meme forme les rendaient equivalents : le lecteur lisait trois     */
+/* fois la meme chose. Ce qui suit ne sert qu'a leur donner trois        */
+/* poids differents, avec les composants du socle et rien de plus :      */
+/* la part garde un chapo, une image et le seul bouton, le don une       */
+/* fiche et un lien, le bouche a oreille une liste et deux liens.        */
+/*                                                                      */
+/* Fonds, poses le 07/09 : aube pour l'en-tete, ouvert pour la part      */
+/* (c'est le fond des ecrans qui appellent a agir), violace pour le don  */
+/* qui doit rester le plus plat des trois, claire pour le bouche a       */
+/* oreille, sombre pour l'appel. Ni violet plein ni terracotta plein :   */
+/* sur les zones eclaircies de ces deux degrades le blanc tombe a 4,1,   */
+/* et les trois quarts de cette page sont du texte suivi.                */
 /* ------------------------------------------------------------------ */
 
-/* ---------- texte et image cote a cote ---------- */
 
-/* Une colonne de lecture a 48ch laisse les deux tiers droits de l'ecran
-   vides sur un portable. Le duo y pose l'objet du bloc : l'image du lieu
-   pour la part, la fiche pour le don. Sous 900 px, tout s'empile et le
-   socle range la figure apres le texte (.figure { order: 4 }). */
-.soutenir__duo { display: grid; gap: clamp(1.8rem, 4vw, 3.4rem); }
+/* ================================================================== */
+/* L'en-tete : le titre, la ferme aujourd'hui, trois reperes            */
+/*                                                                      */
+/* Le lecteur de cette page arrive par un vieux lien et pose une seule   */
+/* question : ou en est le projet. La reponse tient dans l'en-tete,      */
+/* photo et chiffres compris, parce qu'elle n'a pas a etre cherchee.     */
+/* ================================================================== */
+.tete__duo { display: grid; gap: clamp(1.6rem, 3.4vw, 3.2rem); }
+
+.tete__reperes { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 
 @media (min-width: 900px) {
-  .soutenir__duo { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); align-items: start; }
-  .soutenir__duo--fiche { grid-template-columns: minmax(0, 1fr) minmax(0, 21rem); }
+  .tete__duo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+    align-items: center;
+  }
+
+  /* Trois reperes serres a gauche sous deux filets qui, eux, vont jusqu'au
+     bord : le vide de droite se voyait plus que les chiffres. Ils occupent
+     donc la largeur qu'annoncent les filets. */
+  .tete__reperes { justify-content: space-between; max-width: 60rem; }
 }
 
-.soutenir__geste { margin-top: clamp(1.6rem, 2.6vw, 2.2rem); }
+/* Le cadrage par defaut du socle (50% 56%) descend sur la chaussee et
+   perd l'auvent, qui est ce qu'on reconnait du batiment depuis la rue.
+   L'image est un portrait de 1400x1867 : dans un cadre de 268 px de haut
+   on n'en voit qu'une bande de 47 %, il faut donc choisir laquelle. */
+.tete__vue img { max-height: 232px; object-position: 50% 38%; }
+
+.tete__vue figcaption { text-align: right; }
 
 
-/* ---------- fiche du don ---------- */
+/* ================================================================== */
+/* La part : le geste principal                                         */
+/* Grille .duo du socle, variante texte large. Le bouton n'apparait      */
+/* qu'ici et dans l'appel de fin : c'est ce qui dit que la part est le   */
+/* geste principal, plus surement qu'un paragraphe.                      */
+/* ================================================================== */
+.soutenir__geste { margin-top: clamp(1.4rem, 2.4vw, 2rem); }
+
+/* Le socle centre les deux colonnes du duo. Ici la colonne de texte fait
+   une fois et demie la hauteur de l'image : centree, l'image flotte au
+   milieu du vide. Alignee en haut, elle ouvre le bloc avec le chapo. */
+#la-part .duo { align-items: start; }
+
+
+/* ================================================================== */
+/* Le don : une fiche et un lien                                        */
+/*                                                                      */
+/* Une colonne de lecture a 48ch laisse les deux tiers droits de l'ecran */
+/* vides. La fiche y pose l'objet du bloc. Elle n'est pas un .duo : la   */
+/* colonne de droite est etroite et fixe, pour que la fiche se lise      */
+/* comme une carte d'identite du don et non comme une seconde colonne    */
+/* de texte. Sous 900 px, tout s'empile.                                 */
+/*                                                                       */
+/* La colonne de gauche est bornee a 33rem plutot qu'a 1fr : la prose    */
+/* s'arrete de toute facon a 48ch, et le 1fr ouvrait 360 px de vide      */
+/* entre le texte et la fiche. Le bloc s'en trouve plus etroit que celui */
+/* de la part, ce qui est exactement ce qu'on veut dire de lui.          */
+/* ================================================================== */
+.soutenir__fiche { display: grid; gap: clamp(1.8rem, 4vw, 3.4rem); }
+
+@media (min-width: 900px) {
+  .soutenir__fiche { grid-template-columns: minmax(0, 33rem) minmax(0, 23rem); align-items: start; }
+}
 
 /* Trois lignes de fait dans une .carte du socle : ce qui distingue le don
    de la part se lit d'un coup d'oeil, sans le chercher dans le paragraphe.
@@ -46,20 +103,30 @@
 .fiche__valeur { margin: .25rem 0 0; line-height: 1.45; }
 
 
-/* ---------- faire circuler ---------- */
+/* ================================================================== */
+/* Faire circuler : le geste le plus leger                              */
+/* Quatre actions courtes sur deux colonnes : la liste ne ressemble ni   */
+/* au duo texte-image de la part, ni a la fiche du don. C'est le geste   */
+/* qui ne demande pas d'argent, il se lit en diagonale.                  */
+/* ================================================================== */
+/* Le chapo tient sur 58ch et laisse un tiers d'ecran vide a sa droite.
+   L'annotation y prend place plutot que de laisser un trou. */
+.circuler__tete { display: grid; gap: 1rem; align-items: center; }
 
-/* Quatre actions courtes sur deux colonnes : la liste ne ressemble ni au
-   duo texte-image de la part, ni a la fiche du don. C'est le geste le plus
-   leger de la page, il se lit en diagonale. */
+@media (min-width: 900px) {
+  .circuler__tete { grid-template-columns: minmax(0, 1fr) auto; gap: clamp(1.5rem, 4vw, 3.5rem); }
+  .circuler__note { justify-self: center; }
+}
+
+.circuler__note { margin: 0; }
+
 .soutenir__relais {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
   gap: .7rem clamp(1.5rem, 3vw, 2.8rem);
   max-width: 54rem;
-  margin-top: clamp(1.5rem, 2.6vw, 2.1rem);
+  margin-top: clamp(1.4rem, 2.4vw, 1.9rem);
 }
-
-.soutenir__apres { margin-top: clamp(1.5rem, 2.6vw, 2.1rem); }
 
 /* Les portes de bloc : des liens, jamais un bouton. Le bouton de la page
    est celui de la part, et il est le seul. */
@@ -68,5 +135,5 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0 clamp(1.4rem, 3vw, 2.4rem);
-  margin-top: clamp(1.2rem, 2.2vw, 1.8rem);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
 }

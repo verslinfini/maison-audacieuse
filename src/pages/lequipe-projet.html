@@ -1,125 +1,199 @@
 ---
-titre: L'équipe projet | La Maison Audacieuse
-description: Les structures qui feront vivre la ferme, la coopérative où une part vaut une voix et les métiers qui conduisent le chantier.
+titre: L'équipe | La Maison Audacieuse
+description: Les personnes qui ont lancé la Maison Audacieuse, la coopérative où une personne vaut une voix, et les métiers qui conduisent le chantier de la ferme de Novel.
 sortie: lequipe-projet/index.html
 ---
 
 <main>
-  <section class="page-tete">
+  <section class="page-tete page-tete--aube">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <span class="page-tete__sur">L'équipe projet</span>
+      <span class="page-tete__sur">L'équipe</span>
       <h1 class="page-tete__titre">Qui fait la Maison Audacieuse</h1>
-      <p class="page-tete__chapo">Des structures annéciennes ont lancé ce projet et vivront dans la ferme. Une coopérative les rassemble avec vous, où chaque personne compte pour une voix. Autour, des professionnel·les tiennent les plans et les coûts.</p>
+      <p class="page-tete__chapo">Un collectif annécien a lancé ce projet, avec les associations qui vivront dans la ferme. Une coopérative les rassemble avec vous, où chaque personne compte pour une voix. Autour, des professionnel·les tiennent les plans et les coûts.</p>
     </div>
   </section>
 
-  <!-- Premier cercle. Un registre de noms, pas des cartes : les structures
-       n'ont ni la meme taille ni le meme metier, leurs lignes non plus. -->
+  <!-- Premier ecran : les personnes, et rien d'autre. La page echouait parce
+       qu'elle presentait cinq structures la ou le lecteur cherche des visages.
+       Les portraits ne sont pas encore arrives : la grille les attend, cadre
+       par cadre. Le jour ou la matiere arrive, chaque .portrait__cadre est
+       remplace par <img class="portrait__photo" ...> et le marqueur par le
+       texte. Aucune autre reprise n'est necessaire. -->
   <section class="bloc bloc--blanc" id="le-collectif">
     <div class="contenu">
-      <h2 class="bloc__titre">Celles qui feront vivre le lieu</h2>
-      <p class="bloc__intro">Ostara accueille déjà les femmes victimes de violences à Annecy. Le Café des Audacieuses ouvrira avec le lieu. Le béguinage et le pôle santé restent à constituer.</p>
+      <h2 class="bloc__titre">Celles qui ont lancé le projet</h2>
+      <p class="bloc__intro">Elles conduisent le projet depuis son dépôt à la Ville d'Annecy, en 2025.</p>
 
-      <p class="collectif__manque"><span class="a-sourcer">[À SOURCER&nbsp;: photo du collectif, droit à l'image à confirmer]</span></p>
+      <ul class="portraits">
+        <li class="portrait">
+          <p class="portrait__cadre">photo à venir</p>
+          <div class="portrait__dit">
+            <p class="portrait__nom">Morgane Craye</p>
+            <p class="portrait__role">Présidence de la coopérative</p>
+            <p class="portrait__mot"><span class="a-sourcer">[À SOURCER&nbsp;: une ligne sur ce qu'elle fait dans le lieu]</span></p>
+          </div>
+        </li>
+        <li class="portrait">
+          <p class="portrait__cadre">photo à venir</p>
+          <div class="portrait__dit">
+            <p class="portrait__mot"><span class="a-sourcer">[À SOURCER&nbsp;: prénom, fonction et une ligne]</span></p>
+          </div>
+        </li>
+        <li class="portrait">
+          <p class="portrait__cadre">photo à venir</p>
+          <div class="portrait__dit">
+            <p class="portrait__mot"><span class="a-sourcer">[À SOURCER&nbsp;: prénom, fonction et une ligne]</span></p>
+          </div>
+        </li>
+        <li class="portrait">
+          <p class="portrait__cadre">photo à venir</p>
+          <div class="portrait__dit">
+            <p class="portrait__mot"><span class="a-sourcer">[À SOURCER&nbsp;: prénom, fonction et une ligne]</span></p>
+          </div>
+        </li>
+      </ul>
 
-      <dl class="exploitantes">
-        <dt>Ostara</dt>
-        <dd>Association annécienne qui accueille et accompagne les femmes victimes de violences sexistes et sexuelles. Elle tiendra l'écoute et le suivi dans le lieu.</dd>
+      <p class="a-sourcer a-sourcer--bloc">[À SOURCER&nbsp;: les prénoms, les fonctions et les portraits du collectif fondateur, à demander au collectif. Le nombre de personnes reste à confirmer.]</p>
+    </div>
+  </section>
 
-        <dt>Le béguinage</dt>
-        <dd>Un habitat partagé pour des femmes âgées ou isolées qui choisissent de vivre ensemble. Chacune a son logement et les espaces communs sont à toutes.</dd>
+  <!-- Deuxieme ecran : le batiment, en pleine largeur. Une page qui pretend
+       mettre des visages sur des noms ne peut pas etre une page sans image.
+       Photo du 7 mars 2025, batiment vide, aucune personne identifiable. -->
+  <section class="bloc bloc--photo" id="les-espaces">
+    <div class="bloc__fond" aria-hidden="true">
+      <img src="/assets/img/grange.webp" alt="" width="1400" height="1867">
+    </div>
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="panneau">
+        <h2 class="bloc__titre">Ce qu'elles ouvriront</h2>
+        <p>Ostara accueille déjà les femmes victimes de violences à Annecy et tiendra l'écoute dans le lieu. Le Café des Audacieuses ouvrira avec la ferme, coworking en journée et rencontres en soirée.</p>
+        <p>Le béguinage, le pôle de santé et l'espace de créativité attendent la structure qui les fera vivre.</p>
+        <p><a class="lien-texte" href="/le-projet-architectural/">Voir le bâtiment et ses espaces</a></p>
+      </div>
+    </div>
+    <p class="bloc__credit">La grange de la ferme, mars 2025</p>
+  </section>
 
-        <dt>Le Café des Audacieuses</dt>
-        <dd>Le café associatif et culturel du lieu, ouvert sur le quartier. Coworking safe en journée, rencontres et programmation en soirée.</dd>
+  <!-- Troisieme ecran, la zone chaude de la page : une seule idee, en gros.
+       La ponderation des quatre colleges est vraie et secondaire, elle
+       descend en question repliee dans l'ecran suivant. -->
+  <section class="bloc bloc--violet" id="une-voix">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="voix">
+        <h2 class="bloc__titre">Une personne, une voix</h2>
+        <p class="bloc__intro">Quel que soit le nombre de parts que vous prenez, vous avez une voix. Dix parts ne donnent pas dix voix.</p>
+        <p class="voix__chute">Vous votez à l'assemblée générale au même titre que les associations qui habitent le lieu.</p>
+        <p class="annote">quel que soit le montant</p>
+      </div>
 
-        <dt>Le pôle santé <span class="a-sourcer">[À SOURCER : la structure d'exercice du pôle santé, non arrêtée]</span></dt>
-        <dd>Un pôle de santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes.</dd>
-
-        <dt>La maison de la créativité</dt>
-        <dd>Un espace d'éveil et de création pour les enfants et les familles. <span class="a-sourcer">[À SOURCER&nbsp;: la structure qui exploitera cet espace]</span></dd>
-      </dl>
-
-      <div class="mesure prose collectif__suite">
-        <p>Chacune exploitera son espace. Chacune prend part aux décisions de la coopérative, au même titre que vous le jour où vous prenez une part.</p>
-        <p><span class="a-sourcer">[À SOURCER&nbsp;: les personnes du collectif fondateur, prénoms et rôles]</span></p>
+      <div class="reperes">
+        <p><span class="repere__nombre">100&nbsp;€</span><span class="repere__quoi">le prix d'une part sociale</span></p>
+        <p><span class="repere__nombre">1 voix</span><span class="repere__quoi">par personne, quel que soit le nombre de parts</span></p>
+        <p><span class="repere__nombre">99 ans</span><span class="repere__quoi">la promesse de bail signée par la Ville d'Annecy</span></p>
       </div>
     </div>
   </section>
 
-  <!-- Deuxieme cercle. Le point qui transforme un don en appartenance :
-       il se lit en prose, avec la fiche de la cooperative en regard. -->
-  <section class="bloc bloc--violace" id="la-cooperative">
+  <!-- Quatrieme ecran : ce que le lecteur demande apres coup. Les questions
+       a gauche, l'etat civil de la societe a droite. La fiche n'est pas une
+       carte de plus : elle se lit libelle puis valeur. -->
+  <section class="bloc bloc--nappe" id="la-cooperative">
     <div class="contenu">
-      <h2 class="bloc__titre">Une part, une voix</h2>
+      <h2 class="bloc__titre">Comment ça se décide</h2>
+
       <div class="coop">
-        <div class="coop__texte prose">
-          <p>La Coop Audacieuse est une société coopérative d'intérêt collectif. Elle est immatriculée depuis le 10 juillet 2026 au registre du commerce d'Annecy. Elle signera le bail de 99 ans avec la Ville d'Annecy, une fois le permis obtenu, et elle conduit le chantier.</p>
-          <p>Une SCIC réunit des associé·es qui n'ont ni le même métier ni le même intérêt dans le projet. Ici, quatre collèges se partagent les voix, avec un poids fixé par les statuts&nbsp;: les productrices et salarié·es 35&nbsp;%, les bénéficiaires 35&nbsp;%, les partenaires et collectivités 20&nbsp;%, les soutiens 10&nbsp;%.</p>
-          <p>Dans chaque collège, une personne compte pour <span class="marqueur marqueur--2">une voix.</span> Dix parts ne donnent pas dix voix, parce qu'une coopérative se décide par tête.</p>
-          <p>Une part à 100&nbsp;€ vous fait entrer dans la coopérative. Après votre souscription, vous recevez une invitation aux rencontres et aux prises de décision. Vous votez à l'assemblée générale au même titre que les structures qui habitent le lieu.</p>
-          <p>Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+        <div class="questions">
+          <details class="question">
+            <summary>Qu'est-ce qu'une société coopérative d'intérêt collectif&nbsp;?</summary>
+            <div class="question__reponse">
+              <p>Une société dont les associé·es n'ont ni le même métier ni le même intérêt dans le projet. Ici, les personnes qui travaillent dans le lieu, celles qui l'utilisent, les collectivités et les soutiens sont associé·es de la même société.</p>
+            </div>
+          </details>
+          <details class="question">
+            <summary>Comment les voix se répartissent-elles&nbsp;?</summary>
+            <div class="question__reponse">
+              <p>Les associé·es sont réparti·es en quatre collèges. Chaque collège pèse un poids fixé par les statuts&nbsp;: les productrices et salarié·es 35&nbsp;%, les bénéficiaires 35&nbsp;%, les partenaires et collectivités 20&nbsp;%, les soutiens 10&nbsp;%.</p>
+              <p>À l'intérieur de chaque collège, une personne compte pour une voix.</p>
+            </div>
+          </details>
+          <details class="question">
+            <summary>Qui fait quoi entre la coopérative et les associations&nbsp;?</summary>
+            <div class="question__reponse">
+              <p>La coopérative tient le bâtiment et conduit le chantier. Chaque espace est ensuite exploité par sa structure.</p>
+              <p>Les structures qui habitent le lieu sont associées de la coopérative, au même titre que vous.</p>
+            </div>
+          </details>
+          <details class="question">
+            <summary>Que se passe-t-il après ma souscription&nbsp;?</summary>
+            <div class="question__reponse">
+              <p>Vous devenez associé·e de la coopérative. Vous recevez une invitation aux rencontres et aux prises de décision, puis vous votez à l'assemblée générale.</p>
+            </div>
+          </details>
         </div>
 
         <div class="fiche">
           <h3 class="fiche__titre">La Coop Audacieuse</h3>
           <dl class="fiche__liste">
             <dt>Forme</dt>
-            <dd>Société coopérative d'intérêt collectif (SCIC)</dd>
+            <dd>Société coopérative d'intérêt collectif, à capital variable</dd>
             <dt>Immatriculation</dt>
             <dd>10 juillet 2026, RCS d'Annecy</dd>
-            <dt>Collèges</dt>
-            <dd>Quatre, fixés par les statuts</dd>
-            <dt>Une part</dt>
-            <dd>100&nbsp;€</dd>
-            <dt>Une voix</dt>
-            <dd>Par personne, quel que soit le nombre de parts</dd>
-            <dt>Présidence</dt>
-            <dd>Morgane Craye</dd>
-            <dt>Le bâtiment</dt>
-            <dd>Promesse de bail emphytéotique de 99 ans signée avec la Ville d'Annecy</dd>
+            <dt>Siège social</dt>
+            <dd>3 impasse des Rochers, 74960 Annecy</dd>
           </dl>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Troisieme cercle. Un cartouche de plan : le metier d'abord, la
-       structure ensuite. L'ordre de lecture s'inverse par rapport au
-       premier bloc, pour que les deux ne se confondent pas. -->
-  <section class="bloc bloc--blanc" id="les-metiers">
+  <!-- Cinquieme ecran : le cartouche d'un plan, le metier d'abord et la
+       structure ensuite. L'ordre de lecture s'inverse par rapport aux
+       portraits, pour que les deux ne se confondent pas. -->
+  <section class="bloc bloc--claire" id="les-metiers">
     <div class="contenu">
-      <h2 class="bloc__titre">Les métiers qui conduisent le chantier</h2>
-      <p class="bloc__intro">Rénover ce bâtiment demande des métiers que le collectif n'a pas. Une équipe les apporte, des premières études jusqu'à l'entrée des exploitantes dans les lieux.</p>
+      <h2 class="bloc__titre">Les métiers du chantier</h2>
 
-      <!-- Les cinq marques, une par cartouche. Elles ne decorent pas : cette
-           section dit qu'une equipe de metier tient le chantier, et un nom
-           d'agence en texte ne le prouve pas comme sa marque le fait. Elles
-           sont deja publiees sur maison-audacieuse.fr au meme titre, dans le
-           meme ordre, ce qui a permis de lever le doute d'identification sur
-           celle de Lafaye. alt vide : le nom est a cote, le repeter ferait
-           lire deux fois la meme chose a un lecteur d'ecran. -->
+      <div class="duo duo--inverse metiers__entree">
+        <figure class="figure metiers__vue">
+          <img src="/assets/img/ferme-rue.webp" alt="La ferme de Novel vue depuis la rue&nbsp;: un mur de pierre sous un large avant-toit de bois, une porte de grange ouverte, et la rue du quartier de Novel" width="1400" height="1867" loading="lazy">
+          <figcaption>La ferme de Novel, mars 2025.</figcaption>
+        </figure>
+        <div class="mesure prose">
+          <p>Rénover ce bâtiment demande des métiers que le collectif n'a pas. Une équipe les apporte, des premières études jusqu'à l'entrée des associations dans les lieux.</p>
+          <p>La Ville d'Annecy a retenu le projet à son appel à manifestation d'intérêt en 2025, puis elle a signé la promesse de bail de 99&nbsp;ans.</p>
+        </div>
+      </div>
+
+      <!-- Les marques, une par cartouche. Elles ne decorent pas : la section
+           dit qu'une equipe de metier tient le chantier, et un nom d'agence
+           en texte ne le prouve pas comme sa marque le fait. alt vide : le
+           nom est a cote, le repeter ferait lire deux fois la meme chose a un
+           lecteur d'ecran. -->
       <dl class="cartouche">
         <div class="cartouche__item">
           <dt class="cartouche__role">Maîtrise d'œuvre, architecte mandataire</dt>
           <dd>
-            <img class="cartouche__logo" src="/assets/img/pro_basa.png" alt="" width="600" height="602" loading="lazy">
+            <img class="cartouche__logo" src="/assets/img/pro_basa.webp" alt="" width="600" height="602" loading="lazy">
             <span class="cartouche__nom">Basa Architecture</span>
-            <span class="cartouche__dit">L'agence dessine la rénovation et conduit l'équipe technique. Elle travaille le bâti ancien en rénovation frugale.</span>
+            <span class="cartouche__dit">L'agence dessine la rénovation et conduit l'équipe technique. Elle travaille le bâti ancien.</span>
           </dd>
         </div>
         <div class="cartouche__item">
           <dt class="cartouche__role">Assistance à maîtrise d'usage</dt>
           <dd>
-            <img class="cartouche__logo" src="/assets/img/pro_unitoit.png" alt="" width="600" height="602" loading="lazy">
+            <img class="cartouche__logo" src="/assets/img/pro_unitoit.webp" alt="" width="600" height="602" loading="lazy">
             <span class="cartouche__nom">Unitoit</span>
-            <span class="cartouche__dit">Unitoit organise la conception avec les futures habitantes et le partage des espaces communs.</span>
+            <span class="cartouche__dit">Unitoit organise la conception avec les futures habitantes.</span>
           </dd>
         </div>
         <div class="cartouche__item">
           <dt class="cartouche__role">Économie de la construction</dt>
           <dd>
-            <img class="cartouche__logo" src="/assets/img/pro_lafaye.png" alt="" width="600" height="602" loading="lazy">
+            <img class="cartouche__logo" src="/assets/img/pro_lafaye.webp" alt="" width="600" height="602" loading="lazy">
             <span class="cartouche__nom">Lafaye Consulting Group</span>
             <span class="cartouche__dit">Le cabinet chiffre les travaux et tient le budget.</span>
           </dd>
@@ -127,37 +201,31 @@ sortie: lequipe-projet/index.html
         <div class="cartouche__item">
           <dt class="cartouche__role">Environnement et énergie</dt>
           <dd>
-            <img class="cartouche__logo" src="/assets/img/pro_ekola.png" alt="" width="600" height="602" loading="lazy">
+            <img class="cartouche__logo" src="/assets/img/pro_ekola.webp" alt="" width="600" height="602" loading="lazy">
             <span class="cartouche__nom">Ekolea</span>
-            <span class="cartouche__dit">Le bureau d'études traite la thermique et la performance du bâtiment rénové.</span>
+            <span class="cartouche__dit">Le bureau d'études traite la thermique du bâtiment rénové.</span>
           </dd>
         </div>
         <div class="cartouche__item">
-          <dt class="cartouche__role"><span class="a-sourcer">[À SOURCER&nbsp;: rôle de WeCo et d'Immolocal]</span></dt>
+          <dt class="cartouche__role"><span class="a-sourcer">[À SOURCER&nbsp;: le rôle de WeCo dans le chantier et la ligne qui le décrit, à confirmer avec la maîtrise d'ouvrage]</span></dt>
           <dd>
-            <img class="cartouche__logo" src="/assets/img/pro_weco.png" alt="" width="600" height="602" loading="lazy">
-            <span class="cartouche__nom">WeCo et Immolocal</span>
-            <span class="cartouche__dit">Romain Bidot et Philippine Derycke.</span>
+            <img class="cartouche__logo" src="/assets/img/pro_weco.webp" alt="" width="600" height="602" loading="lazy">
+            <span class="cartouche__nom">WeCo</span>
           </dd>
         </div>
       </dl>
 
       <p class="cartouche__marques">Chaque logo est la marque de la structure qu'il désigne.</p>
-
-      <div class="mesure prose metiers__suite">
-        <p>La Ville d'Annecy a retenu le projet à son appel à manifestation d'intérêt en 2025. Elle confie la ferme à la coopérative pour 99 ans, ce qui sort le foncier du coût des travaux.</p>
-        <p><span class="a-sourcer">[À SOURCER : le lieu qui accueille les rencontres du collectif depuis septembre 2026]</span></p>
-      </div>
     </div>
   </section>
 
-  <section class="bloc bloc--sombre" id="prendre-part">
+  <section class="bloc bloc--sombre" id="prendre-part" data-zone-chaude>
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="appel">
         <div class="appel__texte">
           <h2 class="appel__titre">Entrez dans la coopérative</h2>
-          <p class="appel__sous">Une part à 100&nbsp;€. Une voix à l'assemblée générale, quel que soit le nombre de parts que vous prenez.</p>
+          <p class="appel__sous">Une part à 100&nbsp;€, une voix à l'assemblée générale. Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
         </div>
         <p class="appel__gestes">
           <a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a>

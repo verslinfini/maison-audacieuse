@@ -9,39 +9,60 @@ sortie: soutenir/index.html
      publications qu'on ne peut plus corriger. Plutot que de renvoyer ces gens
      vers une collecte de dons alors que la campagne a change de nature, la
      page les accueille et leur montre ou en est le projet. Une redirection
-     leur ferait perdre l'information la plus utile. -->
+     leur ferait perdre l'information la plus utile. C'est pourquoi les trois
+     reperes chiffres et la photo de la ferme aujourd'hui sont dans l'en-tete
+     et non plus bas : la reponse a « ou en est le projet » se donne dans les
+     cent premiers mots, pas au troisieme ecran. -->
 
 <!-- Les trois gestes ne pesent pas pareil et ne se presentent donc pas pareil.
-     La part est le geste principal : fond blanc, chapo, image du lieu, bouton.
-     Le don est un geste d'appoint : fond violace, une fiche de trois lignes et
-     un lien, pas de bouton. Le bouche a oreille ne demande pas d'argent : une
-     liste d'actions sur deux colonnes et deux liens. Trois formes, trois poids.
+     La part est le geste principal : fond ouvert, chapo, image du lieu, le seul
+     bouton de la page. Le don est un geste d'appoint : une fiche de trois lignes
+     et un lien, pas de bouton. Le bouche a oreille ne demande pas d'argent :
+     une liste sur deux colonnes et deux liens. Trois formes, trois poids.
      Le fond gris a ete essaye pour le troisieme bloc et retire : la puce verte
      du socle n'y tient que 2,87 pour un seuil de 3, quand elle tient 3,13 sur
      blanc. Ce qui distingue les trois gestes est leur forme, pas leur fond. -->
 
 <main>
-  <section class="page-tete">
+  <section class="page-tete page-tete--aube">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <span class="page-tete__sur">Soutenir</span>
-      <h1 class="page-tete__titre">Trois façons de soutenir la Maison Audacieuse</h1>
-      <p class="page-tete__chapo">Vous arrivez peut-être ici par un lien vers notre campagne de dons. Elle a fait son travail. Le projet est passé à l'étape suivante, et c'est celle où votre place compte le plus.</p>
+      <div class="tete__duo">
+        <div class="tete__dire">
+          <span class="page-tete__sur">Soutenir</span>
+          <h1 class="page-tete__titre">Trois façons de soutenir la Maison Audacieuse</h1>
+          <p class="page-tete__chapo">Vous arrivez peut-être par un lien vers notre campagne de dons. Elle s'est close en avril 2026, après avoir fait son travail. L'étape suivante est celle où votre place compte le plus.</p>
+        </div>
+
+        <!-- La ferme aujourd'hui, en tete de page : le lecteur qui arrive par
+             un vieux lien veut voir ou en est le batiment, pas lire qu'il
+             avance. La vue du lieu renove est plus bas, avec la part. -->
+        <figure class="figure tete__vue">
+          <img src="/assets/img/ferme-rue.webp" alt="La ferme de Novel aujourd'hui&nbsp;: un long mur de pierre sous un large auvent de bois, au bord d'une rue du quartier de Novel" width="1400" height="1867">
+          <figcaption>La ferme aujourd'hui, quartier de Novel. Mars 2025.</figcaption>
+        </figure>
+      </div>
+
+      <div class="reperes tete__reperes">
+        <p><span class="repere__nombre">88 900 €</span><span class="repere__quoi">réunis par la campagne de dons</span></p>
+        <p><span class="repere__nombre">plus de 650</span><span class="repere__quoi">donatrices et donateurs y ont contribué</span></p>
+        <p><span class="repere__nombre">100 €</span><span class="repere__quoi">le prix d'une part sociale</span></p>
+      </div>
     </div>
   </section>
 
-  <section class="bloc bloc--blanc" id="la-part">
+  <section class="bloc bloc--ouvert" id="la-part">
     <div class="contenu">
       <h2 class="bloc__titre">Prendre une part de la coopérative</h2>
-      <p class="bloc__intro">C'est la façon la plus directe de faire exister le lieu. Les deux autres gestes de cette page viennent après celui-là.</p>
+      <p class="bloc__intro">C'est la façon la plus directe de faire exister le lieu. Les deux autres gestes viennent après celui-là.</p>
 
-      <div class="soutenir__duo">
+      <div class="duo duo--texte-large">
         <div class="soutenir__dire">
           <div class="mesure prose">
-            <p>Une part vaut <strong>100 €</strong>. Elle ne se donne pas, elle se confie : vous devenez copropriétaire du bien commun, et vous pesez dans les décisions à égalité avec tout le monde. <span class="marqueur marqueur--2">Une personne, une voix</span>, quel que soit le nombre de parts.</p>
+            <p>Une part vaut <strong>100 €</strong>. Vous devenez copropriétaire du lieu et vous pesez dans les décisions à égalité avec tout le monde&nbsp;: <span class="marqueur marqueur--2">une&nbsp;personne,&nbsp;une&nbsp;voix</span>, quel que soit le nombre de parts.</p>
             <p>Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
             <p>Une banque ne finance que la moitié d'un lieu comme celui-ci. L'autre moitié, c'est nous.</p>
-            <p><a href="/part-sociale/">Comprendre la part sociale en détail</a>, ou aller directement à la souscription.</p>
+            <p>À ce jour, une part n'ouvre aucun avantage fiscal. <a href="/part-sociale/">Comprendre la part sociale en détail</a>.</p>
           </div>
           <p class="soutenir__geste">
             <a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a>
@@ -49,7 +70,7 @@ sortie: soutenir/index.html
         </div>
 
         <figure class="figure">
-          <img src="/assets/img/visuel-dauphine-1.jpg" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
+          <img src="/assets/img/visuel-dauphine-1.webp" alt="Vue du projet une fois rénové&nbsp;: la ferme aux façades claires, au toit de tuiles neuf, ouverte sur une cour plantée" width="900" height="563">
           <figcaption>Le lieu une fois rénové. Visuel Basa Architecture.</figcaption>
         </figure>
       </div>
@@ -60,11 +81,11 @@ sortie: soutenir/index.html
     <div class="contenu">
       <h2 class="bloc__titre">Faire un don</h2>
 
-      <div class="soutenir__duo soutenir__duo--fiche">
+      <div class="soutenir__fiche">
         <div class="soutenir__dire">
           <div class="mesure prose">
-            <p>La campagne de dons a financé les premières études et le dépôt du permis de construire. Elle s'est close en avril 2026, mais la page de collecte reste ouverte : un don reste possible, et il reste utile.</p>
-            <p>Un don ne vous rend pas copropriétaire et ne vous donne pas de voix en assemblée générale. C'est le seul des trois gestes de cette page qui ouvre droit à un avantage fiscal.</p>
+            <p>La campagne de dons a financé les premières études et le dépôt du permis de construire. La page de collecte reste ouverte&nbsp;: un don reste possible et il reste utile.</p>
+            <p>Un don ne vous rend pas copropriétaire et ne vous donne pas de voix en assemblée générale. C'est le seul des trois gestes de cette page qui ouvre droit à une déduction fiscale.</p>
           </div>
           <p class="soutenir__portes">
             <a class="lien-texte" href="https://www.helloasso.com/associations/la-maison-audacieuse/collectes/la-maison-audacieuse" rel="noopener">Faire un don sur HelloAsso</a>
@@ -74,7 +95,7 @@ sortie: soutenir/index.html
         <dl class="carte fiche">
           <div class="fiche__ligne">
             <dt class="fiche__quoi">Qui reçoit</dt>
-            <dd class="fiche__valeur">L'association La Maison Audacieuse, et non la coopérative.</dd>
+            <dd class="fiche__valeur">L'association La Maison Audacieuse et non la coopérative.</dd>
           </div>
           <div class="fiche__ligne">
             <dt class="fiche__quoi">Ce que ça vous donne</dt>
@@ -89,12 +110,19 @@ sortie: soutenir/index.html
     </div>
   </section>
 
-  <section class="bloc bloc--blanc" id="faire-circuler">
+  <section class="bloc bloc--claire" id="faire-circuler">
     <div class="contenu">
       <h2 class="bloc__titre">Faire circuler le projet</h2>
 
-      <div class="mesure prose">
-        <p>Un lieu porté par des habitantes se construit d'abord par le bouche à oreille. Parler du projet autour de vous vaut souvent plus qu'un don, parce que cela amène des gens que nous n'aurions jamais touchés.</p>
+      <!-- L'annotation manuscrite occupe le vide a droite du chapo et dit ce
+           que la phrase precedente dit deja : une police manuscrite se lit
+           mal, elle ne porte jamais une information qu'on ne trouve pas
+           ailleurs. Elle est la seule de la page. -->
+      <div class="circuler__tete">
+        <div class="mesure mesure--large prose">
+          <p>Un lieu porté par des habitantes se construit d'abord par le bouche à oreille. En parler autour de vous amène des gens que nous n'aurions jamais touchés. Ce geste ne coûte rien.</p>
+        </div>
+        <p class="annote circuler__note">et ça ne coûte rien</p>
       </div>
 
       <ul class="puces soutenir__relais">
@@ -103,10 +131,6 @@ sortie: soutenir/index.html
         <li>Proposer un article ou une interview, si vous écrivez.</li>
         <li>Venir nous rencontrer, sans rien promettre.</li>
       </ul>
-
-      <div class="mesure prose soutenir__apres">
-        <p>Nous ne demandons pas d'engagement, juste une conversation de plus.</p>
-      </div>
 
       <p class="soutenir__portes">
         <a class="lien-texte" href="/les-medias/">L'espace presse et les parutions</a>
@@ -120,7 +144,7 @@ sortie: soutenir/index.html
       <div class="appel">
         <div class="appel__texte">
           <h2 class="appel__titre">Et si ce lieu était le nôtre&nbsp;?</h2>
-          <p class="appel__sous">La Ferme de Novel deviendra ce que nous en ferons, à Annecy, avec celles et ceux qui décident d'en être.</p>
+          <p class="appel__sous">La ferme de Novel deviendra ce que nous en ferons, à Annecy, avec celles et ceux qui décident d'en être.</p>
         </div>
         <p class="appel__gestes">
           <a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a>

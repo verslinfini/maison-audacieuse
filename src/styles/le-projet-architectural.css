@@ -1,191 +1,223 @@
 /* ------------------------------------------------------------------ */
-/* /le-projet-architectural/                                            */
-/* La page est montee avec les composants du socle. Ne vivent ici que    */
-/* les six choses qu'il ne porte pas : le couple texte + image, les      */
-/* deux cadrages d'image que le socle ne prevoit pas, la devise qui      */
-/* ferme un bloc, la liste graduee des cinq espaces, le trou nomme et    */
-/* la remise a zero de <ol>.                                            */
-/* Si l'une d'elles sert une deuxieme page, elle monte dans base.css.    */
+/* /le-projet-architectural/ — « Le lieu »                              */
+/*                                                                      */
+/* La page de l'envie. Son travail est de faire voir, donc l'image y     */
+/* prend la place que le texte occupait : sept images pour environ sept  */
+/* cents mots, contre une pour mille avant le 07/09.                     */
+/*                                                                      */
+/* Le socle porte presque tout : les fonds colores, la galerie, la       */
+/* section en photo pleine largeur, la coupe annotee, l'annotation       */
+/* manuscrite. Ne vivent ici que les six choses qu'il ne sait pas encore */
+/* faire : le grain de l'en-tete colore, le grain des blocs clairs, le   */
+/* cadre blanc du dessin sur l'aplat violet, le credit sous la coupe,    */
+/* le visuel de l'agence sorti du cadrage a 268 px et la ligne de porte. */
 /* ------------------------------------------------------------------ */
 
 
-/* ---------- texte et image cote a cote ---------- */
+/* ---------- grain des fonds colores ---------- */
 
-/* Sur cette page une image ne decore pas, elle prouve : la photo de la
-   ferme, le rendu de l'agence, le dessin d'intention. Chacune se lit avec
-   le paragraphe qui la commente, jamais seule dans un bandeau. */
-.archi-duo {
+/* DOUBLON ASSUME, A REMONTER DANS base.css.
+   Le voile du socle est calibre sur le .page-tete gris : grain neutre a
+   50 %. Pose sur l'aube, il eteint les trois nappes de couleur et la tete
+   redevient grise. Meme traitement que sur la home : grain colore, fusion
+   normale, quatre fois plus discret.
+   /le-modele-economique/ porte deja cette regle a l'identique depuis le
+   07/09 : deux pages l'ont donc inventee separement, ce qui est le signal
+   qu'elle appartient au socle. Elle ne depend de rien qui soit propre a
+   l'une ou a l'autre. */
+.page-tete--aube > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+/* Meme raison pour les trois autres fonds employes ici. Le socle ne regle
+   le grain que du violet, du terracotta et de la photo : sur la nappe, sur
+   la claire et sur le sombre, le voile neutre a 50 % pose un gris par
+   dessus la couleur. */
+.bloc--nappe > .grain__voile,
+.bloc--claire > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .16;
+  mix-blend-mode: normal;
+}
+
+.bloc--sombre > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .28;
+  mix-blend-mode: overlay;
+}
+
+
+/* ---------- 1. la ferme aujourd'hui ---------- */
+
+/* Les trois photographies ferment le bloc, elles ne l'illustrent pas : le
+   texte dit ce qu'on voit en entrant, la bande le montre. */
+.page-lieu .galerie { margin-top: clamp(2rem, 3.4vw, 2.9rem); }
+
+/* Trois cliches verticaux de 1400 x 1867 dans une bande horizontale : au
+   cadrage centre du socle, il ne reste que le bas de chaque image, c'est-a-
+   dire le sol. Le sujet est au tiers superieur dans les trois cas. */
+.page-lieu .galerie img { height: clamp(12rem, 20vw, 17rem); object-position: 50% 38%; }
+
+/* Entre 768 et 830 px, trois colonnes de 15 rem debordent d'un a deux
+   pixels : on est juste au-dessus du seuil ou le socle bascule la bande en
+   defilement. Les colonnes se partagent la largeur au lieu d'imposer leur
+   minimum. La borne basse s'arrete a 768 pour ne pas manger la bande a
+   defilement du socle, qui commence a 767. */
+@media (min-width: 768px) and (max-width: 900px) {
+  .page-lieu .galerie { grid-auto-columns: minmax(0, 1fr); }
+}
+
+
+/* ---------- 3. la coupe ---------- */
+
+/* COMPOSANT AJOUTE ICI, candidat au socle.
+   .coupe__etiquette est absolue, donc ses pourcentages se calculent sur la
+   boite de <figure class="coupe">. Des que la figure porte autre chose que
+   l'image, un credit par exemple, cette boite est plus haute que l'image et
+   les six reperes descendent tous d'autant. Le cadre isole l'image : les
+   pourcentages redeviennent ceux du dessin, quelle que soit la legende. */
+.coupe__cadre { position: relative; }
+
+/* Le dessin est blanc sur une nappe blanche : sans ombre portee, ses bords
+   disparaissent et la coupe flotte. Une ombre plutot qu'un cadre : un
+   cadre changerait la taille de la boite, et les etiquettes se posent en
+   pourcentage de cette boite. */
+.coupe img { box-shadow: 0 14px 34px rgba(56, 54, 72, .16); }
+
+/* Le socle style l'etiquette et la legende de repli, pas le credit. */
+.coupe figcaption {
+  margin-top: .9rem;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: rgba(86, 84, 107, .88);
+  text-align: right;
+}
+
+/* Entre 700 et 1000 px, les six etiquettes tiennent encore mais se
+   touchent. Elles maigrissent avant de disparaitre. */
+@media (max-width: 1000px) {
+  .coupe__etiquette { font-size: .72rem; padding: .22rem .45rem; }
+}
+
+/* L'annotation commente la coupe, elle ne l'annonce pas : elle se tient
+   sous le chapeau, decalee, et ne porte rien qu'on ne lise ailleurs. */
+.page-lieu .annote { margin: -.9rem 0 1.2rem 1.2rem; }
+
+/* Cinq espaces en trois lignes chacun. Cinq cartes de meme taille
+   couteraient deux cents pixels et diraient que les espaces sont
+   interchangeables : ils ne le sont pas, ils se rangent par etage. La liste
+   prolonge donc la legende de la coupe, un filet par entree, sans cadre. */
+.lieu-espaces {
+  margin-top: clamp(2.2rem, 3.6vw, 3.2rem);
   display: grid;
-  gap: clamp(1.8rem, 3.6vw, 3.4rem);
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 0 clamp(1.8rem, 3.4vw, 3.4rem);
 }
 
-@media (min-width: 880px) {
-  .archi-duo {
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
-    align-items: center;
-  }
-
-  /* Le dessin passe a gauche : trois blocs image-a-droite d'affilee font
-     une grille, pas une page. Sa colonne fait la largeur du dessin, sinon
-     le blanc qui l'entoure le detache du paragraphe qu'il illustre. */
-  .archi-duo--inverse {
-    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
-    /* Le dessin est haut : centre, le texte flotte au milieu de deux vides.
-       Les deux colonnes partent de la meme ligne. */
-    align-items: start;
-  }
-
-  .archi-duo--inverse > .figure { order: -1; }
-}
-
-
-/* ---------- cadrages d'image ---------- */
-
-/* Le socle plafonne .figure a 268 px, cadrage du heros de la home ou
-   l'image accompagne un texte court. Ici elle porte le propos : elle a
-   la hauteur de sa colonne, et le recadrage se fait rare. */
-.figure--large { margin-bottom: 0; }
-
-.figure--large img { max-height: 400px; }
-
-/* Un portrait de 747 sur 1107 : cadre a 268 px, il n'en resterait que le
-   milieu. Il se montre entier, dans une largeur qui le tient, et il penche
-   dans l'autre sens que les deux precedents. */
-.figure--dessin {
-  margin-bottom: 0;
-  max-width: 23rem;
-  margin-inline: auto;
-}
-
-.figure--dessin img {
-  max-height: none;
-  transform: rotate(1.1deg);
-}
-
-/* La legende du dessin porte deux phrases, pas un credit de trois mots :
-   alignee a droite comme celles du socle, elle se lit en escalier. */
-.figure--dessin figcaption { text-align: left; }
-
-
-/* ---------- la devise ---------- */
-
-/* Le fil rouge du projet architectural, en deux temps. Il ferme le bloc,
-   il ne l'ouvre pas : les trois paragraphes au-dessus l'ont merite. */
-.archi-devise {
-  margin-top: clamp(1.4rem, 2.4vw, 2rem);
-  padding-top: clamp(1.1rem, 2vw, 1.5rem);
+.lieu-espace {
+  padding: 1rem 0 1.15rem;
   border-top: 1px solid var(--filet);
+}
+
+.lieu-espace__nom {
+  margin: 0 0 .35rem;
   color: var(--violet-sombre);
-  font-size: clamp(1.12rem, 1.5vw, 1.3rem);
+  font-size: 1.06rem;
   font-weight: 600;
-  line-height: 1.34;
-}
-
-
-/* ---------- les cinq espaces ---------- */
-
-/* Cinq cartes de meme taille diraient que les cinq espaces sont
-   interchangeables. Ils ne le sont pas : ils se rangent du plus ouvert au
-   plus protege, et c'est cet ordre qui explique le batiment. La liste le
-   montre par un rail dont le point se vide a mesure qu'on descend. */
-.espaces {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 2.6vw, 2.2rem);
-  max-width: 62ch;
-  margin: 0;
-  padding: 0 0 0 2.4rem;
-  list-style: none;
-}
-
-.espaces::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: .9em;
-  bottom: .9em;
-  width: 2px;
-  background: var(--filet);
-}
-
-.espace { position: relative; }
-
-.espace::before {
-  content: "";
-  position: absolute;
-  left: -2.4rem;
-  top: .3em;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--violet);
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: inset 0 0 0 5px var(--violet);
-}
-
-.espace:nth-child(2)::before { box-shadow: inset 0 0 0 4px var(--violet); }
-.espace:nth-child(3)::before { box-shadow: inset 0 0 0 3px var(--violet); }
-.espace:nth-child(4)::before { box-shadow: inset 0 0 0 2px var(--violet); }
-.espace:nth-child(5)::before { box-shadow: none; }
-
-.espace__nom {
-  margin: 0 0 .32rem;
-  color: var(--violet-sombre);
-  font-size: 1.16rem;
-  font-weight: 600;
-  line-height: 1.26;
+  line-height: 1.25;
   letter-spacing: -.01em;
 }
 
+.lieu-espace p { font-size: .97rem; line-height: 1.5; }
 
-/* ---------- le trou nomme ---------- */
+/* L'etage, en capitales et en petit. Il reste a la couleur pleine du corps
+   de texte : a cette taille, un gris eclairci tombe sous 4,5 sur la nappe. */
+.lieu-espace__ou {
+  margin-top: .5rem;
+  color: var(--texte);
+  font-size: .74rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
 
-/* .a-sourcer vient du socle, ou il marque un fragment de phrase. Le trou de
-   la coupe transversale tient un paragraphe entier : il lui faut sa mesure
-   et son air au-dessus, rien d'autre. Couleur, cadre et taille restent ceux
-   du socle, sinon deux pages afficheraient deux marqueurs differents pour
-   le meme manque. A remonter dans base.css a la deuxieme page qui en a un. */
+
+/* ---------- 4. la rue interieure ---------- */
+
+/* Le dessin est blanc jusqu'au bord du fichier. Pose nu sur l'aplat
+   violet, il fait un trou dans la couleur. Le cadre blanc en fait un objet
+   pose dessus, comme le panneau de la section en photo. */
+.dessin-cadre {
+  margin: 0 auto;
+  max-width: 25rem;
+  padding: clamp(.9rem, 1.6vw, 1.3rem);
+  background: var(--blanc);
+  border-radius: 3px;
+  box-shadow: 0 18px 50px rgba(31, 29, 45, .30);
+}
+
+.dessin-cadre img {
+  width: auto;
+  max-height: 27rem;
+  margin-inline: auto;
+  border-radius: 2px;
+}
+
+.dessin-cadre figcaption {
+  margin-top: .85rem;
+  font-size: .74rem;
+  line-height: 1.55;
+  color: rgba(86, 84, 107, .9);
+}
+
+/* Le socle passe .a-sourcer au jaune sur un fond violet. Ce marqueur-ci
+   est dans le cadre blanc : le jaune y devient illisible. */
+.bloc--violet .dessin-cadre .a-sourcer {
+  border-color: var(--terracotta);
+  color: var(--violet-sombre);
+}
 
 
-/* ---------- la ligne des artisan-es ---------- */
+/* ---------- 5. renover sans abimer ---------- */
 
-/* Deuxieme porte de la page, et pas un deuxieme appel : elle s'adresse a
-   qui vient avec ses mains, pas avec ses cent euros. Elle reste dans le
-   bloc du chantier, ou elle a un sens. */
-.archi-artisans {
+/* Le socle plafonne .figure a 268 px et recadre en cover : c'est le
+   cadrage du heros de la home, ou l'image accompagne un texte court. Ici
+   le visuel de l'agence est le point d'arrivee de la page, il se montre
+   entier. L'ordre 4 du socle en mobile vaut pour le heros de la home ;
+   dans une grille .duo, il ferait passer l'image apres le texte. */
+.figure--apres { order: 0; margin: 0; }
+
+.figure--apres img { max-height: none; }
+
+/* Deux portes de fin de bloc, et pas deux appels : l'une mene a l'equipe,
+   l'autre s'adresse a qui vient avec ses mains plutot qu'avec ses cent
+   euros. Le seul appel de la page reste celui du bloc sombre. */
+.lieu-note {
   max-width: 62ch;
-  margin-top: clamp(2rem, 3.4vw, 2.9rem);
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
 }
 
+.lieu-note + .lieu-note { margin-top: .5rem; }
 
-/* ---------- remise a zero de <ol> ---------- */
 
-/* Le socle remet <ul> a zero et numerote .etapes par un compteur, mais il
-   ne touche pas a <ol> : sans cette ligne le marqueur natif du navigateur
-   double le compte. A remonter dans base.css a la prochaine page qui
-   utilise .etapes sur une liste ordonnee. */
-.etapes {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+@media (max-width: 900px) {
+  /* Empilee, la colonne de texte n'a plus de voisine qui la borne : sans
+     cette ligne elle passe a 48ch au milieu d'une largeur pleine. */
+  .duo .mesure { max-width: none; }
+
+  .dessin-cadre { max-width: 22rem; }
 }
-
-.etapes li > p { max-width: 60ch; }
-
 
 @media (max-width: 767px) {
-  /* Le socle rabat .figure a 158 px pour le heros de la home. Ici l'image
-     est le sujet du bloc : elle garde sa hauteur naturelle. */
-  .figure--large,
-  .figure--dessin { order: 0; margin-bottom: 0; }
+  .page-lieu .annote { margin-left: 0; }
 
-  .figure--large img { max-height: 300px; border-width: 8px; }
+  .dessin-cadre img { max-height: 24rem; }
 
-  .figure--dessin img { max-height: none; border-width: 8px; }
-
-  .espaces { padding-left: 2rem; }
-
-  .espace::before { left: -2rem; }
+  /* Le socle rabat .figure a 158 px de haut pour le heros de la home. Le
+     visuel de l'agence garde sa hauteur naturelle, il est le sujet. */
+  .figure--apres img { border-width: 8px; }
 }
