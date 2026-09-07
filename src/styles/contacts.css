@@ -172,13 +172,6 @@
    on le sort de l'ecran. Le decalage est negatif : vers la gauche, rien ne
    fabrique de barre de defilement. Le retrait du parcours clavier et de
    l'arbre d'accessibilite se fait dans le HTML (tabindex, aria-hidden). */
-.piege {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
 
 
 @media (max-width: 767px) {

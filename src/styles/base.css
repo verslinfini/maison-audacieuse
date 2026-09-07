@@ -909,6 +909,35 @@ h2 .marqueur::before {
 
 .bloc--sombre .a-sourcer { border-color: var(--jaune); color: var(--jaune); }
 
+/* Deux pages ont ecrit ces regles a l'identique. Un composant invente deux
+   fois appartient au socle. */
+
+/* Un trou qui remplace un paragraphe entier, et non un fragment de phrase. */
+.a-sourcer--bloc {
+  display: block;
+  max-width: 48ch;
+  margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
+  padding: .8rem 1rem;
+  line-height: 1.55;
+}
+
+/* Lien en corps de texte, quand il porte une classe. Meme rendu que le lien
+   sans classe d'une colonne de lecture, ci-dessus. */
+.lien,
+.lien-doux {
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .22em;
+}
+
+.lien:hover,
+.lien-doux:hover { text-decoration-color: var(--violet-sombre); }
+
+.bloc--sombre .lien,
+.bloc--sombre .lien-doux { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
+
 /* ---------- fil des pages ---------- */
 
 /* Retour vers la page mere, quand la page est une feuille d'un ensemble. */

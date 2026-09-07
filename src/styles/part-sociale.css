@@ -43,16 +43,7 @@
 /* Le socle ne porte que .lien-texte, qui est un lien d'action de 44 px de
    haut : pose au milieu d'une phrase il en casse la ligne. Celui-ci reste
    dans le fil du texte. */
-.lien {
-  color: var(--violet-sombre);
-  text-decoration: underline;
-  text-decoration-color: var(--violet);
-  text-decoration-thickness: 2px;
-  text-underline-offset: .22em;
-  transition: text-decoration-thickness 150ms ease, text-decoration-color 150ms ease;
-}
 
-.lien:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
 
 
 /* ---------- renvoi d'article ---------- */

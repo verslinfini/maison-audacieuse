@@ -1,6 +1,10 @@
 # maison-audacieuse.fr
 
-Dépôt du site de La Maison Audacieuse (Annecy) : thème enfant Kadence, code custom, contenu source, scripts d'exploitation et chaîne de déploiement. Le site tourne sous WordPress (thème Kadence + Kadence Blocks Pro) chez o2switch.
+Dépôt du site de La Maison Audacieuse (Annecy), hébergé o2switch. Il porte **deux sites** le temps de la bascule.
+
+Le **WordPress en production** sur `www.maison-audacieuse.fr` : thème Kadence, `theme/`, `mu-plugins/`, `contenu/blocs/`, scripts `wp-*` du vault. Il n'a pas bougé.
+
+Le **site statique refondu** sur `preprod.maison-audacieuse.fr` : `src/`, assemblé par `build.mjs`, déployé par `deploie.mjs`, contrôlé par `verif/pages.mjs`. Onze pages au 07/09/2026. Il remplacera le WordPress au module M8, sur décision de Romain.
 
 ## Ce que contient ce dépôt
 
@@ -25,6 +29,12 @@ Romain Bidot (compte GitHub `verslinfini`). Le site a été créé par Pitch Web
 
 ## Déploiement en bref
 
-Code (thème enfant, mu-plugins) : GitHub Actions → rsync par SSH vers o2switch, avec sauvegarde tar côté serveur avant, smoke test après, rollback automatique si échec. Voie sans SSH : zips de release téléversables depuis l'admin WP. Contenu : piloté en local par l'API REST (jamais depuis Actions — le pare-feu o2switch bloque les robots). Détail : `docs/deploiement.md` et `docs/rollback.md`.
+**Site statique, vers la préproduction** : `node deploie.mjs`, depuis la machine. Sauvegarde horodatée côté serveur, envoi, synchronisation par rsync là-bas, contrôle par comparaison d'empreintes. `node deploie.mjs --retour` restaure la version précédente, `--liste` montre les dix sauvegardes conservées.
+
+Pas de GitHub Actions : o2switch filtre le SSH par IP et les serveurs de GitHub changent d'adresse en permanence. Deux contournements existent, l'autorisation dynamique par l'API cPanel et le FTPS qui n'est pas filtré, tous deux au prix d'un secret confié à un tiers. Arbitrage de Romain du 07/09/2026.
+
+**WordPress de production** : contenu piloté en local par l'API REST, jamais depuis un runner, le pare-feu o2switch bloquant les robots. Thème et mu-plugins par la chaîne décrite dans `docs/deploiement.md`, avec `docs/rollback.md` pour le retour.
+
+**Les secrets ne sont pas ici.** Ils vivent dans `~/.secrets/maison-audacieuse/.env`, hors OneDrive, et la clé SSH dans `~/.ssh/`.
 
 Le pilotage du projet vit dans le vault Atlas v2 (`02 Projets/LMA - Maison Audacieuse`), l'outillage agent dans le skill `site-web` du même vault.

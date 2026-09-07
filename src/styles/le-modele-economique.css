@@ -81,13 +81,6 @@ ol.etapes { list-style: none; }
    en aurait besoin. C'est cette page. Le socle est tenu par un autre
    travail en cours : le deplacement se fait a la reunion des deux, en
    supprimant les deux copies. */
-.a-sourcer--bloc {
-  display: block;
-  max-width: 68ch;
-  margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
-  padding: .8rem 1rem;
-  line-height: 1.55;
-}
 
 
 @media (max-width: 767px) {

@@ -147,13 +147,6 @@
    et son air au-dessus, rien d'autre. Couleur, cadre et taille restent ceux
    du socle, sinon deux pages afficheraient deux marqueurs differents pour
    le meme manque. A remonter dans base.css a la deuxieme page qui en a un. */
-.a-sourcer--bloc {
-  display: block;
-  max-width: 68ch;
-  margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
-  padding: .8rem 1rem;
-  line-height: 1.55;
-}
 
 
 /* ---------- la ligne des artisan-es ---------- */

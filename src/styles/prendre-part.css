@@ -12,15 +12,7 @@
 /* .lien-texte du socle est une cible de 44 px, faite pour vivre seule.
    Dans une phrase elle gonfle la ligne. Meme trait violet, sans la boite.
    Candidate a base.css des qu'une deuxieme page en aura besoin. */
-.lien-doux {
-  color: var(--violet-sombre);
-  text-decoration: underline;
-  text-decoration-color: var(--violet);
-  text-decoration-thickness: 2px;
-  text-underline-offset: .22em;
-}
 
-.lien-doux:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
 
 .bloc--sombre .lien-doux { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
 
@@ -200,13 +192,6 @@
 /* Champ piege : hors de l'ecran, jamais display:none, que les robots
    apprennent a ignorer. La declaration est positionnee pour que le champ
    sorte par sa gauche sans jamais elargir la page. */
-.piege {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
 
 .declaration__geste { margin-top: clamp(1.6rem, 3vw, 2.2rem); }
 
