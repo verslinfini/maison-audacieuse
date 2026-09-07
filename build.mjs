@@ -13,8 +13,12 @@ import { fileURLToPath } from 'node:url';
 
 const RACINE = dirname(fileURLToPath(import.meta.url));
 const SRC = join(RACINE, 'src');
-const DIST = join(RACINE, 'dist');
 const PROD = process.argv.includes('--prod');
+
+// --sortie <dossier> construit ailleurs que dans dist/. Sert quand plusieurs
+// travaux tournent en parallele : chacun batit chez lui sans effacer l'autre.
+const iSortie = process.argv.indexOf('--sortie');
+const DIST = join(RACINE, iSortie > 0 && process.argv[iSortie + 1] ? process.argv[iSortie + 1] : 'dist');
 
 const lire = (p) => readFileSync(p, 'utf8');
 

@@ -24,3 +24,6 @@ dist/
 
 # Archive de transfert du deploiement, ephemere.
 .envoi.tgz
+
+# Constructions paralleles des agents, ephemeres.
+.previsu/

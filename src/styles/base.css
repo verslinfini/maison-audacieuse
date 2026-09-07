@@ -6,15 +6,6 @@
 /* Une regle qui ne sert qu'a une page reste dans la feuille de sa page. */
 /* ------------------------------------------------------------------ */
 
-/* ------------------------------------------------------------------ */
-/* Home maison-audacieuse.fr, reconstruction ecran par ecran.          */
-/* Copy verbatim : « Copy home validée écran par écran », 20/08/2026,  */
-/* passe du 03/09. Ambiance claire, arbitree le 03/09 (variante B).    */
-/* Charte fermee : 7 couleurs, Onest, Meow Script en mot d'accent.     */
-/* Ecrans : 1 heros, 2 la place des femmes, 3 la Ferme de Novel,       */
-/* 4 les etapes, 5 le pari du bien commun, 6 prendre part au projet.   */
-/* ------------------------------------------------------------------ */
-
 :root {
   --violet: #766DA0;
   --violet-sombre: #383648;
@@ -472,4 +463,346 @@ h2 .marqueur::before {
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+
+/* ================================================================== */
+/* Pages interieures.                                                 */
+/* La home a sa mise en page propre, ecran par ecran. Toutes les       */
+/* autres pages se montent avec les composants ci-dessous, et rien     */
+/* d'autre : c'est ce qui fait qu'elles se ressemblent. Une page qui   */
+/* a besoin d'un composant absent l'ajoute a sa feuille ; s'il sert    */
+/* une deuxieme fois, il monte ici.                                    */
+/* ================================================================== */
+
+/* ---------- en-tete de page ---------- */
+
+/* Le titre d'une page interieure. Volontairement plus calme que le heros
+   de la home : ici on informe, on ne convainc pas encore. */
+.page-tete {
+  position: relative;
+  overflow: hidden;
+  background: var(--gris);
+  padding: calc(var(--h-entete) + clamp(2.6rem, 5vw, 4.6rem)) 0 clamp(2.4rem, 4.4vw, 4rem);
+}
+
+.page-tete > .contenu { position: relative; z-index: 1; }
+
+.page-tete__sur {
+  display: block;
+  margin-bottom: .85rem;
+  font-size: var(--t-petit);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--violet-sombre);
+}
+
+.page-tete__titre {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--violet-sombre);
+  font-size: var(--t-titre);
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.page-tete__chapo {
+  margin-top: clamp(1.1rem, 1.8vw, 1.6rem);
+  max-width: 56ch;
+  font-size: var(--t-lead);
+  line-height: 1.45;
+}
+
+/* ---------- sections ---------- */
+
+/* Un bloc = une idee. L'alternance de fond donne le rythme de la page,
+   elle ne decore pas : deux blocs de meme fond qui se suivent doivent
+   etre un seul bloc. */
+.bloc {
+  position: relative;
+  padding: clamp(3rem, 6vw, 5.5rem) 0;
+}
+
+.bloc > .contenu { position: relative; z-index: 1; }
+
+.bloc--blanc { background: var(--blanc); }
+.bloc--violace { background: var(--violace); }
+.bloc--gris { background: var(--gris); }
+
+.bloc--sombre {
+  background: var(--violet-sombre);
+  color: rgba(255, 255, 255, .88);
+}
+
+.bloc--sombre h2,
+.bloc--sombre h3,
+.bloc--sombre .bloc__titre { color: var(--blanc); }
+
+.bloc--sombre .lien-texte { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .5); }
+.bloc--sombre .lien-texte:hover { text-decoration-color: var(--jaune); }
+.bloc--sombre :focus-visible { outline-color: var(--jaune); }
+
+.bloc__titre {
+  margin: 0 0 clamp(1.3rem, 2.4vw, 2.1rem);
+  max-width: 24ch;
+  color: var(--violet-sombre);
+  font-size: var(--t-titre);
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.bloc__intro {
+  margin: -.6rem 0 clamp(1.8rem, 3vw, 2.6rem);
+  max-width: 62ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+}
+
+/* ---------- colonne de lecture ---------- */
+
+/* Au-dela d'environ 70 signes, l'oeil perd la ligne suivante. Tout texte
+   suivi passe par la. */
+.mesure { max-width: 68ch; }
+.mesure--large { max-width: 82ch; }
+
+/* Espacement vertical du texte courant. Evite d'avoir a marger chaque
+   paragraphe a la main dans chaque page. */
+.prose > * + * { margin-top: 1.15em; }
+.prose > * + h3 { margin-top: 2.4em; }
+
+.prose h3 {
+  margin-bottom: -.35em;
+  color: var(--violet-sombre);
+  font-size: clamp(1.28rem, 1.7vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -.01em;
+}
+
+.prose h4 {
+  margin-bottom: -.5em;
+  color: var(--violet-sombre);
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.prose strong { color: var(--violet-sombre); font-weight: 600; }
+
+/* ---------- listes ---------- */
+
+/* ul est remis a zero dans le socle : une liste qui doit se lire comme une
+   liste reclame donc une classe. */
+.puces { display: flex; flex-direction: column; gap: .6rem; }
+
+.puces li { position: relative; padding-left: 1.5rem; }
+
+.puces li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--vert);
+}
+
+.bloc--sombre .puces li::before { background: var(--jaune); }
+
+/* Liste numerotee, pour les etapes d'un parcours. */
+.etapes { counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
+
+.etapes > li {
+  counter-increment: etape;
+  position: relative;
+  padding-left: 3.4rem;
+}
+
+.etapes > li::before {
+  content: counter(etape);
+  position: absolute;
+  left: 0;
+  top: -.1em;
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--violet);
+  color: var(--blanc);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.etapes__titre {
+  display: block;
+  margin-bottom: .3rem;
+  color: var(--violet-sombre);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- grilles et cartes ---------- */
+
+.grille { display: grid; gap: clamp(1.1rem, 2vw, 1.8rem); }
+.grille--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); }
+.grille--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.5rem), 1fr)); }
+
+.carte {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  padding: clamp(1.4rem, 2.2vw, 2rem);
+  border: 1px solid var(--filet);
+  border-radius: 10px;
+  background: var(--blanc);
+}
+
+.bloc--blanc .carte { background: var(--gris); border-color: transparent; }
+.bloc--sombre .carte { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .16); }
+
+.carte__titre {
+  margin: 0;
+  color: var(--violet-sombre);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.28;
+}
+
+.bloc--sombre .carte__titre { color: var(--blanc); }
+
+.carte__note {
+  margin-top: auto;
+  padding-top: .3rem;
+  font-size: var(--t-petit);
+  color: rgba(86, 84, 107, .78);
+}
+
+.bloc--sombre .carte__note { color: rgba(255, 255, 255, .66); }
+
+/* Carte cliquable en entier : le lien couvre la carte, sans imbriquer de
+   blocs dans une balise a. */
+.carte--lien { position: relative; transition: border-color .18s ease, transform .18s ease; }
+.carte--lien:hover { border-color: var(--violet); transform: translateY(-2px); }
+.carte--lien a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.carte--lien:focus-within { outline: 3px solid var(--violet); outline-offset: 3px; }
+.carte--lien a:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carte--lien { transition: none; }
+  .carte--lien:hover { transform: none; }
+}
+
+/* ---------- faits chiffres ---------- */
+
+.faits { display: grid; gap: clamp(1.2rem, 2.4vw, 2.2rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+
+.fait__nombre {
+  display: block;
+  color: var(--violet-sombre);
+  font-size: clamp(2.1rem, 3.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+
+.bloc--sombre .fait__nombre { color: var(--jaune); }
+
+.fait__quoi { display: block; margin-top: .5rem; max-width: 22ch; line-height: 1.4; }
+
+/* ---------- tableau ---------- */
+
+/* Deborde en scroll dans son propre cadre : la page ne scrolle jamais
+   horizontalement. */
+.tableau-cadre { overflow-x: auto; }
+
+.tableau { width: 100%; border-collapse: collapse; font-size: .98rem; }
+
+.tableau th,
+.tableau td { padding: .85rem 1rem; text-align: left; border-bottom: 1px solid var(--filet); vertical-align: top; }
+
+.tableau th { color: var(--violet-sombre); font-weight: 600; }
+
+.tableau thead th { border-bottom-width: 2px; }
+
+.tableau tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------- questions ---------- */
+
+.questions { display: flex; flex-direction: column; }
+
+.question { border-bottom: 1px solid var(--filet); }
+
+.question > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  color: var(--violet-sombre);
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+}
+
+.question > summary::-webkit-details-marker { display: none; }
+
+.question > summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--violet);
+}
+
+.question[open] > summary::after { content: "\2212"; }
+
+.question__reponse { padding: 0 0 1.35rem; max-width: 68ch; }
+.question__reponse > * + * { margin-top: .9em; }
+
+/* ---------- appel de fin de page ---------- */
+
+/* Chaque page se termine par une porte. Jamais deux appels de meme
+   intention sur une page. */
+.appel { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.2rem, 3vw, 2.6rem); }
+
+.appel__texte { flex: 1 1 22rem; }
+
+.appel__titre {
+  margin: 0;
+  color: var(--blanc);
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.015em;
+}
+
+.appel__sous { margin-top: .9rem; max-width: 46ch; }
+
+.appel__gestes { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: center; }
+
+.bloc--sombre .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
+.bloc--sombre .bouton--primaire:hover { background: #FFEB7E; }
+
+/* ---------- fil des pages ---------- */
+
+/* Retour vers la page mere, quand la page est une feuille d'un ensemble. */
+.retour {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: clamp(2rem, 3.4vw, 3rem);
+  font-size: var(--t-petit);
+}
+
+@media (max-width: 767px) {
+  .page-tete { padding-top: calc(var(--h-entete) + 2.2rem); }
+  .page-tete__titre { max-width: none; }
+  .etapes > li { padding-left: 2.9rem; }
+  .etapes > li::before { width: 2rem; height: 2rem; font-size: .92rem; }
 }
