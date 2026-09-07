@@ -312,7 +312,10 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   align-items: flex-end;
   justify-content: center;
   gap: .1rem;
-  margin: .35rem 0 0;
+  /* Remontee sous le compteur : le bas de l'anneau descend plus bas que
+     le palier, une marge nulle laisserait la fleche loin du chiffre
+     qu'elle designe. */
+  margin: -.7rem 0 0;
   padding-left: 2.4rem;
   color: var(--texte);
 }
@@ -324,7 +327,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   transform: rotate(-6deg);
   transform-origin: 100% 100%;
 }
-.jauge__note-fleche { flex: none; width: 52px; height: 42px; margin-bottom: .55rem; }
+.jauge__note-fleche { flex: none; width: 56px; height: 52px; margin-bottom: .3rem; color: var(--violet); }
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
    Haut et bas droits a 0,6 unite pres sur 226 : assez pour que ce ne soit pas
@@ -1133,9 +1136,9 @@ h2 .marqueur::before {
   .jauge { order: 6; margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
   /* A plat sur ce format : inclinee, la premiere ligne sort dans la marge
      et le geste coute une hauteur que le heros n'a pas. */
-  .jauge__note { order: 7; justify-content: flex-start; padding-left: 0; margin-top: .45rem; gap: .3rem; }
+  .jauge__note { order: 7; justify-content: flex-start; padding-left: 0; margin-top: -.15rem; gap: .3rem; }
   .jauge__note-texte { transform: none; text-align: left; }
-  .jauge__note-fleche { width: 40px; height: 32px; margin-bottom: .25rem; }
+  .jauge__note-fleche { width: 44px; height: 38px; margin-bottom: .2rem; }
   .hero__actions { order: 8; margin-top: .4rem; }
   .figure img { max-height: 158px; border-width: 8px; transform: rotate(-1deg); }
   .figure figcaption { margin-top: .6rem; }
