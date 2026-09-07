@@ -205,6 +205,17 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   padding: .6rem var(--marge) calc(.6rem + env(safe-area-inset-bottom, 0px));
 }
 .barre-mobile .bouton { width: 100%; }
+/* Sur le terracotta de l'ecran « Pour agir », le violet sur blanc devient une
+   pastille rapportee. La barre prend le fond de l'ecran et le bouton son
+   jaune, celui-la meme qui porte le CTA de la section. */
+.barre-mobile { transition: background-color .25s ease, border-color .25s ease; }
+.barre-mobile[data-chaud="oui"] {
+  background: var(--terracotta);
+  border-top-color: rgba(255, 255, 255, .28);
+}
+.barre-mobile[data-chaud="oui"] .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
+.barre-mobile[data-chaud="oui"] .bouton--primaire:hover { background: #FFEB7E; }
+@media (prefers-reduced-motion: reduce) { .barre-mobile { transition: none; } }
 
 /* ================================================================== */
 /* Ecran 1, heros                                                     */
@@ -347,7 +358,11 @@ html.etat-avant [data-compteur] { display: none; }
    « Un lieu dedie a l'egalite » demande 509 px la ou la colonne en fait 471.
    8 % de moins le fait tenir sur trois lignes sans toucher a la grille, donc
    sans resserrer le texte de droite. */
-#le-lieu h2 { max-width: none; font-size: calc(var(--t-titre) * .88); }
+/* Ce titre porte huit mots quand les autres en portent quatre : a taille
+   pleine, « a la place des femmes » depasse la colonne de quelques pixels et
+   passe a quatre lignes au-dela de 1280. 95 %, soit 2,4 px de moins, invisible
+   a cote d'une ligne en plus. L'autre voie coutait 33 px au texte de droite. */
+#le-lieu h2 { max-width: none; font-size: calc(var(--t-titre) * .95); }
 .lieu__grille {
   display: grid;
   grid-template-columns: minmax(0, 4.6fr) minmax(0, 6fr);
@@ -1028,65 +1043,6 @@ h2 .marqueur::before {
 .pied__bas a { color: rgba(255,255,255,.7); }
 #pied :focus-visible { outline-color: var(--jaune); }
 
-/* ---------- ruban de maquette, hors livrable ---------- */
-/* La page circule par lien : sans ce ruban, un lecteur sans contexte prend
-   le compteur d'exemple pour le chiffre reel. */
-.ruban {
-  position: fixed;
-  z-index: 90;
-  right: 1rem;
-  bottom: 1rem;
-  padding: .42rem .7rem;
-  border-radius: 7px;
-  background: #383648;
-  color: #fff;
-  font: 600 .68rem/1.35 "Onest", system-ui, sans-serif;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  box-shadow: 0 6px 18px rgba(56,54,72,.3);
-  pointer-events: none;
-}
-/* Ecran court aussi : en paysage sur telephone, le flottant retombe sur le
-   contenu comme en portrait. */
-@media (max-width: 767px), (max-height: 520px) {
-  /* Flottant, il tombait sur la jauge et masquait le libelle du palier. Un
-     element fixe masque toujours quelque chose : celui-ci sort du fixe et
-     se pose dans les 32 px de vide qui separent l'entete du sur-titre. */
-  .ruban {
-    position: absolute;
-    top: var(--h-entete);
-    left: 0;
-    right: 0;
-    bottom: auto;
-    padding: .34rem var(--marge);
-    border-radius: 0;
-    box-shadow: none;
-    font-size: .6rem;
-    letter-spacing: .07em;
-  }
-}
-
-/* ---------- avertissement « version pour ordinateur » ---------- */
-/* Safari et Chrome mobile laissent forcer la version ordinateur, reglage
-   memorise par site. Le meta viewport est alors ignore : la page se compose
-   en 980 px puis se reduit a l'echelle, les media queries voient 980 px et
-   servent la mise en page large sur un ecran de 6 pouces. Rien ne le corrige
-   cote site, c'est un choix du visiteur. On peut au moins le nommer. */
-.avis-bureau {
-  display: none;
-  position: relative;
-  z-index: 120;
-  margin: 0;
-  padding: .75rem 1rem;
-  background: var(--jaune);
-  color: var(--violet-sombre);
-  font: 500 15px/1.45 "Onest", system-ui, sans-serif;
-  text-align: center;
-}
-.avis-bureau b { font-weight: 700; }
-html.vue-bureau .avis-bureau { display: block; }
-html.vue-bureau .entete { position: static; }
-
 /* Le libelle du champ existe pour les lecteurs d'ecran, pas a l'ecran. */
 .visuellement-cache {
   position: absolute;
@@ -1203,9 +1159,11 @@ html.vue-bureau .entete { position: static; }
 
   #prendre-part { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; text-align: left; }
   #agir { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
-  /* Deux fois le meme bouton l'un sur l'autre : la barre s'efface quand un
-     bouton du flux est a l'ecran. */
-  .barre-mobile[data-double="oui"] { display: none; }
+  /* Un seul appel a l'ecran, toujours au meme endroit : la barre reste, les
+     boutons du flux s'effacent. Leurs liens voisins restent, eux. */
+  .hero__actions .bouton--primaire,
+  .part__actions .bouton--primaire,
+  .geste--cta { display: none; }
   .gestes {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 1.3rem;
@@ -1268,7 +1226,8 @@ html.vue-bureau .entete { position: static; }
 
   /* Empilees, deux pastilles de largeurs differentes se lisent comme un
      defaut d'alignement. */
-  .equations li { width: 100%; }
+  .equations li { width: 100%; text-align: center; }
+  .equations small { text-align: center; }
   .part__actions { align-self: stretch; }
   /* Coupes dictees pour le large : a 375 px elles laissent un mot seul. */
   br.coupe-large { display: none; }
@@ -1407,7 +1366,7 @@ html.vue-bureau .entete { position: static; }
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
-        <h2>Un lieu dédié <br class="coupe-titre">à l'égalité et à la place des&nbsp;femmes</h2>
+        <h2>Un lieu dédié <br class="coupe-titre">à l'égalité et <br class="coupe-titre">à la place des&nbsp;femmes</h2>
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
@@ -1640,7 +1599,6 @@ html.vue-bureau .entete { position: static; }
   </div>
 </footer>
 
-<p class="ruban" title="Maquette de travail : chiffres d'exemple, aucune mise en ligne décidée.">Maquette<span class="ruban__suite"> · chiffres d'exemple</span></p>
 
 <div class="barre-mobile">
   <a class="bouton bouton--primaire" href="#hero" title="Tunnel /prendre-part/ en construction">Je prends ma part</a>
@@ -1674,52 +1632,25 @@ html.vue-bureau .entete { position: static; }
   window.addEventListener('orientationchange', testerVue);
 
   var barre = document.querySelector('.barre-mobile');
-  var boutonsFlux = [].slice.call(document.querySelectorAll('main .bouton--primaire'));
-  if (barre && boutonsFlux.length) {
-    // Un seuil de visibilite ne suffisait pas : le bouton du heros tombe pile
-    // sous la barre sur un ecran de 812 px, visible a 37 %, donc compte comme
-    // absent, et on voyait deux boutons empiles. On compare les positions.
-    // Un bouton du flux emerge au-dessus de la barre  -> la barre s'efface.
-    // Il est encore coince derriere elle              -> lui qui s'efface.
-    // Dans tous les cas un seul bouton a l'ecran, toujours au meme endroit.
+  var agir = document.getElementById('agir');
+  if (barre && agir) {
+    // La barre ne s'efface plus : elle change de teinte en entrant dans
+    // l'ecran terracotta, et la garde jusqu'en bas.
     var enAttente = false;
-    // display:none ne discrimine pas : la barre est masquee aussi bien parce
-    // qu'on est sur un large que parce qu'elle s'est effacee elle-meme. Le
-    // media query dit lequel des deux.
-    var regimeTelephone = window.matchMedia('(max-width: 767px)');
-    var majBarre = function () {
+    var majTeinte = function () {
       enAttente = false;
-      if (!regimeTelephone.matches) {
-        boutonsFlux.forEach(function (b) { b.style.visibility = ''; });
-        barre.dataset.double = 'non';
-        return;
-      }
-      var bas = window.innerHeight;
-      var hautBarre = bas - (barre.offsetHeight || 66);
-      var libre = false, caches = [];
-      boutonsFlux.forEach(function (b) {
-        var r = b.getBoundingClientRect();
-        if (r.bottom <= 0 || r.top >= bas) { return; }
-        if (r.bottom > hautBarre) { caches.push(b); } else { libre = true; }
-      });
-      barre.dataset.double = libre ? 'oui' : 'non';
-      boutonsFlux.forEach(function (b) {
-        b.style.visibility = (!libre && caches.indexOf(b) >= 0) ? 'hidden' : '';
-      });
+      var haut = window.innerHeight - (barre.offsetHeight || 66);
+      barre.dataset.chaud = agir.getBoundingClientRect().top < haut ? 'oui' : 'non';
     };
     var planifier = function () {
       if (enAttente) { return; }
       enAttente = true;
-      requestAnimationFrame(majBarre);
+      requestAnimationFrame(majTeinte);
     };
-    majBarre();
+    majTeinte();
     window.addEventListener('scroll', planifier, { passive: true });
     window.addEventListener('resize', planifier);
     window.addEventListener('orientationchange', planifier);
-    if (regimeTelephone.addEventListener) { regimeTelephone.addEventListener('change', planifier); }
-    // Un seul calcul au chargement du script ne suffit pas : les polices web
-    // et la photo du heros deplacent encore le bouton apres coup, et sans
-    // defilement rien ne redeclenche le calcul. On suit la hauteur reelle.
     window.addEventListener('load', planifier);
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(planifier); }
     if ('ResizeObserver' in window) { new ResizeObserver(planifier).observe(document.body); }
