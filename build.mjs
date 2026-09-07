@@ -67,6 +67,7 @@ Disallow: /
 writeFileSync(join(DIST, 'robots.txt'), ROBOTS, 'utf8');
 
 // Un fichier prefixe par _ est un brouillon : present dans src, absent du site.
+const produites = [];
 const pages = readdirSync(join(SRC, 'pages')).filter((f) => f.endsWith('.html') && !f.startsWith('_'));
 for (const fichier of pages) {
   const nom = basename(fichier, '.html');
@@ -99,11 +100,45 @@ for (const fichier of pages) {
   const reste = page.match(/\{\{[^}]*\}\}/);
   if (reste) throw new Error(`${fichier} : variable non remplie ${reste[0]}`);
 
+  const adresse = '/' + (champs.sortie || `${nom}/index.html`).replace(/index\.html$/, '');
+  produites.push({ adresse, titre: champs.titre, description: champs.description });
+
   const sortie = join(DIST, champs.sortie || `${nom}/index.html`);
   mkdirSync(dirname(sortie), { recursive: true });
   writeFileSync(sortie, page, 'utf8');
   console.log(`${(champs.sortie || `${nom}/index.html`).padEnd(30)} ${page.split('\n').length} lignes`);
 }
+
+const NL = `
+`;
+const SITE = 'https://www.maison-audacieuse.fr';
+const jour = new Date().toISOString().slice(0, 10);
+produites.sort((a, b) => a.adresse.localeCompare(b.adresse));
+
+// Le sitemap se deduit des pages construites. Ecrit a la main, il oublie une
+// page le jour ou l'on est presse, c'est-a-dire le jour de la mise en ligne.
+writeFileSync(join(DIST, 'sitemap.xml'), [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...produites.map((p) => `  <url><loc>${SITE}${p.adresse}</loc><lastmod>${jour}</lastmod></url>`),
+  '</urlset>',
+  '',
+].join(NL), 'utf8');
+
+// llms.txt : ce que le site dit de lui-meme a une IA qui le lit. Il reprend
+// les metadonnees des pages, donc il ne peut pas les contredire.
+writeFileSync(join(DIST, 'llms.txt'), [
+  '# La Maison Audacieuse',
+  '',
+  "> Tiers-lieu dédié aux femmes à Annecy, dans la Ferme de Novel : béguinage pour seniors, maison de santé, café associatif, bureaux associatifs, maison de la créativité. Le lieu est porté par la SCIC La Coop Audacieuse, sous promesse de bail emphytéotique de 99 ans avec la Ville d'Annecy. Une campagne de parts sociales à 100 € est en cours pour réunir les fonds propres du projet.",
+  '',
+  "La part sociale n'est ni un placement ni un produit d'épargne : elle ne rapporte pas d'intérêts, personne ne s'enrichit, et une personne vaut une voix quel que soit le nombre de parts détenues. Aucun avantage fiscal n'est acquis à ce jour, la demande d'agrément ESUS étant en instruction.",
+  '',
+  '## Pages',
+  '',
+  ...produites.map((p) => `- [${p.titre.split(' | ')[0]}](${SITE}${p.adresse}) : ${p.description}`),
+  '',
+].join(NL), 'utf8');
 
 function existe(p) {
   try { statSync(p); return true; } catch { return false; }
