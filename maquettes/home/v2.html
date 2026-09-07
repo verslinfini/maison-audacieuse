@@ -6,6 +6,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Parts sociales d'un lieu solidaire | La Maison Audacieuse</title>
 <meta name="description" content="Une ferme d'Annecy devient un lieu de vie solidaire. Prenez une part à 100 € et devenez coopératrice ou coopérateur du lieu.">
+<!-- Favicon : la maison du logo en negatif dans une pastille violette. Le
+     logo entier est illisible a 16 px, la maison seule sur fond transparent
+     n'occupe que la moitie du carre. -->
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="../assets/favicon/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta name="theme-color" content="#766DA0">
 <link rel="stylesheet" href="../assets/fonts.css">
 <style>
 /* ------------------------------------------------------------------ */
@@ -335,7 +343,11 @@ html.etat-avant [data-compteur] { display: none; }
 }
 #le-lieu > .contenu { position: relative; z-index: 1; width: 100%; }
 /* Sur le blanc, le grain gris doit rester une texture, pas un voile. */
-#le-lieu h2 { max-width: 13ch; }
+/* Titre allonge le 05/09 (« dedie a l'egalite et a la place des femmes ») :
+   « Un lieu dedie a l'egalite » demande 509 px la ou la colonne en fait 471.
+   8 % de moins le fait tenir sur trois lignes sans toucher a la grille, donc
+   sans resserrer le texte de droite. */
+#le-lieu h2 { max-width: none; font-size: calc(var(--t-titre) * .88); }
 .lieu__grille {
   display: grid;
   grid-template-columns: minmax(0, 4.6fr) minmax(0, 6fr);
@@ -930,6 +942,8 @@ h2 .marqueur::before {
    flex-grow reglerait l'etirement sans seuil a caler, mais il deplace le
    bouton d'une fraction de pixel sur les larges : seuil explicite. */
 @media (max-width: 359px) {
+  /* Les trois lignes du titre tiennent jusqu ici, en dessous elles coulent. */
+  br.coupe-titre { display: none; }
   .infolettre { flex-direction: column; }
   .infolettre .bouton--contour { width: 100%; }
   /* En colonne, la taille par defaut d'un input (20 caracteres) l'emporte
@@ -1334,7 +1348,7 @@ h2 .marqueur::before {
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier">premier palier&nbsp;: 667, autant que de donateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 667</span>
           </p>
         </div>
       </div>
@@ -1357,7 +1371,7 @@ h2 .marqueur::before {
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <div class="lieu__grille">
-        <h2>Un lieu pour élargir la place des&nbsp;femmes</h2>
+        <h2>Un lieu dédié à l'égalité <br class="coupe-titre">et à la place <br class="coupe-titre">des&nbsp;femmes</h2>
         <div>
           <div class="lieu__texte">
             <p>Aujourd'hui encore, les femmes restent plus exposées aux violences, à l'isolement et aux inégalités sociales et économiques. À Annecy comme ailleurs, les réponses existent, mais dispersées, fragmentées et rarement coordonnées.</p>
@@ -1388,7 +1402,7 @@ h2 .marqueur::before {
         <p>La ferme de Novel, c'est un bâtiment patrimonial du XIX<sup>e</sup> siècle, longtemps resté vacant, en plein cœur du quartier de Novel à Annecy.</p>
         <p>Nous rénovons entièrement ce grand corps de ferme pour en faire un lieu accessible, lumineux et accueillant.</p>
         <p>Le projet architectural préserve l'identité du lieu&nbsp;: ses murs en pierre et sa charpente d'origine. Tout en le modernisant pour le rendre plus accessible et performant.</p>
-        <p><span class="bail"><span class="marqueur marqueur--3">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span>&nbsp;: le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est estimé à 3,2 millions d'euros.</p>
+        <p><span class="bail"><span class="marqueur marqueur--3">La Ville d'Annecy nous confie le bâtiment pour 99 ans</span>&nbsp;: le foncier ne nous coûte rien, chaque euro finance la rénovation.</span> L'ensemble du projet de rénovation est chiffré à 3,2 millions d'euros.</p>
         <a class="lien-texte" href="/le-projet-architectural/">Découvrir le projet architectural</a>
       </div>
       <figure class="apres">
