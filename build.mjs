@@ -48,6 +48,20 @@ for (const dossier of ['styles', 'scripts', 'assets']) {
   if (existe(source)) cpSync(source, join(DIST, dossier), { recursive: true });
 }
 
+// robots.txt : la recette se ferme aux moteurs, la production s'ouvre. Le fichier
+// est produit, jamais ecrit a la main : un robots.txt de recette parti en
+// production couterait des semaines de reindexation.
+const ROBOTS = PROD
+  ? `User-agent: *
+Allow: /
+
+Sitemap: https://www.maison-audacieuse.fr/sitemap.xml
+`
+  : `User-agent: *
+Disallow: /
+`;
+writeFileSync(join(DIST, 'robots.txt'), ROBOTS, 'utf8');
+
 // Un fichier prefixe par _ est un brouillon : present dans src, absent du site.
 const pages = readdirSync(join(SRC, 'pages')).filter((f) => f.endsWith('.html') && !f.startsWith('_'));
 for (const fichier of pages) {
