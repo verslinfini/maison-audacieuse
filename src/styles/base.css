@@ -608,7 +608,10 @@ h2 .marqueur::before {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--vert);
+  /* Le vert tient 3,13 sur blanc, 2,87 sur --gris et 2,69 sur --violace, pour
+     un seuil de 3. Il echouait donc sur deux des trois fonds du site. Le
+     violet passe partout : 4,70, 4,32, 4,04. */
+  background: var(--violet);
 }
 
 .bloc--sombre .puces li::before { background: var(--jaune); }

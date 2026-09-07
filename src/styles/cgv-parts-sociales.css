@@ -3,7 +3,7 @@
 /* Page de document : la lisibilite d'un texte long qui engage. Le corps */
 /* tenait dans un seul bloc violace de treize mille pixels, au motif     */
 /* qu'un document se lit d'un trait. Un lecteur ne lit pas onze metres   */
-/* d'un trait : il s'y perd. Le document est donc rendu par ses cinq     */
+/* d'un trait : il s'y perd. Le document est donc rendu par ses six      */
 /* parties, chacune sur son fond, chacune annoncant son rang et le       */
 /* chemin du retour au sommaire. Les titres de partie prennent l'echelle */
 /* du site (.bloc__titre, 48 px), les quinze articles passent en h3.     */
@@ -14,7 +14,7 @@
 /* Vingt marqueurs de trou a filet jaune vivent sur cette page. Un
    vingt-et-unieme encadre jaune se serait lu comme un trou de plus.
    L'avertissement prend donc le violet sombre de la charte : c'est le seul
-   objet de la page a le porter avec la partie 4 et la cloture, et c'est
+   objet de la page a le porter avec la partie 5 et la cloture, et c'est
    exactement ce qu'on veut dire de lui. */
 .foi {
   max-width: 52ch;
@@ -38,7 +38,7 @@
 /* ---------- sommaire ---------- */
 
 /* Groupe par partie, numerote de 1 a 15 en continu : le sommaire est la
-   carte du document, il annonce les cinq etapes qu'on va traverser et non
+   carte du document, il annonce les six etapes qu'on va traverser et non
    une liste de quinze renvois sans relief. */
 .sommaire { margin-top: clamp(2.4rem, 4vw, 3.4rem); counter-reset: renvoi; }
 
@@ -116,8 +116,8 @@
 /* Le reperage reste a l'ecran tant qu'on est dans sa partie. Il ne repete
    pas le titre juste en dessous : il porte le rang, qui ne se lit nulle
    part ailleurs, et le retour au sommaire, qui est ce dont on a besoin au
-   milieu de onze metres de texte. Fond opaque obligatoire : le texte defile
-   dessous. */
+   milieu de dix-sept mille pixels de document. Fond opaque obligatoire : le
+   texte defile dessous. */
 .cgv__reperage {
   position: sticky;
   /* Collee sous l'entete, sans jeu : le moindre interstice laisse defiler
@@ -158,7 +158,7 @@
 
 .cgv__vers-sommaire:hover { text-decoration-color: var(--violet-sombre); }
 
-/* La pastille fait 30 px de haut : la cible du pouce se rattrape autour. */
+/* La barre fait 30 px de haut : la cible du pouce se rattrape autour. */
 .cgv__vers-sommaire::after { content: ""; position: absolute; inset: -11px -10px; }
 
 /* Sur le fond sombre, le contour blanc a 40 % tient 3,28 sur le violet
