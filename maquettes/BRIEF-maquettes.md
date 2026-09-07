@@ -3,18 +3,18 @@
 Tu construis UNE variante de maquette HTML de la nouvelle home de maison-audacieuse.fr. Trois variantes sont construites en parallèle par trois agents distincts, chacune radicalement différente de structure, même copy, même charte. Romain choisira plein écran sur GitHub Pages, jamais sur une description. La maquette n'est pas le code de production (la page WordPress sera refaite en blocs Kadence), c'est un objet de décision : elle doit être belle, juste, fidèle à la charte, et représenter honnêtement ce que la page sera.
 
 ## Fichiers à lire avant d'écrire (dans cet ordre)
-1. La copy validée, source unique du texte : `C:\Users\romai\dev\maison-audacieuse\contenu\pages\accueil.md`. Tu la colles TELLE QUELLE. Tu ne réécris aucune phrase, tu ne coupes rien, tu ne remplaces aucun mot. Si un texte te paraît trop long pour ta mise en page, tu gardes le texte et tu le signales dans ton retour. Les marqueurs `[TROU: …]` de la copy se rendent visiblement (encadré en pointillé avec le texte du trou) pour que Romain voie ce qui manque.
-2. Le doc de beats, surtout la section « Les trois variantes de maquette » et, dans chaque beat, la rubrique « Variantes » : `c:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\2026.08.18 - Beats et arborescence home - LMA.md`.
-3. La charte, intrant fermé : `C:\Users\romai\dev\maison-audacieuse\docs\charte.md`.
+1. La copy validée, source unique du texte : `C:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\03 Code\maison-audacieuse\contenu\pages\accueil.md`. Tu la colles TELLE QUELLE. Tu ne réécris aucune phrase, tu ne coupes rien, tu ne remplaces aucun mot. Si un texte te paraît trop long pour ta mise en page, tu gardes le texte et tu le signales dans ton retour. Les marqueurs `[TROU: …]` de la copy se rendent visiblement (encadré en pointillé avec le texte du trou) pour que Romain voie ce qui manque.
+2. Le doc de beats, surtout la section « Les trois variantes de maquette » et, dans chaque beat, la rubrique « Variantes » : `c:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\01 Contenu\2026.08.18 - Beats et arborescence home - LMA.md`.
+3. La charte, intrant fermé : `C:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\03 Code\maison-audacieuse\docs\charte.md`.
 4. L'anti-slop, grille de ce qui est interdit : `c:\Users\romai\OneDrive\04 L'univers v2\.claude\skills\site-web\references\anti-slop.md`.
 5. Le protocole des variantes : `c:\Users\romai\OneDrive\04 L'univers v2\.claude\skills\site-web\references\variantes-ui.md`.
-6. Les assets et leurs crédits : `C:\Users\romai\dev\maison-audacieuse-maquettes\maquettes\assets\SOURCES.md`, `maquettes\assets\fonts.css`, dossiers `img\`, `logo\`, `fonts\`.
-7. Le hub existant, pour la cohérence du ton : `C:\Users\romai\dev\maison-audacieuse-maquettes\maquettes\index.html`.
+6. Les assets et leurs crédits : `C:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\03 Code\maison-audacieuse-maquettes\maquettes\assets\SOURCES.md`, `maquettes\assets\fonts.css`, dossiers `img\`, `logo\`, `fonts\`.
+7. Le hub existant, pour la cohérence du ton : `C:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\03 Code\maison-audacieuse-maquettes\maquettes\index.html`.
 
 Ne lis PAS la maquette Weco (`home.html`, 1,4 Mo de base64, elle saturerait ton contexte). Si tu veux voir le rythme dont Romain s'inspire, ouvre `https://verslinfini.github.io/weco-maquette-home/` avec Playwright, trois captures maximum, puis referme : la charte Weco (jaune, corail, feutre) ne se copie pas, seule la respiration compte.
 
 ## Fichier à produire
-Un seul fichier HTML autonome : `C:\Users\romai\dev\maison-audacieuse-maquettes\maquettes\home\<nom-de-ta-variante>.html`. CSS et JS inline. Polices par `<link rel="stylesheet" href="../assets/fonts.css">` (Onest variable + Meow Script, auto-hébergées, aucune requête réseau externe, aucun CDN, aucune Google Font distante). Images par chemins relatifs `../assets/img/…`, logo `../assets/logo/lma.svg`. Aucun fichier partagé avec les autres variantes : la duplication est voulue, elle permet de diverger.
+Un seul fichier HTML autonome : `C:\Users\romai\OneDrive\04 L'univers v2\02 Projets\LMA - Maison Audacieuse\05 Site web\03 Code\maison-audacieuse-maquettes\maquettes\home\<nom-de-ta-variante>.html`. CSS et JS inline. Polices par `<link rel="stylesheet" href="../assets/fonts.css">` (Onest variable + Meow Script, auto-hébergées, aucune requête réseau externe, aucun CDN, aucune Google Font distante). Images par chemins relatifs `../assets/img/…`, logo `../assets/logo/lma.svg`. Aucun fichier partagé avec les autres variantes : la duplication est voulue, elle permet de diverger.
 
 ## Obligations, toutes
 - `<!doctype html>`, `<html lang="fr">`, `<meta charset="utf-8">`, viewport, `<meta name="robots" content="noindex, nofollow">`, `<title>` = le title Yoast de la copy.
@@ -35,7 +35,7 @@ Un seul fichier HTML autonome : `C:\Users\romai\dev\maison-audacieuse-maquettes\
 - Aucun texte hors copy à part : le badge, le sélecteur, les mentions « à venir », le `title` du CTA, les crédits image. Aucun lorem ipsum.
 
 ## Auto-vérification avant de rendre (ce n'est pas l'audit, qui sera fait par un tiers)
-Ouvre ton fichier avec Playwright (`file:///C:/Users/romai/dev/maison-audacieuse-maquettes/maquettes/home/<fichier>.html`) : `browser_resize` 1440x900 puis capture, `browser_resize` 375x812 puis capture, `browser_console_messages` (zéro erreur), `browser_network_requests` (zéro requête vers un hôte externe, zéro 404 hors les deux fichiers voisins qui n'existent peut-être pas encore), un parcours Tab jusqu'au bouton principal, `?etat=avant` testé. Corrige ce que tu vois. Regarde ta capture pleine page et pose-toi la question du veto slop : « on dirait de l'IA, on dirait un template » ? Si oui, retravaille avant de rendre.
+Ouvre ton fichier avec Playwright (`file:///C:/Users/romai/OneDrive/04 L'univers v2/02 Projets/LMA - Maison Audacieuse/05 Site web/03 Code/maison-audacieuse-maquettes/maquettes/home/<fichier>.html`) : `browser_resize` 1440x900 puis capture, `browser_resize` 375x812 puis capture, `browser_console_messages` (zéro erreur), `browser_network_requests` (zéro requête vers un hôte externe, zéro 404 hors les deux fichiers voisins qui n'existent peut-être pas encore), un parcours Tab jusqu'au bouton principal, `?etat=avant` testé. Corrige ce que tu vois. Regarde ta capture pleine page et pose-toi la question du veto slop : « on dirait de l'IA, on dirait un template » ? Si oui, retravaille avant de rendre.
 
 ## Retour, structuré, sans prose
 STATUT: ok | bloqué | partiel
