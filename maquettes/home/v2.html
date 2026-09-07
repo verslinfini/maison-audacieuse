@@ -264,6 +264,10 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 
 /* Compteur : anneau et chiffre en vert, le palier en cours pour denominateur.
    124 sur 667, l'arc couvre 18,6 % du cercle (60,8 de 326,7). */
+/* Jauge et annotation dans un meme bloc large comme la jauge : la note
+   se cale ainsi sur le bord droit de la legende, la ou finit « 670 »,
+   et l'y suit a toutes les largeurs sans decalage a la main. */
+.jauge__ensemble { width: max-content; max-width: 100%; margin: 0 auto; }
 .jauge {
   margin-top: 1.9rem;
   padding-top: 1.35rem;
@@ -310,13 +314,14 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 .jauge__note {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-end;
   gap: .1rem;
   /* Remontee sous le compteur : le bas de l'anneau descend plus bas que
      le palier, une marge nulle laisserait la fleche loin du chiffre
-     qu'elle designe. */
+     qu'elle designe. Le retrait a droite compense la pointe, qui tombe
+     a 78 % du cadre de la fleche et non a son bord. */
   margin: -.7rem 0 0;
-  padding-left: 2.4rem;
+  padding-right: .7rem;
   color: var(--texte);
 }
 .jauge__note-texte {
@@ -1005,6 +1010,10 @@ h2 .marqueur::before {
 @media (max-width: 359px) {
   /* Les trois lignes du titre tiennent jusqu ici, en dessous elles coulent. */
   br.coupe-titre { display: none; }
+  /* Ici la legende passe sous l'anneau : « 670 » remonte a gauche, hors
+     d'atteinte de la fleche, qui pointerait dans le vide. Le texte reste. */
+  .jauge__note-fleche { display: none; }
+  .jauge__note { padding-left: 0; }
 }
 .porte .lien-texte { margin-top: auto; }
 /* Meme violet que le soulignement des liens texte : le trait de bordure
@@ -1133,13 +1142,16 @@ h2 .marqueur::before {
   .hero__lead { order: 3; }
   .figure { order: 4; margin-bottom: .6rem; }
   .hero__phrase { order: 5; }
-  .jauge { order: 6; margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
+  .jauge__ensemble { order: 6; width: 100%; }
+  .jauge { margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
   /* A plat sur ce format : inclinee, la premiere ligne sort dans la marge
      et le geste coute une hauteur que le heros n'a pas. */
-  .jauge__note { order: 7; justify-content: flex-start; padding-left: 0; margin-top: -.15rem; gap: .3rem; }
+  /* Ici la jauge part du bord gauche : la position de « 670 » ne depend
+     plus de la largeur d'ecran, un retrait fixe suffit a caler la pointe. */
+  .jauge__note { justify-content: flex-start; padding: 0 0 0 4.3rem; margin-top: -.15rem; gap: .3rem; }
   .jauge__note-texte { transform: none; text-align: left; }
   .jauge__note-fleche { width: 44px; height: 38px; margin-bottom: .2rem; }
-  .hero__actions { order: 8; margin-top: .4rem; }
+  .hero__actions { order: 7; margin-top: .4rem; }
   .figure img { max-height: 158px; border-width: 8px; transform: rotate(-1deg); }
   .figure figcaption { margin-top: .6rem; }
   .jauge__anneau { width: 96px; height: 96px; }
@@ -1365,7 +1377,8 @@ h2 .marqueur::before {
              donc de zero le 07/09 : 124 est une valeur d'exemple. Le 667 est
              le PALIER, c'est-a-dire le nombre de donatrices et donateurs de la
              campagne close en avril. -->
-        <div class="jauge" data-compteur>
+        <div class="jauge__ensemble" data-compteur>
+        <div class="jauge">
           <span class="jauge__deja">déjà</span>
           <div class="jauge__anneau">
             <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
@@ -1379,13 +1392,14 @@ h2 .marqueur::before {
             <span class="jauge__palier">Premier palier&nbsp;: 670</span>
           </p>
         </div>
-        <p class="jauge__note" data-compteur>
+        <p class="jauge__note">
           <span class="jauge__note-texte">autant que de participant·es<br>à la campagne de dons</span>
           <svg class="jauge__note-fleche" viewBox="0 0 60 48" fill="none" aria-hidden="true" focusable="false">
             <path d="M3 43C21 42.5 38 35 46.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
             <path d="M38.5 15.5L47 6.5L53 16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </p>
+        </div>
       </div>
       <div class="hero__colonne">
         <figure class="figure">
