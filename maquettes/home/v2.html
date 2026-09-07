@@ -926,6 +926,24 @@ h2 .marqueur::before {
 .porte h3 { font-size: 1.02rem; color: var(--violet-sombre); }
 .porte p { font-size: .93rem; line-height: 1.5; }
 .infolettre { display: flex; flex-wrap: wrap; gap: .45rem; width: 100%; margin-top: auto; }
+.infolettre #prenom { flex: 1 1 6rem; }
+.infolettre #courriel { flex: 2 1 11rem; }
+/* Trois elements sur une rangee : sous 430 px d'encart ils ne tiennent plus,
+   et le bouton se retrouvait seul a flotter a gauche de sa ligne. La bascule
+   depend de la largeur de l'encart, pas de celle de l'ecran : a 768 px de
+   fenetre l'encart n'en fait deja plus que 340. */
+.porte { container-type: inline-size; }
+@container (max-width: 430px) {
+  .infolettre {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  }
+  .infolettre input { width: 100%; }
+  .infolettre .bouton--contour { grid-column: 1 / -1; width: 100%; }
+}
+@container (max-width: 250px) {
+  .infolettre { grid-template-columns: minmax(0, 1fr); }
+}
 .infolettre input {
   flex: 1 1 9rem;
   min-width: 0;
@@ -944,11 +962,6 @@ h2 .marqueur::before {
 @media (max-width: 359px) {
   /* Les trois lignes du titre tiennent jusqu ici, en dessous elles coulent. */
   br.coupe-titre { display: none; }
-  .infolettre { flex-direction: column; }
-  .infolettre .bouton--contour { width: 100%; }
-  /* En colonne, la taille par defaut d'un input (20 caracteres) l'emporte
-     sur l'etirement : a police agrandie il sortait de l'encart. */
-  .infolettre input { width: 100%; }
 }
 .porte .lien-texte { margin-top: auto; }
 /* Meme violet que le soulignement des liens texte : le trait de bordure
@@ -1548,8 +1561,10 @@ h2 .marqueur::before {
           <h3>Pas encore décidé·e&nbsp;?</h3>
           <p>Inscrivez-vous à la newsletter pour suivre l'aventure.</p>
           <form class="infolettre" id="infolettre" title="Formulaire Brevo à câbler">
+            <label class="visuellement-cache" for="prenom">Votre prénom</label>
+            <input id="prenom" name="prenom" type="text" autocomplete="given-name" placeholder="Prénom">
             <label class="visuellement-cache" for="courriel">Votre adresse électronique</label>
-            <input id="courriel" name="email" type="email" autocomplete="email" placeholder="prenom@exemple.fr">
+            <input id="courriel" name="email" type="email" autocomplete="email" placeholder="prenom@exemple.fr" required>
             <button class="bouton bouton--contour" type="submit">Je m'inscris</button>
           </form>
         </section>
