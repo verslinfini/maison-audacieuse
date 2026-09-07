@@ -610,6 +610,10 @@ h2 .marqueur::before {
 
 .bloc--sombre .puces li::before { background: var(--jaune); }
 
+/* .prose strong est en violet sombre : sur un bloc sombre, c'est du sombre
+   sur du sombre. */
+.bloc--sombre .prose strong { color: var(--blanc); }
+
 /* Liste numerotee, pour les etapes d'un parcours. */
 .etapes { list-style: none; counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
 
@@ -728,7 +732,10 @@ h2 .marqueur::before {
 
 .tableau thead th { border-bottom-width: 2px; }
 
-.tableau tbody tr:last-child td { border-bottom: 0; }
+/* Le filet de derniere ligne se ferme aussi quand la ligne s'ouvre par un
+   th[scope=row], sinon un trait reste orphelin sous la premiere colonne. */
+.tableau tbody tr:last-child td,
+.tableau tbody tr:last-child th { border-bottom: 0; }
 
 /* ---------- questions ---------- */
 

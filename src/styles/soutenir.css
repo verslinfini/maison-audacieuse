@@ -1,0 +1,7 @@
+/* ------------------------------------------------------------------ */
+/* /soutenir/ : ancienne redirection vers HelloAsso, devenue page.     */
+/* Elle ne porte presque rien en propre : tout vient du socle. Si ce   */
+/* fichier grossit, c'est que la page invente au lieu de reutiliser.   */
+/* ------------------------------------------------------------------ */
+
+.soutenir__geste { margin-top: clamp(1.6rem, 2.6vw, 2.2rem); }

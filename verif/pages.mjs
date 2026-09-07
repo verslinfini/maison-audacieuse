@@ -37,6 +37,10 @@ const MOTS_PROSCRITS = [
   'placement', 'rendement', 'epargne', 'épargne', 'investissement rentable',
   'acheter une part', 'achetez une part', 'reduction d\'impot', 'réduction d\'impôt',
   'defiscalisation', 'défiscalisation', 'recuperable a tout moment', 'récupérable à tout moment',
+  // Veto arme du beat 4 : on demande le remboursement, on ne recupere pas son
+  // argent. Toute reformulation, adjectivale comprise, est une chaine neuve.
+  'récupérable sur demande', 'récupérez votre argent', 'remboursement garanti',
+  'récupérer votre argent quand', 'parts garanties',
 ];
 
 // Chiffres retires par le collectif ou non sources. La liste de reference est
