@@ -1,0 +1,165 @@
+/* ------------------------------------------------------------------ */
+/* Mentions legales et politique de confidentialite.                    */
+/* Page longue, dense, sans image : tout se joue sur la hierarchie et    */
+/* sur la capacite a retrouver une rubrique. Le socle porte deja les     */
+/* blocs, la prose, les puces et le tableau. Ne restent ici que le       */
+/* sommaire a ancres, le lien dans le fil du texte et le marqueur des    */
+/* informations qui manquent encore.                                     */
+/* ------------------------------------------------------------------ */
+
+/* ---------- date de version ---------- */
+
+.legal__version {
+  margin-top: 1.1rem;
+  font-size: var(--t-petit);
+  color: rgba(86, 84, 107, .8);
+}
+
+/* ---------- sommaire ---------- */
+
+/* Le sommaire n'est pas un ecran : il sert de tableau de bord entre le
+   titre et le corps, d'ou un bloc volontairement plus bas que les autres. */
+.bloc--sommaire {
+  padding-top: clamp(1.8rem, 3vw, 2.6rem);
+  padding-bottom: clamp(1.8rem, 3vw, 2.6rem);
+  border-bottom: 1px solid var(--filet);
+}
+
+.sommaire__titre {
+  margin: 0 0 clamp(1.1rem, 2vw, 1.6rem);
+  color: var(--violet-sombre);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.sommaire__grille {
+  display: grid;
+  gap: clamp(1.3rem, 2.6vw, 2.4rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.sommaire__partie {
+  margin: 0 0 .55rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sommaire__partie a { color: var(--violet-sombre); }
+
+.sommaire__groupe ul { display: flex; flex-direction: column; }
+
+.sommaire__groupe li { line-height: 1.35; }
+
+.sommaire a {
+  display: inline-block;
+  padding: .28rem 0;
+  color: var(--texte);
+  font-size: var(--t-petit);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .28em;
+  transition: text-decoration-color 150ms ease, color 150ms ease;
+}
+
+.sommaire a:hover { color: var(--violet-sombre); text-decoration-color: var(--violet); }
+
+/* ---------- rubriques ---------- */
+
+/* Chaque rubrique est une section a part : elle porte l'ancre du sommaire
+   et recoit donc le decalage de scroll que le socle pose sur section[id].
+   .prose est mis sur la section elle-meme, sinon l'espacement du texte
+   courant ne descendrait pas jusqu'aux paragraphes. */
+.legal__rubrique + .legal__rubrique { margin-top: clamp(2.4rem, 4vw, 3.4rem); }
+
+/* Titre de rubrique quand elle n'est pas dans .prose, comme au-dessus du
+   tableau des durees. */
+.legal__soustitre {
+  margin: 0 0 clamp(1.1rem, 2vw, 1.6rem);
+  color: var(--violet-sombre);
+  font-size: clamp(1.28rem, 1.7vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -.01em;
+}
+
+/* ---------- lien dans le fil du texte ---------- */
+
+/* Le socle n'a que .lien-texte, un lien-action de 44 px de haut : dans un
+   paragraphe il casserait la ligne. Ici les liens sont des references,
+   pas des gestes, et ils restent dans le texte. */
+.legal .prose a,
+.legal .tableau a {
+  color: var(--violet-sombre);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: .2em;
+  transition: text-decoration-thickness 150ms ease;
+}
+
+.legal .prose a:hover,
+.legal .tableau a:hover { text-decoration-thickness: 3px; }
+
+/* Une adresse electronique ne se coupe pas n'importe ou. */
+.legal a[href^="mailto:"] { word-break: break-word; }
+
+/* Le lien de retour reprend .lien-texte, qui redevient un geste. */
+.legal .retour { color: var(--violet-sombre); }
+
+/* ---------- ce qui manque encore ---------- */
+
+/* Le marqueur .a-sourcer appartient au socle, la page ne le redefinit pas.
+   Une seule correction : le socle pose le texte en terracotta, qui donne
+   4,1 sur blanc et 3,5 sur le fond violace, sous le minimum de 4,5 exige
+   pour du texte. Le pointille garde la couleur du marqueur, le texte passe
+   au violet sombre. A remonter dans le socle si une autre page fait le
+   meme constat. */
+.legal .a-sourcer { color: var(--violet-sombre); }
+
+/* ---------- tableau des durees ---------- */
+
+/* Cinq colonnes ne tiennent pas sous 700 px. La largeur minimale force le
+   defilement dans .tableau-cadre plutot que l'ecrasement des cellules,
+   et la page elle-meme ne defile jamais horizontalement. */
+.tableau--durees { min-width: 44rem; }
+
+/* Un tableau coupe net au bord droit ne dit pas qu'il continue. Les deux
+   premiers plans, en background-attachment local, suivent le contenu et
+   masquent l'ombre du bord atteint ; les deux ombres, fixes au cadre,
+   restent visibles tant qu'il reste quelque chose a lire de ce cote.
+   Aucun script : l'indice se calcule tout seul. */
+.legal .tableau-cadre {
+  background:
+    linear-gradient(to right, var(--gris) 40%, rgba(245, 245, 246, 0)) left center / 3rem 100% no-repeat local,
+    linear-gradient(to left, var(--gris) 40%, rgba(245, 245, 246, 0)) right center / 3rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(56, 54, 72, .3), rgba(56, 54, 72, 0)) left center / 1.1rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(56, 54, 72, .3), rgba(56, 54, 72, 0)) right center / 1.1rem 100% no-repeat scroll;
+}
+
+.legal .tableau-cadre:focus-visible { outline-offset: 2px; }
+
+/* L'ombre de bord signale qu'il reste du tableau a droite, elle ne le dit
+   pas. Sur un ecran ou la moitie des colonnes est hors champ, on le dit. */
+.legal__note-tableau { display: none; }
+
+.tableau--durees th[scope="row"] { width: 10rem; }
+
+.tableau--durees td { color: var(--texte); }
+
+@media (max-width: 767px) {
+  .sommaire__grille { gap: 1.4rem; }
+  .tableau--durees { font-size: .92rem; }
+
+  .legal__note-tableau {
+    display: block;
+    margin-bottom: .9rem;
+    font-size: var(--t-petit);
+    color: rgba(86, 84, 107, .82);
+  }
+}

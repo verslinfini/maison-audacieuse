@@ -1,0 +1,196 @@
+/* ------------------------------------------------------------------ */
+/* /le-projet-architectural/                                            */
+/* La page est montee avec les composants du socle. Ne vivent ici que    */
+/* les six choses qu'il ne porte pas : le couple texte + image, les      */
+/* deux cadrages d'image que le socle ne prevoit pas, la devise qui      */
+/* ferme un bloc, la liste graduee des cinq espaces, le trou nomme et    */
+/* la remise a zero de <ol>.                                            */
+/* Si l'une d'elles sert une deuxieme page, elle monte dans base.css.    */
+/* ------------------------------------------------------------------ */
+
+
+/* ---------- texte et image cote a cote ---------- */
+
+/* Sur cette page une image ne decore pas, elle prouve : la photo de la
+   ferme, le rendu de l'agence, le dessin d'intention. Chacune se lit avec
+   le paragraphe qui la commente, jamais seule dans un bandeau. */
+.archi-duo {
+  display: grid;
+  gap: clamp(1.8rem, 3.6vw, 3.4rem);
+  align-items: start;
+}
+
+@media (min-width: 880px) {
+  .archi-duo {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  /* Le dessin passe a gauche : trois blocs image-a-droite d'affilee font
+     une grille, pas une page. Sa colonne fait la largeur du dessin, sinon
+     le blanc qui l'entoure le detache du paragraphe qu'il illustre. */
+  .archi-duo--inverse {
+    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+    /* Le dessin est haut : centre, le texte flotte au milieu de deux vides.
+       Les deux colonnes partent de la meme ligne. */
+    align-items: start;
+  }
+
+  .archi-duo--inverse > .figure { order: -1; }
+}
+
+
+/* ---------- cadrages d'image ---------- */
+
+/* Le socle plafonne .figure a 268 px, cadrage du heros de la home ou
+   l'image accompagne un texte court. Ici elle porte le propos : elle a
+   la hauteur de sa colonne, et le recadrage se fait rare. */
+.figure--large { margin-bottom: 0; }
+
+.figure--large img { max-height: 400px; }
+
+/* Un portrait de 747 sur 1107 : cadre a 268 px, il n'en resterait que le
+   milieu. Il se montre entier, dans une largeur qui le tient, et il penche
+   dans l'autre sens que les deux precedents. */
+.figure--dessin {
+  margin-bottom: 0;
+  max-width: 23rem;
+  margin-inline: auto;
+}
+
+.figure--dessin img {
+  max-height: none;
+  transform: rotate(1.1deg);
+}
+
+/* La legende du dessin porte deux phrases, pas un credit de trois mots :
+   alignee a droite comme celles du socle, elle se lit en escalier. */
+.figure--dessin figcaption { text-align: left; }
+
+
+/* ---------- la devise ---------- */
+
+/* Le fil rouge du projet architectural, en deux temps. Il ferme le bloc,
+   il ne l'ouvre pas : les trois paragraphes au-dessus l'ont merite. */
+.archi-devise {
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
+  padding-top: clamp(1.1rem, 2vw, 1.5rem);
+  border-top: 1px solid var(--filet);
+  color: var(--violet-sombre);
+  font-size: clamp(1.12rem, 1.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.34;
+}
+
+
+/* ---------- les cinq espaces ---------- */
+
+/* Cinq cartes de meme taille diraient que les cinq espaces sont
+   interchangeables. Ils ne le sont pas : ils se rangent du plus ouvert au
+   plus protege, et c'est cet ordre qui explique le batiment. La liste le
+   montre par un rail dont le point se vide a mesure qu'on descend. */
+.espaces {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.6vw, 2.2rem);
+  max-width: 62ch;
+  margin: 0;
+  padding: 0 0 0 2.4rem;
+  list-style: none;
+}
+
+.espaces::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: .9em;
+  bottom: .9em;
+  width: 2px;
+  background: var(--filet);
+}
+
+.espace { position: relative; }
+
+.espace::before {
+  content: "";
+  position: absolute;
+  left: -2.4rem;
+  top: .3em;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--violet);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 5px var(--violet);
+}
+
+.espace:nth-child(2)::before { box-shadow: inset 0 0 0 4px var(--violet); }
+.espace:nth-child(3)::before { box-shadow: inset 0 0 0 3px var(--violet); }
+.espace:nth-child(4)::before { box-shadow: inset 0 0 0 2px var(--violet); }
+.espace:nth-child(5)::before { box-shadow: none; }
+
+.espace__nom {
+  margin: 0 0 .32rem;
+  color: var(--violet-sombre);
+  font-size: 1.16rem;
+  font-weight: 600;
+  line-height: 1.26;
+  letter-spacing: -.01em;
+}
+
+
+/* ---------- le trou nomme ---------- */
+
+/* .a-sourcer vient du socle, ou il marque un fragment de phrase. Ici il
+   porte un paragraphe entier : il lui faut sa mesure et son air au-dessus,
+   rien d'autre. Couleur, cadre et taille restent ceux du socle, sinon deux
+   pages afficheraient deux marqueurs differents pour le meme manque. */
+.a-sourcer {
+  display: block;
+  max-width: 68ch;
+  margin-top: clamp(1.9rem, 3.2vw, 2.8rem);
+  line-height: 1.55;
+}
+
+
+/* ---------- la ligne des artisan-es ---------- */
+
+/* Deuxieme porte de la page, et pas un deuxieme appel : elle s'adresse a
+   qui vient avec ses mains, pas avec ses cent euros. Elle reste dans le
+   bloc du chantier, ou elle a un sens. */
+.archi-artisans {
+  max-width: 62ch;
+  margin-top: clamp(2rem, 3.4vw, 2.9rem);
+}
+
+
+/* ---------- remise a zero de <ol> ---------- */
+
+/* Le socle remet <ul> a zero et numerote .etapes par un compteur, mais il
+   ne touche pas a <ol> : sans cette ligne le marqueur natif du navigateur
+   double le compte. A remonter dans base.css a la prochaine page qui
+   utilise .etapes sur une liste ordonnee. */
+.etapes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.etapes li > p { max-width: 60ch; }
+
+
+@media (max-width: 767px) {
+  /* Le socle rabat .figure a 158 px pour le heros de la home. Ici l'image
+     est le sujet du bloc : elle garde sa hauteur naturelle. */
+  .figure--large,
+  .figure--dessin { order: 0; margin-bottom: 0; }
+
+  .figure--large img { max-height: 300px; border-width: 8px; }
+
+  .figure--dessin img { max-height: none; border-width: 8px; }
+
+  .espaces { padding-left: 2rem; }
+
+  .espace::before { left: -2rem; }
+}

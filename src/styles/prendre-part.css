@@ -1,0 +1,259 @@
+/* ------------------------------------------------------------------ */
+/* Page /prendre-part/ : la declaration d'intention de souscription.    */
+/* La page est batie avec les composants du socle. Ne vivent ici que le */
+/* formulaire, le marquage de l'etape courante du parcours et les deux  */
+/* notes de reassurance. Aucun paiement n'est branche : cette feuille   */
+/* n'habille donc rien de bancaire.                                     */
+/* ------------------------------------------------------------------ */
+
+
+/* ---------- lien dans le fil du texte ---------- */
+
+/* .lien-texte du socle est une cible de 44 px, faite pour vivre seule.
+   Dans une phrase elle gonfle la ligne. Meme trait violet, sans la boite.
+   Candidate a base.css des qu'une deuxieme page en aura besoin. */
+.lien-doux {
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .22em;
+}
+
+.lien-doux:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
+
+.bloc--sombre .lien-doux { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
+
+.bloc--sombre .lien-doux:hover { text-decoration-color: var(--jaune); }
+
+
+/* ---------- ecran 1, ce que vous prenez ---------- */
+
+/* La phrase du remboursement est la premiere objection de tous les lecteurs.
+   Elle se detache du texte courant sans encadre ni pictogramme : sur une page
+   qui demande de l'argent, la sobriete est l'argument. */
+.reassurance {
+  margin-top: clamp(1.6rem, 2.6vw, 2.2rem);
+  max-width: 42ch;
+  color: var(--violet-sombre);
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.apres-mesure { margin-top: clamp(1.2rem, 2vw, 1.8rem); }
+
+
+/* ---------- ecran 2, le parcours ---------- */
+
+/* Le socle remet ul a zero, jamais ol. Sur une liste ordonnee, .etapes
+   affiche donc le marqueur natif « 1. » EN PLUS de sa pastille numerotee,
+   et herite du retrait de 40 px. Correctif de page : la regle a sa place
+   dans base.css, elle est signalee dans le retour de session. */
+.etapes { margin: 0; padding-left: 0; list-style: none; }
+
+.etapes li p + p { margin-top: .55rem; }
+
+/* L'etape ou se trouve le lecteur. Pastille pleine plutot que violet clair,
+   et une etiquette jaune : c'est la seule zone chaude de cet ecran. */
+.etapes > li.etape--ici::before { background: var(--violet-sombre); }
+
+.etapes__ici {
+  display: inline-block;
+  margin-left: .55rem;
+  padding: .16em .6em;
+  border-radius: 999px;
+  background: var(--jaune);
+  color: var(--violet-sombre);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  vertical-align: .14em;
+  white-space: nowrap;
+}
+
+/* Le faux RIB coute plus cher que le piratage d'un site : la mise en garde
+   se lit au moment ou l'on parle du virement, pas dans une page annexe. */
+.parcours__alerte {
+  margin-top: clamp(1.9rem, 3.2vw, 2.6rem);
+  padding-left: 1.1rem;
+  max-width: 64ch;
+  border-left: 3px solid var(--violet);
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+
+/* ---------- ecran 3, la declaration ---------- */
+
+.declaration-grille { display: grid; gap: clamp(1.5rem, 3vw, 3rem); }
+
+.declaration-intro .prose { max-width: 40ch; }
+
+/* Ce que la page ne demande pas. Menthe pleine, une fois, en tete du
+   formulaire : c'est la seule zone chaude de cet ecran. */
+.garde {
+  margin-top: clamp(1.3rem, 2.4vw, 1.8rem);
+  padding: .95rem 1.15rem;
+  border-radius: 8px;
+  background: var(--menthe);
+  color: var(--violet-sombre);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Le cadre est plafonne : au-dela, les libelles s'eloignent de leur champ
+   et les mentions legales se lisent sur 100 signes. */
+.declaration {
+  position: relative;
+  max-width: 40rem;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
+  background: var(--blanc);
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(56, 54, 72, .10);
+}
+
+.champs { display: grid; gap: clamp(1.1rem, 2vw, 1.5rem); }
+
+.champ { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+
+.champ label {
+  color: var(--violet-sombre);
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Bordure a 3,4 pour 1 sur le blanc : sous ce seuil le champ se devine
+   plus qu'il ne se voit, et un formulaire d'argent ne se devine pas. */
+.champ input,
+.champ textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: .7rem .85rem;
+  border: 1.5px solid #8A8896;
+  border-radius: 8px;
+  background: var(--blanc);
+  color: var(--texte);
+  font: 400 1rem/1.4 "Onest", "Segoe UI", system-ui, sans-serif;
+}
+
+.champ textarea { min-height: 7.5rem; resize: vertical; }
+
+.champ input:hover,
+.champ textarea:hover { border-color: var(--violet); }
+
+.champ input:focus,
+.champ textarea:focus { border-color: var(--violet); }
+
+.champ__aide {
+  max-width: 68ch;
+  color: #676579;
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+.champ__option { color: #676579; font-size: .84rem; font-weight: 400; }
+
+.champ--parts input { max-width: 9rem; }
+
+/* Le montant n'existe que si le script tourne : sans lui l'aide sous le
+   champ suffit, et la page ne raconte rien de faux. */
+.montant {
+  margin-top: .25rem;
+  color: var(--violet-sombre);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.montant[hidden] { display: none; }
+
+.champ--case { flex-direction: row; align-items: flex-start; gap: .8rem; }
+
+.champ--case input {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  margin-top: .16em;
+  padding: 0;
+  accent-color: var(--violet);
+}
+
+.champ--case label {
+  max-width: 62ch;
+  color: var(--texte);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Enfant direct de la grille des champs : sans cette ligne, la mention se
+   plie dans une demi-colonne et se lit sur quarante signes. */
+.champ__aide--case {
+  grid-column: 1 / -1;
+  margin-top: -.55rem;
+  padding-left: calc(24px + .8rem);
+}
+
+/* Champ piege : hors de l'ecran, jamais display:none, que les robots
+   apprennent a ignorer. La declaration est positionnee pour que le champ
+   sorte par sa gauche sans jamais elargir la page. */
+.piege {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.declaration__geste { margin-top: clamp(1.6rem, 3vw, 2.2rem); }
+
+.declaration__geste .bouton { min-height: 54px; padding: 0 2rem; }
+
+.declaration__note {
+  margin-top: 1.1rem;
+  max-width: 56ch;
+  color: #676579;
+  font-size: .88rem;
+  line-height: 1.5;
+}
+
+
+/* ---------- ecran 5, l'appel ---------- */
+
+/* Le don ne concourt pas avec la part sur cette page : une ligne, en pied,
+   sous un filet, apres l'appel principal. */
+.appel__autre {
+  margin-top: clamp(1.9rem, 3.4vw, 2.8rem);
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  color: rgba(255, 255, 255, .74);
+  font-size: .92rem;
+}
+
+
+@media (min-width: 640px) {
+  .champs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .champ--large { grid-column: 1 / -1; }
+}
+
+@media (min-width: 980px) {
+  .declaration-grille { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); align-items: start; }
+}
+
+@media (max-width: 767px) {
+  /* La barre d'appel pointe sur cette page meme, et elle recouvrirait le
+     bouton d'envoi du formulaire. Elle disparait ici, seule page du site
+     ou le geste est dans le corps et non dans la barre. */
+  .barre-mobile { display: none; }
+
+  body { padding-bottom: 0; }
+
+  html { scroll-padding-bottom: 1.5rem; }
+
+  .etapes__ici { margin-left: 0; margin-top: .35rem; display: table; }
+
+  .declaration__geste .bouton { width: 100%; }
+}

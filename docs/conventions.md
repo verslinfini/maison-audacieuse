@@ -25,7 +25,8 @@ build.mjs             assemble le tout dans dist/
 ```
 node build.mjs          site de recette, noindex
 node build.mjs --prod    site public, indexable
-node verif/identique.mjs contrle que la home n a pas bouge
+node verif/identique.mjs  la home n a pas bouge au refactoring
+node verif/pages.mjs      controle mecanique de toutes les pages
 ```
 
 ## Ajouter une page
@@ -77,6 +78,32 @@ Chaque ecran est une `<section>` avec un identifiant, dans cet ordre :
 ```
 
 Un seul `<h1>` par page, dans le premier ecran. Les ecrans suivants ouvrent en `<h2>`, jamais en sautant un niveau.
+
+## Les composants des pages interieures
+
+La home a sa mise en page propre, ecran par ecran. **Toutes les autres pages se montent avec les composants de `base.css`, et rien d autre.** C est ce qui fait qu elles se ressemblent sans que personne n ait a y penser.
+
+| Composant | A quoi il sert |
+|---|---|
+| `.page-tete` | l en-tete de la page : sur-titre, `h1`, chapo |
+| `.bloc` + `--blanc` `--violace` `--gris` `--sombre` | une section = une idee. Les fonds alternent |
+| `.bloc__titre`, `.bloc__intro` | le titre et le chapeau d une section |
+| `.mesure`, `.prose` | colonne de lecture (68 signes) et espacement du texte courant |
+| `.puces`, `.etapes` | liste a puces, liste numerotee d un parcours |
+| `.grille--2`, `.grille--3`, `.carte` | grilles de cartes ; `.carte--lien` rend la carte cliquable en entier |
+| `.faits`, `.fait__nombre` | des chiffres mis en avant |
+| `.tableau-cadre`, `.tableau` | un tableau qui scrolle dans son cadre, jamais la page |
+| `.questions`, `.question` | une FAQ en `details`, ouvrable sans JavaScript |
+| `.appel` | la porte de fin de page, dans un `.bloc--sombre` |
+| `.retour` | le lien de retour vers la page mere |
+
+Trois regles d usage :
+
+**Alterner les fonds.** Deux blocs de meme fond qui se suivent sont un seul bloc.
+**Finir par une porte.** Chaque page se termine sur un `.bloc--sombre` qui porte l appel. Jamais deux appels de meme intention sur une page.
+**Le surlignage `.marqueur` est rare.** Un mot ou deux par page au maximum, sinon il ne surligne plus rien.
+
+Un composant qui manque s ecrit dans la feuille de la page. S il ressert une deuxieme fois, il monte dans `base.css` et disparait des deux feuilles.
 
 ## Le comportement
 

@@ -1,0 +1,234 @@
+/* ------------------------------------------------------------------ */
+/* Page « La part sociale ».                                            */
+/* Tout le reste vient de base.css. Ne vivent ici que les six choses    */
+/* que le socle ne porte pas encore : le sommaire ancre, le lien en     */
+/* corps de texte, le renvoi d'article, la liste des trois limites,     */
+/* le marqueur d'arbitrage et le second niveau de l'appel.              */
+/* ------------------------------------------------------------------ */
+
+
+/* ---------- en-tete de page ---------- */
+
+/* La definition tient en deux temps : le chapo pose le mot, ce bloc
+   dit ce qu'on obtient. Le sommaire vient apres, jamais avant. */
+.tete__suite { margin-top: 1.15rem; }
+
+.sommaire {
+  margin-top: clamp(1.7rem, 3vw, 2.5rem);
+  padding-top: clamp(1.1rem, 2vw, 1.5rem);
+  border-top: 1px solid var(--filet);
+}
+
+.sommaire ul { display: flex; flex-wrap: wrap; gap: 0 1.7rem; }
+
+.sommaire a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  font-size: var(--t-petit);
+  font-weight: 500;
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: rgba(118, 109, 160, .55);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .3em;
+  transition: text-decoration-color 150ms ease;
+}
+
+.sommaire a:hover { text-decoration-color: var(--violet-sombre); }
+
+
+/* ---------- lien en corps de texte ---------- */
+
+/* Le socle ne porte que .lien-texte, qui est un lien d'action de 44 px de
+   haut : pose au milieu d'une phrase il en casse la ligne. Celui-ci reste
+   dans le fil du texte. */
+.lien {
+  color: var(--violet-sombre);
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .22em;
+  transition: text-decoration-thickness 150ms ease, text-decoration-color 150ms ease;
+}
+
+.lien:hover { text-decoration-color: var(--violet-sombre); text-decoration-thickness: 3px; }
+
+
+/* ---------- renvoi d'article ---------- */
+
+/* Sur cette page la preuve remplace la promesse : chaque affirmation porte
+   son numero d'article. Il doit se lire sans jamais prendre le pas sur la
+   phrase, d'ou la taille reduite et le gris tenu a 5,2 sur blanc. */
+.article {
+  font-size: .82em;
+  color: #66647A;
+  white-space: nowrap;
+}
+
+.puces .article { display: inline-block; margin-left: .15rem; }
+
+
+/* ---------- les trois limites ---------- */
+
+/* Un syntagme nominal court, puis une ligne d'explication qui descend dans
+   les statuts. Filets seulement : un aveu de limite dans un encadre de
+   couleur se lit comme un avertissement, ce qu'il n'est pas. */
+.limites { display: flex; flex-direction: column; }
+
+.limites > li { padding: clamp(1rem, 1.8vw, 1.35rem) 0; border-top: 1px solid var(--filet); }
+
+.limites > li:last-child { border-bottom: 1px solid var(--filet); }
+
+.limites strong {
+  display: block;
+  margin-bottom: .4rem;
+  color: var(--violet-sombre);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.limites p { margin: 0; }
+
+
+/* ---------- marqueur d'arbitrage ---------- */
+
+/* Ce qui n'est pas tranche reste visible sur la page, jamais lisse en une
+   formule prudente. Ces blocs sortent a la validation : ils sont donc
+   volontairement etrangers a la charte, en trait tirete, sans aplat de
+   couleur et sans pictogramme. */
+.arbitrage {
+  padding: .75rem .95rem;
+  border: 1px dashed rgba(118, 109, 160, .75);
+  border-left: 4px solid var(--violet);
+  border-radius: 4px;
+  background: rgba(118, 109, 160, .05);
+  color: var(--violet-sombre);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.arbitrage--sourcer { border-left-color: var(--kaki); }
+
+.arbitrage--sombre {
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
+  border-color: rgba(255, 255, 255, .45);
+  border-left-color: var(--jaune);
+  background: rgba(255, 255, 255, .07);
+  color: rgba(255, 255, 255, .9);
+}
+
+/* Dans une reponse de FAQ, le marqueur suit la reponse et ne s'en detache
+   pas : il commente cette reponse-la. */
+.question__reponse .arbitrage { margin-top: 1rem; }
+
+
+/* ---------- questions ---------- */
+
+/* Le titre porte le niveau H3 pour que la FAQ soit navigable au lecteur
+   d'ecran, et il reprend la forme du resume du socle. */
+.question__titre { margin: 0; font: inherit; color: inherit; }
+
+/* Chaque question est une ancre citee dans des mails et des SMS : elle doit
+   s'arreter sous l'entete, pas dessous. */
+.question { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
+
+
+/* ---------- etapes en liste ordonnee ---------- */
+
+/* Le socle remet ul a zero, pas ol. Les trois ecrans du tunnel sont une
+   sequence, donc un ol : sans cette remise a zero, le navigateur ajoute ses
+   propres numeros a cote des pastilles du socle. */
+ol.etapes { margin: 0; padding: 0; list-style: none; }
+
+
+/* ---------- respirations propres a la page ---------- */
+
+/* Le tableau compare, il ne recommande pas : aucune couleur d'accent sur une
+   colonne, et une largeur qui reste celle de la colonne de lecture, sinon la
+   comparaison se lit comme une autre page. */
+.comparatif-cadre { margin-top: clamp(1.4rem, 2.4vw, 2rem); }
+
+.comparatif tbody tr:last-child th { border-bottom: 0; }
+
+.apres-tableau { margin-top: clamp(1.2rem, 2.2vw, 1.9rem); }
+
+.gestes-corps { margin-top: clamp(1.7rem, 3vw, 2.4rem); }
+
+.faq__sortie { margin-top: clamp(1.5rem, 2.6vw, 2.2rem); }
+
+
+/* ---------- second niveau de l'appel ---------- */
+
+/* Le lecteur qui ne souscrit pas aujourd'hui est l'adresse a capter. Le
+   champ reste sous le bouton, en trait blanc, jamais dans la couleur ni
+   dans la forme du CTA. */
+.appel-second {
+  max-width: 46rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2.2rem);
+  border-top: 1px solid rgba(255, 255, 255, .2);
+}
+
+.appel-second__texte { max-width: 44ch; margin-bottom: 1rem; }
+
+.infolettre { display: flex; flex-wrap: wrap; gap: .7rem; }
+
+.infolettre input {
+  flex: 1 1 15rem;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 1rem;
+  font: inherit;
+  color: var(--violet-sombre);
+  background: var(--blanc);
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 6px;
+}
+
+.infolettre input::placeholder { color: #6B697F; }
+
+.infolettre .bouton { min-height: 48px; }
+
+
+@media (max-width: 767px) {
+  .sommaire ul { flex-direction: column; gap: 0; }
+  .sommaire a { min-height: 44px; }
+  .arbitrage { font-size: .82rem; }
+  .limites strong { font-size: 1.08rem; }
+
+  /* Trois colonnes tiennent mal dans 335 px : le cadre du socle les met en
+     scroll horizontal, et la lectrice de 65 ans qui tient son telephone perd
+     la moitie du tableau sans le savoir. Chaque ligne devient donc un bloc,
+     l'intitule de colonne repasse devant sa cellule et le tableau reste un
+     tableau pour le lecteur d'ecran. */
+  .comparatif,
+  .comparatif tbody,
+  .comparatif tr,
+  .comparatif th,
+  .comparatif td { display: block; width: 100%; }
+
+  .comparatif thead { display: none; }
+
+  .comparatif tr {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--filet);
+  }
+
+  .comparatif tr:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+
+  .comparatif th[scope="row"] { padding: 0 0 .55rem; border: 0; }
+
+  .comparatif td { padding: .4rem 0 0; border: 0; }
+
+  .comparatif td::before {
+    content: attr(data-col);
+    display: block;
+    font-size: .74rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: #66647A;
+  }
+}

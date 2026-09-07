@@ -1,0 +1,173 @@
+/* ------------------------------------------------------------------ */
+/* Page « L'equipe projet ».                                            */
+/* Trois cercles, trois formes. Le collectif se lit comme un registre   */
+/* de noms, la cooperative comme une page de statuts, les metiers       */
+/* comme le cartouche d'un plan. Aucune grille de cartes : ces trois    */
+/* groupes ne se ressemblent pas, ils ne doivent pas se presenter       */
+/* pareil.                                                              */
+/* ------------------------------------------------------------------ */
+
+
+/* ---------- ce qui manque encore ---------- */
+
+/* Marque visible d'une information non sourcee. Volontairement neutre :
+   ce n'est pas un accent de charte, c'est un trou a combler. Le tirete
+   se lit comme un champ de formulaire vide. */
+.a-sourcer {
+  padding: .12em .45em;
+  border: 1px dashed rgba(56, 54, 72, .45);
+  border-radius: 3px;
+  background: rgba(56, 54, 72, .045);
+  color: var(--violet-sombre);
+  font-size: .86em;
+  text-transform: none;
+  letter-spacing: normal;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+
+/* ---------- premier cercle : le registre des exploitantes ---------- */
+
+/* Le nom a gauche, ce qu'elle fait a droite, un filet entre chaque.
+   Les lignes n'ont pas la meme longueur et c'est voulu : une carte
+   impose la meme quantite de texte a tout le monde, pas un registre. */
+.collectif__manque { margin: 0 0 clamp(1.6rem, 2.8vw, 2.4rem); }
+
+.exploitantes {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+  margin: 0;
+}
+
+.exploitantes dt,
+.exploitantes dd {
+  margin: 0;
+  padding: clamp(1rem, 1.9vw, 1.5rem) 0;
+  border-top: 1px solid var(--filet);
+}
+
+.exploitantes dt {
+  padding-right: clamp(1rem, 2.4vw, 2.4rem);
+  color: var(--violet-sombre);
+  font-size: clamp(1.16rem, 1.7vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+
+.exploitantes dd { max-width: 60ch; }
+
+.exploitantes dt:last-of-type,
+.exploitantes dd:last-of-type { border-bottom: 1px solid var(--filet); }
+
+.collectif__suite { margin-top: clamp(1.8rem, 3vw, 2.6rem); }
+
+
+/* ---------- deuxieme cercle : la cooperative ---------- */
+
+/* La demonstration a gauche, la fiche d'identite a droite. La fiche
+   n'est pas une carte de plus : c'est l'etat civil de la societe, et
+   elle se lit comme tel, libelle puis valeur. */
+.coop {
+  display: grid;
+  gap: clamp(1.8rem, 3.4vw, 3.2rem);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .85fr);
+  align-items: start;
+}
+
+.coop__texte { max-width: 62ch; }
+
+.fiche {
+  padding: clamp(1.3rem, 2.2vw, 1.9rem);
+  background: var(--blanc);
+  border: 1px solid var(--filet);
+  border-radius: 10px;
+}
+
+.fiche__titre {
+  margin: 0 0 1.1rem;
+  color: var(--violet-sombre);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.fiche__liste { margin: 0; }
+
+.fiche__liste dt {
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--texte);
+}
+
+.fiche__liste dd {
+  margin: .2rem 0 0;
+  color: var(--violet-sombre);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.fiche__liste dd + dt {
+  margin-top: .95rem;
+  padding-top: .95rem;
+  border-top: 1px solid var(--filet);
+}
+
+
+/* ---------- troisieme cercle : le cartouche des metiers ---------- */
+
+/* Inverse du premier bloc : le metier d'abord, la structure ensuite.
+   C'est l'ordre du cartouche d'un plan d'architecte, et c'est l'ordre
+   dans lequel on cherche une competence. Deux colonnes au large, une
+   seule des que la ligne se serre. */
+.cartouche {
+  display: grid;
+  gap: clamp(1.4rem, 2.6vw, 2.2rem) clamp(1.6rem, 3vw, 3rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  margin: 0;
+}
+
+.cartouche__item { padding-top: .9rem; border-top: 2px solid var(--violet); }
+
+.cartouche__role {
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--violet-sombre);
+  font-weight: 600;
+}
+
+.cartouche dd { margin: .55rem 0 0; max-width: 46ch; }
+
+.cartouche__nom {
+  display: block;
+  margin-bottom: .2rem;
+  color: var(--violet-sombre);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.metiers__suite { margin-top: clamp(2rem, 3.4vw, 3rem); }
+
+
+@media (max-width: 899px) {
+  .coop { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 767px) {
+  /* Le registre passe en pile : le nom, puis sa ligne, le filet au
+     dessus du nom seulement. Deux colonnes de 15 rem ne tiennent pas
+     dans 375 px sans couper les mots. */
+  .exploitantes { grid-template-columns: minmax(0, 1fr); }
+
+  .exploitantes dt { padding: 1.15rem 0 .35rem; }
+
+  .exploitantes dd { padding: 0 0 1.15rem; border-top: 0; }
+
+  .exploitantes dt:last-of-type { border-bottom: 0; }
+
+  .cartouche__role { font-size: .74rem; }
+}

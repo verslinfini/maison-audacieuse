@@ -46,6 +46,27 @@ const CHIFFRES_PROSCRITS = [
   '80 000 €', '100 000 €', '15 % d\'apport', '54 000', '18 %', '25 %',
 ];
 
+/* Dire ce que la part sociale n'est pas fait partie du discours : « ce n'est
+   pas un placement » est la phrase la plus utile de la page part sociale.
+   On ne signale donc un mot proscrit que s'il n'est pas nie autour. C'est une
+   heuristique : elle rate une tournure retorse, elle evite surtout de crier
+   sur chaque phrase honnete, ce qui apprendrait a ignorer l'alerte. */
+const NEGATIONS = ['pas', 'plus', 'jamais', 'ni', 'aucun', 'aucune', 'sans', 'rien'];
+
+function* occurrences(texte, mot) {
+  let i = -1;
+  while ((i = texte.indexOf(mot, i + 1)) >= 0) {
+    yield texte.slice(Math.max(0, i - 90), i + mot.length + 70);
+  }
+}
+
+// Comparaison mot a mot plutot que par expression : « pas » ne doit pas se
+// reconnaitre dans « passage ».
+const nie = (passage) => {
+  const mots = ' ' + passage.replace(/[^a-zà-ÿ]+/gi, ' ').trim().toLowerCase() + ' ';
+  return NEGATIONS.some((n) => mots.includes(' ' + n + ' '));
+};
+
 /* ------------------------------------------------------------------ serveur */
 
 const serveur = createServer((req, res) => {
@@ -100,7 +121,9 @@ for (const { url, fichier } of pages) {
   // 1. Interdits de langue et de chiffres, sur le texte rendu seulement :
   //    un commentaire de code n'atteint pas le lecteur.
   const minuscules = sansBalises.toLowerCase();
-  for (const m of MOTS_PROSCRITS) if (minuscules.includes(m)) ennuis.push(`mot proscrit : « ${m} »`);
+  for (const m of MOTS_PROSCRITS) for (const passage of occurrences(minuscules, m)) {
+    if (!nie(passage)) ennuis.push(`mot proscrit : « ${m} », dans « ...${passage.trim()}... »`);
+  }
   for (const c of CHIFFRES_PROSCRITS) if (sansBalises.includes(c)) ennuis.push(`chiffre proscrit : « ${c} »`);
   if (sansBalises.includes('\u2014')) ennuis.push('tiret cadratin dans le texte');
 

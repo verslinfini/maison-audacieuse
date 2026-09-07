@@ -1,0 +1,141 @@
+/* ------------------------------------------------------------------ */
+/* /les-medias/                                                         */
+/* La page se monte avec les composants du socle. Ne vivent ici que les */
+/* quatre manques : la ligne « organe de presse plus date » d'une carte */
+/* de parution, le marqueur [A SOURCER] destine a se voir puis a        */
+/* disparaitre, la reduction du fait chiffre quand c'est une date, et   */
+/* l'encadre du texte que la presse recopie.                            */
+/* ------------------------------------------------------------------ */
+
+
+/* ---------- carte de parution ---------- */
+
+/* Une parution se lit dans cet ordre : qui l'a publiee, quand, puis le
+   titre. La source passe donc AVANT le titre, contrairement a une carte
+   ordinaire ou le titre ouvre. Candidat a base.css des qu'une deuxieme
+   page listera des sources datees. */
+.carte__source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .6rem;
+  margin: 0;
+  color: var(--violet-sombre);
+  font-size: var(--t-petit);
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1.35;
+}
+
+.carte__date {
+  color: var(--texte);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Le titre porte le lien qui couvre la carte : il reste noir, le
+   soulignement ne vient qu'au survol, sinon six cartes soulignees font
+   un mur bleu. */
+.parutions .carte__titre a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.parutions .carte--lien:hover .carte__titre a,
+.parutions .carte--lien:focus-within .carte__titre a {
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .18em;
+}
+
+/* Les titres de presse sont longs : 1,14 rem du socle les fait deborder
+   de la carte sur deux colonnes. */
+.parutions .carte__titre { font-size: 1.06rem; line-height: 1.32; }
+
+/* Le gris du socle (rgba(86,84,107,.78)) tombe a 4,0 sur le fond gris de la
+   carte : sous le seuil. La hierarchie tient deja au corps de 0,875 rem, la
+   couleur n'a pas besoin de l'appuyer. A remonter dans base.css. */
+.parutions .carte__note { color: var(--texte); }
+
+
+/* ---------- marqueur de chiffre manquant ---------- */
+
+/* Se voit, se lit, se retire. Le jaune de la charte tient 11,7:1 avec le
+   violet sombre : le marqueur est lisible et il derange, c'est le but. */
+.a-sourcer {
+  display: inline-block;
+  padding: .1em .45em;
+  border-radius: 3px;
+  background: var(--jaune);
+  color: var(--violet-sombre);
+  font-size: .78em;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+
+/* ---------- fait chiffre qui est une date ---------- */
+
+/* 10/07/2026 fait dix signes : a la taille du socle il sort de sa colonne
+   de 12 rem. Le fait garde son rang, il perd deux crans de corps. */
+.fait__nombre--date {
+  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- espace presse ---------- */
+
+.presse { margin-top: clamp(2.4rem, 4vw, 3.4rem); }
+
+/* Le texte que le journaliste copie. Il est detache du reste pour qu'on
+   voie ou commence et ou finit ce qui se reprend tel quel. */
+.presse-apropos {
+  padding: clamp(1.3rem, 2.2vw, 1.9rem);
+  border-left: 4px solid var(--violet);
+  border-radius: 0 8px 8px 0;
+  background: var(--blanc);
+}
+
+.presse-apropos > * + * { margin-top: .9em; }
+
+.presse-apropos__libelle {
+  color: var(--violet-sombre);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* L'adresse presse se donne seule sur sa ligne : un journaliste la copie,
+   il ne la cherche pas au milieu d'une phrase. */
+.presse-contact a {
+  display: inline-block;
+  color: var(--violet-sombre);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--violet);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .28em;
+  overflow-wrap: anywhere;
+}
+
+.presse-contact a:hover { text-decoration-color: var(--violet-sombre); }
+
+/* Le cadre incline du socle est dessine pour le heros clair : sur le
+   violace il garde son geste, il perd l'ombre qui s'y voyait sale. */
+.presse .figure { margin-top: 1.6rem; }
+.presse .figure img { box-shadow: 0 14px 30px rgba(56, 54, 72, .14); }
+
+/* Meme cause que la note de carte : le gris de legende du socle tombe a 3,4
+   sur le violace. Le credit d'un visuel doit se lire, c'est ce qui autorise
+   sa reprise. */
+.presse .figure figcaption { color: var(--texte); }
+
+
+@media (max-width: 767px) {
+  .parutions .carte__titre { font-size: 1rem; }
+  .presse-apropos { border-left-width: 3px; }
+}

@@ -1,0 +1,80 @@
+/* ------------------------------------------------------------------ */
+/* /le-modele-economique/                                               */
+/* Une page qui parle d'argent se lit debout : le socle porte presque   */
+/* tout, cette feuille ne pose que le rythme vertical et les deux       */
+/* elements que base.css n'a pas encore, la date d'une etape et la      */
+/* marque d'un chiffre non valide.                                      */
+/* ------------------------------------------------------------------ */
+
+/* ---------- les trois piliers ---------- */
+
+/* La grille suit le texte qui l'introduit : sans cette marge elle se colle
+   au dernier paragraphe et les cartes se lisent comme une suite de la
+   phrase, pas comme les trois appuis qu'elles decrivent. */
+.piliers { margin-top: clamp(1.8rem, 3.2vw, 2.6rem); }
+
+
+/* ---------- reperes chiffres ---------- */
+
+/* Les trois seuls chiffres de la page, isoles entre deux filets. Ils
+   coupent la colonne de lecture, ce qui est le but : on doit pouvoir les
+   trouver sans lire le paragraphe qui les precede. */
+.reperes {
+  margin: clamp(2.2rem, 4vw, 3.2rem) 0;
+  padding: clamp(1.8rem, 3vw, 2.4rem) 0;
+  border-top: 1px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+}
+
+
+/* ---------- liste des espaces ---------- */
+
+/* La liste vit entre deux paragraphes de la meme section : elle respire
+   comme un paragraphe, pas comme un bloc. */
+.espaces { margin: 1.6rem 0 2rem; }
+
+
+/* ---------- calendrier ---------- */
+
+/* DEFAUT DU SOCLE, a remonter dans base.css. .etapes numerote ses items par
+   un compteur CSS, mais le socle ne remet a zero que les puces de ul. Sur le
+   <ol> qui convient a un calendrier, le marqueur natif s'ajoute a la pastille
+   et la ligne s'ouvre sur « 1. 1 ». La regle vaut pour toute page qui datera
+   des etapes : sa place est dans le socle, pas ici. */
+ol.etapes { list-style: none; }
+
+
+/* La date d'une etape, au-dessus de son intitule. Le socle ne porte que
+   .etapes__titre : si une deuxieme page date ses etapes, cette regle et
+   celle du dessous montent dans base.css. Violet sombre plutot que violet :
+   sur le fond violace, le violet plafonne sous 4,5. */
+.etapes__quand {
+  display: block;
+  margin-bottom: .25rem;
+  color: var(--violet-sombre);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.etapes p { margin-top: .35rem; }
+
+
+/* ---------- chiffre en attente de validation ---------- */
+
+/* Un trou assume, pas une coquille. Le pointille dit au relecteur que la
+   ligne attend une decision du collectif : il disparait avec le crochet. */
+.a-sourcer {
+  display: inline-block;
+  color: var(--texte);
+  letter-spacing: .04em;
+  text-transform: none;
+  border-bottom: 1px dashed rgba(86, 84, 107, .55);
+}
+
+
+@media (max-width: 767px) {
+  .reperes { padding: 1.6rem 0; }
+}

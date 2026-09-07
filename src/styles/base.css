@@ -254,7 +254,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   transform: rotate(-1.2deg);
 }
 
-.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: rgba(86, 84, 107, .72); text-align: right; }
+.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: rgba(86, 84, 107, .88); text-align: right; }
 
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
@@ -678,7 +678,7 @@ h2 .marqueur::before {
   margin-top: auto;
   padding-top: .3rem;
   font-size: var(--t-petit);
-  color: rgba(86, 84, 107, .78);
+  color: rgba(86, 84, 107, .86);
 }
 
 .bloc--sombre .carte__note { color: rgba(255, 255, 255, .66); }
@@ -788,6 +788,24 @@ h2 .marqueur::before {
 
 .bloc--sombre .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 .bloc--sombre .bouton--primaire:hover { background: #FFEB7E; }
+
+/* ---------- trous nommes ---------- */
+
+/* Une information qui manque se montre, elle ne se devine pas. Ce marqueur
+   rend visible ce qui reste a sourcer, en recette comme en relecture. Il ne
+   doit plus exister une seule occurrence le jour de la mise en ligne. */
+.a-sourcer {
+  padding: .05em .3em;
+  border: 1px dashed var(--terracotta);
+  border-radius: 3px;
+  color: var(--terracotta);
+  font-size: .92em;
+  font-style: normal;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.bloc--sombre .a-sourcer { border-color: var(--jaune); color: var(--jaune); }
 
 /* ---------- fil des pages ---------- */
 
