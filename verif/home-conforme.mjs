@@ -54,8 +54,28 @@ const VOULUS = [
     test: (c, p) => p === 'texte' && String(c.m).startsWith('Prochaines étapes'),
   },
   {
-    quoi: 'credit photo : opacite .72 vers .88 (audit du 07/09, contraste 3,36 sous le seuil)',
-    test: (c, p) => p === 'couleur' && String(c.m).includes('0.72') && String(c.d).includes('0.88'),
+    // Le vert de la charte, #5E9E85, tient 3,13 sur blanc : assez pour un
+    // trace ou un aplat, dont le seuil est 3, pas pour un mot, dont le seuil
+    // est 4,5. Mesure au pixel le 08/09 : les cinq etiquettes des espaces a
+    // 2,86, le compteur de la jauge a 2,57, le mot du cadre et la fleche de
+    // la frise au meme niveau. Les TEXTES verts passent a --vert-sombre ;
+    // l'anneau de la jauge, les points de la frise et les filets gardent le
+    // vert de la charte, ou il est juste. Un plancher d'accessibilite n'est
+    // pas un gout : le gel de la home ne le couvre pas.
+    quoi: 'les textes verts passent au vert de texte, --vert-sombre',
+    test: (c, p) => p === 'couleur' && String(c.m) === 'rgb(94, 158, 133)',
+  },
+  {
+    // Meme lot : la legende de figure passe de 72 % a la couleur pleine du
+    // corps de texte, elle tombait a 4,43 sur les fonds teintes.
+    quoi: 'credit photo : opacite .72 vers la couleur pleine du corps de texte',
+    test: (c, p) => p === 'couleur' && String(c.m).includes('0.72'),
+  },
+  {
+    // Les fonds pleins des ecrans 5 et 7 ont ete assombris le 08/09 : le
+    // blanc y mesurait 3,72 a 4,07 pour 4,5. Voir la note de « accueil.css ».
+    quoi: 'fonds pleins des ecrans le-pari et agir, voile porte au seuil AA',
+    test: (c, p) => p === 'image' && String(c.m).includes('radial-gradient'),
   },
   {
     quoi: 'la structure exploitante du pole sante a quitte le projet, l espace est nomme par sa fonction',

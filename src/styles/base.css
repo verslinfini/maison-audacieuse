@@ -11,6 +11,13 @@
   --violet-sombre: #383648;
   --kaki: #9D9669;
   --vert: #5E9E85;
+  /* Vert de texte. Le vert de la charte n'en tient que 3,13 sur blanc, ce qui
+     suffit a un trace et pas a un mot. Meme rapport que --violet a
+     --violet-sombre : la charte donne la teinte, le web donne la valeur.
+     Valeur retenue apres mesure : 4,75 sur blanc pur ne suffisait pas, les
+     fonds du site etant des degrades legerement teintes ou le meme vert
+     tombait a 4,33. */
+  --vert-sombre: #416F5C;
   --terracotta: #A3716A;
   --menthe: #BAFFE4;
   --jaune: #FFF3A8;
@@ -254,7 +261,7 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   transform: rotate(-1.2deg);
 }
 
-.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: rgba(86, 84, 107, .88); text-align: right; }
+.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: var(--texte); text-align: right; }
 
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
@@ -418,22 +425,28 @@ h2 .marqueur::before {
   white-space: nowrap;
 }
 
-@media (max-width: 767px) {
-  :root { --h-entete: 58px; }
-
-  /* Sans cette reserve, un element atteint au clavier ou par une ancre
-     s arrete pile sous la barre du bas et reste invisible. */
-  html { scroll-padding-bottom: 86px; }
-
+/* Bascule de navigation : sous 880 px, le menu passe en depliant et l'appel
+   descend dans la barre du bas. Six liens, un logo et un bouton demandent
+   880 px pour tenir sur une ligne ; en dessous, la nav passait sur deux
+   lignes, ce qui est une barre cassee, pas une barre dense. */
+@media (max-width: 879px) {
   .nav, .entete__cta { display: none; }
 
   .menu-bouton { display: inline-flex; }
 
   .barre-mobile { display: block; padding: .5rem var(--marge) calc(.5rem + env(safe-area-inset-bottom, 0px)); }
 
-  .bouton { min-height: 48px; }
+  /* Sans cette reserve, un element atteint au clavier ou par une ancre
+     s arrete pile sous la barre du bas et reste invisible. */
+  html { scroll-padding-bottom: 86px; }
 
   body { padding-bottom: 78px; }
+}
+
+@media (max-width: 767px) {
+  :root { --h-entete: 58px; }
+
+  .bouton { min-height: 48px; }
 
   .figure { order: 4; margin-bottom: .6rem; }
 
@@ -1003,9 +1016,13 @@ h2 .marqueur::before {
    liste d'etapes. */
 .bloc--nappe {
   background:
-    radial-gradient(54% 44% at 98% 6%, rgba(157,150,105,.34), rgba(157,150,105,0) 62%),
-    radial-gradient(60% 50% at 2% 94%, rgba(118,109,160,.32), rgba(118,109,160,0) 64%),
-    radial-gradient(78% 58% at 46% 44%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    radial-gradient(54% 44% at 98% 6%, rgba(157,150,105,.30), rgba(157,150,105,0) 62%),
+    radial-gradient(60% 50% at 2% 94%, rgba(118,109,160,.26), rgba(118,109,160,0) 64%),
+    /* La nappe claire couvre 96 % de la largeur et non 78 : sous 900 px, les
+       deux nappes de couleur se rejoignaient au centre et le corps de texte
+       y tombait a 4,43 pour 4,5. Elle porte le texte, elle doit le couvrir a
+       toutes les largeurs. */
+    radial-gradient(96% 72% at 46% 46%, rgba(255,255,255,.94), rgba(255,255,255,0) 76%),
     var(--violace);
 }
 
@@ -1355,7 +1372,10 @@ h2 .marqueur::before {
   font-family: "Meow Script", "Segoe Script", cursive;
   font-size: clamp(1.35rem, 2.1vw, 1.8rem);
   line-height: 1.15;
-  color: var(--violet);
+  /* Violet sombre et non violet de charte : une annotation depasse rarement
+     22 px, son seuil est donc 4,5 et non 3. Mesuree entre 3,86 et 4,37 sur
+     trois pages avec le violet de charte. */
+  color: var(--violet-sombre);
   /* Onest et Meow Script n'ont pas la meme ligne de base : sans ce
      decalage, l'annotation flotte au-dessus de ce qu'elle commente. */
   transform: rotate(-2.5deg);
@@ -1491,7 +1511,7 @@ ol.etapes > li::marker { content: none; }
     radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
     radial-gradient(70% 78% at 76% 44%, rgba(92,91,150,.78), rgba(92,91,150,0) 70%),
     radial-gradient(64% 74% at 24% 60%, rgba(112,93,130,.70), rgba(112,93,130,0) 72%),
-    linear-gradient(rgba(56,54,72,.20), rgba(56,54,72,.20)),
+    linear-gradient(rgba(56,54,72,.28), rgba(56,54,72,.28)),
     var(--violet);
 }
 

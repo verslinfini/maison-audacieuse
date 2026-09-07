@@ -104,7 +104,7 @@ L'ordre compte, et c'est celui de la levée d'objection, pas celui de la logique
 1. **Une part, c'est quoi.** Une phrase de définition frontale, avant tout le reste. Pas d'introduction, pas de mise en contexte.
 2. **Cent euros, une voix.** Le prix et le pouvoir dans la même respiration. C'est le seul endroit où le montant apparaît en grand.
 3. **Votre argent reste le vôtre.** La phrase du remboursement, au mot près, tôt et pas en fin de page. C'est la première objection réelle des gens.
-4. **Ce que ce n'est pas.** Ni un don, ni un placement, ni une action. L'aveu de limite fait plus pour la confiance que trois arguments.
+4. **Ce que la part ne fait pas.** Elle ne remplace pas un don, elle ne rapporte rien, elle n'enrichit personne. L'aveu de limite fait plus pour la confiance que trois arguments. Dire ce que la part ne FAIT pas, jamais ce qu'elle n'EST pas : nommer une catégorie pour la nier l'installe quand même, et « placement » figure aux interdits armés de la campagne. Le mot survit à une capture d'écran.
 5. **Vos questions.** Tout le reste va là, en questions repliées : la fiscalité, les collèges, le décès, la cession, la durée. Un lecteur qui creuse ouvre. Les autres passent.
 6. **L'appel.**
 
@@ -142,7 +142,7 @@ Consigne explicite de Romain : **ne pas assommer de chiffres**. La page contient
 
 Le mécanisme à faire comprendre tient en une phrase, déjà écrite et validée : « une banque ne finance que la moitié d'un lieu comme celui-ci, l'autre moitié, c'est nous ». Tout le reste de la page sert cette phrase ou n'a rien à y faire.
 
-Rappel du garde-fou : la page ne porte pas à la fois le coût total et la fraction bancaire. Le lecteur divise, et il obtient un montant que le référentiel interdit de publier.
+Rappel du garde-fou, et il vaut à l'échelle du site, pas de la page. Le coût total est sur l'accueil et sur les médias, la fraction bancaire sur le modèle économique, la part sociale et soutenir. Aucune page ne porte les deux, et pourtant deux clics suffisent à faire la division. La règle qui se tient vraiment est donc celle-ci : **partout où la fraction bancaire apparaît, les trois sources sont nommées dans la même respiration**. Une moitié et un reste se divisent, trois sources ne se divisent pas.
 
 Le libellé du menu passe à « Le projet ».
 
