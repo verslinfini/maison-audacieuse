@@ -28,11 +28,11 @@ Ce que cela exclut, sans exception : le vault Atlas, ce depot, un compte-rendu, 
 | Administrateur WordPress | Romain | en place |
 | Hebergement o2switch (cPanel) | Romain | en place |
 | Depot GitHub `verslinfini/maison-audacieuse` | Romain (compte `verslinfini`) | en place, public (passé public le 17/08/2026) |
-| Nom de domaine `maison-audacieuse.fr` | a confirmer | **a clarifier avec l agence** |
+| Nom de domaine `maison-audacieuse.fr` | Romain | en place (confirme le 07/09/2026) |
 | Licence Kadence Blocks Pro | a confirmer | **a clarifier avec l agence** |
 | Compte Brevo (emailing) | Romain | en place |
 
-Les deux lignes a clarifier sont plus urgentes que le reste : sans le domaine, aucune reprise en main du DNS n est possible ; sans la licence Kadence Pro, les blocs Pro deja utilises sur les pages cessent d etre mis a jour.
+Reste a clarifier : la licence Kadence Blocks Pro, sans laquelle les blocs Pro deja utilises sur les pages cessent d etre mis a jour. Le point devient sans objet le jour ou le site quitte WordPress.
 
 ## Acces techniques a brancher
 
