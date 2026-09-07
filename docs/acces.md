@@ -14,7 +14,7 @@ Le wizard guide etape par etape, ecrit dans le `.env` local et dans les secrets 
 
 | Endroit | Ce qu il contient | Qui y accede |
 | --- | --- | --- |
-| `.env` du clone local (`C:\Users\romai\dev\maison-audacieuse\.env`) | mot de passe d application WP, coordonnees SSH, chemin de la cle privee | Romain, sur sa machine |
+| Coffre local, hors OneDrive (`C:\Users\romai\.secrets\maison-audacieuse\.env`) | mot de passe d application WP, coordonnees SSH, chemin de la cle privee | Romain, sur sa machine |
 | `~/.ssh/o2switch_lma` | cle privee de deploiement, dediee, sans passphrase | Romain, sur sa machine |
 | Secrets GitHub Actions du depot `verslinfini/maison-audacieuse` | ce dont le workflow de deploiement a besoin | le workflow, en lecture seule et en aveugle |
 | Coffre du collectif (`00 Acces`, Nextcloud) | acces partages de l equipe | le collectif |
