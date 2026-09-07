@@ -21,3 +21,6 @@ Thumbs.db
 maquettes/_verif/
 .verif-sorties/
 dist/
+
+# Archive de transfert du deploiement, ephemere.
+.envoi.tgz

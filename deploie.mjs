@@ -14,14 +14,17 @@
 // confort nul sur un site qu'on publie a la demande. Arbitrage du 07/09/2026.
 
 import { execFileSync } from 'node:child_process';
-import { readFileSync, existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { readFileSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { tmpdir, homedir } from 'node:os';
+import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const RACINE = dirname(fileURLToPath(import.meta.url));
 const COFFRE = join(homedir(), '.secrets', 'maison-audacieuse', '.env');
-const HORODATAGE = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '').replace(/(\d{8})/, '$1-');
+// Horodatage a la seconde, en UTC : a la minute, deux deploiements rapproches
+// ecrasaient la meme sauvegarde, et le second effacait l'etat auquel on voulait
+// revenir. C'est exactement le moment ou l'on en a besoin.
+const HORODATAGE = new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '').replace(/(\d{8})/, '$1-');
 
 const RETOUR = process.argv.includes('--retour');
 const LISTE = process.argv.includes('--liste');
@@ -146,11 +149,12 @@ distant([
 // 4. Envoi. Une archive plutot qu'un rsync : rsync n'existe pas sous Windows,
 // il existe sur le serveur, donc la synchronisation se fait la-bas.
 etape(4, 'envoi');
-const tmp = mkdtempSync(join(tmpdir(), 'lma-'));
-const archive = join(tmp, 'site.tgz');
-local('tar', ['czf', archive, '-C', DIST, '.']);
-local('scp', [...OPTIONS_SCP, archive, `${HOTE}:~/site-en-cours.tgz`], { stdio: ['ignore', 'pipe', 'pipe'] });
-rmSync(tmp, { recursive: true, force: true });
+// Chemins relatifs : le tar de Git Bash lit « C:\... » comme un hote distant
+// et refuse d'ecrire. L'archive nait donc dans le depot, et en repart aussitot.
+const ARCHIVE = '.envoi.tgz';
+local('tar', ['czf', ARCHIVE, '-C', 'dist', '.']);
+local('scp', [...OPTIONS_SCP, ARCHIVE, `${HOTE}:~/site-en-cours.tgz`], { stdio: ['ignore', 'pipe', 'pipe'] });
+rmSync(join(RACINE, ARCHIVE), { force: true });
 dire('  archive envoyee');
 
 // 5. Extraction puis synchronisation, avec --delete pour que le serveur soit
@@ -171,11 +175,18 @@ distant([
 // pas avoir. Les empreintes disent la verite sans secret.
 etape(6, 'controle');
 const exclusions = INTOUCHABLES.map((f) => `-not -path './${f}*'`).join(' ');
-const attendu = local('bash', ['-c',
-  `cd dist && find . -type f ${exclusions} -exec sha256sum {} + | sort -k2 | sha256sum | cut -c1-16`]).trim();
-const obtenu = distant(
-  `cd '${CIBLE}' && find . -type f ${exclusions} -exec sha256sum {} + | sort -k2 | sha256sum | cut -c1-16`,
-  true).trim();
+
+// Deux dialectes de sha256sum : Git Bash ecrit « hash *./x » (etoile du mode
+// binaire, un espace), le serveur « hash  ./x » (deux espaces). Meme contenu,
+// lignes differentes. On retire l'etoile puis on remet un espace unique, sinon
+// deux copies identiques donnent deux empreintes differentes.
+const EMPREINTE = (dossier) =>
+  `cd '${dossier}' && find . -type f ${exclusions} -exec sha256sum {} +`
+  + ` | tr -d '*' | awk '{h=$1; $1=""; sub(/^ +/, ""); print h " " $0}'`
+  + ` | sort -k2 | sha256sum | cut -c1-16`;
+
+const attendu = local('bash', ['-c', EMPREINTE('dist')]).trim();
+const obtenu = distant(EMPREINTE(CIBLE), true).trim();
 
 dire(`  empreinte locale   ${attendu}`);
 dire(`  empreinte distante ${obtenu}`);
