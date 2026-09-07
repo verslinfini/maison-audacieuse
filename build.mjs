@@ -110,6 +110,30 @@ for (const fichier of pages) {
       throw new Error(`${fichier} : valeur d'exemple encore en place, « ${exemple[1]} ». `
         + `La remplacer par la valeur reelle et retirer l'attribut avant de construire en production.`);
     }
+
+    // Un trou nomme est un arbitrage qui n'a pas eu lieu, ecrit en clair pour
+    // qu'on ne l'oublie pas. Il vit en preproduction, ou il sert de rappel.
+    // Publie, il devient l'aveu qu'on n'a pas verifie ce qu'on affirme, sur
+    // un site qui demande de l'argent a des particuliers.
+    const trous = [...page.matchAll(/\[À (?:SOURCER|TRANCHER)(?:&nbsp;| )?:?\s*([^\]]*)\]/g)];
+    if (trous.length) {
+      const liste = trous.map((t) => '    - ' + (t[1] || '(sans libelle)').replace(/&nbsp;/g, ' ').slice(0, 110)).join('\n');
+      throw new Error(`${fichier} : ${trous.length} trou(s) nomme(s) encore en place.\n${liste}\n`
+        + `  Les combler ou les retirer avant de construire en production. Un trou retire d'une page\n`
+        + `  se reporte dans « Ce qui reste avant la mise en ligne », il ne disparait pas.`);
+    }
+  }
+
+  // Une valeur d'exemple porte « data-a-remplir » : elle vit en preproduction,
+  // jamais en production. Le compteur de la home en est une. Sans ce garde,
+  // le site s'ouvre au public en annoncant un nombre de cooperateur ices faux,
+  // et c'est le premier chiffre que voit un visiteur.
+  if (PROD) {
+    const exemple = page.match(/data-a-remplir="([^"]*)"/);
+    if (exemple) {
+      throw new Error(`${fichier} : valeur d'exemple encore en place, « ${exemple[1]} ». `
+        + `La remplacer par la valeur reelle et retirer l'attribut avant de construire en production.`);
+    }
   }
 
   const adresse = '/' + (champs.sortie || `${nom}/index.html`).replace(/index\.html$/, '');
