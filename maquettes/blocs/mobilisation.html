@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>La mobilisation citoyenne | La Maison Audacieuse</title>
+<meta name="description" content="Escalier de la mobilisation : lettre de soutien, campagne de dons, parts sociales, titres participatifs.">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="../assets/favicon/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta name="theme-color" content="#766DA0">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* ------------------------------------------------------------------ */
+/* Bloc « La mobilisation citoyenne ». Quatre marches, une par etage   */
+/* du financement citoyen. La marche en cours est depliee sur les      */
+/* trois paliers de la souscription : c'est la seule information de    */
+/* l'ecran qui ne soit pas deja ailleurs sur la home.                  */
+/* Meme charte que home/v2.html, aucune couleur nouvelle.              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --violet: #766DA0;
+  --violet-sombre: #383648;
+  --kaki: #9D9669;
+  --vert: #5E9E85;
+  --terracotta: #A3716A;
+  --menthe: #BAFFE4;
+  --jaune: #FFF3A8;
+  --texte: #56546B;
+  --gris: #F5F5F6;
+  --violace: #EDEDF5;
+  --blanc: #FFFFFF;
+
+  --filet: rgba(56, 54, 72, .16);
+  --marge: clamp(1.25rem, 3.6vw, 3.5rem);
+
+  --t-titre: clamp(1.95rem, 3.4vw, 3rem);
+  --t-lead: clamp(1.2rem, 1.55vw, 1.55rem);
+  --t-corps: clamp(1.0625rem, .95vw, 1.125rem);
+  --t-petit: .875rem;
+
+  /* Hauteur d'une contremarche : ce qui separe deux girons successifs. */
+  --h-marche: clamp(46px, 5.2vw, 74px);
+  --trait: 3px;
+
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--violace);
+  color: var(--texte);
+  font-family: "Onest", "Segoe UI", system-ui, sans-serif;
+  font-size: var(--t-corps);
+  line-height: 1.62;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-spacing: -.018em; }
+h2 { font-size: var(--t-titre); line-height: 1.04; }
+p { margin: 0; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; border-radius: 2px; }
+
+.contenu { max-width: 1240px; margin: 0 auto; padding: 0 var(--marge); }
+.grain__voile { position: absolute; inset: 0; pointer-events: none; background-image: var(--grain); opacity: .5; z-index: 0; }
+
+#mobilisation {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.6rem, 7vw, 6.5rem) 0 clamp(3.6rem, 7vw, 6rem);
+  background:
+    radial-gradient(58% 26% at 96% 3%, rgba(118, 109, 160, .26), rgba(118, 109, 160, 0) 62%),
+    radial-gradient(66% 24% at 3% 96%, rgba(94, 158, 133, .20), rgba(94, 158, 133, 0) 64%),
+    var(--blanc);
+}
+#mobilisation .contenu { position: relative; z-index: 1; }
+
+.mob__intro { max-width: 46ch; }
+.mob__intro h2 { margin-bottom: 1.1rem; }
+.mob__chapo { font-size: var(--t-lead); line-height: 1.42; }
+
+/* ---------- l'escalier ---------- */
+/* Gouttiere nulle : le giron d'une marche doit toucher la contremarche
+   de la suivante, sinon l'escalier est troue. L'air vient des paddings. */
+.escalier {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  gap: 0;
+  margin-top: clamp(3rem, 5vw, 4.5rem);
+}
+.marche {
+  position: relative;
+  padding: 0 clamp(.7rem, 1.4vw, 1.3rem) calc(1.5rem + var(--trait));
+}
+/* Chaque marche monte d'une contremarche au-dessus de la precedente. */
+.marche:nth-child(1) { margin-bottom: 0; }
+.marche:nth-child(2) { margin-bottom: var(--h-marche); }
+.marche:nth-child(3) { margin-bottom: calc(var(--h-marche) * 2); }
+.marche:nth-child(4) { margin-bottom: calc(var(--h-marche) * 3); }
+
+/* Giron : le plat sur lequel la marche est posee. */
+.marche::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  border-top: var(--trait) solid var(--vert);
+}
+/* Contremarche : la montee depuis le giron precedent. */
+.marche::before {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: var(--h-marche);
+  border-left: var(--trait) solid var(--vert);
+}
+.marche:first-child::before { content: none; }
+
+.marche--vient::after, .marche--vient::before { border-color: var(--kaki); border-style: dashed; }
+.marche--ici::before { border-color: var(--violet); }
+/* Le dernier giron s'arrete peu apres son rond : file jusqu'au bord, il
+   annoncerait une cinquieme marche qui n'existe pas. */
+.marche:last-child::after { right: auto; width: calc(50% + 2.6rem); }
+
+/* Le rond, pose au milieu de son giron. */
+.marche__rond {
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 22px; height: 22px;
+  margin-left: -11px;
+  transform: translateY(50%);
+  border-radius: 50%;
+  background: var(--vert);
+  color: var(--blanc);
+  display: grid;
+  place-items: center;
+}
+.marche__rond svg { width: 14px; height: 14px; }
+.marche--vient .marche__rond { background: var(--blanc); border: var(--trait) solid var(--kaki); }
+.marche--ici .marche__rond {
+  width: 32px; height: 32px; margin-left: -16px;
+  background: var(--violet);
+  box-shadow: 0 0 0 7px rgba(118, 109, 160, .18);
+}
+.marche--ici .marche__rond svg { width: 15px; height: 15px; }
+
+.marche__date {
+  display: block;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--kaki);
+  margin-bottom: .35rem;
+}
+.marche h3 { font-size: 1.22rem; line-height: 1.18; margin-bottom: .45rem; }
+.marche__detail { font-size: .93rem; line-height: 1.46; }
+.marche__detail b { color: var(--violet-sombre); }
+.marche__note { display: block; margin-top: .5rem; font-size: .84rem; color: var(--kaki); }
+
+/* L'annotation manuscrite qui dit ou nous sommes. */
+/* L'annotation s'aligne sur le bloc qu'elle designe, jamais sur le centre
+   de la colonne : decalee, sa fleche tombe sur la marche voisine. */
+.mob__ici {
+  position: absolute;
+  left: clamp(.7rem, 1.4vw, 1.3rem);
+  bottom: calc(100% + .15rem);
+  width: 11rem;
+  color: var(--violet);
+  pointer-events: none;
+}
+.mob__ici span {
+  display: block;
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: 1.85rem;
+  line-height: 1.05;
+}
+.mob__ici svg { width: 46px; height: 30px; margin-left: .4rem; }
+
+/* ---------- le deplie de la marche en cours ---------- */
+.paliers {
+  position: relative;
+  margin-top: clamp(2.6rem, 4vw, 3.8rem);
+  padding: clamp(1.6rem, 2.6vw, 2.4rem) clamp(1.4rem, 2.6vw, 2.4rem);
+  background: var(--violace);
+  border-radius: 12px;
+  border-top: var(--trait) solid var(--violet);
+}
+.paliers h3 { font-size: 1.32rem; margin-bottom: 1.3rem; }
+.paliers__grille {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: clamp(1.6rem, 3vw, 3rem);
+  align-items: center;
+}
+
+.compteur { display: flex; align-items: center; gap: .9rem; }
+.compteur__anneau { position: relative; width: 104px; height: 104px; flex: none; }
+.compteur__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.compteur__piste { fill: none; stroke: rgba(118, 109, 160, .22); stroke-width: 9; }
+.compteur__arc { fill: none; stroke: var(--violet); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 327; stroke-dashoffset: 266; }
+.compteur__nombre {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: 1.55rem; font-weight: 700; color: var(--violet-sombre);
+}
+.compteur__legende { font-size: .9rem; line-height: 1.35; }
+.compteur__legende b { display: block; font-size: 1rem; color: var(--violet-sombre); }
+
+.echelons { display: grid; gap: .75rem; }
+.echelon {
+  display: grid;
+  grid-template-columns: 4.4rem minmax(0, 1fr);
+  gap: .9rem;
+  align-items: baseline;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--filet);
+}
+.echelon:last-child { padding-bottom: 0; border-bottom: 0; }
+.echelon b { font-size: 1.3rem; font-weight: 700; color: var(--violet-sombre); letter-spacing: -.02em; }
+.echelon span { font-size: .93rem; line-height: 1.4; }
+.echelon--vise b { color: var(--kaki); }
+
+/* ---------- format telephone ---------- */
+/* L'escalier bascule en colonne : la montee ne se lit plus en hauteur
+   mais en decalage vers la droite, une carte apres l'autre. Le trait
+   reste dans le meme role, contremarche verticale et giron court. */
+@media (max-width: 860px) {
+  .escalier {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    margin-top: clamp(2.4rem, 6vw, 3.4rem);
+  }
+  .marche {
+    margin-bottom: 0 !important;
+    padding: 0 0 1.6rem 1.9rem;
+  }
+  .marche:last-child { padding-bottom: 0; }
+  .marche:nth-child(1) { margin-left: 0; }
+  .marche:nth-child(2) { margin-left: 11px; }
+  .marche:nth-child(3) { margin-left: 22px; }
+  .marche:nth-child(4) { margin-left: 33px; }
+
+  /* En colonne, le trait ne monte plus VERS sa marche : il descend vers
+     la suivante. Il porte donc l'etat de la marche qu'il rejoint, sinon
+     le pointille du « a venir » commencerait une marche trop tard. */
+  .marche::before, .marche::after { border-color: var(--vert); border-style: solid; }
+  .marche:has(+ .marche--ici)::before,
+  .marche:has(+ .marche--ici)::after { border-color: var(--violet); }
+  .marche:has(+ .marche--vient)::before,
+  .marche:has(+ .marche--vient)::after { border-color: var(--kaki); border-style: dashed; }
+
+  /* Contremarche : du bas du rond jusqu'au centre du rond suivant, qui
+     tombe 15 px sous le bord de la carte (rond de 22 px pose a 4 px). */
+  .marche::before {
+    content: "";
+    left: 0;
+    top: 26px;
+    bottom: -15px;
+    height: auto;
+  }
+  .marche--ici::before { top: 31px; }
+  /* La premiere marche perd son trait en large, elle le retrouve ici :
+     en colonne il descend vers la suivante au lieu de venir d'avant. */
+  .marche:first-child::before { content: ""; }
+  .marche:last-child::before { content: none; }
+  /* Giron : le coude horizontal qui rattrape le decalage de la suivante. */
+  .marche::after {
+    left: 0;
+    right: auto;
+    width: 11px;
+    top: auto;
+    bottom: -15px;
+  }
+  .marche:last-child::after { content: none; }
+
+  .marche__rond {
+    left: 0; top: 4px; bottom: auto;
+    margin-left: -11px;
+    transform: none;
+  }
+  .marche--ici .marche__rond { margin-left: -16px; top: -1px; }
+
+  /* En colonne il n'y a pas de place au-dessus du bloc : l'annotation
+     rentre dans le flux, en tete de marche, a hauteur du rond violet.
+     La fleche n'a plus rien a designer, elle tombe. */
+  .mob__ici {
+    position: static;
+    width: auto;
+    margin: -.35rem 0 .1rem;
+  }
+  .mob__ici span { font-size: 1.55rem; }
+  .mob__ici svg { display: none; }
+
+  .paliers__grille { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .compteur { justify-content: flex-start; }
+  .echelon { grid-template-columns: 3.8rem minmax(0, 1fr); gap: .7rem; }
+}
+
+@media (max-width: 359px) {
+  .marche:nth-child(2) { margin-left: 7px; }
+  .marche:nth-child(3) { margin-left: 14px; }
+  .marche:nth-child(4) { margin-left: 21px; }
+  .marche::after { width: 7px; }
+  .echelon { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+}
+</style>
+</head>
+<body>
+
+<section id="mobilisation">
+  <div class="grain__voile" aria-hidden="true"></div>
+  <div class="contenu">
+
+    <div class="mob__intro">
+      <h2>La mobilisation citoyenne</h2>
+      <p class="mob__chapo">Ce lieu n'avance pas à coups d'annonces. Il avance à mesure que nous sommes plus nombreux·ses.</p>
+    </div>
+
+    <ol class="escalier">
+      <li class="marche marche--faite">
+        <div class="marche__bloc">
+          <span class="marche__date">Début 2025</span>
+          <h3>La lettre de soutien</h3>
+          <p class="marche__detail"><b>1 700 personnes</b> signent pour que le projet existe.</p>
+        </div>
+        <span class="marche__rond">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.2 8.4l3.1 3.2 6.5-7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="visuellement-cache">Étape franchie</span>
+        </span>
+      </li>
+
+      <li class="marche marche--faite">
+        <div class="marche__bloc">
+          <span class="marche__date">2025 → avril 2026</span>
+          <h3>La campagne de dons</h3>
+          <p class="marche__detail"><b>120 000 €</b> réunis auprès de <b>650 donateur·ices</b>, dons et mécénat de compétences. Les études démarrent.<span class="marche__note">Le don reste possible.</span></p>
+        </div>
+        <span class="marche__rond">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.2 8.4l3.1 3.2 6.5-7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="visuellement-cache">Étape franchie</span>
+        </span>
+      </li>
+
+      <li class="marche marche--ici">
+        <p class="mob__ici" aria-hidden="true">
+          <span>nous sommes ici</span>
+          <svg viewBox="0 0 46 30" fill="none" aria-hidden="true" focusable="false"><path d="M6 5C14 3 26 8 30 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M23 19.5L30.5 24.5L36 17" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <div class="marche__bloc">
+          <span class="marche__date">Depuis septembre 2026</span>
+          <h3>Les parts sociales</h3>
+          <p class="marche__detail">Chacune et chacun peut devenir copropriétaire du lieu, à partir de <b>100 €</b>.</p>
+        </div>
+        <span class="marche__rond">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3.4" fill="currentColor"/></svg>
+          <span class="visuellement-cache">Étape en cours</span>
+        </span>
+      </li>
+
+      <li class="marche marche--vient">
+        <div class="marche__bloc">
+          <span class="marche__date">Janvier 2027</span>
+          <h3>Les titres participatifs</h3>
+          <p class="marche__detail">La marche suivante du financement citoyen, pour celles et ceux qui veulent aller plus loin.</p>
+        </div>
+        <span class="marche__rond">
+          <span class="visuellement-cache">Étape à venir</span>
+        </span>
+      </li>
+    </ol>
+
+    <div class="paliers">
+      <h3>Où en est la souscription</h3>
+      <div class="paliers__grille">
+        <div class="compteur">
+          <div class="compteur__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+              <circle class="compteur__piste" cx="60" cy="60" r="52"></circle>
+              <circle class="compteur__arc" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <span class="compteur__nombre">124</span>
+          </div>
+          <p class="compteur__legende"><b>coopérateur·ices</b>sur les 667 du premier palier</p>
+        </div>
+        <ol class="echelons">
+          <li class="echelon">
+            <b>667</b>
+            <span>autant que de donateur·ices en 2026</span>
+          </li>
+          <li class="echelon echelon--vise">
+            <b>1 700</b>
+            <span>autant que de signataires de la lettre de soutien</span>
+          </li>
+          <li class="echelon echelon--vise">
+            <b>3 000</b>
+            <span>parce qu'à 3 000, ce lieu n'est plus le projet de quelques-un·es</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.visuellement-cache {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</body>
+</html>
