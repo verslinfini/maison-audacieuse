@@ -1066,6 +1066,27 @@ h2 .marqueur::before {
   }
 }
 
+/* ---------- avertissement « version pour ordinateur » ---------- */
+/* Safari et Chrome mobile laissent forcer la version ordinateur, reglage
+   memorise par site. Le meta viewport est alors ignore : la page se compose
+   en 980 px puis se reduit a l'echelle, les media queries voient 980 px et
+   servent la mise en page large sur un ecran de 6 pouces. Rien ne le corrige
+   cote site, c'est un choix du visiteur. On peut au moins le nommer. */
+.avis-bureau {
+  display: none;
+  position: relative;
+  z-index: 120;
+  margin: 0;
+  padding: .75rem 1rem;
+  background: var(--jaune);
+  color: var(--violet-sombre);
+  font: 500 15px/1.45 "Onest", system-ui, sans-serif;
+  text-align: center;
+}
+.avis-bureau b { font-weight: 700; }
+html.vue-bureau .avis-bureau { display: block; }
+html.vue-bureau .entete { position: static; }
+
 /* Le libelle du champ existe pour les lecteurs d'ecran, pas a l'ecran. */
 .visuellement-cache {
   position: absolute;
@@ -1309,6 +1330,8 @@ h2 .marqueur::before {
 </style>
 </head>
 <body>
+
+<p class="avis-bureau" hidden>Votre navigateur affiche ce site en <b>version pour ordinateur</b>, ce qui écrase la mise en page mobile. Sur iPhone, touchez <b>aA</b> à gauche de la barre d'adresse puis « Demander le site mobile ». Sur Android, ouvrez le menu <b>⋮</b> et décochez « Site pour ordinateur ».</p>
 
 <header class="entete" id="entete">
   <div class="entete__inner">
@@ -1634,6 +1657,21 @@ h2 .marqueur::before {
   window.addEventListener('scroll', maj, { passive: true });
 
 
+
+  // La largeur de mise en page depasse largement celle de l'ecran physique :
+  // signature du mode « version pour ordinateur ». screen.width reste la
+  // largeur reelle en pixels CSS, clientWidth passe a 980.
+  var avis = document.querySelector('.avis-bureau');
+  var testerVue = function () {
+    var ecran = Math.min(screen.width || 9999, screen.height || 9999);
+    var grossier = !window.matchMedia || matchMedia('(pointer: coarse)').matches;
+    var force = grossier && ecran < 560 && document.documentElement.clientWidth > ecran * 1.4;
+    document.documentElement.classList.toggle('vue-bureau', force);
+    if (avis) { avis.hidden = !force; }
+  };
+  testerVue();
+  window.addEventListener('resize', testerVue);
+  window.addEventListener('orientationchange', testerVue);
 
   var barre = document.querySelector('.barre-mobile');
   var boutonsFlux = [].slice.call(document.querySelectorAll('main .bouton--primaire'));
