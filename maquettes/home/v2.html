@@ -303,7 +303,9 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 }
 .jauge__legende { line-height: 1.4; }
 .jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
-.jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); color: var(--texte); }
+/* Bornee : sans plafond, la lecture du palier etire toute la jauge et
+   pousse l'anneau hors de la colonne du heros. */
+.jauge__palier { display: block; max-width: 23ch; margin-top: .3rem; font-size: var(--t-petit); line-height: 1.35; color: var(--texte); }
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
    Haut et bas droits a 0,6 unite pres sur 226 : assez pour que ce ne soit pas
@@ -977,6 +979,9 @@ h2 .marqueur::before {
 @media (max-width: 359px) {
   /* Les trois lignes du titre tiennent jusqu ici, en dessous elles coulent. */
   br.coupe-titre { display: none; }
+  /* Ici la legende passe sous l'anneau et dispose de toute la largeur :
+     la brider a 23ch lui coute une ligne pour rien. */
+  .jauge__palier { max-width: none; }
 }
 .porte .lien-texte { margin-top: auto; }
 /* Meme violet que le soulignement des liens texte : le trait de bordure
@@ -1343,7 +1348,7 @@ h2 .marqueur::before {
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier">premier palier&nbsp;: 667</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670, autant que de participant·es à la campagne&nbsp;de&nbsp;dons</span>
           </p>
         </div>
       </div>
