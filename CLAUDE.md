@@ -40,6 +40,7 @@ node build.mjs                    site de recette : noindex, robots.txt bloquant
 node build.mjs --prod             site public : indexable
 node build.mjs --sortie <dossier> construire ailleurs (travaux parallèles)
 node verif/pages.mjs              contrôler toutes les pages
+node verif/home-conforme.mjs      la home rend encore comme la maquette validée
 node deploie.mjs                  déployer en préproduction
 node deploie.mjs --retour         revenir à la version précédente
 node deploie.mjs --liste          les sauvegardes du serveur

@@ -25,7 +25,7 @@ build.mjs             assemble le tout dans dist/
 ```
 node build.mjs          site de recette, noindex
 node build.mjs --prod    site public, indexable
-node verif/identique.mjs  la home n a pas bouge au refactoring
+node verif/home-conforme.mjs  la home rend encore comme la maquette validee
 node verif/pages.mjs      controle mecanique de toutes les pages
 ```
 
