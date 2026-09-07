@@ -780,6 +780,10 @@ h2 .marqueur::before {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* Hauteur propre a chaque cadre plutot qu'etiree sur le plus haut :
+     sans ca, celui qui n'a pas de precision garde son texte colle en
+     haut avec un vide dessous. */
+  align-items: center;
   gap: clamp(.7rem, 1.6vw, 1.3rem);
   margin: clamp(1.2rem, 2.8vh, 2.2rem) 0 0;
 }
@@ -1504,7 +1508,7 @@ h2 .marqueur::before {
         <p class="part__texte">Devenez coopérateur·ice de la Maison Audacieuse <br class="coupe-large">et copropriétaire du lieu avec nous.</p>
         <p class="part__texte part__texte--pivot">Chaque part sociale en appelle d'autres.<br><span class="marqueur marqueur--5">Plus nous sommes nombreux·ses, plus le projet a de poids.</span></p>
         <ul class="equations">
-          <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b><small>une seule suffit, on peut en prendre plusieurs</small></li>
+          <li><b>1</b> part <span class="eq" aria-hidden="true">=</span> <b>100 €</b></li>
           <li><b>1</b> personne <span class="eq" aria-hidden="true">=</span> <b>1</b> voix<small>quel que soit le nombre de parts</small></li>
         </ul>
         <p class="part__reassurance">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
