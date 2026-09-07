@@ -303,9 +303,28 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 }
 .jauge__legende { line-height: 1.4; }
 .jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
-/* Sous la jauge entiere et non dans sa legende : celle-ci est centree
-   sur l'anneau, une ligne de plus y decale « cooperateur ices ». */
-.jauge__sous { margin-top: .85rem; font-size: var(--t-petit); line-height: 1.4; color: var(--texte); text-align: center; }
+.jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); color: var(--texte); }
+/* Annotation portee a la main sous le compteur, reliee au palier par un
+   trait trace. Elle ne rentre pas dans la legende : celle-ci est centree
+   sur l'anneau, une ligne de plus y decalerait « cooperateur ices ». */
+.jauge__note {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: .1rem;
+  margin: .35rem 0 0;
+  padding-left: 2.4rem;
+  color: var(--texte);
+}
+.jauge__note-texte {
+  display: block;
+  text-align: right;
+  font-size: .84rem;
+  line-height: 1.32;
+  transform: rotate(-6deg);
+  transform-origin: 100% 100%;
+}
+.jauge__note-fleche { flex: none; width: 52px; height: 42px; margin-bottom: .55rem; }
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
    Haut et bas droits a 0,6 unite pres sur 226 : assez pour que ce ne soit pas
@@ -1112,7 +1131,11 @@ h2 .marqueur::before {
   .figure { order: 4; margin-bottom: .6rem; }
   .hero__phrase { order: 5; }
   .jauge { order: 6; margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
-  .jauge__sous { order: 7; text-align: left; margin-top: .7rem; }
+  /* A plat sur ce format : inclinee, la premiere ligne sort dans la marge
+     et le geste coute une hauteur que le heros n'a pas. */
+  .jauge__note { order: 7; justify-content: flex-start; padding-left: 0; margin-top: .45rem; gap: .3rem; }
+  .jauge__note-texte { transform: none; text-align: left; }
+  .jauge__note-fleche { width: 40px; height: 32px; margin-bottom: .25rem; }
   .hero__actions { order: 8; margin-top: .4rem; }
   .figure img { max-height: 158px; border-width: 8px; transform: rotate(-1deg); }
   .figure figcaption { margin-top: .6rem; }
@@ -1350,9 +1373,16 @@ h2 .marqueur::before {
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">Premier palier&nbsp;: 670</span>
           </p>
         </div>
-        <p class="jauge__sous" data-compteur>Premier palier&nbsp;: 670, autant que de participant·es à la campagne de dons</p>
+        <p class="jauge__note" data-compteur>
+          <span class="jauge__note-texte">autant que de participant·es<br>à la campagne de dons</span>
+          <svg class="jauge__note-fleche" viewBox="0 0 60 48" fill="none" aria-hidden="true" focusable="false">
+            <path d="M3 43C21 42.5 38 35 46.5 11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M38.5 15.5L47 6.5L53 16.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </p>
       </div>
       <div class="hero__colonne">
         <figure class="figure">
