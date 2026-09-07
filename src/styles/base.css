@@ -562,8 +562,11 @@ h2 .marqueur::before {
 
 /* Au-dela d'environ 70 signes, l'oeil perd la ligne suivante. Tout texte
    suivi passe par la. */
-.mesure { max-width: 68ch; }
-.mesure--large { max-width: 82ch; }
+/* L'unite ch vaut la largeur du « 0 », pas celle d'un signe moyen. En Onest le
+   rapport est de 1,42 : 68ch rendaient 97 signes par ligne, soit une colonne
+   fausse de 46 %. Mesure, pas estimee. */
+.mesure { max-width: 48ch; }
+.mesure--large { max-width: 58ch; }
 
 /* Espacement vertical du texte courant. Evite d'avoir a marger chaque
    paragraphe a la main dans chaque page. */
@@ -615,7 +618,7 @@ h2 .marqueur::before {
 .bloc--sombre .prose strong { color: var(--blanc); }
 
 /* Liste numerotee, pour les etapes d'un parcours. */
-.etapes { list-style: none; counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
+.etapes { list-style: none; max-width: 52ch; counter-reset: etape; display: flex; flex-direction: column; gap: clamp(1.2rem, 2vw, 1.8rem); }
 
 .etapes > li {
   counter-increment: etape;
@@ -737,6 +740,24 @@ h2 .marqueur::before {
 .tableau tbody tr:last-child td,
 .tableau tbody tr:last-child th { border-bottom: 0; }
 
+/* Sous 640 px, un tableau de plus de trois colonnes s'empile : chaque rangee
+   devient un bloc et l'intitule de colonne repasse devant sa cellule, via
+   data-col. Un defilement horizontal cache la moitie du tableau sans le dire. */
+@media (max-width: 639px) {
+  .tableau--empile thead { position: absolute; left: -9999px; }
+  .tableau--empile tbody tr { display: block; padding: .9rem 0; border-bottom: 1px solid var(--filet); }
+  .tableau--empile tbody tr:last-child { border-bottom: 0; }
+  .tableau--empile td,
+  .tableau--empile th { display: block; width: auto; padding: .2rem 0; border: 0; }
+  .tableau--empile td::before {
+    content: attr(data-col) " ";
+    display: block;
+    font-size: var(--t-petit);
+    font-weight: 600;
+    color: var(--violet-sombre);
+  }
+}
+
 /* ---------- questions ---------- */
 
 .questions { display: flex; flex-direction: column; }
@@ -795,6 +816,52 @@ h2 .marqueur::before {
 
 .bloc--sombre .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 .bloc--sombre .bouton--primaire:hover { background: #FFEB7E; }
+
+/* ---------- champs de formulaire ---------- */
+
+/* WCAG 1.4.11 demande 3:1 pour le contour d'un champ. --filet donne 1,33 sur
+   blanc : le champ est invisible. Le violet donne 4,70. */
+.champ { display: flex; flex-direction: column; gap: .4rem; }
+
+.champ > label { font-weight: 600; color: var(--violet-sombre); }
+
+.champ input:not([type="checkbox"]):not([type="radio"]),
+.champ textarea,
+.champ select,
+.infolettre input[type="email"] {
+  width: 100%;
+  padding: .7rem .85rem;
+  border: 1.5px solid var(--violet);
+  border-radius: 6px;
+  background: var(--blanc);
+  color: var(--texte);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.champ input:focus-visible,
+.champ textarea:focus-visible,
+.infolettre input:focus-visible { border-color: var(--violet-sombre); }
+
+.champ input::placeholder,
+.champ textarea::placeholder,
+.infolettre input::placeholder { color: rgba(86, 84, 107, .78); }
+
+.champ__aide { font-size: var(--t-petit); color: rgba(86, 84, 107, .86); }
+
+/* Case a cocher : la cible reste de 44 px meme si le carre en fait 20. */
+.champ--case { flex-direction: row; align-items: flex-start; gap: .6rem; }
+.champ--case input { width: 1.25rem; height: 1.25rem; margin: .18rem 0 0; flex: none; accent-color: var(--violet); }
+.champ--case label { font-weight: 400; color: inherit; cursor: pointer; }
+
+/* Champ piege : hors de l'ecran, jamais display:none, que les robots lisent. */
+.piege {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 
 /* ---------- liens dans le fil du texte ---------- */
 

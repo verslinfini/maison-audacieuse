@@ -129,6 +129,13 @@
    et la page elle-meme ne defile jamais horizontalement. */
 .tableau--durees { min-width: 44rem; }
 
+/* Sous 640 px le tableau s'empile (.tableau--empile du socle) : le min-width
+   le forcerait a deborder et on ne verrait que deux colonnes sur cinq. */
+@media (max-width: 639px) {
+  .tableau--durees { min-width: 0; }
+  .legal .tableau-cadre { overflow-x: visible; }
+}
+
 /* Un tableau coupe net au bord droit ne dit pas qu'il continue. Les deux
    premiers plans, en background-attachment local, suivent le contenu et
    masquent l'ombre du bord atteint ; les deux ombres, fixes au cadre,

@@ -756,6 +756,16 @@ h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-sp
 
 .geste--3 { grid-area: 1 / 5; }
 
+/* Mesure : a 768 px les trois colonnes tombent a 190 px, soit 24 signes par
+   ligne, sur l'ecran de conversion du site. Elles ne redeviennent lisibles
+   qu'a 1200 px. En dessous, une seule colonne, et les fleches disparaissent
+   puisqu'elles ne relient plus rien horizontalement. */
+@media (max-width: 1199px) {
+  .gestes { grid-template-columns: minmax(0, 1fr); }
+  .gestes .fleche { display: none; }
+  .geste--1, .geste--2, .geste--3 { grid-area: auto; }
+}
+
 .geste--cta { grid-column: 1 / -1; justify-self: center; }
 
 
@@ -850,14 +860,17 @@ h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-sp
   min-width: 0;
   min-height: 44px;
   padding: 0 .7rem;
-  border: 1px solid var(--filet);
+  /* WCAG 1.4.11 demande 3:1 pour un contour de champ. --filet donnait 1,33
+     sur blanc : le champ ne se voyait pas, alors que le bouton juste a cote
+     porte un contour plein. Le violet donne 4,70. */
+  border: 1.5px solid var(--violet);
   border-radius: 7px;
   background: var(--blanc);
   color: var(--texte);
   font: 400 .93rem/1 "Onest", system-ui, sans-serif;
 }
 
-.infolettre input::placeholder { color: #8a889c; }
+.infolettre input::placeholder { color: rgba(86, 84, 107, .78); }
 
 /* Sous 340 px le champ et le bouton ne tiennent plus cote a cote. Un
    flex-grow reglerait l'etirement sans seuil a caler, mais il deplace le
