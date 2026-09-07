@@ -955,3 +955,422 @@ h2 .marqueur::before {
   .etapes > li { padding-left: 2.9rem; }
   .etapes > li::before { width: 2rem; height: 2rem; font-size: .92rem; }
 }
+
+
+/* ================================================================== */
+/* FONDS DE SECTION COLORES                                            */
+/*                                                                     */
+/* Ajoutes le 07/09/2026. Cause : les dix feuilles de pages            */
+/* interieures totalisaient zero vert, zero terracotta et un kaki,     */
+/* contre dix verts sur la seule home. Les pages n'etaient pas grises  */
+/* par gout : le socle ne leur offrait que blanc, violace, gris et     */
+/* sombre. Un composant absent du socle ne s'invente pas dans dix      */
+/* feuilles a la fois, il manque partout.                              */
+/*                                                                     */
+/* Les recettes viennent de la home, ou elles ont ete arbitrees et     */
+/* mesurees ecran par ecran. Elles montent ici telles quelles : le     */
+/* contraste deja tenu la-bas est tenu ici, sans nouvel arbitrage.     */
+/*                                                                     */
+/* Regle d'emploi, celle de la charte : UNE SEULE zone chaude par vue. */
+/* Deux fonds colores qui se suivent s'annulent. Le rythme d'une page  */
+/* interieure : clair, clair, un fond plein, clair, l'appel sombre.    */
+/* ================================================================== */
+
+/* Menthe en haut a gauche, terracotta au bord droit, lavande dessous,
+   nappe blanche au centre pour le texte. Le fond d'ouverture. */
+.bloc--aube,
+.page-tete--aube {
+  background:
+    radial-gradient(58% 46% at 6% 4%, rgba(186,255,228,.52), rgba(186,255,228,0) 62%),
+    radial-gradient(46% 62% at 104% 48%, rgba(163,113,106,.30), rgba(163,113,106,0) 64%),
+    radial-gradient(64% 40% at 78% 102%, rgba(118,109,160,.26), rgba(118,109,160,0) 66%),
+    radial-gradient(60% 52% at 38% 46%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+
+/* Terracotta en haut a droite, vert dilue en bas a gauche, une trace de
+   jaune au coin. Le seul fond sans lavande : il tranche avec les autres. */
+.bloc--claire {
+  background:
+    radial-gradient(56% 50% at 96% 2%, rgba(163,113,106,.34), rgba(163,113,106,0) 62%),
+    radial-gradient(62% 54% at 2% 96%, rgba(94,158,133,.26), rgba(94,158,133,0) 64%),
+    radial-gradient(44% 38% at 92% 98%, rgba(255,243,168,.42), rgba(255,243,168,0) 66%),
+    var(--blanc);
+}
+
+/* Kaki en haut a droite, lavande en bas a gauche, large nappe blanche au
+   centre. Elle sert ce qui demande de la lisibilite : frise, tableau,
+   liste d'etapes. */
+.bloc--nappe {
+  background:
+    radial-gradient(54% 44% at 98% 6%, rgba(157,150,105,.34), rgba(157,150,105,0) 62%),
+    radial-gradient(60% 50% at 2% 94%, rgba(118,109,160,.32), rgba(118,109,160,0) 64%),
+    radial-gradient(78% 58% at 46% 44%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+
+/* Menthe et terracotta en haut, lavande dessous. La composition la plus
+   ouverte : celle des ecrans qui appellent a faire quelque chose. */
+.bloc--ouvert {
+  background:
+    radial-gradient(84% 68% at 22% 10%, rgba(186,255,228,.40), rgba(186,255,228,0) 60%),
+    radial-gradient(76% 62% at 90% 4%, rgba(163,113,106,.30), rgba(163,113,106,0) 62%),
+    radial-gradient(70% 58% at 4% 90%, rgba(118,109,160,.28), rgba(118,109,160,0) 64%),
+    var(--blanc);
+}
+
+/* Violet plein, texte blanc. Le fond de rupture d'une page : il porte
+   l'idee qu'on veut qu'on retienne, jamais du texte long.
+   Contraste : le blanc y tient 4,04 pour 4,5 vise. Plancher assume le
+   04/09 sur la home, apres essai : le seuil strict demanderait 14 % de
+   voile sombre, donc un violet qui n'est plus celui de la charte.
+   Consequence a tenir : sur ce fond, pas de corps de texte sous 1,0625 rem
+   et pas de gris, le blanc plein seulement. */
+.bloc--violet {
+  background:
+    radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
+    radial-gradient(58% 30% at 12% -10%, rgba(157,150,105,.52), rgba(157,150,105,0) 66%),
+    radial-gradient(82% 44% at 94% 2%, rgba(56,54,72,.52), rgba(56,54,72,0) 68%),
+    radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
+    radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
+    radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
+    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    var(--violet);
+  color: var(--blanc);
+}
+
+/* Terracotta plein, texte blanc. Meme plancher de contraste que le violet,
+   ramene par un voile sombre a 16 %. La couleur chaude du site : une seule
+   section par page, jamais deux. */
+.bloc--terracotta {
+  background:
+    radial-gradient(66% 38% at 88% 104%, rgba(56,54,72,.44), rgba(56,54,72,0) 66%),
+    radial-gradient(56% 30% at 10% -8%, rgba(255,243,168,.26), rgba(255,243,168,0) 68%),
+    radial-gradient(74% 42% at 6% 96%, rgba(56,54,72,.34), rgba(56,54,72,0) 70%),
+    radial-gradient(68% 74% at 74% 44%, rgba(150,101,110,.52), rgba(150,101,110,0) 72%),
+    radial-gradient(62% 70% at 26% 56%, rgba(172,124,100,.48), rgba(172,124,100,0) 74%),
+    linear-gradient(rgba(56,54,72,.16), rgba(56,54,72,.16)),
+    var(--terracotta);
+  color: var(--blanc);
+}
+
+/* Ce que les deux fonds pleins partagent avec le fond sombre : les titres
+   passent au blanc, les liens au jaune, la mise au point aussi. Ecrit une
+   fois pour les trois, sinon la troisieme diverge. */
+.bloc--violet h2,
+.bloc--violet h3,
+.bloc--violet .bloc__titre,
+.bloc--terracotta h2,
+.bloc--terracotta h3,
+.bloc--terracotta .bloc__titre { color: var(--blanc); }
+
+.bloc--violet .bloc__intro,
+.bloc--terracotta .bloc__intro { color: rgba(255, 255, 255, .94); }
+
+.bloc--violet .prose strong,
+.bloc--terracotta .prose strong { color: var(--blanc); }
+
+.bloc--violet .puces li::before,
+.bloc--terracotta .puces li::before { background: var(--jaune); }
+
+.bloc--violet .lien-texte,
+.bloc--violet .lien,
+.bloc--violet .lien-doux,
+.bloc--terracotta .lien-texte,
+.bloc--terracotta .lien,
+.bloc--terracotta .lien-doux { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
+
+.bloc--violet .prose a:not([class]),
+.bloc--terracotta .prose a:not([class]),
+.bloc--violet .mesure a:not([class]),
+.bloc--terracotta .mesure a:not([class]) { color: var(--jaune); text-decoration-color: rgba(255, 243, 168, .55); }
+
+.bloc--violet :focus-visible,
+.bloc--terracotta :focus-visible { outline-color: var(--jaune); }
+
+/* Le bouton violet disparaitrait sur le fond violet et flotterait sur le
+   terracotta : sur les deux, il passe au jaune, qui porte son libelle a
+   10,4:1. Meme regle que sur .bloc--sombre. */
+.bloc--violet .bouton--primaire,
+.bloc--terracotta .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
+
+.bloc--violet .bouton--primaire:hover,
+.bloc--terracotta .bouton--primaire:hover { background: #FFEB7E; }
+
+.bloc--violet .carte,
+.bloc--terracotta .carte { background: rgba(255, 255, 255, .10); border-color: rgba(255, 255, 255, .22); }
+
+.bloc--violet .carte__titre,
+.bloc--terracotta .carte__titre { color: var(--blanc); }
+
+.bloc--violet .carte__note,
+.bloc--terracotta .carte__note { color: rgba(255, 255, 255, .72); }
+
+.bloc--violet .fait__nombre,
+.bloc--terracotta .fait__nombre { color: var(--jaune); }
+
+.bloc--violet .a-sourcer,
+.bloc--terracotta .a-sourcer { border-color: var(--jaune); color: var(--jaune); }
+
+/* Le grain texture les aplats colores plus fort que les fonds clairs :
+   sans lui, un aplat de cette taille se voit comme un aplat. */
+.bloc--violet > .grain__voile,
+.bloc--terracotta > .grain__voile { opacity: .30; mix-blend-mode: overlay; }
+
+
+/* ================================================================== */
+/* IMAGES : LES QUATRE FACONS DE POSER UNE PHOTO                       */
+/* Le site a longtemps eu trois images pour onze pages. Les composants */
+/* ci-dessous existent pour que la matiere photographique du projet    */
+/* serve a autre chose qu'a decorer une colonne de texte.              */
+/* ================================================================== */
+
+/* 1. Le duo : une image et un texte cote a cote, l'image d'abord au
+   telephone. C'est la facon la plus simple de rompre un mur de
+   paragraphes, et la plus employee. */
+.duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.6rem, 3.4vw, 3.4rem);
+  align-items: center;
+}
+
+.duo--texte-large { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.duo--image-large { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+
+/* L'image passe a droite sans changer l'ordre du HTML : au clavier et a
+   la lecture d'ecran, le texte vient toujours en premier. */
+.duo--inverse > .figure,
+.duo--inverse > figure { order: 2; }
+
+.duo .figure { margin: 0; }
+
+@media (max-width: 900px) {
+  .duo,
+  .duo--texte-large,
+  .duo--image-large { grid-template-columns: minmax(0, 1fr); }
+  .duo--inverse > .figure,
+  .duo--inverse > figure { order: 0; }
+}
+
+/* 2. La section en photo pleine largeur, avec un panneau blanc pose
+   dessus. Reprise de l'ecran 3 de la home, ou elle porte la ferme.
+   Le voile sombre n'est pas une decoration : sans lui, le panneau flotte
+   et les bords de la photo mangent le titre de la section suivante. */
+.bloc--photo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--violet-sombre);
+  padding: clamp(3.4rem, 8vw, 7rem) 0;
+}
+
+.bloc__fond {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bloc__fond img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bloc__fond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(56,54,72,.62), rgba(56,54,72,.24) 62%, rgba(56,54,72,.42));
+}
+
+.bloc--photo > .contenu { position: relative; z-index: 2; }
+.bloc--photo > .grain__voile { z-index: 1; opacity: .14; }
+
+/* Le panneau : la carte blanche posee sur la photo. Il tient le texte,
+   donc il est opaque. Un panneau translucide sur une photo est
+   illisible des que la photo bouge d'un cliche a l'autre. */
+.panneau {
+  background: var(--blanc);
+  color: var(--texte);
+  max-width: 40rem;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  border-radius: 3px;
+  box-shadow: 0 18px 50px rgba(31, 29, 45, .22);
+}
+
+.panneau > * + * { margin-top: 1.05em; }
+.panneau h2,
+.panneau .bloc__titre { color: var(--violet-sombre); margin-bottom: 0; }
+
+/* Le credit de la photo de fond, en bas a droite du cadre. */
+.bloc__credit {
+  position: absolute;
+  right: var(--marge);
+  bottom: 1rem;
+  z-index: 2;
+  font-size: .7rem;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .82);
+}
+
+/* 3. La galerie : une bande de photos de meme hauteur, qui defile au
+   telephone plutot que de s'empiler sur six ecrans. */
+.galerie {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(15rem, 1fr);
+  gap: clamp(.7rem, 1.4vw, 1.1rem);
+}
+
+.galerie img {
+  width: 100%;
+  height: clamp(13rem, 22vw, 19rem);
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.galerie figure { margin: 0; }
+.galerie figcaption { margin-top: .55rem; font-size: .74rem; color: rgba(86, 84, 107, .88); }
+
+@media (max-width: 767px) {
+  .galerie {
+    grid-auto-columns: 78%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: .6rem;
+    /* Le debordement volontaire deborde jusqu'au bord de l'ecran, pas
+       jusqu'au bord de la colonne : sinon la bande a l'air coupee. */
+    margin-inline: calc(var(--marge) * -1);
+    padding-inline: var(--marge);
+  }
+  .galerie > * { scroll-snap-align: start; }
+}
+
+/* 4. La coupe annotee : un plan d'architecte, et des etiquettes posees
+   dessus en HTML plutot que dessinees dans le fichier.
+   Raison : la coupe fournie par l'agence nomme cinq structures
+   exploitantes. Deux ont bouge depuis. Etiqueter en HTML permet de
+   corriger un nom sans redemander un fichier a l'agence, et de nommer
+   les espaces par leur fonction quand la structure n'est pas figee.
+   Les reperes sont en pourcentage du cadre : ils suivent l'image quelle
+   que soit sa largeur. */
+.coupe {
+  position: relative;
+  margin: 0;
+}
+
+.coupe img { width: 100%; border-radius: 2px; }
+
+.coupe__etiquette {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: .3rem .6rem;
+  border-radius: 2px;
+  background: var(--blanc);
+  box-shadow: 0 2px 10px rgba(31, 29, 45, .16);
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--violet-sombre);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.coupe__etiquette::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: var(--tige, 0);
+  background: var(--violet-sombre);
+  opacity: .45;
+}
+
+/* Sous 700 px les etiquettes se chevauchent quelle que soit leur
+   position : la coupe redevient une image, et la legende une liste. */
+.coupe__legende { display: none; }
+
+@media (max-width: 700px) {
+  .coupe__etiquette { display: none; }
+  .coupe__legende {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    margin-top: 1rem;
+    font-size: .92rem;
+  }
+  .coupe__legende b { color: var(--violet-sombre); }
+}
+
+
+/* ================================================================== */
+/* ANNOTATION MANUSCRITE                                               */
+/* La Meow Script sert de commentaire porte a la main dans la marge :   */
+/* jamais un titre, jamais une phrase entiere. C'est la voix qui        */
+/* commente, pas la voix qui parle. Une par section au maximum.         */
+/* Elle ne porte jamais une information qu'on ne trouve pas ailleurs :  */
+/* une police manuscrite se lit mal, et certains ne la lisent pas.      */
+/* ================================================================== */
+.annote {
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+  line-height: 1.15;
+  color: var(--violet);
+  /* Onest et Meow Script n'ont pas la meme ligne de base : sans ce
+     decalage, l'annotation flotte au-dessus de ce qu'elle commente. */
+  transform: rotate(-2.5deg);
+  display: inline-block;
+}
+
+.bloc--violet .annote,
+.bloc--terracotta .annote,
+.bloc--sombre .annote { color: var(--jaune); }
+
+/* La fleche qui relie l'annotation a ce qu'elle designe. Elle est
+   decorative : le texte se comprend sans elle. */
+.annote__fleche { display: block; width: 3.4rem; height: auto; color: var(--violet); opacity: .7; }
+
+.bloc--violet .annote__fleche,
+.bloc--terracotta .annote__fleche,
+.bloc--sombre .annote__fleche { color: var(--jaune); }
+
+
+/* ================================================================== */
+/* REPERES                                                             */
+/* Deux ou trois chiffres poses en travers d'une page, sur une seule    */
+/* ligne, separes par un filet. Difference avec .faits : .faits est une */
+/* grille de tuiles, .reperes est une ligne. On l'emploie quand les     */
+/* chiffres ponctuent un recit, pas quand ils sont le sujet.            */
+/* ================================================================== */
+.reperes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.4rem, 4vw, 3.4rem);
+  align-items: baseline;
+  padding: clamp(1.2rem, 2.4vw, 1.8rem) 0;
+  border-top: 1px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+}
+
+.repere__nombre {
+  display: block;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--violet-sombre);
+}
+
+.repere__quoi { display: block; margin-top: .35rem; max-width: 20ch; font-size: var(--t-petit); line-height: 1.4; }
+
+.bloc--violet .reperes,
+.bloc--terracotta .reperes,
+.bloc--sombre .reperes { border-color: rgba(255, 255, 255, .28); }
+
+.bloc--violet .repere__nombre,
+.bloc--terracotta .repere__nombre,
+.bloc--sombre .repere__nombre { color: var(--jaune); }

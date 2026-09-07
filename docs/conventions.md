@@ -141,3 +141,129 @@ Editer `dist/`.
 Mettre du style dans un attribut `style`.
 Dupliquer une regle CSS dans deux feuilles.
 Ajouter une dependance sans que le besoin l ait rendue evidente.
+
+
+## Le catalogue des fonds et des images (07/09/2026)
+
+Ces composants vivent dans `base.css`, section « Fonds de section colores » et suivantes. Ils ont ete ajoutes le 07/09 apres le constat que les pages interieures n avaient acces qu au blanc, au gris et au violace, quand la home disposait de six fonds travailles.
+
+### Les fonds de section
+
+Six variantes s ajoutent aux quatre existantes, avec la meme mecanique : `<section class="bloc bloc--X">`.
+
+| Classe | Ce que ca donne | Quand |
+| --- | --- | --- |
+| `bloc--blanc` | blanc plein | par defaut, la section de lecture |
+| `bloc--violace` | violace plein | alternance simple |
+| `bloc--gris` | gris plein | alternance simple |
+| `bloc--aube` | menthe, terracotta, lavande sur violace | ouverture de page |
+| `bloc--claire` | terracotta, vert, jaune sur blanc | section qui doit trancher |
+| `bloc--nappe` | kaki, lavande, nappe blanche au centre | frise, tableau, liste d etapes |
+| `bloc--ouvert` | menthe, terracotta, lavande sur blanc | section qui appelle a agir |
+| `bloc--violet` | violet plein, texte blanc | l idee a retenir, une par page |
+| `bloc--terracotta` | terracotta plein, texte blanc | la couleur chaude, une par page |
+| `bloc--sombre` | violet sombre, texte blanc | l appel de fin, toujours en dernier |
+
+Trois regles :
+
+**Une seule zone chaude par vue.** Un fond plein par page, `bloc--violet` ou `bloc--terracotta`, jamais les deux, jamais deux fois.
+
+**Deux fonds identiques qui se suivent sont un seul bloc.** Soit on les fusionne, soit on change l un des deux.
+
+**Le rythme type d une page interieure** : `page-tete` claire, `bloc--blanc`, une image pleine largeur ou un fond plein, `bloc--claire` ou `bloc--nappe`, `bloc--sombre` pour l appel.
+
+Sur `bloc--violet` et `bloc--terracotta`, le socle bascule seul les titres au blanc, les liens et le bouton au jaune, les puces au jaune, les cartes en translucide. Rien a reecrire dans la feuille de page.
+
+### La section en photo pleine largeur
+
+```html
+<section class="bloc bloc--photo">
+  <div class="bloc__fond" aria-hidden="true">
+    <img src="/assets/img/voute.jpg" alt="" width="1400" height="1867">
+  </div>
+  <div class="grain__voile" aria-hidden="true"></div>
+  <div class="contenu">
+    <div class="panneau">
+      <h2 class="bloc__titre">Le titre</h2>
+      <p>Deux ou trois paragraphes, pas plus.</p>
+    </div>
+  </div>
+  <p class="bloc__credit">Photo collectif La Maison Audacieuse</p>
+</section>
+```
+
+L image de fond est decorative, donc `alt=""` et `aria-hidden` sur son conteneur : ce qu elle montre est dit par le panneau. Le panneau est opaque, jamais translucide.
+
+### Le duo image et texte
+
+```html
+<div class="duo">
+  <figure class="figure">
+    <img src="/assets/img/charpente.jpg" alt="La charpente…" width="1400" height="1867">
+    <figcaption>Sous les combles, mars 2025.</figcaption>
+  </figure>
+  <div class="mesure prose">
+    <p>…</p>
+  </div>
+</div>
+```
+
+`duo--inverse` place l image a droite sans changer l ordre du HTML : le texte reste premier au clavier et a la lecture d ecran. `duo--texte-large` et `duo--image-large` deforment la grille. Sous 900 px, tout s empile, image en premier.
+
+### La galerie
+
+```html
+<div class="galerie">
+  <figure><img src="…" alt="…" width="1400" height="1867"><figcaption>…</figcaption></figure>
+  <figure><img src="…" alt="…" width="1400" height="1867"><figcaption>…</figcaption></figure>
+</div>
+```
+
+Trois ou quatre images de meme hauteur. Sous 767 px, la bande defile horizontalement avec accroche plutot que de s empiler sur six ecrans.
+
+### La coupe annotee
+
+```html
+<figure class="coupe">
+  <img src="/assets/img/coupe-espaces.jpg" alt="Coupe du batiment…" width="2000" height="1009">
+  <p class="coupe__etiquette" style="left: 14%; top: 82%">Accueil des femmes<br>victimes de violences</p>
+  <p class="coupe__etiquette" style="left: 44%; top: 86%">Pole de sante</p>
+  <ul class="coupe__legende">
+    <li><b>Rez-de-chaussee</b> accueil, pole de sante, cafe</li>
+    <li><b>Premier etage</b> bureaux, beguinage</li>
+  </ul>
+</figure>
+```
+
+Les etiquettes se posent en pourcentage du cadre, elles suivent donc l image a toutes les largeurs. Sous 700 px elles se chevauchent quoi qu on fasse : elles disparaissent et `coupe__legende` prend le relais. **Les deux doivent dire la meme chose**, sinon le lecteur au telephone lit autre chose que celui au bureau.
+
+Raison d etre du composant : la coupe fournie par l agence nomme cinq structures exploitantes, dont une a quitte le projet. Etiqueter par-dessus permet de nommer les espaces par leur fonction, et de corriger sans redemander un fichier.
+
+### L annotation manuscrite
+
+```html
+<p class="annote">autant que de participant·es</p>
+```
+
+Meow Script, violette sur fond clair, jaune sur fond plein. Une par section au maximum, jamais un titre, jamais une phrase entiere. Elle ne porte jamais une information qu on ne trouve pas ailleurs : une police manuscrite se lit mal, et certains ne la lisent pas du tout.
+
+### Les reperes
+
+```html
+<div class="reperes">
+  <p><span class="repere__nombre">99 ans</span><span class="repere__quoi">la duree de la promesse de bail</span></p>
+  <p><span class="repere__nombre">100 €</span><span class="repere__quoi">le prix d une part sociale</span></p>
+</div>
+```
+
+Deux ou trois chiffres sur une ligne, entre deux filets. Difference avec `faits` : `faits` est une grille de tuiles quand les chiffres sont le sujet, `reperes` est une ligne quand ils ponctuent un recit.
+
+### La valeur d exemple
+
+Un chiffre de preproduction se declare :
+
+```html
+<span data-a-remplir="ce qu il faut mettre a la place">124</span>
+```
+
+`node build.mjs --prod` refuse alors de construire tant que l attribut est la. C est le garde-fou du compteur de la home : sans lui, le site s ouvre au public en annoncant un nombre de cooperateur·ices faux, et c est le premier chiffre que voit un visiteur.

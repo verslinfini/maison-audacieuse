@@ -100,6 +100,18 @@ for (const fichier of pages) {
   const reste = page.match(/\{\{[^}]*\}\}/);
   if (reste) throw new Error(`${fichier} : variable non remplie ${reste[0]}`);
 
+  // Une valeur d'exemple porte « data-a-remplir » : elle vit en preproduction,
+  // jamais en production. Le compteur de la home en est une. Sans ce garde,
+  // le site s'ouvre au public en annoncant un nombre de cooperateur ices faux,
+  // et c'est le premier chiffre que voit un visiteur.
+  if (PROD) {
+    const exemple = page.match(/data-a-remplir="([^"]*)"/);
+    if (exemple) {
+      throw new Error(`${fichier} : valeur d'exemple encore en place, « ${exemple[1]} ». `
+        + `La remplacer par la valeur reelle et retirer l'attribut avant de construire en production.`);
+    }
+  }
+
   const adresse = '/' + (champs.sortie || `${nom}/index.html`).replace(/index\.html$/, '');
   produites.push({ adresse, titre: champs.titre, description: champs.description });
 

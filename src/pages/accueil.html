@@ -12,15 +12,16 @@ sortie: index.html
         <p class="kicker">À ANNECY, QUARTIER DE NOVEL</p>
         <h1>Et si ce lieu était le nôtre ?</h1>
         <p class="hero__lead">Devenons-en toutes et tous coopérateur·ices.</p>
-        <!-- Le compteur ne compte que les coopeatrices et cooperateurs, il part
-             donc de zero le 07/09 : 124 est une valeur d'exemple, masquee. Le 666 est
-             le PALIER, c'est-a-dire le nombre de donatrices et donateurs de la
-             campagne close en avril. -->
-        <!-- Le compteur s'allume a la premiere souscription reelle : retirer le
-           « hidden » ci-dessous et remplacer 124 par le chiffre du jour. Tant
-           qu'il compte zero cooperateur ice, la copy validee prevoit le heros
-           sans la ligne compteur, et rien d'autre ne bouge. -->
-      <div class="jauge__ensemble" data-compteur hidden>
+        <!-- La jauge est la piece centrale du heros : elle dit ou en est la
+             campagne d'un coup d'oeil, et c'est elle qui donne envie d'en etre.
+             Elle ne compte que les cooperatrices et cooperateurs, pas les euros
+             (pivot du plan de campagne du 14/08). Le 666 est le PALIER, c'est-a-dire
+             le nombre de donatrices et donateurs de la campagne close en avril.
+             Le chiffre affiche est un exemple de preproduction : « data-a-remplir »
+             le declare, et « node build.mjs --prod » refuse de construire tant
+             qu'il reste. Au lancement, remplacer 124 par le chiffre reel, ajuster
+             « stroke-dasharray » de .jauge__arc au prorata, retirer l'attribut. -->
+      <div class="jauge__ensemble" data-compteur>
         <div class="jauge">
           <span class="jauge__deja">déjà</span>
           <div class="jauge__anneau">
@@ -28,7 +29,7 @@ sortie: index.html
               <circle class="jauge__piste" cx="60" cy="60" r="52"></circle>
               <circle class="jauge__arc" cx="60" cy="60" r="52"></circle>
             </svg>
-            <span class="jauge__nombre">124</span>
+            <span class="jauge__nombre" data-a-remplir="compteur de cooperateur·ices au jour de la bascule">124</span>
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
