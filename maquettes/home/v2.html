@@ -303,9 +303,13 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 }
 .jauge__legende { line-height: 1.4; }
 .jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
-/* Bornee : sans plafond, la lecture du palier etire toute la jauge et
-   pousse l'anneau hors de la colonne du heros. */
-.jauge__palier { display: block; max-width: 23ch; margin-top: .3rem; font-size: var(--t-petit); line-height: 1.35; color: var(--texte); }
+/* Bornees : sans plafond, la lecture etire toute la jauge et pousse
+   l'anneau hors de la colonne du heros. La lecture prend sa propre ligne
+   sous le chiffre et s'equilibre sur deux : text-wrap balance repartit
+   les mots que le plafond en ch a fait passer a la ligne. Violet sombre
+   et non violet, qui tombe a 3,7 de contraste sur ce fond. */
+.jauge__palier { display: block; max-width: 25ch; margin-top: .3rem; font-size: var(--t-petit); line-height: 1.35; color: var(--texte); }
+.jauge__lecture { display: block; max-width: 22ch; margin-top: .34rem; font-weight: 600; color: var(--violet-sombre); text-wrap: balance; }
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
    Haut et bas droits a 0,6 unite pres sur 226 : assez pour que ce ne soit pas
@@ -981,7 +985,7 @@ h2 .marqueur::before {
   br.coupe-titre { display: none; }
   /* Ici la legende passe sous l'anneau et dispose de toute la largeur :
      la brider a 23ch lui coute une ligne pour rien. */
-  .jauge__palier { max-width: none; }
+  .jauge__palier, .jauge__lecture { max-width: none; }
 }
 .porte .lien-texte { margin-top: auto; }
 /* Meme violet que le soulignement des liens texte : le trait de bordure
@@ -1348,7 +1352,7 @@ h2 .marqueur::before {
           </div>
           <p class="jauge__legende">
             <span class="jauge__quoi">coopérateur·ices</span>
-            <span class="jauge__palier">premier palier&nbsp;: 670, autant que de participant·es à la campagne&nbsp;de&nbsp;dons</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="jauge__lecture">nous étions 670 à la campagne&nbsp;de&nbsp;dons</span></span>
           </p>
         </div>
       </div>
@@ -1385,7 +1389,9 @@ h2 .marqueur::before {
             <li><span class="nom-structure">Béguinage</span>un habitat partagé pour des femmes âgées et isolées qui choisissent la vie en communauté,</li>
             <li><span class="nom-structure">Café des Audacieuses</span>un café culturel et associatif ouvert sur le quartier, coworking safe en journée, rencontres en soirée,</li>
             <li><span class="nom-structure">Maison En-Santé</span>un pôle santé inclusif, avec des soignant·es sensibilisé·es à la santé des femmes,</li>
-          <li><span class="nom-structure">Banjo</span>un espace de créativité et d'éveil pour les enfants et les familles.</li>
+          <!-- Banjo a quitte le projet : la brique est nommee par son usage
+               et non par une exploitante, le lieu tient sans elle. -->
+          <li><span class="nom-structure">Enfance et familles</span>un espace de créativité et d'éveil.</li>
         </ul>
         <p class="lieu__lien"><a class="lien-texte" href="/lequipe-projet/">Découvrir l'équipe et les exploitantes du lieu</a></p>
       </div>
