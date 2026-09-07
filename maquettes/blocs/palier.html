@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lecture du palier, quatre registres</title>
+<meta name="description" content="La legende de la jauge du heros, comparee en quatre traitements, aux deux largeurs reelles.">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta name="theme-color" content="#766DA0">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* ------------------------------------------------------------------ */
+/* Comparateur : la lecture du palier sous la jauge du heros, dans      */
+/* quatre registres, aux deux largeurs ou elle vit reellement           */
+/* (colonne gauche du heros a 1440, pleine largeur a 375).              */
+/* Le CSS de la jauge est repris tel quel de home/v2.html.              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --violet: #766DA0;
+  --violet-sombre: #383648;
+  --kaki: #9D9669;
+  --vert: #5E9E85;
+  --terracotta: #A3716A;
+  --menthe: #BAFFE4;
+  --jaune: #FFF3A8;
+  --texte: #56546B;
+  --violace: #EDEDF5;
+  --blanc: #FFFFFF;
+  --filet: rgba(56, 54, 72, .16);
+  --t-petit: .875rem;
+  --trace-2: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'><path d='M13,2.1 L62,2.5 L56,30.3 L3,29.9 Z' fill='%23FFF3A8'/></svg>");
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 4rem;
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: "Onest", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-spacing: -.018em; }
+h1 { font-size: 1.9rem; margin-bottom: .5rem; }
+p { margin: 0; }
+
+.entete { max-width: 62ch; margin-bottom: 2.4rem; }
+.entete p + p { margin-top: .7rem; }
+.entete code {
+  font: inherit;
+  background: var(--violace);
+  padding: .1rem .35rem;
+  border-radius: 4px;
+}
+
+.variante { margin-top: 3.2rem; border-top: 1px solid var(--filet); padding-top: 1.4rem; }
+.variante__titre { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .3rem; }
+.variante h2 { font-size: 1.25rem; }
+.variante__lettre {
+  display: inline-grid; place-items: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--violet); color: var(--blanc);
+  font-size: .82rem; font-weight: 700;
+}
+.variante__note { font-size: .93rem; max-width: 62ch; margin-bottom: 1.5rem; }
+
+.paire { display: flex; flex-wrap: wrap; gap: 2.2rem 3rem; align-items: flex-start; }
+.cadre__nom { font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--kaki); margin-bottom: .5rem; }
+/* Les deux largeurs reelles : colonne gauche du heros a 1440, et pleine
+   largeur moins les marges a 375. */
+.cadre__boite { background: #EAEAF1; border-radius: 10px; padding: 1.4rem 1.5rem 1.6rem; }
+/* Le cadre etroit fait 375 px de large avec les marges reelles de la
+   page (20 px), pour que la zone de texte fasse exactement les 335 px
+   d'un telephone courant. Le large vise les 540 px de la colonne
+   gauche du heros a 1440. */
+.cadre--large .cadre__boite { width: calc(540px + 3rem); max-width: 100%; }
+.cadre--etroit .cadre__boite { width: 375px; max-width: 100%; padding: 1.4rem 20px 1.6rem; }
+
+/* ---------- la jauge, reprise de home/v2.html ---------- */
+.jauge {
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--filet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.jauge__deja {
+  flex: 0 0 auto;
+  align-self: center;
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: 3.9rem;
+  line-height: 1;
+  color: var(--texte);
+  -webkit-text-stroke: .6px currentColor;
+  paint-order: stroke fill;
+  transform: rotate(-7deg);
+  margin: 0 -.2rem .5rem 0;
+}
+.jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
+.jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.jauge__piste { fill: none; stroke: rgba(56, 54, 72, .13); stroke-width: 8; }
+.jauge__arc { fill: none; stroke: var(--vert); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 60.8 326.7; }
+.jauge__nombre {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.55rem; font-weight: 700; letter-spacing: -.03em;
+  color: var(--vert); line-height: 1;
+}
+.jauge__legende { line-height: 1.4; }
+.jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
+.jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); line-height: 1.35; color: var(--texte); }
+
+/* Format telephone, repris a l'identique du bloc 767 px de la home :
+   l'anneau retrecit a 96 px et le gap a .6rem, sans quoi la legende
+   passerait sous l'anneau ici alors qu'elle reste a cote en vrai. */
+.cadre--etroit .jauge { flex-wrap: wrap; justify-content: flex-start; gap: .6rem; padding-top: 1rem; }
+.cadre--etroit .jauge__anneau { width: 96px; height: 96px; }
+.cadre--etroit .jauge__nombre { font-size: 1.75rem; }
+.cadre--etroit .jauge__deja { margin: 0 0 .3rem 0; font-size: 2.4rem; }
+.cadre--etroit .jauge__legende { flex: 1 1 9rem; min-width: 0; }
+
+/* ---------- ce qui distingue les quatre registres ---------- */
+/* La lecture est toujours sur sa propre ligne, sous le palier, et
+   s'equilibre sur deux lignes : text-wrap balance repartit les mots,
+   le plafond en ch garantit la coupe la ou balance manque. */
+.lecture {
+  display: block;
+  margin-top: .34rem;
+  text-wrap: balance;
+}
+
+/* A, sobre : la lecture s'efface derriere le chiffre. */
+.v-a .jauge__palier { font-weight: 600; color: var(--violet-sombre); }
+.v-a .lecture { max-width: 25ch; font-size: .8rem; font-weight: 400; color: var(--texte); opacity: .85; }
+
+/* B, affirmee : la lecture pese autant que le palier, et repete le chiffre. */
+.v-b .jauge__palier { max-width: 25ch; }
+.v-b .lecture { max-width: 22ch; font-weight: 600; color: var(--violet-sombre); }
+
+/* C, manuscrite : le geste du « deja », applique a la lecture. */
+.v-c .jauge__palier { max-width: 25ch; }
+.v-c .lecture {
+  max-width: 15ch;
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: 1.55rem;
+  line-height: 1.12;
+  color: var(--violet);
+  margin-top: .45rem;
+}
+
+/* D, surlignee : le trace jaune de la charte, deux lignes surlignees. */
+.v-d .jauge__palier { max-width: 25ch; }
+.v-d .lecture { max-width: 22ch; font-weight: 600; color: var(--violet-sombre); }
+/* Technique du marqueur reprise a l'identique de la home : les 15 unites
+   de chaque bord ne s'etirent pas, seul le milieu s'allonge, sinon le
+   biais du trace change d'angle avec la longueur du texte. */
+.v-d .lecture i {
+  font-style: normal;
+  --bg: 15px;
+  --bd: 15px;
+  color: var(--violet-sombre);
+  border-style: solid;
+  border-width: 0 var(--bd) 0 var(--bg);
+  border-image-source: var(--trace-2);
+  border-image-slice: 0 15 fill;
+  border-image-width: 0 var(--bd) 0 var(--bg);
+  border-image-repeat: stretch;
+  padding: .26em 0;
+  margin-left: calc(var(--bg) / -2);
+  margin-right: calc(var(--bd) / -2);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+</style>
+</head>
+<body>
+
+<div class="entete">
+  <h1>La lecture du palier, quatre registres</h1>
+  <p>Le chiffre sur sa ligne, la lecture sous lui, équilibrée sur deux lignes. Chaque variante est montrée aux deux largeurs où elle vit vraiment : la colonne gauche du héros sur ordinateur, la pleine largeur sur téléphone.</p>
+  <p>Les formulations changent avec le registre, parce qu'une phrase longue ne tient ni en écriture manuscrite ni sous un surlignage.</p>
+</div>
+
+<!-- A -->
+<section class="variante v-a">
+  <div class="variante__titre"><span class="variante__lettre">A</span><h2>Sobre</h2></div>
+  <p class="variante__note">La lecture s'efface derrière le chiffre, comme une note de bas de page. C'est le traitement en ligne aujourd'hui. Il ne coûte rien à la hiérarchie du héros, mais il se lit peu, et c'est justement ce qu'on cherchait à corriger.</p>
+  <div class="paire">
+    <div class="cadre cadre--large">
+      <p class="cadre__nom">Ordinateur</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">autant que de participant·es à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="cadre cadre--etroit">
+      <p class="cadre__nom">Téléphone</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">autant que de participant·es à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="variante v-b">
+  <div class="variante__titre"><span class="variante__lettre">B</span><h2>Affirmée</h2></div>
+  <p class="variante__note">La lecture pèse autant que le chiffre et devient une phrase, pas une glose. Elle répète 670 : la coïncidence saute aux yeux sans qu'on l'explique. Elle ne rajoute ni police ni couleur : c’est le poids du trait qui la porte. Le violet de la charte a été essayé puis écarté, il tombe à 3,7 de contraste sur ce fond, sous le seuil de 4,5.</p>
+  <div class="paire">
+    <div class="cadre cadre--large">
+      <p class="cadre__nom">Ordinateur</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">nous étions 670 à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="cadre cadre--etroit">
+      <p class="cadre__nom">Téléphone</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">nous étions 670 à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="variante v-c">
+  <div class="variante__titre"><span class="variante__lettre">C</span><h2>Manuscrite</h2></div>
+  <p class="variante__note">Le geste du « déjà », repris pour la lecture. C'est le plus joyeux des quatre, et le plus risqué : deux écritures manuscrites se répondent à quinze centimètres l'une de l'autre, et la police se lit mal en petit corps sur deux lignes.</p>
+  <div class="paire">
+    <div class="cadre cadre--large">
+      <p class="cadre__nom">Ordinateur</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">autant que nous étions à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="cadre cadre--etroit">
+      <p class="cadre__nom">Téléphone</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture">autant que nous étions à la campagne&nbsp;de&nbsp;dons</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- D -->
+<section class="variante v-d">
+  <div class="variante__titre"><span class="variante__lettre">D</span><h2>Surlignée</h2></div>
+  <p class="variante__note">Le tracé jaune de la charte. C'est le plus visible des quatre. Il a un coût ailleurs : ce surlignage ne sert jusqu'ici qu'aux phrases qui portent le projet, et l'employer sur une note de jauge le banalise partout où il compte.</p>
+  <div class="paire">
+    <div class="cadre cadre--large">
+      <p class="cadre__nom">Ordinateur</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture"><i>nous étions 670 à la campagne&nbsp;de&nbsp;dons</i></span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="cadre cadre--etroit">
+      <p class="cadre__nom">Téléphone</p>
+      <div class="cadre__boite">
+        <div class="jauge">
+          <span class="jauge__deja">déjà</span>
+          <div class="jauge__anneau">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="jauge__piste" cx="60" cy="60" r="52"></circle><circle class="jauge__arc" cx="60" cy="60" r="52"></circle></svg>
+            <span class="jauge__nombre">124</span>
+          </div>
+          <p class="jauge__legende">
+            <span class="jauge__quoi">coopérateur·ices</span>
+            <span class="jauge__palier">premier palier&nbsp;: 670<span class="lecture"><i>nous étions 670 à la campagne&nbsp;de&nbsp;dons</i></span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
