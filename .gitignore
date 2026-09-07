@@ -20,3 +20,4 @@ __pycache__/
 Thumbs.db
 maquettes/_verif/
 .verif-sorties/
+dist/

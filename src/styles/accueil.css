@@ -1,0 +1,1183 @@
+/* ------------------------------------------------------------------ */
+/* Page d'accueil. Sept ecrans : heros, la place des femmes, la Ferme   */
+/* de Novel, les etapes, le pari du bien commun, prendre part, agir.    */
+/* Ne contient que ce qui n'appartient qu'a cette page. Le commun est   */
+/* dans styles/base.css.                                                */
+/* ------------------------------------------------------------------ */
+
+h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-spacing: -.018em; }
+
+
+/* ================================================================== */
+/* Ecran 1, heros                                                     */
+/* ================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--h-entete) + 1.6rem) 0 clamp(2.2rem, 8vh, 5.4rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__contenu {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--marge);
+  display: grid;
+  grid-template-columns: minmax(0, 1.07fr) minmax(0, .93fr);
+  gap: clamp(1.9rem, 5.4vw, 6rem);
+  align-items: end;
+}
+
+.kicker { font-size: .8rem; font-weight: 600; letter-spacing: .16em; color: var(--violet-sombre); margin-bottom: .9rem; }
+
+.hero h1 { max-width: 14ch; text-wrap: balance; }
+
+.hero__lead { margin-top: 1.3rem; font-size: var(--t-lead); font-weight: 500; line-height: 1.32; max-width: 46ch; color: var(--violet-sombre); }
+
+.hero__phrase { font-size: clamp(1.2rem, 1.72vw, 1.62rem); font-weight: 500; line-height: 1.54; max-width: 30ch; color: var(--texte); }
+
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.7rem; margin-top: 1.6rem; }
+
+
+/* Compteur : anneau et chiffre en vert, le palier en cours pour denominateur.
+   124 sur 667, l'arc couvre 18,6 % du cercle (60,8 de 326,7). */
+/* Jauge et annotation dans un meme bloc large comme la jauge : la note
+   se cale ainsi sur le bord droit de la legende, la ou finit « 670 »,
+   et l'y suit a toutes les largeurs sans decalage a la main. */
+.jauge__ensemble { width: max-content; max-width: 100%; margin: 0 auto; }
+
+.jauge {
+  margin-top: 1.9rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--filet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.9rem, 1.6vw, 1.4rem);
+}
+
+.jauge__deja {
+  flex: 0 0 auto;
+  align-self: center;
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(2.6rem, 3.4vw, 3.9rem);
+  line-height: 1;
+  color: var(--texte);
+  -webkit-text-stroke: .6px currentColor;
+  paint-order: stroke fill;
+  transform: rotate(-7deg);
+  margin: 0 -.2rem .5rem 0;
+}
+
+.jauge__anneau { position: relative; flex: 0 0 auto; width: 124px; height: 124px; }
+
+.jauge__anneau svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.jauge__piste { fill: none; stroke: rgba(56, 54, 72, .13); stroke-width: 8; }
+
+.jauge__arc { fill: none; stroke: var(--vert); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 60.8 326.7; }
+
+.jauge__nombre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.55rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--vert);
+  line-height: 1;
+}
+
+.jauge__legende { line-height: 1.4; }
+
+.jauge__quoi { display: block; font-size: 1.0625rem; font-weight: 600; color: var(--violet-sombre); }
+
+.jauge__palier { display: block; margin-top: .3rem; font-size: var(--t-petit); color: var(--texte); }
+
+/* Annotation portee a la main sous le compteur, reliee au palier par un
+   trait trace. Elle ne rentre pas dans la legende : celle-ci est centree
+   sur l'anneau, une ligne de plus y decalerait « cooperateur ices ». */
+.jauge__note {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: .1rem;
+  /* Remontee sous le compteur : le bas de l'anneau descend plus bas que
+     le palier, une marge nulle laisserait la fleche loin du chiffre
+     qu'elle designe. Le retrait a droite compense la pointe, qui tombe
+     a 78 % du cadre de la fleche et non a son bord. */
+  margin: -.7rem 0 0;
+  padding-right: .7rem;
+  color: var(--texte);
+}
+
+.jauge__note-texte {
+  display: block;
+  text-align: right;
+  font-size: .79rem;
+  line-height: 1.34;
+  transform: rotate(-6deg);
+  transform-origin: 100% 100%;
+}
+
+.jauge__note-fleche { flex: none; width: 56px; height: 52px; margin-bottom: .3rem; }
+
+
+/* ================================================================== */
+/* Ecran 2, un lieu pour repenser la place des femmes                 */
+/* ================================================================== */
+#le-lieu {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+}
+
+#le-lieu > .contenu { position: relative; z-index: 1; width: 100%; }
+
+/* Sur le blanc, le grain gris doit rester une texture, pas un voile. */
+/* Titre allonge le 05/09 (« dedie a l'egalite et a la place des femmes ») :
+   « Un lieu dedie a l'egalite » demande 509 px la ou la colonne en fait 471.
+   8 % de moins le fait tenir sur trois lignes sans toucher a la grille, donc
+   sans resserrer le texte de droite. */
+/* Ce titre porte huit mots quand les autres en portent quatre : a taille
+   pleine, « a la place des femmes » depasse la colonne de quelques pixels et
+   passe a quatre lignes au-dela de 1280. 95 %, soit 2,4 px de moins, invisible
+   a cote d'une ligne en plus. L'autre voie coutait 33 px au texte de droite. */
+#le-lieu h2 { max-width: none; font-size: calc(var(--t-titre) * .95); }
+
+.lieu__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 4.6fr) minmax(0, 6fr);
+  gap: clamp(1.8rem, 3.4vw, 3.4rem);
+  align-items: start;
+}
+
+.lieu__texte { display: flex; flex-direction: column; gap: 1.1rem; max-width: 40rem; }
+
+.lieu__texte p { line-height: 1.66; }
+
+/* Meme corps que le constat : seule la couleur dit que c'est la reponse. */
+.lieu__reponse { color: var(--violet-sombre); font-weight: 600; }
+
+
+/* Les cinq usages en bande, sous le texte : un inventaire, pas une colonne
+   de lecture qui concurrence la premiere. */
+.usages {
+  margin-top: clamp(1.8rem, 4vh, 3.2rem);
+  padding-top: clamp(1.4rem, 3vh, 2.2rem);
+  border-top: 1px solid rgba(56, 54, 72, .14);
+}
+
+.niveaux {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+}
+
+.niveaux li {
+  position: relative;
+  color: var(--violet-sombre);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+.niveaux .nom-structure {
+  display: block;
+  font-size: clamp(.85rem, .72vw, .94rem);
+  font-weight: 700;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+  color: var(--vert);
+  line-height: 1.3;
+  white-space: nowrap;
+  margin-bottom: .45rem;
+}
+
+.lieu__lien { margin-top: clamp(1.2rem, 2.6vh, 1.9rem); }
+
+
+/* ================================================================== */
+/* Ecran 3, renover un lieu emblematique : la Ferme de Novel           */
+/* Le seul ecran ou l'image tient tout le cadre. Le texte vit dans un  */
+/* panneau pose dessus, le projet renove en vignette a cheval : le     */
+/* futur se pose sur le present, c'est tout l'avant-apres.             */
+/* ================================================================== */
+#la-ferme {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--h-entete) + 1.5rem) 0 clamp(2.4rem, 6vh, 4.4rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--violet-sombre);
+}
+
+.ferme__fond {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 82%;
+}
+
+/* Aucun voile sur la photo : elle reste telle qu'elle a ete prise. Le grain
+   descend a .12, au-dela il ternit l'image au lieu de la texturer. */
+#la-ferme > .grain__voile { z-index: 2; opacity: .12; }
+
+.ferme__contenu {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .82fr);
+  align-items: end;
+}
+
+.panneau {
+  background: var(--blanc);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.35rem, 2.3vw, 2.3rem);
+  border-radius: 3px;
+  box-shadow: 0 26px 60px rgba(56, 54, 72, .34);
+  max-width: 615px;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.panneau h2 { font-size: clamp(1.6rem, 2.35vw, 2.25rem); line-height: 1.08; margin-bottom: .25rem; }
+
+.panneau p { line-height: 1.56; }
+
+.panneau .lien-texte { margin-top: .3rem; align-self: flex-start; }
+
+/* La vignette du projet renove, posee a cheval sur le panneau. */
+.apres {
+  position: relative;
+  width: min(100%, 424px);
+  margin: 0 0 clamp(1rem, 3.4vh, 2.6rem) clamp(-3.4rem, -2.6vw, -1.4rem);
+  padding: 10px 10px 0;
+  background: var(--blanc);
+  border-radius: 3px;
+  box-shadow: 0 20px 44px rgba(56, 54, 72, .38);
+  transform: rotate(4deg);
+}
+
+.apres img { border-radius: 1px; }
+
+.apres__pied { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: .4rem .8rem; padding: 0 .15rem .5rem; }
+
+.apres__mot {
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(2.1rem, 2.9vw, 3.1rem);
+  line-height: 1;
+  color: var(--vert);
+  -webkit-text-stroke: 1px currentColor;
+  paint-order: stroke fill;
+  transform: rotate(-4deg);
+  margin: .35rem 0 0 .2rem;
+}
+
+.apres figcaption { font-size: .72rem; letter-spacing: .03em; color: var(--texte); text-align: right; padding-bottom: .35rem; }
+
+/* Essai en cours : la mise en avant du bail, surlignee ou en gras seul. */
+/* Mise en avant du bail : la phrase entiere en gras, les 99 ans surlignes. */
+#la-ferme .bail { font-weight: 700; }
+
+
+/* ================================================================== */
+/* Ecran 4, les etapes du projet                                       */
+/* La frise porte l'ecran, seule. Deux etats seulement : ce qui est     */
+/* acquis (trait plein, point plein) et ce qui vient (trait pointille,  */
+/* point creux). Une seule case en couleur, le 31 decembre, comme le    */
+/* demande la copy : c'est la couleur qui dit « c'est maintenant »,     */
+/* jamais une phrase d'interpellation.                                  */
+/* ================================================================== */
+#les-etapes {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+}
+
+#les-etapes > .contenu { position: relative; z-index: 1; width: 100%; }
+
+#les-etapes h2 { text-align: center; }
+
+.frise {
+  position: relative;
+  list-style: none;
+  margin: clamp(2.4rem, 6vh, 4.4rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+/* Le trait : plein jusqu'au jalon de septembre, pointille ensuite. */
+.frise::before,
+.frise::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 0;
+  border-top: 2px solid var(--vert);
+}
+
+.frise::before { left: 0; width: 64.3%; }
+
+.frise::after { left: 64.3%; right: 0; border-top-style: dashed; }
+
+.jalon {
+  position: relative;
+  min-height: clamp(230px, 34vh, 300px);
+  padding: 0 .45rem;
+}
+
+.jalon__point {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  border-radius: 50%;
+  background: var(--vert);
+}
+
+.jalon--vient .jalon__point { background: var(--violace); border: 2px solid var(--vert); }
+
+.jalon__bloc {
+  position: absolute;
+  left: 50%;
+  width: 175%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.jalon:first-child .jalon__bloc { left: 0; width: 150%; transform: none; }
+
+.jalon:last-child .jalon__bloc { left: auto; right: 0; width: 150%; transform: none; }
+
+.jalon:nth-child(odd) .jalon__bloc { bottom: calc(50% + 22px); }
+
+.jalon:nth-child(even) .jalon__bloc { top: calc(50% + 22px); }
+
+.jalon__date {
+  display: block;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--violet-sombre);
+  letter-spacing: -.005em;
+  margin-bottom: .3rem;
+}
+
+.jalon__texte { display: block; font-size: .89rem; line-height: 1.42; }
+
+/* La seule case en couleur de la frise. */
+.jalon--maintenant .jalon__bloc {
+  background: var(--menthe);
+  border-radius: 8px;
+  padding: .7rem .9rem .8rem;
+  width: 168%;
+}
+
+.jalon--maintenant .jalon__point { background: var(--vert); border: 0; width: 19px; height: 19px; margin: -9.5px 0 0 -9.5px; }
+
+.jalon__fleche { color: var(--vert); font-weight: 700; }
+
+.etapes__chute {
+  margin: clamp(2.2rem, 5.5vh, 4rem) auto 0;
+  max-width: 44ch;
+  text-align: center;
+  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  line-height: 1.42;
+}
+
+.etapes__chute strong { color: var(--violet-sombre); }
+
+
+.etapes__lien { margin-top: .5rem; text-align: center; }
+
+
+/* ================================================================== */
+/* Ecran 5, le pari du bien commun                                     */
+/* Le seul ecran sans image ni dispositif : la couleur fait tout le     */
+/* travail. Fond violet de marque, texte blanc, une seule zone chaude   */
+/* (le surlignage), et la chute detachee sous un filet.                 */
+/* ================================================================== */
+#le-pari {
+  position: relative;
+  color: var(--blanc);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + 1rem) 0 clamp(2rem, 4vh, 3rem);
+  overflow: hidden;
+}
+
+#le-pari > .contenu { position: relative; z-index: 1; width: 100%; }
+
+/* Sur un aplat colore, le grain doit texturer sans salir. */
+#le-pari h2 { color: var(--blanc); max-width: 11ch; }
+
+.pari__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 4.2fr) minmax(0, 6.4fr);
+  gap: clamp(1.8rem, 3.4vw, 3.4rem);
+  align-items: start;
+}
+
+.pari__texte {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  font-size: clamp(1.05rem, 1.1vw, 1.14rem);
+  line-height: 1.58;
+}
+
+/* Blanc sur violet, 4,7:1 : les chiffres se detachent par la graisse, pas
+   par une couleur qui tomberait sous le seuil. */
+.pari__texte strong { font-weight: 700; }
+
+.pari__chute {
+  margin-top: clamp(3.4rem, 9.5vh, 6.8rem);
+  max-width: 27ch;
+  font-size: clamp(1.1rem, 1.45vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.36;
+  /* Onest n'a pas d'italique dessine : le navigateur penche la romaine. */
+  font-style: italic;
+}
+
+/* Le paragraphe pivot : tout en gras, le retournement seul surligne. */
+.pari__fort { font-weight: 700; }
+
+/* Sur cet aplat, seul le blanc tient : l'ocre tombe a 1,09:1 et le vert a
+   1,42:1, les trois couleurs ont la meme luminosite. Essai clos le 04/09. */
+
+/* ---------------- fonds textures, figes le 04/09 ------------------ */
+/* Deux registres se superposent. Les nappes de VALEUR (celles qui
+   eclaircissent ou foncent) sont poussees hors des colonnes de texte ;
+   au centre, seule la TEINTE bouge, a luminance egale. La couleur respire
+   partout, le contraste ne bouge que la ou il n'y a rien a lire.
+   Chaque ecran a sa propre composition : ni les memes teintes, ni les
+   memes positions. Un fond qui se repeterait d'un ecran a l'autre se
+   verrait comme un motif, ce qui est exactement ce qu'on evite. */
+
+/* Le grain colore de la charte, en fusion sur le violet, en mode normal sur
+   les fonds clairs ou « overlay » ne se verrait pas. */
+#le-pari > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .38;
+  mix-blend-mode: overlay;
+}
+
+.hero > .grain__voile,
+#le-lieu > .grain__voile,
+#les-etapes > .grain__voile,
+#prendre-part > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+
+/* Ecran 5, le violet. Kaki et ombre aux quatre angles, deux virages de
+   teinte au centre : #6C6BAC vers le bleu, #836D96 vers le rouge, tous
+   deux a la luminance du violet de la charte.
+   Les 8 % de violet sombre rendent ce que la texture coute : sans eux le
+   blanc tombe a 3,86:1, avec eux il tient 4,04:1, au-dessus de l'aplat
+   d'origine. Le seuil AA strict de 4,5 demanderait 14 % de voile, donc un
+   violet qui n'est plus celui de la charte : arbitrage a l'audit. */
+#le-pari {
+  background:
+    radial-gradient(70% 40% at 88% 106%, rgba(157,150,105,.72), rgba(157,150,105,0) 64%),
+    radial-gradient(58% 30% at 12% -10%, rgba(157,150,105,.52), rgba(157,150,105,0) 66%),
+    radial-gradient(82% 44% at 94% 2%, rgba(56,54,72,.52), rgba(56,54,72,0) 68%),
+    radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
+    radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
+    radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
+    linear-gradient(rgba(56,54,72,.08), rgba(56,54,72,.08)),
+    var(--violet);
+}
+
+
+/* Ecran 1, le heros : menthe au-dessus du kicker, terracotta le long du
+   bord droit, lavande sous l'image. Le centre reste blanc, le titre y est. */
+.hero {
+  background:
+    radial-gradient(58% 46% at 6% 4%, rgba(186,255,228,.52), rgba(186,255,228,0) 62%),
+    radial-gradient(46% 62% at 104% 48%, rgba(163,113,106,.30), rgba(163,113,106,0) 64%),
+    radial-gradient(64% 40% at 78% 102%, rgba(118,109,160,.26), rgba(118,109,160,0) 66%),
+    radial-gradient(60% 52% at 38% 46%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+
+
+/* Ecran 2 : terracotta en haut a droite, vert dilue en bas a gauche, une
+   trace de jaune au coin bas droit. Ni menthe ni lavande, c'est le seul
+   ecran sans elles. */
+#le-lieu {
+  background:
+    radial-gradient(56% 50% at 96% 2%, rgba(163,113,106,.34), rgba(163,113,106,0) 62%),
+    radial-gradient(62% 54% at 2% 96%, rgba(94,158,133,.26), rgba(94,158,133,0) 64%),
+    radial-gradient(44% 38% at 92% 98%, rgba(255,243,168,.42), rgba(255,243,168,0) 66%),
+    var(--blanc);
+}
+
+
+/* Ecran 4 : kaki en haut a droite, lavande en bas a gauche, une large nappe
+   blanche au centre. Elle sert la frise, qui gagne 0,24 point de contraste
+   sur le violace nu. */
+#les-etapes {
+  background:
+    radial-gradient(54% 44% at 98% 6%, rgba(157,150,105,.34), rgba(157,150,105,0) 62%),
+    radial-gradient(60% 50% at 2% 94%, rgba(118,109,160,.32), rgba(118,109,160,0) 64%),
+    radial-gradient(78% 58% at 46% 44%, rgba(255,255,255,.92), rgba(255,255,255,0) 70%),
+    var(--violace);
+}
+
+
+/* Ecran 6 : menthe et terracotta en haut, lavande dessous. Composition la
+   plus ouverte de la page, l'ecran de l'appel. */
+#prendre-part {
+  background:
+    radial-gradient(84% 68% at 22% 10%, rgba(186,255,228,.40), rgba(186,255,228,0) 60%),
+    radial-gradient(76% 62% at 90% 4%, rgba(163,113,106,.30), rgba(163,113,106,0) 62%),
+    radial-gradient(70% 58% at 4% 90%, rgba(118,109,160,.28), rgba(118,109,160,0) 64%),
+    var(--blanc);
+}
+
+
+
+/* ================================================================== */
+/* Ecran 6, prendre part au projet                                     */
+/* L'ecran de conversion. Composition centree et fond blanc : tout      */
+/* converge vers un seul bouton, rien ne tire l'oeil de cote.           */
+/* ================================================================== */
+#prendre-part {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + .8rem) 0 clamp(1.6rem, 3vh, 2.6rem);
+  overflow: hidden;
+  text-align: center;
+}
+
+#prendre-part > .contenu { position: relative; z-index: 1; width: 100%; }
+
+.part__bloc { max-width: 47rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+
+#prendre-part h2 { max-width: 18ch; position: relative; z-index: 0; }
+
+
+.part__question {
+  margin-top: clamp(1rem, 2.4vh, 1.8rem);
+  font-size: var(--t-lead);
+  font-weight: 600;
+  line-height: 1.34;
+  color: var(--violet-sombre);
+  max-width: 30ch;
+}
+
+.part__texte { margin-top: .8rem; max-width: 46ch; line-height: 1.6; }
+
+/* La phrase qui porte l'idee du nombre : tout en gras, le retournement
+   surligne. Interligne desserre, deux blocs de surlignage se suivent. */
+.part__texte--pivot { font-weight: 700; color: var(--violet-sombre); line-height: 1.78; margin-top: 1.2rem; }
+
+/* Les deux equations : un fait chacune, le chiffre porte, le signe colore. */
+.equations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Hauteur propre a chaque cadre plutot qu'etiree sur le plus haut :
+     sans ca, celui qui n'a pas de precision garde son texte colle en
+     haut avec un vide dessous. */
+  align-items: center;
+  gap: clamp(.7rem, 1.6vw, 1.3rem);
+  margin: clamp(1.2rem, 2.8vh, 2.2rem) 0 0;
+}
+
+.equations li {
+  background: var(--violace);
+  border-radius: 10px;
+  padding: clamp(.8rem, 1.6vh, 1.15rem) clamp(1.1rem, 2vw, 1.9rem);
+  font-size: 1.05rem;
+  color: var(--texte);
+  line-height: 1.25;
+}
+
+.equations b { font-size: clamp(1.5rem, 2.1vw, 2rem); font-weight: 700; color: var(--violet-sombre); letter-spacing: -.02em; }
+
+.equations .eq { font-size: 1.35rem; font-weight: 700; color: var(--violet); padding: 0 .18em; }
+
+.equations small { display: block; margin-top: .35rem; font-size: .8rem; color: var(--texte); }
+
+.part__reassurance { margin-top: clamp(1rem, 2.4vh, 1.7rem); max-width: 44ch; font-size: .95rem; line-height: 1.55; }
+
+.part__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: clamp(1.4rem, 3.2vh, 2.2rem);
+}
+
+.part__actions .bouton { min-height: 58px; padding: 0 2.1rem; font-size: .95rem; }
+
+/* ================================================================== */
+/* Ecran 7, pour agir                                                  */
+/* Trois gestes puis le bouton, relies par des fleches tracees a la     */
+/* main. Deux dispositions et quatre fonds en essai : la page alterne   */
+/* clair, photo, clair, violet, clair, et un sixieme ecran clair de     */
+/* suite casserait cette respiration.                                   */
+/* ================================================================== */
+#agir {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--h-entete) + .8rem) 0 clamp(1.6rem, 3vh, 2.6rem);
+  overflow: hidden;
+  background:
+    radial-gradient(58% 46% at 4% 8%, rgba(157,150,105,.30), rgba(157,150,105,0) 64%),
+    radial-gradient(52% 44% at 98% 88%, rgba(186,255,228,.44), rgba(186,255,228,0) 62%),
+    radial-gradient(46% 40% at 88% 6%, rgba(255,243,168,.40), rgba(255,243,168,0) 66%),
+    radial-gradient(70% 56% at 44% 50%, rgba(255,255,255,.86), rgba(255,255,255,0) 72%),
+    var(--violace);
+}
+
+#agir > .contenu { position: relative; z-index: 1; width: 100%; }
+
+#agir > .grain__voile {
+  background-image: var(--grain-couleur);
+  background-size: 240px 240px;
+  opacity: .18;
+  mix-blend-mode: normal;
+}
+
+#agir h2 { text-align: center; max-width: 20ch; margin: 0 auto; }
+
+
+/* Fond retenu le 04/09 : terracotta plein, la couleur qui manquait, et la
+   rupture qu'exigeait l'alternance de la page. Cinq nappes le font bouger
+   comme les autres ecrans, plus le grain colore.
+   Reserve tenue : le blanc n'y atteint pas le seuil AA. Le voile sombre
+   passe de 8 a 16 % pour ramener le corps de texte au niveau du violet de
+   l'ecran 5, qui est notre plancher assume. */
+#agir {
+  background:
+    radial-gradient(66% 38% at 88% 104%, rgba(56,54,72,.44), rgba(56,54,72,0) 66%),
+    radial-gradient(56% 30% at 10% -8%, rgba(255,243,168,.26), rgba(255,243,168,0) 68%),
+    radial-gradient(74% 42% at 6% 96%, rgba(56,54,72,.34), rgba(56,54,72,0) 70%),
+    radial-gradient(68% 74% at 74% 44%, rgba(150,101,110,.52), rgba(150,101,110,0) 72%),
+    radial-gradient(62% 70% at 26% 56%, rgba(172,124,100,.48), rgba(172,124,100,0) 74%),
+    linear-gradient(rgba(56,54,72,.16), rgba(56,54,72,.16)),
+    var(--terracotta);
+  color: var(--blanc);
+}
+
+#agir > .grain__voile { opacity: .34; mix-blend-mode: overlay; }
+
+#agir h2, #agir .geste h3 { color: var(--blanc); }
+
+/* Les encarts restent blancs : leurs titres ne suivent pas le fond de la
+   section, sinon ils passent en blanc sur blanc. */
+#agir .porte h3 { color: var(--violet-sombre); }
+
+/* Jaune plein, retenu le 04/09. Le violet flottait sur le terracotta, deux
+   teintes de valeur voisine qui se disputaient ; le jaune tranche et porte
+   son libelle a 10,4:1. Essais clos : vert 3,7:1 donc ecarte, cerne blanc et
+   halo diffus ecartes a l'oeil, jaune passe a 8,6:1 ecarte aussi.
+   A noter : le bouton reste violet sur les fonds clairs, c'est le seul ecran
+   colore de la page. */
+#agir .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
+
+#agir .bouton--primaire:hover { background: #FFEB7E; }
+
+
+/* ---- les gestes et les fleches ---- */
+.gestes {
+  list-style: none;
+  /* Le titre de section doit respirer largement avant les gestes : c'est ce
+     vide qui dit qu'on change de registre, pas un filet ni une couleur. */
+  margin: clamp(3.6rem, 13vh, 9rem) 0 0;
+  padding: 0;
+  display: grid;
+  /* Les gestes se calent en haut, sinon des textes de longueurs inegales
+     font danser les chiffres. Seules les fleches se centrent. */
+  align-items: start;
+}
+
+/* Disposition en ligne : trois colonnes resserrees, deux fleches entre. */
+/* Trois colonnes resserrees, deux fleches entre elles, le bouton centre
+   dessous. La disposition en Z, essayee le 04/09, est ecartee. */
+.gestes {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: clamp(.7rem, 1.6vw, 1.5rem);
+  row-gap: clamp(1.8rem, 4.4vh, 3.2rem);
+}
+
+.geste--1 { grid-area: 1 / 1; }
+
+.fleche--a { grid-area: 1 / 2; }
+
+.geste--2 { grid-area: 1 / 3; }
+
+.fleche--b { grid-area: 1 / 4; }
+
+.geste--3 { grid-area: 1 / 5; }
+
+.geste--cta { grid-column: 1 / -1; justify-self: center; }
+
+
+.geste h3 {
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  line-height: 1.2;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(.45rem, 1vw, .85rem);
+}
+
+.geste__no {
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(3.2rem, 4.6vw, 4.6rem);
+  /* Hauteur nulle : le chiffre deborde de la ligne sans la pousser. */
+  line-height: 0;
+  position: relative;
+  top: .06em;
+  color: var(--jaune);
+  /* Epaissi juste assez pour exister, puis recule : le chiffre numerote,
+     il ne doit pas peser plus que le titre qu'il annonce. */
+  -webkit-text-stroke: .5px currentColor;
+  opacity: .82;
+}
+
+.geste p { margin-top: .5rem; font-size: .95rem; line-height: 1.5; }
+
+.geste--cta { display: flex; }
+
+.geste--cta .bouton { min-height: 58px; padding: 0 1.9rem; font-size: .95rem; }
+
+.fleche { color: var(--jaune); display: flex; justify-content: center; align-self: center; }
+
+.fleche svg { display: block; width: 100%; height: auto; }
+
+.fleche--a { width: clamp(40px, 4.4vw, 62px); }
+
+.fleche--b { width: clamp(54px, 6.2vw, 88px); }
+
+
+/* ---- les deux encarts du bas ---- */
+.portes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.7rem, 1.6vw, 1.2rem);
+  margin-top: clamp(3.6rem, 9.4vh, 6.8rem);
+  align-items: stretch;
+}
+
+.porte {
+  background: var(--blanc);
+  color: var(--texte);
+  border-radius: 12px;
+  padding: clamp(.9rem, 2vh, 1.35rem) clamp(1rem, 2vw, 1.7rem) clamp(1rem, 2.2vh, 1.45rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .55rem;
+}
+
+.porte h3 { font-size: 1.02rem; color: var(--violet-sombre); }
+
+.porte p { font-size: .93rem; line-height: 1.5; }
+
+.infolettre { display: flex; flex-wrap: wrap; gap: .45rem; width: 100%; margin-top: auto; }
+
+.infolettre #prenom { flex: 1 1 6rem; }
+
+.infolettre #courriel { flex: 2 1 11rem; }
+
+/* Trois elements sur une rangee : sous 430 px d'encart ils ne tiennent plus,
+   et le bouton se retrouvait seul a flotter a gauche de sa ligne. La bascule
+   depend de la largeur de l'encart, pas de celle de l'ecran : a 768 px de
+   fenetre l'encart n'en fait deja plus que 340. */
+.porte { container-type: inline-size; }
+
+@container (max-width: 430px) {
+  .infolettre {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  }
+  .infolettre input { width: 100%; }
+  .infolettre .bouton--contour { grid-column: 1 / -1; width: 100%; }
+}
+
+@container (max-width: 250px) {
+  .infolettre { grid-template-columns: minmax(0, 1fr); }
+}
+
+.infolettre input {
+  flex: 1 1 9rem;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 .7rem;
+  border: 1px solid var(--filet);
+  border-radius: 7px;
+  background: var(--blanc);
+  color: var(--texte);
+  font: 400 .93rem/1 "Onest", system-ui, sans-serif;
+}
+
+.infolettre input::placeholder { color: #8a889c; }
+
+/* Sous 340 px le champ et le bouton ne tiennent plus cote a cote. Un
+   flex-grow reglerait l'etirement sans seuil a caler, mais il deplace le
+   bouton d'une fraction de pixel sur les larges : seuil explicite. */
+@media (max-width: 359px) {
+  /* Les trois lignes du titre tiennent jusqu ici, en dessous elles coulent. */
+  br.coupe-titre { display: none; }
+
+  /* Ici la legende passe sous l'anneau : « 670 » remonte a gauche, hors
+     d'atteinte de la fleche, qui pointerait dans le vide. Le texte reste. */
+  .jauge__note-fleche { display: none; }
+
+  .jauge__note { padding-left: 0; }
+}
+
+.porte .lien-texte { margin-top: auto; }
+
+
+
+
+
+/* Credit de la photo : pastille opaque, sinon le contraste depend du ciel. */
+.ferme__credit {
+  position: absolute;
+  z-index: 3;
+  right: var(--marge);
+  bottom: 1rem;
+  padding: .3rem .6rem;
+  border-radius: 4px;
+  background: var(--violet-sombre);
+  color: var(--blanc);
+  font-size: .68rem;
+  letter-spacing: .03em;
+}
+
+
+/* ---------- etroit ---------- */
+@media (max-width: 1080px) {
+  .hero__contenu { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+
+  .hero h1 { max-width: 22ch; }
+
+  .hero__phrase { max-width: 46ch; }
+
+  .lieu__grille { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+
+  .niveaux { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
+
+  .ferme__contenu { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; justify-items: start; }
+
+  .apres { margin-left: 0; width: min(62%, 380px); }
+
+  .jalon__texte { font-size: .86rem; }
+
+  .pari__grille { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+
+  #le-pari h2 { max-width: 100%; }
+
+  .pari__chute { max-width: 100%; }
+
+  #prendre-part h2 { max-width: 100%; }
+}
+
+@media (max-width: 767px) {
+  .hero { padding-top: calc(var(--h-entete) + 2rem); padding-bottom: 3.5rem; }
+
+  .hero h1 { font-size: 2.2rem; max-width: 100%; }
+
+  .hero__lead { font-size: 1.05rem; margin-top: .8rem; }
+
+  .hero__contenu { display: flex; flex-direction: column; gap: 1rem; }
+
+  .hero__bloc, .hero__colonne { display: contents; }
+
+  .kicker { order: 1; }
+
+  .hero h1 { order: 2; }
+
+  .hero__lead { order: 3; }
+
+  .hero__phrase { order: 5; }
+
+  .jauge__ensemble { order: 6; width: 100%; }
+
+  .jauge { margin-top: .8rem; padding-top: 1rem; gap: .6rem; }
+
+  /* A plat sur ce format : inclinee, la premiere ligne sort dans la marge
+     et le geste coute une hauteur que le heros n'a pas. */
+  /* Ici la jauge part du bord gauche : la position de « 670 » ne depend
+     plus de la largeur d'ecran, un retrait fixe suffit a caler la pointe. */
+  .jauge__note { justify-content: flex-start; padding: 0 0 0 4.3rem; margin-top: -.15rem; gap: .3rem; }
+
+  .jauge__note-texte { transform: none; text-align: left; }
+
+  .jauge__note-fleche { width: 44px; height: 38px; margin-bottom: .2rem; }
+
+  .hero__actions { order: 7; margin-top: .4rem; }
+
+  .jauge__anneau { width: 96px; height: 96px; }
+
+  .jauge__nombre { font-size: 1.75rem; }
+
+  .jauge__deja { font-size: 2.4rem; margin-bottom: .3rem; }
+
+  .lieu__reponse { font-size: 1.1rem; }
+
+  /* En etroit, la photo cesse d'etre un fond : elle devient le bandeau du
+     haut, sinon le panneau la recouvre entierement. */
+  #la-ferme { display: block; min-height: 0; padding: 0 0 2.5rem; }
+
+  .ferme__fond { position: relative; height: clamp(190px, 32vh, 260px); margin-bottom: 1.3rem; }
+
+  .panneau { padding: 1.25rem 1.15rem; }
+
+  .apres { width: min(74%, 300px); margin-bottom: 0; }
+
+  .ferme__credit { position: static; display: inline-block; margin: .9rem 0 0 var(--marge); }
+
+  /* La frise bascule a la verticale : le trait passe a gauche, les jalons
+     s'empilent dans l'ordre de lecture. */
+  #les-etapes { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+
+  #les-etapes h2 { text-align: left; }
+
+  .frise { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; padding-left: 1.75rem; }
+
+  /* Deux traits calibres en pourcentage de la frise placaient la cesure a
+     64,3 % quand le gros point tombe a 73,1 % : le pointille commencait
+     128 px avant « maintenant ». Chaque jalon porte desormais son propre
+     segment, la cesure suit le point quelle que soit la longueur des textes. */
+  .frise::before, .frise::after { display: none; }
+
+  .jalon { min-height: 0; padding: 0 0 1.5rem; }
+
+  .jalon::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem + 6.5px);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-left: 2px solid var(--vert);
+  }
+
+  /* Le trait part du premier point, pas du bord haut du premier jalon. */
+  .jalon:first-child::before { top: calc(.45rem + 7px); }
+
+  .jalon--maintenant::before, .jalon--maintenant ~ .jalon::before { border-left-style: dashed; }
+
+  .jalon__point { top: .45rem; left: -1.75rem; margin: 0; }
+
+  .jalon--maintenant .jalon__point { left: calc(-1.75rem - 2px); top: .3rem; }
+
+  .jalon__bloc, .jalon:nth-child(odd) .jalon__bloc, .jalon:nth-child(even) .jalon__bloc,
+  .jalon:first-child .jalon__bloc, .jalon:last-child .jalon__bloc {
+    position: static;
+    width: auto;
+    transform: none;
+    text-align: left;
+  }
+
+  .jalon--maintenant .jalon__bloc { width: auto; margin-right: 1rem; }
+
+  .etapes__chute { text-align: left; margin-left: 0; }
+
+  .etapes__lien { text-align: left; }
+
+  #le-pari { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+
+
+  #prendre-part { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; text-align: left; }
+
+  #agir { min-height: 0; padding: calc(var(--h-entete) + 2rem) 0 3rem; }
+
+  /* Un seul appel a l'ecran, toujours au meme endroit : la barre reste, les
+     boutons du flux s'effacent. Leurs liens voisins restent, eux. */
+  .hero__actions .bouton--primaire,
+  .part__actions .bouton--primaire,
+  .geste--cta { display: none; }
+
+  .gestes {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.3rem;
+  }
+
+  .geste, .fleche, .geste--cta { grid-area: auto; }
+
+  .fleche { display: none; }
+
+  #agir h2 { text-align: left; max-width: 100%; margin: 0; }
+
+  .geste--cta { justify-self: stretch; }
+
+  .geste--cta .bouton { width: 100%; }
+
+  .portes { grid-template-columns: minmax(0, 1fr); }
+
+
+
+
+  .part__bloc { align-items: flex-start; }
+
+  .equations { justify-content: flex-start; }
+
+  /* align-items: center du large centrait le lien sous un bouton etire :
+     seul element de l ecran a ne pas partir du bord gauche. */
+  .part__actions { justify-content: flex-start; align-items: flex-start; }
+
+  .part__actions .bouton { width: 100%; }
+
+
+  /* ---------- passe telephone du 05/09 ---------- */
+  /* Le heros etait une grille alignee sur la fin ; passe en colonne, ce
+     align-items poussait le sur-titre et la photo contre le bord droit,
+     seuls contre un texte cale a gauche. */
+  .hero__contenu { align-items: stretch; }
+
+  .hero__actions { gap: 1rem 1.7rem; }
+
+  /* Le CTA principal prend la largeur : c'est la cible du pouce, et les
+     six autres boutons de la page la prennent deja. */
+  .hero__actions .bouton { width: 100%; }
+
+
+  /* Deux colonnes de 145 px hachaient l'inventaire, un mot par ligne. Le
+     nom passe dans la ligne : chaque usage redevient une phrase. */
+  .niveaux { grid-template-columns: minmax(0, 1fr); gap: .95rem; }
+
+  .niveaux .nom-structure {
+    display: inline;
+    margin: 0 .45rem 0 0;
+    font-size: .82rem;
+    white-space: normal;
+  }
+
+
+  /* Le credit legende la photo du haut : il la suit, au lieu d'atterrir
+     sous la vignette du projet renove, qui n'est pas la meme image. */
+  #la-ferme { display: flex; flex-direction: column; align-items: stretch; }
+
+  .ferme__fond { order: 1; margin-bottom: 0; }
+
+  /* Sorti de la photo, le credit n'a plus besoin de sa pastille : le fond
+     de la section fait deja le contraste. */
+  .ferme__credit { order: 2; margin: .6rem 0 1.3rem var(--marge); padding: 0; background: none; }
+
+  .ferme__contenu { order: 3; }
+
+  /* 4 degres sur 300 px de large sortent la vignette de la marge. */
+  .apres { transform: rotate(2.5deg); }
+
+
+  /* La marge negative du gros point venait du large, ou elle le centrait
+     sur un trait horizontal ; a la verticale elle le decalait de 9 px. */
+  .jalon--maintenant .jalon__point { margin: 0; }
+
+
+  /* Le grand vide sous le titre servait a poser l'accroche en bas de la
+     colonne de gauche. Sans colonne, c'est un trou. */
+  .pari__chute { margin-top: 1.5rem; }
+
+
+  /* Empilees, deux pastilles de largeurs differentes se lisent comme un
+     defaut d'alignement. */
+  .equations li { width: 100%; text-align: center; }
+
+  .equations small { text-align: center; }
+
+  .part__actions { align-self: stretch; }
+
+  /* Coupes dictees pour le large : a 375 px elles laissent un mot seul. */
+  br.coupe-large { display: none; }
+
+
+  /* 13vh d'air avant les gestes disaient le changement de registre sur un
+     ecran large ; en lecture verticale, le defilement le dit deja. */
+  .gestes { margin-top: 2.6rem; row-gap: 1.7rem; }
+
+  /* 1vw ne vaut plus rien a 375 px : le chiffre venait toucher le titre. */
+  .geste h3 { gap: .7rem; }
+
+  .geste--cta { margin-top: .9rem; }
+
+  .portes { margin-top: 3.2rem; gap: .85rem; }
+
+  .apres figcaption, .ferme__credit { font-size: .76rem; }
+
+
+  /* Taille de police systeme agrandie (courante sur Android, et le beguinage
+     s'adresse a des femmes de 65 ans et plus) : a 150 %, le mot manuscrit et
+     la legende sortaient de la jauge et se faisaient couper par l'overflow de
+     la section. Ils peuvent desormais passer a la ligne. */
+  .jauge { flex-wrap: wrap; justify-content: flex-start; }
+
+  .jauge__deja { margin-right: 0; }
+
+  .jauge__legende { flex: 1 1 9rem; min-width: 0; }
+
+  /* Meme cause : justify-items: start dimensionne le panneau sur son contenu,
+     sans plafond. */
+  .panneau { max-width: 100%; }
+
+
+  /* Les nappes sont dimensionnees en pourcentage de la section. Sur un ecran
+     etroit, la meme section fait trois fois la hauteur : la nappe verte
+     descendait sur tout l'inventaire et lui coutait 0,46 point de contraste,
+     la lavande 1,3 point a la frise. On les rend au format. */
+  #le-lieu {
+    background:
+      radial-gradient(66% 24% at 96% 2%, rgba(163,113,106,.34), rgba(163,113,106,0) 62%),
+      radial-gradient(72% 24% at 2% 97%, rgba(94,158,133,.21), rgba(94,158,133,0) 64%),
+      radial-gradient(54% 18% at 92% 99%, rgba(255,243,168,.42), rgba(255,243,168,0) 66%),
+      var(--blanc);
+  }
+
+  #les-etapes {
+    background:
+      radial-gradient(64% 22% at 98% 4%, rgba(157,150,105,.32), rgba(157,150,105,0) 62%),
+      radial-gradient(70% 24% at 2% 96%, rgba(118,109,160,.26), rgba(118,109,160,0) 64%),
+      radial-gradient(96% 46% at 46% 46%, rgba(255,255,255,.94), rgba(255,255,255,0) 74%),
+      var(--violace);
+  }
+}
