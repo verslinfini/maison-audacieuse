@@ -10,14 +10,13 @@
   --violet: #766DA0;
   --violet-sombre: #383648;
   --kaki: #9D9669;
+  /* Le vert de la charte porte les traces ET les mots. Il tient 3,13 sur
+     blanc, en dessous des 4,5 d'un texte courant : Romain a tranche le
+     09/09, la charte prime, le vert ne se decline pas. Un « --vert-sombre »
+     de valeur web avait ete introduit le 08/09, il est retire. Ce que cela
+     coute est mesure et inscrit dans « verif/contraste.mjs », section des
+     ecarts assumes : les mots verts ne sont pas conformes AA. */
   --vert: #5E9E85;
-  /* Vert de texte. Le vert de la charte n'en tient que 3,13 sur blanc, ce qui
-     suffit a un trace et pas a un mot. Meme rapport que --violet a
-     --violet-sombre : la charte donne la teinte, le web donne la valeur.
-     Valeur retenue apres mesure : 4,75 sur blanc pur ne suffisait pas, les
-     fonds du site etant des degrades legerement teintes ou le meme vert
-     tombait a 4,33. */
-  --vert-sombre: #416F5C;
   --terracotta: #A3716A;
   --menthe: #BAFFE4;
   --jaune: #FFF3A8;
@@ -622,9 +621,10 @@ h2 .marqueur::before {
   height: 7px;
   border-radius: 50%;
   /* Le vert tient 3,13 sur blanc, 2,87 sur --gris et 2,69 sur --violace, pour
-     un seuil de 3. Il echouait donc sur deux des trois fonds du site. Le
-     violet passe partout : 4,70, 4,32, 4,04. */
-  background: var(--violet);
+     un seuil de 3 : il echoue de peu sur deux des trois fonds. Il avait ete
+     passe au violet le 08/09, la charte le reprend le 09/09. Une puce de
+     7 px n'est pas un mot, l'ecart se voit moins que sur du texte. */
+  background: var(--vert);
 }
 
 .bloc--sombre .puces li::before { background: var(--jaune); }

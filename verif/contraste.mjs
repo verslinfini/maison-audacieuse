@@ -36,6 +36,25 @@
 // echantillonnes : le pire seul serait bruite par un pixel de bordure, la
 // mediane adoucirait la mesure la ou elle compte.
 
+// Les ecarts ASSUMES : des mesures sous le seuil qu'une decision a validees.
+// Elles restent affichees avec leur valeur mesuree, dans leur propre section,
+// et ne sont pas comptees comme des defauts. Une entree sans date ni raison
+// n'a rien a faire ici : la liste sert a assumer un choix, pas a faire taire
+// le controle.
+const ASSUMES = [
+  {
+    // Romain, 09/09/2026 : le vert de la charte porte les traces ET les mots.
+    // Il vaut 3,13 sur blanc, sous les 4,5 exiges d'un texte courant, et les
+    // cinq etiquettes des espaces de la home tombent entre 2,89 et 2,97 sur
+    // les fonds legerement teintes. La charte prime, le vert ne se decline
+    // pas. Un « --vert-sombre » de valeur web avait ete introduit le 08/09
+    // puis retire. La regle ne vise que cette couleur exacte : tout autre
+    // texte sous son seuil reste compte comme un defaut.
+    quoi: 'vert de la charte sur du texte, arbitrage de Romain du 09/09/2026',
+    test: (p) => p.couleur === 'rgb(94, 158, 133)',
+  },
+];
+
 import { createRequire } from 'node:module';
 import http from 'node:http';
 import fs from 'node:fs';
@@ -199,7 +218,10 @@ if (!fs.existsSync(join(DIST, 'index.html'))) {
       const cle = `${p.texte}|${p.ou}|${Math.round(p.taille)}`;
       if (!vus.has(cle) || vus.get(cle).r > p.r) vus.set(cle, p);
     }
-    const liste = [...vus.values()].sort((a, b) => a.r - b.r);
+    const tout = [...vus.values()].sort((a, b) => a.r - b.r);
+    const estAssume = (x) => ASSUMES.some((a) => { try { return a.test(x); } catch { return false; } });
+    const assumes = tout.filter(estAssume);
+    const liste = tout.filter((x) => !estAssume(x));
     defauts += liste.length;
 
     console.log(`\n=== /${url === 'accueil' ? '' : url + '/'} ===`);
@@ -208,6 +230,14 @@ if (!fs.existsSync(join(DIST, 'index.html'))) {
       console.log(`  ${p.r.toFixed(2)} / ${p.seuil}  ${String(Math.round(p.taille)).padStart(3)}px  ${p.largeur}  [${p.ou}]  fond rgb(${p.f})  « ${p.texte} »`);
     }
     if (liste.length > 14) console.log(`  et ${liste.length - 14} autre(s)`);
+    if (assumes.length) {
+      console.log(`  ${assumes.length} ecart(s) assume(s), affiche(s) et non compte(s) :`);
+      for (const p of assumes.slice(0, 8)) {
+        const quoi = ASSUMES.find((a) => { try { return a.test(p); } catch { return false; } }).quoi;
+        console.log(`    ${p.r.toFixed(2)} / ${p.seuil}  ${String(Math.round(p.taille)).padStart(3)}px  ${p.largeur}  « ${p.texte} »  ${quoi}`);
+      }
+      if (assumes.length > 8) console.log(`    et ${assumes.length - 8} autre(s) du meme lot`);
+    }
     if (doutes.length) {
       const t = new Set(doutes.map((d) => d.texte));
       console.log(`  ${doutes.length} mesure(s) non concluante(s), fond releve identique a la couleur du texte, a verifier a l oeil :`);

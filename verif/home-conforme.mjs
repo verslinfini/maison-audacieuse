@@ -54,18 +54,6 @@ const VOULUS = [
     test: (c, p) => p === 'texte' && String(c.m).startsWith('Prochaines étapes'),
   },
   {
-    // Le vert de la charte, #5E9E85, tient 3,13 sur blanc : assez pour un
-    // trace ou un aplat, dont le seuil est 3, pas pour un mot, dont le seuil
-    // est 4,5. Mesure au pixel le 08/09 : les cinq etiquettes des espaces a
-    // 2,86, le compteur de la jauge a 2,57, le mot du cadre et la fleche de
-    // la frise au meme niveau. Les TEXTES verts passent a --vert-sombre ;
-    // l'anneau de la jauge, les points de la frise et les filets gardent le
-    // vert de la charte, ou il est juste. Un plancher d'accessibilite n'est
-    // pas un gout : le gel de la home ne le couvre pas.
-    quoi: 'les textes verts passent au vert de texte, --vert-sombre',
-    test: (c, p) => p === 'couleur' && String(c.m) === 'rgb(94, 158, 133)',
-  },
-  {
     // Meme lot : la legende de figure passe de 72 % a la couleur pleine du
     // corps de texte, elle tombait a 4,43 sur les fonds teintes.
     quoi: 'credit photo : opacite .72 vers la couleur pleine du corps de texte',
@@ -76,6 +64,15 @@ const VOULUS = [
     // blanc y mesurait 3,72 a 4,07 pour 4,5. Voir la note de « accueil.css ».
     quoi: 'fonds pleins des ecrans le-pari et agir, voile porte au seuil AA',
     test: (c, p) => p === 'image' && String(c.m).includes('radial-gradient'),
+  },
+  {
+    // La liste des espaces se lisait comme une phrase : virgule apres chaque
+    // item, point sur le dernier. Elle se lit maintenant comme une liste.
+    // Demande de Romain le 09/09 sur les virgules ; le point final tombe avec
+    // elles, une liste sans virgules ne se clot pas par un point.
+    quoi: 'liste des espaces : plus de ponctuation en fin d item',
+    test: (c, p, n) => p === 'texte' && n.tag === 'LI'
+      && String(c.m).replace(/[,.]$/, '') === String(c.d).replace(/[,.]$/, ''),
   },
   {
     quoi: 'la structure exploitante du pole sante a quitte le projet, l espace est nomme par sa fonction',
@@ -100,6 +97,44 @@ const VOULUS = [
   {
     quoi: 'marge du lien sous le champ, meme lot',
     test: (c, p, n) => p === 'marge' && n.classes === 'lien-texte' && String(c.d).startsWith('6.28'),
+  },
+  {
+    // « pour des femmes agees et isolees » devient « pour femmes agees
+    // isolees » : la coordination faisait de l'isolement une seconde
+    // condition d'entree, l'apposition en fait la situation qu'on adresse.
+    // Reformulation de Romain, 09/09.
+    quoi: 'beguinage : « pour femmes agees isolees » sans coordination',
+    test: (c, p, n) => p === 'texte' && String(c.m).startsWith('un habitat partagé pour des femmes'),
+  },
+  {
+    // Consequence de la chute des etapes passee sur deux lignes, voir
+    // STRUCTURE_VOULUE : une ligne de plus, donc trente pixels de plus sur le
+    // paragraphe, et autant sur le conteneur qui le porte.
+    quoi: 'hauteurs entrainees par la chute des etapes sur deux lignes',
+    test: (c, p, n) => p === 'h'
+      && (n.chemin === 'main/section[3]/div[1]/p[2]' || n.chemin === 'main/section[3]/div[1]')
+      && Number(c.d) - Number(c.m) >= 30 && Number(c.d) - Number(c.m) <= 32,
+  },
+];
+
+// Les ecarts de STRUCTURE voulus : un noeud present d'un seul cote. Ils se
+// declarent a part parce qu'ils coutent plus cher que les autres : un noeud
+// declare ici n'est plus compare du tout, ni son texte ni ses styles. On n'en
+// inscrit donc que pour une decision prise, jamais pour faire taire le
+// controle.
+const STRUCTURE_VOULUE = [
+  {
+    // La chute de l'ecran des etapes passe sur deux lignes : « Le don a lance
+    // les etudes. » puis « La part sociale nous rassemble dans un projet
+    // commun. » Le <br> insere decale l'index du <strong> qui suit, d'ou
+    // trois lignes de structure pour une seule decision. Demande de Romain,
+    // 09/09. Prix paye : le <strong> de cette chute n'est plus compare.
+    quoi: 'la chute des etapes passe sur deux lignes',
+    test: (chemin) => [
+      'main/section[3]/div[1]/p[2]/br[0]',
+      'main/section[3]/div[1]/p[2]/strong[0]',
+      'main/section[3]/div[1]/p[2]/strong[1]',
+    ].includes(chemin),
   },
 ];
 
@@ -172,8 +207,9 @@ if (!fs.existsSync(join(DIST, 'index.html'))) {
   const D = parChemin(aD);
 
   const derives = [];
-  const manquants = Object.keys(M).filter((c) => !(c in D));
-  const enPlus = Object.keys(D).filter((c) => !(c in M));
+  const declare = (c) => STRUCTURE_VOULUE.some((v) => { try { return v.test(c); } catch { return false; } });
+  const manquants = Object.keys(M).filter((c) => !(c in D) && !declare(c));
+  const enPlus = Object.keys(D).filter((c) => !(c in M) && !declare(c));
 
   for (const chemin of Object.keys(M)) {
     if (!(chemin in D)) continue;
@@ -197,7 +233,7 @@ if (!fs.existsSync(join(DIST, 'index.html'))) {
 
   const total = manquants.length + enPlus.length + derives.length;
   console.log(total === 0
-    ? `\nla home est conforme a la maquette validee (${VOULUS.length - 1} ecart(s) voulu(s) ignore(s))`
+    ? `\nla home est conforme a la maquette validee (${VOULUS.length} ecart(s) voulu(s) et ${STRUCTURE_VOULUE.length} ecart(s) de structure ignore(s))`
     : `\n${total} derive(s). Chacune est soit a corriger, soit a inscrire dans VOULUS avec sa raison.`);
   if (total > 0) process.exitCode = 1;
 
