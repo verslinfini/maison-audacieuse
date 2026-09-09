@@ -732,7 +732,7 @@ h1, h2, h3 { font-weight: 700; color: var(--violet-sombre); margin: 0; letter-sp
    colore de la page. */
 #agir .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 
-#agir .bouton--primaire:hover { background: #FFEB7E; }
+#agir .bouton--primaire:hover { filter: brightness(.94); }
 
 
 /* ---- les gestes et les fleches ---- */

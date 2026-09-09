@@ -240,7 +240,12 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 
 .barre-mobile[data-chaud="oui"] .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 
-.barre-mobile[data-chaud="oui"] .bouton--primaire:hover { background: #FFEB7E; }
+/* Survol des boutons jaunes. La variation se fait par traitement et non par
+   teinte : un #FFEB7E avait ete invente a cote du #FFF3A8 de la charte, il
+   est retire. « brightness » garde la couleur de la charte et fonce le
+   bouton ET son libelle du meme geste, ce qui ne peut pas degrader le
+   contraste entre les deux. Voir « verif/palette.mjs ». */
+.barre-mobile[data-chaud="oui"] .bouton--primaire:hover { filter: brightness(.94); }
 
 @media (prefers-reduced-motion: reduce) { .barre-mobile { transition: none; }
 }
@@ -831,7 +836,7 @@ h2 .marqueur::before {
 .appel__gestes { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: center; }
 
 .bloc--sombre .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
-.bloc--sombre .bouton--primaire:hover { background: #FFEB7E; }
+.bloc--sombre .bouton--primaire:hover { filter: brightness(.94); }
 
 /* ---------- champs de formulaire ---------- */
 
@@ -1117,7 +1122,7 @@ h2 .marqueur::before {
 .bloc--terracotta .bouton--primaire { background: var(--jaune); color: var(--violet-sombre); }
 
 .bloc--violet .bouton--primaire:hover,
-.bloc--terracotta .bouton--primaire:hover { background: #FFEB7E; }
+.bloc--terracotta .bouton--primaire:hover { filter: brightness(.94); }
 
 .bloc--violet .carte,
 .bloc--terracotta .carte { background: rgba(255, 255, 255, .10); border-color: rgba(255, 255, 255, .22); }

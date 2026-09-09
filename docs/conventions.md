@@ -143,6 +143,25 @@ Dupliquer une regle CSS dans deux feuilles.
 Ajouter une dependance sans que le besoin l ait rendue evidente.
 
 
+## La regle des couleurs
+
+La charte donne les couleurs, le CSS n'en invente aucune. Les onze teintes de `docs/charte.md` sont declarees
+une fois dans le `:root` de `src/styles/base.css`. Toute declaration qui peint quelque chose qu'on voit
+(`color`, `background`, `border-color`, `fill`, `stroke`) s'y sert par `var(--nom)`.
+
+**Une variation de valeur se fait par traitement, jamais par nouvelle teinte.** Un survol qui doit foncer prend
+`filter: brightness(.94)`, pas un hexadecimal voisin. Le traitement garde la couleur de la charte, il n'en
+declare pas une autre, et il fonce le fond et le libelle du meme geste, ce qui ne peut pas degrader le contraste
+entre les deux.
+
+Si une couleur de la charte ne tient pas son seuil de contraste sur du texte, **on ne la fonce pas** : on change
+ce qu'elle peint, ou on assume l'ecart en l'inscrivant dans la liste des ecarts assumes de `verif/contraste.mjs`,
+avec sa mesure et sa date. Arbitrage de Romain du 09/09/2026, apres deux passages ou le reflexe inverse avait ete
+pris : un `--vert-sombre` #416F5C pour les textes verts, un `#FFEB7E` pour le survol des boutons jaunes.
+
+`node verif/palette.mjs` le verifie, palette comprise : une teinte inventee ne se blanchit pas en se donnant un
+nom de variable.
+
 ## Le catalogue des fonds et des images (07/09/2026)
 
 Ces composants vivent dans `base.css`, section « Fonds de section colores » et suivantes. Ils ont ete ajoutes le 07/09 apres le constat que les pages interieures n avaient acces qu au blanc, au gris et au violace, quand la home disposait de six fonds travailles.
