@@ -1,19 +1,18 @@
-# Copy de la page « part sociale », version 2
+# Copy de la page « part sociale », version 3
 
-Source de la copy, jamais du markup. Rédigée le 09/09/2026 depuis le brief vocal de Romain du même jour.
+Source de la copy, jamais du markup. Version 2 écrite le 09/09/2026 depuis le brief vocal de Romain,
+version 3 le même jour après sa relecture des blocs 1 à 4.
 Rien n'est intégré dans la page tant que ce document n'est pas validé.
 
-Deux niveaux de lecture, décidés ici :
+Deux niveaux de lecture :
 
 - **le fil**, ce qu'on lit debout en trente secondes, sept blocs courts ;
 - **la FAQ**, tout ce qui est vrai, utile, et trop technique pour le fil.
 
-Le brief portait de quoi écrire une page de trois mille mots. La page en fait moins de mille. Ce qui a été
-poussé en FAQ n'est pas perdu, il est rangé là où on va le chercher quand on a la question.
-
 Vérifications faites dans les statuts constitutifs signés avant d'écrire : articles 15.1 à 15.5
 (remboursement), 22 (collèges de vote), 27 (rémunérations financières), 30 et 31 (excédents et
-impartageabilité des réserves).
+impartageabilité des réserves). Identité légale relevée dans `01 Structuration juridique/Statuts
+constitutifs signés - LMA.md`.
 
 ---
 
@@ -22,94 +21,80 @@ impartageabilité des réserves).
 **H1** : Les parts sociales de la Maison Audacieuse
 
 **Méta titre** : Les parts sociales de la Maison Audacieuse
-**Méta description** : Une part, c'est 100 €, une voix, et un petit bout d'un lieu qui appartiendra à celles et ceux qui s'en servent. Votre argent reste le vôtre.
+**Méta description** : Une part, c'est 100 €, une voix, et un petit morceau d'un lieu qui appartiendra à celles et ceux qui s'en servent. Votre argent reste le vôtre.
 
 ---
 
 ## Bloc 1 : pourquoi une coopérative
 
-**Titre** : On n'a pas hésité longtemps
+Pas de titre. Le H1 ouvre, le texte enchaîne.
 
-Pour porter ce lieu, il fallait choisir une forme juridique. Le choix était fait avant même qu'on
-en parle : une coopérative.
-
-Parce qu'une coopérative fait trois choses qu'aucune autre société ne fait.
+Pour porter ce projet, il fallait choisir une forme juridique. Le choix était évident avant même qu'on
+ait besoin d'en parler : la coopérative. C'est celle qui colle le plus avec nos valeurs.
 
 **Personne ne s'enrichit.** Une part vaut 100 € le premier jour et 100 € vingt ans plus tard. Elle ne
-prend pas de valeur, jamais. C'est écrit dans nos statuts, et c'est irréversible.
+prend pas de valeur. Jamais.
 
-**Une personne, une voix.** Ailleurs, celui qui met le plus d'argent décide le plus. Ici, celle qui a
-une part et celui qui en a cinquante pèsent pareil.
+**Une personne, une voix.** Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir.
+Ici, on est tous à égalité.
 
-**On peut être très nombreux.** Et c'est le but. Plus il y a de monde autour de la table, plus le lieu
-ressemble à ce que les gens veulent vraiment, et moins il ressemble à l'idée qu'une poignée de
-personnes s'en faisait au départ.
+**On peut être très nombreux.** Et c'est ça le but. Plus il y a de monde autour de la table, plus le
+lieu ressemble à ce que les gens veulent vraiment.
 
 ---
 
 ## Bloc 2 : l'objectif
 
+Rendu : c'est le bloc qui doit se voir. Fond plein, texte large, les trois lignes détachées les unes
+des autres. C'est le seul endroit de la page qui hausse la voix.
+
 **Titre** : Un lieu qui appartient à celles et ceux qui s'en servent
 
-C'est notre objectif, et il tient en une phrase : réunir le plus de monde possible autour de ce lieu,
-pour qu'il soit un bien commun.
+Notre objectif est simple : réunir le plus de monde possible pour créer un bien commun.
 
-Pas le lieu de quelqu'un. Pas le lieu d'une association qui vous accueille. Un lieu dont vous tenez un
-morceau, avec quelques milliers d'autres personnes.
+Un lieu qui sort des logiques marchandes.
+Un lieu où on peut tous décider.
+Un lieu dont on est tous « propriétaires ».
 
 ---
 
 ## Bloc 3 : c'est quoi, une part sociale
 
-**Titre** : Une part, c'est un morceau de la coopérative
+**Titre** : Une part, c'est un petit morceau de la coopérative
 
-La coopérative s'appelle La Coop Audacieuse. C'est elle qui portera la Maison Audacieuse.
+Ainsi, une part sociale, c'est un petit morceau de la coopérative.
 
-Une part sociale, c'est un morceau de cette coopérative. Vous en prenez une, vous devenez
-coopérateur ou coopératrice. Vous entrez dans la maison, et vous avez une voix dans les décisions.
+> **Encart, identité de la coopérative**
+> La Coop Audacieuse
+> Société coopérative d'intérêt collectif à capital variable
+> Créée le 10 juillet 2026, immatriculée au RCS d'Annecy
+> SIREN 107 280 208
+> Siège : 3 impasse des Rochers, 74960 Annecy Cran-Gevrier
 
-C'est tout. Il n'y a pas de piège en dessous.
+Vous possédez une part sociale, vous avez le statut de coopérateur ou de coopératrice. Il vous donne
+le droit, si vous le souhaitez, de participer aux décisions du projet.
 
 ---
 
 ## Bloc 4 : cent euros, et ce n'est pas un don
 
-**Titre** : 100 €, versés une fois
+**Titre** : 100 €, et ce n'est pas un don
 
-Une part sociale coûte 100 €. On la paie en une fois.
+Chaque part coûte 100 €. On peut en prendre autant qu'on veut.
 
-**Ce n'est pas un don.** Avec un don, l'argent part et ne revient pas. Avec une part, l'argent reste le
-vôtre. Il est confié à la coopérative, il travaille pour le lieu, et vous pouvez demander à le
-récupérer.
+Ce n'est pas un don, puisque vous restez propriétaire de cette part et qu'elle vous sera remboursée sur
+demande.
 
 > Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.
 
-Une part ne rapporte rien : pas d'intérêts, pas de dividendes, jamais. Nos statuts l'interdisent, et
-ils ne peuvent pas être contournés. Le retour sur investissement, ici, c'est que le lieu existe.
-
 ---
 
-## Bloc 5 : concrètement
-
-**Titre** : Concrètement, comment ça marche
-
-**Vous choisissez combien.** Les parts vont par tranches de 100 €. Une part, trois parts, dix parts :
-c'est vous qui décidez ce que vous pouvez mettre.
-
-**Vous restez coopérateur ou coopératrice tant que vous détenez une part.** Une seule suffit pour
-avoir votre voix.
-
-**Vous pouvez demander le remboursement.** Vous écrivez à la coopérative, et elle vous rembourse. Sans
-intérêts, sans contrepartie : ni gain, ni pénalité.
-
-**Vous lisez les statuts avant de signer.** C'est le contrat de la coopérative, il fait foi sur tout ce
-qui est écrit ici. [À SOURCER : lien de téléchargement des statuts constitutifs signés, PDF à déposer]
-
----
-
-## Bloc 6 : les niveaux d'implication
+## Bloc 5 : les niveaux d'implication
 
 **Titre** : Vous vous impliquez autant que vous voulez
+
+Rendu : c'est l'arbre d'engagement. Cinq marches, la première large et les suivantes qui s'affinent,
+pour qu'on voie d'un coup d'œil que tout est optionnel après la première.
 
 Prendre une part suffit. Tout le reste est ouvert, jamais obligatoire.
 
@@ -131,7 +116,7 @@ des réunions d'information. [À SOURCER : lien d'invitation du groupe WhatsApp,
 
 ---
 
-## Bloc 7 : l'association, à côté
+## Bloc 6 : l'association, à côté
 
 **Titre** : Et il y a l'association
 
@@ -144,14 +129,17 @@ Si c'est ce combat-là qui vous tient à cœur, c'est là qu'on vous attend.
 
 ---
 
-## Bloc 8 : l'appel
+## Bloc 7 : l'appel
 
 **Titre** : Prêt·e ?
 
+Avant de souscrire, lisez les statuts de la coopérative. C'est le contrat, il fait foi sur tout ce qui
+est écrit ici. [À SOURCER : lien de téléchargement des statuts constitutifs signés, PDF à déposer]
+
 [bouton] Je prends ma part
 
-Une question avant de vous décider ? Écrivez à
-[À TRANCHER : souscription@maison-audacieuse.fr, adresse à créer, singulier ou pluriel]
+Une question ? Écrivez à
+[À TRANCHER : souscription@maison-audacieuse.fr, adresse à créer, recommandation au singulier]
 
 ---
 
@@ -166,7 +154,12 @@ comble. Une banque ne finance que la moitié d'un lieu comme celui-ci : l'autre 
 **C'est comme des actions ?**
 Non, et c'est toute la différence. Dans une société classique, on achète des actions en espérant qu'elles
 prennent de la valeur et rapportent des dividendes. Ici, la part vaut toujours 100 €, et nos statuts
-prévoient que la totalité des excédents part en réserves qui ne peuvent jamais être distribuées.
+prévoient que la totalité des excédents part en réserves qui ne peuvent jamais être distribuées, ni
+pendant la vie de la coopérative, ni le jour où elle s'arrêterait.
+
+**Est-ce que ma part rapporte quelque chose ?**
+Non. Pas d'intérêts, pas de dividendes, jamais. Le retour sur investissement, ici, c'est que le lieu
+existe.
 
 **Combien de temps mon argent est-il immobilisé ?**
 [À TRANCHER : le délai statutaire de cinq ans et la réserve de trésorerie ne sont publiables qu'après
@@ -189,8 +182,8 @@ qui se construit, et c'est la contrepartie du fait qu'on ne cherche à enrichir 
 Vous votez en assemblée générale : l'approbation des comptes, les orientations du projet, les
 modifications importantes. Une personne égale une voix. [À TRANCHER : dire ou non que les
 coopérateur·ices soutiens forment un collège qui pèse 10 % des voix, article 22 des statuts. Ne pas le
-dire est une omission ; le dire sur cette page casse le message d'égalité. Recommandation : le dire ici,
-en FAQ, plutôt que de le laisser découvrir dans les statuts.]
+dire est une omission ; le dire dans le fil casse le message d'égalité. Recommandation : le dire ici,
+en FAQ.]
 
 **Est-ce que ça me donne un avantage fiscal ?**
 [À TRANCHER : aucune promesse fiscale tant que l'agrément ESUS est en instruction. Formulation neutre
@@ -198,6 +191,27 @@ recommandée : « Non. Le don, lui, ouvre droit à une réduction d'impôt de 66
 
 **Je peux plutôt faire un don ?**
 Oui, et c'est utile aussi. [lien vers /soutenir/]
+
+---
+
+## Ce qui a changé de la v2 à la v3
+
+- Le titre « On n'a pas hésité longtemps » est retiré, le bloc 1 ouvre directement.
+- « Pour porter ce lieu » devient « pour porter ce projet », qui ne réduit pas le propos au bâtiment.
+- « Le choix était fait » devient « le choix était évident », et la raison est dite : nos valeurs.
+- « C'est écrit dans nos statuts, et c'est irréversible » est retiré. La preuve juridique se donne en
+  FAQ, elle alourdit le fil.
+- « Celui qui met le plus d'argent décide le plus » devient « a le plus de pouvoir », et « pèsent
+  pareil » devient « on est tous à égalité ».
+- La troisième raison s'arrête à « ce que les gens veulent vraiment ». La suite disait deux fois la
+  même chose.
+- Le bloc 2 passe en bloc visuel, avec les trois lignes détachées.
+- Le bloc 3 s'ouvre sur « Ainsi », qui l'enchaîne au précédent, et porte l'encart d'identité de la
+  coopérative.
+- Le bloc « Concrètement, comment ça marche » est supprimé. Ses quatre points sont partis là où ils
+  sont utiles : le prix et le nombre de parts au bloc 4, le statut de coopérateur·ice au bloc 3, la
+  lecture des statuts au bloc 7, l'absence de rendement en FAQ. Un bloc de moins, rien de perdu.
+- La page passe de sept blocs et une FAQ à sept blocs et une FAQ, mais le fil perd environ 120 mots.
 
 ---
 
@@ -209,17 +223,9 @@ au montant nominal *sous déduction des pertes éventuelles*, et l'article 15.2 
 d'exiger le reversement du trop-perçu si des pertes surviennent dans les cinq ans qui suivent la sortie.
 La comparaison promet une sécurité que les statuts ne donnent pas. Le vocabulaire du prêt et du taux est
 par ailleurs dans les mots proscrits du projet, au même titre que placement, rendement et épargne.
-Ce que la comparaison cherchait à dire est écrit autrement au bloc 4 : ce n'est pas un don, l'argent
-reste le vôtre, vous pouvez demander à le récupérer.
 
 **« Le montant remboursé est égal au montant apporté. »** Écarté pour la même raison : faux au regard de
-l'article 15.1. La phrase validée par le collectif, « votre argent reste le vôtre, vous pouvez demander
-le remboursement de vos parts à tout moment », dit la même chose sans promettre un montant.
-
-**« Copropriétaire du lieu. »** Écarté. La coopérative ne sera jamais propriétaire des murs : la Ville
-d'Annecy reste propriétaire, la coopérative aura un bail emphytéotique de 99 ans. « Un morceau de la
-coopérative » est vrai et dit la même chose. La page d'accueil porte encore la formule fausse, elle vient
-de la maquette validée par le collectif et n'a pas été modifiée.
+l'article 15.1.
 
 **« Une période d'engagement d'un an après l'ouverture. »** Écarté. Cette clause n'existe pas dans les
 statuts signés, et elle contredirait la phrase validée « à tout moment ». Les statuts prévoient autre
@@ -227,5 +233,23 @@ chose : un délai de cinq ans, avec remboursement anticipé possible sur décisi
 Créer une clause nouvelle est une décision de gouvernance, pas une décision de rédaction.
 
 **Les dates de travaux 2027 à 2028 et la sortie fin 2029.** Écartées. Le référentiel des chiffres
-autorisés ne porte que « été 2027 » pour le début des travaux, et encore, à confirmer avec BASA. Une date
-de fin de travaux affichée sur une page de souscription devient une promesse.
+autorisés ne porte que « été 2027 » pour le début des travaux, à confirmer avec BASA. Une date de fin de
+travaux affichée sur une page de souscription devient une promesse.
+
+---
+
+## Deux points à surveiller dans la v3
+
+**« Dont on est tous « propriétaires ».»** Écrit tel que dicté, guillemets compris. Les guillemets font
+le travail : ils annoncent la figure de style. Sans eux la phrase serait fausse, la coopérative ne sera
+jamais propriétaire des murs, la Ville d'Annecy le reste et la coopérative aura un bail emphytéotique de
+99 ans. La page du modèle économique le dit noir sur blanc, donc le site ne se contredit qu'au premier
+degré. La page d'accueil, elle, porte encore « copropriétaire du lieu » sans guillemets, et cette
+formule vient de la maquette validée par le collectif.
+
+**« Elle vous sera remboursée sur demande. »** Plus engageant que la phrase validée qui suit. La phrase
+validée dit « vous pouvez demander », c'est-à-dire qu'on peut faire la demande ; celle-ci dit qu'on
+rembourse. L'article 15.4 encadre le délai et l'article 15.5 soumet la demande à autorisation préalable
+du Conseil Coopératif. Les deux phrases côte à côte, la seconde corrige la première, mais l'ordre de
+lecture fait que la promesse est lue avant la nuance. À voir si l'on inverse les deux, ou si l'on
+attend la délibération du Conseil Coopératif pour trancher.
