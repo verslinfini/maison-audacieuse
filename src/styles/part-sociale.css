@@ -2,7 +2,7 @@
 /* Page « C'est quoi, une part sociale ? ».                             */
 /* Tout le reste vient de base.css. Ne vivent ici que les quatre choses  */
 /* que le socle ne porte pas : le prix pose en grand, le cadrage de      */
-/* l'image du duo, la liste des limites et deux reglages de fin de       */
+/* l'image du duo, les listes a filets et deux reglages de fin de       */
 /* bloc. La feuille d'avant en portait dix, dont un sommaire ancre, un   */
 /* tableau comparatif et un second formulaire : ils sont sortis avec le  */
 /* texte qu'ils servaient.                                              */
@@ -131,18 +131,21 @@
 .bloc--photo .bloc__credit { text-shadow: 0 1px 8px rgba(31, 29, 45, .75); }
 
 
-/* ---------- les trois limites ---------- */
+/* ---------- les listes a filets ---------- */
 
 /* Un syntagme nominal court, puis une ligne qui dit pourquoi. Filets
-   seulement : un aveu de limite dans un encadre de couleur se lit comme un
-   avertissement, ce qu'il n'est pas. */
-.limites { display: flex; flex-direction: column; }
+   seulement : la liste sert deux fois sur cette page, pour les trois raisons
+   de l'ouverture et pour les cinq niveaux d'implication, et un encadre de
+   couleur ferait lire la seconde comme une liste d'obligations.
+   La classe s'appelait « limites » quand elle ne servait qu'a l'aveu de
+   limite ; elle a ete renommee le 09/09 quand elle a servi ailleurs. */
+.points { display: flex; flex-direction: column; }
 
-.limites > li { padding: clamp(1rem, 1.8vw, 1.35rem) 0; border-top: 1px solid var(--filet); }
+.points > li { padding: clamp(1rem, 1.8vw, 1.35rem) 0; border-top: 1px solid var(--filet); }
 
-.limites > li:last-child { border-bottom: 1px solid var(--filet); }
+.points > li:last-child { border-bottom: 1px solid var(--filet); }
 
-.limites strong {
+.points strong {
   display: block;
   margin-bottom: .4rem;
   color: var(--violet-sombre);
@@ -151,7 +154,41 @@
   line-height: 1.3;
 }
 
-.limites p { margin: 0; }
+.points p { margin: 0; }
+
+
+/* Les trois lignes de l'objectif. C'est le seul endroit de la page ou le
+   texte devient grand : trois affirmations detachees, une par ligne, sans
+   puce. Le filet terracotta les tient ensemble sans les enfermer, et c'est un
+   trait graphique, dont le seuil de contraste est 3 et non 4,5. */
+.manifeste {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+  margin-top: clamp(1.6rem, 3vw, 2.6rem);
+  max-width: 30ch;
+  list-style: none;
+}
+
+.manifeste > li {
+  padding-left: clamp(.9rem, 1.8vw, 1.4rem);
+  border-left: 3px solid var(--terracotta);
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -.015em;
+  color: var(--violet-sombre);
+}
+
+
+/* La chute de l'arbre d'engagement. Elle dit l'inverse de ce qu'une liste de
+   cinq niveaux laisse croire, donc elle se detache de la liste. */
+.implication__chute {
+  margin-top: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--violet-sombre);
+}
 
 
 /* ---------- questions ---------- */
@@ -200,5 +237,16 @@
 @media (max-width: 767px) {
   .duo .figure img { height: clamp(15rem, 58vw, 21rem); border-width: 8px; }
 
-  .limites strong { font-size: 1.08rem; }
+  .points strong { font-size: 1.08rem; }
 }
+
+
+/* La chaine validee de la campagne, posee en plaque blanche sur le violet.
+   Le socle rend les cartes translucides sur fond plein : le blanc y mesure
+   4,10 pour 4,5 a 18 px en graisse 600, mesure le 09/09. La phrase la plus
+   importante de la page ne peut pas etre la moins lisible de la page. En
+   plaque opaque elle tient largement son seuil, et elle se detache du fond
+   comme une etiquette posee dessus. */
+#cent-euros .carte { background: var(--blanc); border-color: transparent; }
+
+#cent-euros .carte__titre { color: var(--violet-sombre); }
