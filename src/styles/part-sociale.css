@@ -440,14 +440,15 @@
 
 /* Le plafond de 24 signes du socle couperait ce titre en lignes de deux mots
    dans une colonne de cette largeur. */
-/* Meme taille que le titre de l'ecran 5 de la home, verifie au pixel le
-   10/09 : 48 px a 1440, graisse 700, interlettre -0,018 em. Il avait ete
-   descendu a 41,6 px parce qu'il fait 57 signes contre 22 a « Le pari du bien
-   commun » ; la largeur reste a 16ch et non aux 11ch de la home, sinon un
-   titre trois fois plus long part sur six lignes. */
+/* Titre a 41,6 px et non aux 48 px de l'ecran 5 de la home. Essai du 10/09 a
+   la taille de la home : ce titre fait 57 signes contre 22 a « Le pari du bien
+   commun », il y prenait toute la colonne et ecrasait le sous-titre, qui est
+   ce que Romain voulait voir gagner en presence. Le sous-titre, lui, est
+   identique au pixel a celui de la home. */
 #objectif .bloc__titre {
   max-width: 18ch;
   margin-bottom: 0;
+  font-size: clamp(1.75rem, 2.95vw, 2.6rem);
 }
 
 /* La phrase d'objectif ferme la colonne de gauche, loin sous le titre : c'est
