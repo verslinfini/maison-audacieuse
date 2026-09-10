@@ -17,7 +17,7 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 | | Section | Fond | La question à laquelle elle répond |
 |---|---|---|---|
 | **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
-| | 2. Un bien commun se garde à plusieurs milliers | `bloc--violet` | pourquoi le nombre |
+| | 2. Réunir le plus de monde possible pour créer un bien commun | `bloc--violet` | pourquoi le nombre |
 | **QUOI** | 3. Une part, c'est un petit morceau de la coopérative | `bloc--blanc` | c'est quoi, concrètement |
 | | 4. 100 €, une voix | `bloc--terracotta` | combien, et est-ce que je le reperds |
 | | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
@@ -53,47 +53,56 @@ Ici, nous sommes tous à égalité.
 **On peut être très nombreux·ses.** Et c'est ça le but. Plus il y a de monde autour de la table, plus
 le lieu ressemble à ce que les gens veulent vraiment.
 
-### 2. Un bien commun se garde à plusieurs milliers
+### 2. Réunir le plus de monde possible pour créer un bien commun
 
-Deuxième réécriture, 10/09. La première, du matin, portait « pourquoi on demande cet argent à des
-habitants et pas à des investisseurs ». Romain a rouvert la home et constaté que c'est le sujet entier
-de l'écran 5, mot pour mot : « Dans un projet classique, nous aurions ouvert le capital à de gros
-investisseurs, en échange de contreparties importantes. Pour servir l'intérêt général et garder ce lieu
-accessible, nous faisons le pari inverse. » Il avait raison, le texte du matin était une redite.
+Troisième écriture, 10/09 après-midi. Romain a rejeté la deuxième (« Un bien commun se garde à
+plusieurs milliers », « créer un bien commun et le garder ») et demandé le retour du titre et de la
+phrase d'objectif de la version du matin, puis une colonne de droite reprise de sa dictée. Ce que
+l'écran doit condenser, dans ses mots : on a créé une coopérative parce que ça colle à nos valeurs et
+parce que ça permet d'être très nombreux·ses ; on veut être nombreux·ses pour que le lieu soit un bien
+commun qui appartient à tout le monde, pour préserver l'intérêt général, pour le financer par le nombre
+et pour montrer l'engouement. Le premier point est l'écran 1, la part est l'écran 3 : cet écran porte
+le nombre, et lui seul.
 
-Ce que la home ne dit nulle part, et qui fait le contenu propre de cet écran : le bien commun comme
-régime de gestion (géré, protégé, partagé collectivement), la protection contre le dévoiement, la durée
-des 99 ans, et le poids devant les institutions expliqué au lieu d'être asséné. L'écran découle des
-trois règles de l'écran 1, qui servent précisément à cela.
+La phrase qui tient l'écran vient de la campagne Ulule « Un commun accord » (Jancovici, lue le 08/09
+pour DEA) : « le montant compte pour que le projet existe, le nombre de soutiens compte encore plus
+pour montrer que ça répond à une attente réelle ». C'est une idée, pas une formule protégée. Elle est
+reformulée pour une coopérative et elle remplace « le nombre compte plus que la somme », jugé trop
+court par Romain. Elle règle aussi le point ouvert de la version précédente : elle reconnaît l'argent
+sur une page qui demande 100 € trois écrans plus bas.
 
 **Titre**, colonne de gauche :
-Un bien commun se garde à plusieurs milliers
+Réunir le plus de monde possible pour créer un bien commun
 
-**Phrase d'objectif**, sous le titre, italique graisse 500, réglage de l'écran 5 de la home :
-Notre objectif est simple : réunir le plus de monde possible pour créer un bien commun et le garder.
+**Phrase d'objectif**, sous le titre, réglage de l'écran 5 de la home :
+Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui l'utilisent.
 
 **Colonne de droite :**
 
-Un bien commun se gère, se protège et se partage collectivement, au service de l'intérêt général.
+Un bien commun est au service de l'intérêt général. Il se gère, se protège et se partage
+collectivement.
 
-Le bail court sur 99 ans. Ce lieu doit tenir plus longtemps que celles et ceux qui le lancent
-aujourd'hui. Il ne tiendra que si personne ne peut se l'approprier.
+La Ville d'Annecy a signé la promesse de bail de 99 ans. Ce lieu devra tenir plus longtemps que celles
+et ceux qui le lancent aujourd'hui.
 
-*(paragraphe pivot, tout en gras)* Un lieu détenu par quelques personnes finit par leur ressembler.
-Détenu par plusieurs milliers, **il ne peut être capté** ni par un financeur, ni par un dirigeant, ni
-par un petit groupe qui voudrait l'orienter autrement.
-*(« il ne peut être capté » surligné au marqueur jaune, seule zone chaude de l'écran)*
+Nous cherchons donc à rassembler une communauté de personnes qui partagent ces valeurs et qui veulent
+voir exister un lieu comme celui-ci sur le territoire.
 
-Aujourd'hui, le nombre compte plus que la somme. Chaque personne qui prend une part rend le projet plus
-solide devant les financeurs et les institutions. Elle le rapproche aussi de celles et ceux qui s'en
-serviront.
+*(paragraphe pivot, tout en gras)* Car le meilleur moyen de le faire durer, c'est qu'il appartienne à
+une multitude de personnes différentes.
 
-Trois points restent ouverts avec Romain. « Nous ne cherchons pas à lever de l'argent » a été
-transformé en « le nombre compte plus que la somme » : la formule d'origine est plus forte mais
-attaquable sur une page qui demande 100 € trois écrans plus bas, et fausse au sens strict puisque
-l'objectif interne est de 400 k€. L'écran 3 est devenu le maillon faible et son contenu gagnerait à
-descendre en écran 4 ou en FAQ. Le titre « Une part sociale, c'est un petit morceau de la coopérative
-qui porte le projet », proposé par Romain, n'est pas retenu ici : c'est déjà le titre de l'écran 3.
+L'argent compte, il finance la rénovation. **Le nombre compte encore plus** : il montre que ce lieu
+répond à une attente réelle. Et chaque personne qui prend une part rend le projet plus solide devant
+les financeurs et les institutions.
+*(« Le nombre compte encore plus » surligné au marqueur jaune, seule zone chaude de l'écran)*
+
+Deux écarts avec la dictée de Romain, et pourquoi. « Nous avons signé un bail de 99 ans avec la mairie
+d'Annecy » : faux au jour d'écriture, seule la promesse de bail est signée, le bail vient après le
+permis, formulation imposée par `chiffres-autorises.md`. « Créer une communauté qui soutient la
+création d'un lieu » : le double « créer » est retiré, la communauté se rassemble et le lieu existe.
+
+Ce qui reste ouvert : l'écran 3 est le maillon faible de la page et son contenu gagnerait à descendre
+en écran 4 ou en FAQ.
 
 Ce qui a été écarté de la matière du 10/09, et pourquoi : le capitalisme, le fascisme, la surveillance
 et le totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. La Ville d'Annecy
