@@ -55,62 +55,46 @@ le lieu ressemble à ce que les gens veulent vraiment.
 
 ### 2. Réunir le plus de monde possible pour créer un bien commun
 
-Troisième écriture, 10/09 après-midi. Romain a rejeté la deuxième (« Un bien commun se garde à
-plusieurs milliers », « créer un bien commun et le garder ») et demandé le retour du titre et de la
-phrase d'objectif de la version du matin, puis une colonne de droite reprise de sa dictée. Ce que
-l'écran doit condenser, dans ses mots : on a créé une coopérative parce que ça colle à nos valeurs et
-parce que ça permet d'être très nombreux·ses ; on veut être nombreux·ses pour que le lieu soit un bien
-commun qui appartient à tout le monde, pour préserver l'intérêt général, pour le financer par le nombre
-et pour montrer l'engouement. Le premier point est l'écran 1, la part est l'écran 3 : cet écran porte
-le nombre, et lui seul.
+Troisième passe, 10/09 au soir. Les deux précédentes échouaient pour la même raison : elles écrivaient
+de l'explication dans le seul écran de la page qui ne doit pas en faire. Sur les neuf écrans, huit
+expliquent déjà quelque chose ; celui-ci doit faire ressentir.
 
-La phrase qui tient l'écran vient de la campagne Ulule « Un commun accord » (Jancovici, lue le 08/09
-pour DEA) : « le montant compte pour que le projet existe, le nombre de soutiens compte encore plus
-pour montrer que ça répond à une attente réelle ». C'est une idée, pas une formule protégée. Elle est
-reformulée pour une coopérative et elle remplace « le nombre compte plus que la somme », jugé trop
-court par Romain. Elle règle aussi le point ouvert de la version précédente : elle reconnaît l'argent
-sur une page qui demande 100 € trois écrans plus bas.
+L'objection qu'il traite, et que rien d'autre sur le site ne traite : « mes 100 €, ça ne changera
+rien ». C'est la première objection de tout souscripteur citoyen. La phrase de Romain la retourne.
 
-**Titre**, colonne de gauche :
+**Titre**, colonne de gauche, revenu à la formulation du 09/09 :
 Réunir le plus de monde possible pour créer un bien commun
 
-**Phrase d'objectif**, sous le titre, réglage de l'écran 5 de la home :
+**Phrase d'objectif**, italique graisse 500, réglage de l'écran 5 de la home :
 Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui l'utilisent.
 
 **Colonne de droite :**
 
-Un bien commun est au service de l'intérêt général. Il se gère, se protège et se partage
-collectivement.
+Un bien commun est au service de l'intérêt général. Il se gère, se protège et se partage collectivement.
 
-La Ville d'Annecy a signé la promesse de bail de 99 ans. Ce lieu devra tenir plus longtemps que celles
-et ceux qui le lancent aujourd'hui.
+Nous avons signé avec la Ville d'Annecy une promesse de bail de 99 ans. Ce lieu devra donc durer plus
+longtemps que celles et ceux qui le lancent aujourd'hui.
 
-Nous cherchons donc à rassembler une communauté de personnes qui partagent ces valeurs et qui veulent
-voir exister un lieu comme celui-ci sur le territoire.
+Nous cherchons à réunir autour de lui le plus grand nombre de personnes qui partagent nos valeurs et qui
+veulent voir un lieu comme celui-ci exister sur le territoire. Un lieu détenu par une multitude ne
+dépend de personne en particulier, alors il traverse le temps.
 
-*(paragraphe pivot, tout en gras)* Car le meilleur moyen de le faire durer, c'est qu'il appartienne à
-une multitude de personnes différentes.
-
-L'argent compte, il finance la rénovation. **Le nombre compte encore plus** : il montre que ce lieu
-répond à une attente réelle. Et chaque personne qui prend une part rend le projet plus solide devant
-les financeurs et les institutions.
+*(paragraphe pivot, tout en gras, la seconde phrase à la ligne)* L'argent compte pour que le projet
+existe. **Le nombre compte encore plus**, parce qu'il montre que ce lieu répond à une attente réelle.
 *(« Le nombre compte encore plus » surligné au marqueur jaune, seule zone chaude de l'écran)*
 
-Deux écarts avec la dictée de Romain, et pourquoi. « Nous avons signé un bail de 99 ans avec la mairie
-d'Annecy » : faux au jour d'écriture, seule la promesse de bail est signée, le bail vient après le
-permis, formulation imposée par `chiffres-autorises.md`. « Créer une communauté qui soutient la
-création d'un lieu » : le double « créer » est retiré, la communauté se rassemble et le lieu existe.
+Chaque personne qui prend une part rend le projet plus solide devant la banque, les financeurs et les
+institutions. Elle rapproche aussi le lieu de celles et ceux qui s'en serviront.
 
-Ce qui reste ouvert : l'écran 3 est le maillon faible de la page et son contenu gagnerait à descendre
-en écran 4 ou en FAQ.
+Une correction de fait sur la dictée de Romain : elle disait « nous avons signé un bail de 99 ans avec
+la mairie d'Annecy ». C'est une promesse de bail, le bail lui-même vient après le permis.
+`chiffres-autorises.md` porte la consigne : formuler « la Ville a signé la promesse de bail de 99 ans »,
+jamais « la ferme est sous bail ». La structure de sa phrase est gardée, un mot est ajouté.
 
-Ce qui a été écarté de la matière du 10/09, et pourquoi : le capitalisme, le fascisme, la surveillance
-et le totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. La Ville d'Annecy
-est bailleur emphytéotique et candidate au capital, l'instructeur ESUS lit le site, la presse aussi.
-Une page qui demande de l'argent et qui dénonce le fascisme se fait renvoyer à sa dénonciation. La
-charge politique passe donc par ce que le lieu fait, jamais par ce qu'il dénonce, ce qui est aussi la
-règle de la voix de Romain sur LinkedIn : il dit ce qu'il a fait, jamais ce qu'il est, et la critique
-vise un système, jamais une personne.
+Ce qui a été écarté de la matière du 10/09 : le capitalisme, le fascisme, la surveillance et le
+totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. La Ville d'Annecy est
+bailleur et candidate au capital, l'instructeur ESUS lit le site, la presse aussi. La charge politique
+passe par ce que le lieu fait, jamais par ce qu'il dénonce.
 
 ### 3. Une part, c'est un petit morceau de la coopérative
 
