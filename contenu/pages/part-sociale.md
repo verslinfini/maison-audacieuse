@@ -69,8 +69,12 @@ Réunir le plus de monde possible pour créer un bien commun
 
 **Phrase de gauche**, sans surlignage. Formatage identique à la chute de l'écran 5 de la home, vérifié
 au pixel : 20,88 px, graisse 500, interligne 28,4 px, italique, 373,8 px de large, 85,5 px de marge
-haute, blanc.
-L'argent compte pour que le projet existe, mais le nombre compte encore plus.
+haute, blanc. Elle tient sur quatre lignes.
+C'est la phrase que Romain avait rapportée d'un autre projet, rétablie entière le 10/09 au soir après
+avoir été resserrée dans la journée. Entière, elle dit les trois choses d'un coup, l'argent, le nombre
+et l'attente, au moment le plus visible de l'écran.
+L'argent compte pour que le projet existe, mais le nombre de soutiens compte encore plus pour montrer
+qu'il répond à une attente réelle.
 
 **Colonne de droite :**
 
@@ -83,12 +87,15 @@ nombre de personnes qui partagent nos valeurs et qui veulent voir ce projet exis
 Pour qu'il perdure bien longtemps après nous.
 
 Un projet que plusieurs milliers de personnes soutiennent n'a plus le même poids. Ce nombre dit
-l'attente des habitants mieux qu'un dossier ne le fera jamais. Chaque personne qui prend une part le
-rend plus solide devant la banque, les financeurs et les institutions.
+l'attente des habitants mieux qu'un dossier ne le fera jamais. Chaque personne qui prend une part
+rend le projet plus solide devant la banque, les financeurs et les institutions.
 
 Le surlignage jaune disparaît de cet écran, arbitrage de Romain du 10/09 au soir : sur une phrase de
 cette longueur, à cette place, il fallait le mettre partout ou nulle part. La zone chaude de la page
 reste sur le fond terracotta de l'écran 4.
+
+Le doublon entre l'attente nommée à gauche et « Ce nombre dit l'attente des habitants » à droite est
+assumé : la reprise a été proposée au retrait, Romain a choisi de garder les deux.
 
 Sur la troisième phrase du dernier paragraphe, deux formulations ont été écartées. « La taille de sa
 communauté montre l'attente des habitants » décrit un mécanisme au lieu de le faire sentir. « Personne
