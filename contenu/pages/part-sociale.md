@@ -17,7 +17,7 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 | | Section | Fond | La question à laquelle elle répond |
 |---|---|---|---|
 | **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
-| | 2. Réunir le plus de monde possible pour créer un bien commun | `bloc--violet` | pourquoi moi |
+| | 2. Un bien commun se garde à plusieurs milliers | `bloc--violet` | pourquoi le nombre |
 | **QUOI** | 3. Une part, c'est un petit morceau de la coopérative | `bloc--blanc` | c'est quoi, concrètement |
 | | 4. 100 €, une voix | `bloc--terracotta` | combien, et est-ce que je le reperds |
 | | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
@@ -53,37 +53,47 @@ Ici, nous sommes tous à égalité.
 **On peut être très nombreux·ses.** Et c'est ça le but. Plus il y a de monde autour de la table, plus
 le lieu ressemble à ce que les gens veulent vraiment.
 
-### 2. Réunir le plus de monde possible pour créer un bien commun
+### 2. Un bien commun se garde à plusieurs milliers
 
-Réécrit le 10/09. La version précédente définissait le bien commun, et cette définition redisait trois
-choses déjà dites ailleurs : les logiques marchandes sont le sujet de l'écran 5 de la home, « on peut
-tou·tes décider » est la raison 2 de l'écran précédent, « plus nous sommes nombreux·ses » est la
-raison 3. Une seule idée sur cinq appartenait à cet écran en propre.
-Il porte maintenant ce qu'aucun autre écran du site ne porte : pourquoi on demande cet argent à des
-habitants et pas à des investisseurs. Disposition reprise de l'écran 5 de la home, à la demande de
-Romain : titre à gauche, phrase d'objectif dessous, texte explicatif à droite.
+Deuxième réécriture, 10/09. La première, du matin, portait « pourquoi on demande cet argent à des
+habitants et pas à des investisseurs ». Romain a rouvert la home et constaté que c'est le sujet entier
+de l'écran 5, mot pour mot : « Dans un projet classique, nous aurions ouvert le capital à de gros
+investisseurs, en échange de contreparties importantes. Pour servir l'intérêt général et garder ce lieu
+accessible, nous faisons le pari inverse. » Il avait raison, le texte du matin était une redite.
+
+Ce que la home ne dit nulle part, et qui fait le contenu propre de cet écran : le bien commun comme
+régime de gestion (géré, protégé, partagé collectivement), la protection contre le dévoiement, la durée
+des 99 ans, et le poids devant les institutions expliqué au lieu d'être asséné. L'écran découle des
+trois règles de l'écran 1, qui servent précisément à cela.
 
 **Titre**, colonne de gauche :
-Réunir le plus de monde possible pour créer un bien commun
+Un bien commun se garde à plusieurs milliers
 
-**Phrase d'objectif**, sous le titre, en blanc gras, sans surlignage :
-Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui l'utilisent.
+**Phrase d'objectif**, sous le titre, italique graisse 500, réglage de l'écran 5 de la home :
+Notre objectif est simple : réunir le plus de monde possible pour créer un bien commun et le garder.
 
 **Colonne de droite :**
 
-Un bien commun appartient au collectif qui s'en sert. La Maison Audacieuse restera à celles et ceux
-qui la font vivre. Personne ne pourra jamais la revendre.
+Un bien commun se gère, se protège et se partage collectivement, au service de l'intérêt général.
 
-Le lieu bouscule les inégalités de genre et il expérimente de nouvelles manières de vivre ensemble.
-La première tient dans la façon dont il se finance : par le nombre.
+Le bail court sur 99 ans. Ce lieu doit tenir plus longtemps que celles et ceux qui le lancent
+aujourd'hui. Il ne tiendra que si personne ne peut se l'approprier.
 
-*(paragraphe pivot, tout en gras)* Un lieu ressemble à celles et ceux qui le financent. Un investisseur
-attend une contrepartie et il l'obtient. Celui-ci, **nous vous le devrons**.
-*(« nous vous le devrons » surligné au marqueur jaune, seule zone chaude de l'écran)*
+*(paragraphe pivot, tout en gras)* Un lieu détenu par quelques personnes finit par leur ressembler.
+Détenu par plusieurs milliers, **il ne peut être capté** ni par un financeur, ni par un dirigeant, ni
+par un petit groupe qui voudrait l'orienter autrement.
+*(« il ne peut être capté » surligné au marqueur jaune, seule zone chaude de l'écran)*
 
-Le territoire compte déjà beaucoup de projets marchands alors qu'il manque des endroits où des inconnus
-décident ensemble, où l'on se soigne, où l'on se loge et où l'on se rencontre sans rien vendre.
-**Chaque part sociale en construit un.**
+Aujourd'hui, le nombre compte plus que la somme. Chaque personne qui prend une part rend le projet plus
+solide devant les financeurs et les institutions. Elle le rapproche aussi de celles et ceux qui s'en
+serviront.
+
+Trois points restent ouverts avec Romain. « Nous ne cherchons pas à lever de l'argent » a été
+transformé en « le nombre compte plus que la somme » : la formule d'origine est plus forte mais
+attaquable sur une page qui demande 100 € trois écrans plus bas, et fausse au sens strict puisque
+l'objectif interne est de 400 k€. L'écran 3 est devenu le maillon faible et son contenu gagnerait à
+descendre en écran 4 ou en FAQ. Le titre « Une part sociale, c'est un petit morceau de la coopérative
+qui porte le projet », proposé par Romain, n'est pas retenu ici : c'est déjà le titre de l'écran 3.
 
 Ce qui a été écarté de la matière du 10/09, et pourquoi : le capitalisme, le fascisme, la surveillance
 et le totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. La Ville d'Annecy

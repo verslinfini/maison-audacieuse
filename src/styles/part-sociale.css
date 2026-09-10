@@ -279,13 +279,21 @@
    « start » et non « center » : centrees, les deux colonnes se decalaient
    l'une par rapport a l'autre et la photo descendait sous le titre. Alignees
    en haut, elles finissent a la meme hauteur, et le vide qui reste tombe
-   entier au-dessus des trois raisons. */
+   entier au-dessus des trois raisons.
+   Reglage du 10/09, deuxieme passe : le titre et le chapo se centrent sur la
+   hauteur VISIBLE de la colonne de droite, du bord haut de l'image au bord bas
+   de la legende. Le centrage de la grille porte sur la cellule entiere, marge
+   comprise, donc il vise 19 px trop haut ; la colonne de texte reprend la meme
+   marge haute que l'image, ce qui la redescend d'exactement la moitie de cette
+   marge et fait coincider les deux centres. Vrai quelle que soit la marge. */
 .tete-duo {
   display: grid;
   grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr);
   gap: clamp(2.2rem, 5vw, 4.4rem);
-  align-items: start;
+  align-items: center;
 }
+
+.tete-duo__dire { margin-top: clamp(1.4rem, 4.2vh, 3.2rem); }
 
 /* Le titre, un cran au-dessus de la version aeree du simulateur (3,35vw) et
    un cran sous le reglage du socle (4,17vw). Reglage demande le 10/09. Il
@@ -351,11 +359,11 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.5rem, 3.2vw, 3rem);
-  /* Ecart inchange depuis le 09/09 : « on laisse le meme espace entre les
-     trois lignes de texte et les trois parties du dessous ». Il part du bas
-     du bloc de tete, donc du bas du chapo ou de la legende, selon la plus
-     basse des deux colonnes. */
-  margin-top: clamp(3.4rem, 12.5vh, 7.4rem);
+  /* L'ecart part du bas du bloc de tete, donc du bas de la legende, qui est
+     la plus basse des deux colonnes depuis que la photo a grandi. Il valait
+     113 px et les trois raisons touchaient le bas de l'ecran ; Romain le
+     ramene a une vingtaine le 10/09. */
+  margin-top: clamp(1rem, 2.6vh, 1.6rem);
 }
 
 .raisons > li { display: flex; flex-direction: column; gap: .55rem; }
