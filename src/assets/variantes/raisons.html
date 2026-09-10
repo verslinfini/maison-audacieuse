@@ -4,39 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Cinq traitements des trois raisons — La Maison Audacieuse</title>
+<title>Traitements des trois raisons — La Maison Audacieuse</title>
 <link rel="stylesheet" href="/styles/base.css">
 <link rel="stylesheet" href="/styles/part-sociale.css">
 <style>
 /* ==================================================================
-   SIMULATEUR. Cinq traitements des trois raisons du premier ecran de
+   SIMULATEUR. Traitements des trois raisons du premier ecran de
    « part-sociale », dans leur contexte reel : meme entete, meme fond,
    meme titre, meme photo. On compare des ecrans, pas des vignettes.
 
-   Le contenu est identique dans les cinq. Seule la mise en forme change.
-   Rien ici n'est en ligne : cette page vit dans « src/assets/variantes/ »
-   et ne figure ni au menu, ni au plan du site, ni aux controles.
+   Deux axes independants :
+     CADRES  la mise en forme des trois raisons, six propositions ;
+     AIR     la densite de tout l'ecran, normale ou aeree.
+
+   Le contenu est identique partout. Rien ici n'est en ligne : la page
+   vit dans « src/assets/variantes/ » et ne figure ni au menu, ni au
+   plan du site, ni aux controles.
    ================================================================== */
+
+/* ---------- le pilote, repliable pour ne pas manger l'ecran ---------- */
 
 .pilote {
   position: fixed;
   z-index: 60;
-  left: 1.1rem;
-  top: calc(var(--h-entete) + .5rem);
+  left: 1rem;
+  top: calc(var(--h-entete) + .4rem);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: .4rem;
-  padding: .5rem .6rem;
+  gap: .35rem;
+  padding: .45rem .55rem;
   border-radius: 999px;
   background: rgba(31, 29, 45, .93);
   box-shadow: 0 14px 40px rgba(31, 29, 45, .3);
 }
 
+body[data-pilote="plie"] .pilote > *:not(.replier) { display: none; }
+body[data-pilote="plie"] .pilote { padding: .4rem; }
+
 .pilote b {
-  padding: 0 .55rem 0 .35rem;
+  padding: 0 .45rem 0 .3rem;
   color: rgba(255, 255, 255, .5);
-  font-size: .74rem;
+  font-size: .7rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -44,71 +53,79 @@
 
 .pilote button {
   appearance: none;
-  min-height: 36px;
-  padding: 0 .85rem;
+  min-height: 34px;
+  padding: 0 .75rem;
   border: 0;
   border-radius: 999px;
   background: rgba(255, 255, 255, .1);
   color: #fff;
   font: inherit;
-  font-size: .86rem;
+  font-size: .82rem;
   font-weight: 500;
   cursor: pointer;
 }
 
-.pilote button:hover { background: rgba(255, 255, 255, .2); }
+.pilote button:hover { background: rgba(255, 255, 255, .22); }
 .pilote button[aria-pressed="true"] { background: #FFF3A8; color: #383648; font-weight: 700; }
-.pilote .sep { width: 1px; height: 24px; background: rgba(255, 255, 255, .2); margin: 0 .25rem; }
+.pilote .sep { width: 1px; height: 22px; background: rgba(255, 255, 255, .2); margin: 0 .2rem; }
+.pilote .replier { padding: 0 .6rem; background: rgba(255, 255, 255, .16); }
 
 .etiquette {
   position: fixed;
   z-index: 60;
-  bottom: 1.1rem;
-  right: 1.1rem;
-  padding: .4rem .8rem;
+  bottom: 1rem;
+  right: 1rem;
+  padding: .38rem .8rem;
   border-radius: 999px;
   background: rgba(31, 29, 45, .9);
   color: #fff;
-  font-size: .8rem;
+  font-size: .78rem;
   font-weight: 600;
 }
 
-/* On n'affiche que la variante choisie. */
+/* ---------- l'axe AIR ---------- */
+
+/* En « aere », chaque element retrecit d'un cran et les intervalles
+   grandissent. C'est le meme ecran, moins charge : on ne retire rien, on
+   redonne du vide entre les choses. */
+body[data-air="large"] .page-tete__titre { font-size: clamp(2rem, 3.35vw, 3rem); }
+body[data-air="large"] .page-tete__chapo { font-size: clamp(1.08rem, 1.36vw, 1.36rem); margin-top: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.62; }
+body[data-air="large"] .tete-duo { gap: clamp(2.2rem, 5vw, 4.4rem); grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr); }
+body[data-air="large"] .tete-duo__voir { width: min(100%, 16rem); margin-right: clamp(0px, 5vw, 5.5rem); }
+body[data-air="large"] .tete-duo__voir img { max-height: min(36vh, 21rem); }
+body[data-air="large"] .jeu-marge,
+body[data-air="large"] .raisons { margin-top: clamp(2.4rem, 6vh, 4.4rem); }
+body[data-air="large"] .lot strong { font-size: clamp(.98rem, 1.12vw, 1.08rem); }
+body[data-air="large"] .lot p { font-size: 1rem; line-height: 1.62; }
+body[data-air="large"] .lot { gap: clamp(2rem, 4.4vw, 4rem); }
+
+/* ---------- socle commun aux traitements sans cadre ---------- */
+
 .jeu { display: none; }
+body[data-jeu="a"] #jeu-a, body[data-jeu="c"] #jeu-c, body[data-jeu="e"] #jeu-e,
+body[data-jeu="f"] #jeu-f, body[data-jeu="g"] #jeu-g, body[data-jeu="h"] #jeu-h { display: block; }
+
 .jeu-marge { margin-top: clamp(1.3rem, 3vh, 2.4rem); }
-body[data-jeu="a"] #jeu-a,
-body[data-jeu="b"] #jeu-b,
-body[data-jeu="c"] #jeu-c,
-body[data-jeu="d"] #jeu-d,
-body[data-jeu="e"] #jeu-e { display: block; }
 
-/* Le titre en deux ou en trois lignes. */
-body[data-titre="3"] .titre-2 { display: none; }
-body[data-titre="2"] .titre-3 { display: none; }
-body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem); }
+.lot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3.2vw, 3rem); }
+.lot > li { display: flex; flex-direction: column; gap: .55rem; }
+.lot strong { color: var(--violet-sombre); font-size: clamp(1.02rem, 1.24vw, 1.18rem); font-weight: 700; line-height: 1.24; letter-spacing: -.015em; }
+.lot p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
 
-/* ---------------------------------------------------------------
-   B. MANCHETTE. Aucun cadre. Un trait epais de couleur au-dessus de
-   chaque colonne, comme la manchette d'un journal, puis le titre, puis
-   le texte. Le vocabulaire est celui de la presse ecrite : c'est ce
-   qui l'eloigne le plus du bloc a ombre portee.
-   --------------------------------------------------------------- */
-.manchette { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.4rem, 3vw, 3rem); }
-.manchette > li { display: flex; flex-direction: column; gap: .5rem; padding-top: .9rem; border-top: 4px solid var(--accent); }
-.manchette strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
-.manchette p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
-.manchette .eg { color: var(--accent); }
+/* Le filet qui separe les colonnes, celui de la version C que Romain a
+   retenu. Il tient les trois ensemble sans les enfermer. */
+.lot--filets > li + li { border-left: 1px solid var(--filet); padding-left: clamp(1.4rem, 3vw, 2.8rem); }
+
+.acc-1 { --accent: #A3716A; }
+.acc-2 { --accent: #5E9E85; }
+.acc-3 { --accent: #9D9669; }
 
 /* ---------------------------------------------------------------
-   C. CHIFFRES MANUSCRITS. Le rang est ecrit a la main, en Meow Script,
-   la police d'accent de la charte, qui ne sert presque nulle part sur
-   le site. Pas de cadre, un filet fin entre les colonnes. C'est le
-   geste le plus fait main des cinq, et le seul qui ne pourrait pas
-   sortir d'un gabarit.
+   C. CHIFFRES MANUSCRITS. Le rang ecrit a la main, en Meow Script.
+   Conserve comme reference : c'est de la que viennent F, G et H.
    --------------------------------------------------------------- */
-.plume { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.6rem, 3.4vw, 3.2rem); }
-.plume > li { position: relative; display: flex; flex-direction: column; gap: .5rem; padding-left: clamp(2.6rem, 4vw, 3.6rem); }
-.plume > li + li { border-left: 1px solid var(--filet); padding-left: clamp(3.2rem, 5vw, 4.6rem); }
+.plume > li { position: relative; padding-left: clamp(2.6rem, 4vw, 3.6rem); }
+.plume > li + li { padding-left: clamp(3.2rem, 5vw, 4.6rem); }
 .plume__rang {
   position: absolute;
   left: clamp(-.2rem, .6vw, .6rem);
@@ -120,68 +137,91 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
   transform: rotate(-9deg);
 }
 .plume > li + li .plume__rang { left: clamp(.6rem, 1.4vw, 1.4rem); }
-.plume strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
-.plume p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
-.plume .eg { color: var(--accent); }
 
 /* ---------------------------------------------------------------
-   D. UNE SEULE BANDE. Les trois raisons ne sont plus trois objets mais
-   trois temps d'un meme bloc, sur le violet plein, separes par des
-   filets clairs. Repond a « ca fait trois boites » en supprimant les
-   boites.
+   E. LE CHIFFRE PORTE LE TEXTE.
    --------------------------------------------------------------- */
-.bande {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  background:
-    radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
-    radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
-    linear-gradient(rgba(56,54,72,.30), rgba(56,54,72,.30)),
-    #766DA0;
-}
-.bande > li { display: flex; flex-direction: column; gap: .5rem; padding: clamp(1.3rem, 2.2vw, 1.9rem); }
-.bande > li + li { border-left: 1px solid rgba(255, 255, 255, .22); }
-.bande__rang { color: var(--jaune); font-size: .8rem; font-weight: 700; letter-spacing: .14em; }
-.bande strong { color: #fff; font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
-.bande p { margin: 0; font-size: var(--t-corps); line-height: 1.5; color: rgba(255, 255, 255, .92); }
-.bande .eg { color: var(--jaune); }
-
-/* ---------------------------------------------------------------
-   E. LE CHIFFRE PORTE LE TEXTE. Un tres grand chiffre en couleur
-   pleine a gauche, le texte cale contre lui. Aucun cadre, aucune
-   ombre, rien que du rapport de taille. C'est le plus graphique des
-   cinq et le plus sec.
-   --------------------------------------------------------------- */
-.compte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.4rem, 3vw, 2.8rem); }
 .compte > li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .1rem clamp(.7rem, 1.2vw, 1.1rem); align-items: start; }
-.compte__rang {
-  grid-row: 1 / span 2;
-  font-size: clamp(2.8rem, 4.4vw, 4.2rem);
-  font-weight: 700;
-  line-height: .82;
-  letter-spacing: -.06em;
-  color: var(--accent);
-}
-.compte strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
-.compte p { margin: .35rem 0 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
-.compte .eg { color: var(--accent); }
+.compte__rang { grid-row: 1 / span 2; font-size: clamp(2.8rem, 4.4vw, 4.2rem); font-weight: 700; line-height: .82; letter-spacing: -.06em; color: var(--accent); }
+.compte p { margin-top: .35rem; }
 
-.acc-1 { --accent: #A3716A; }
-.acc-2 { --accent: #5E9E85; }
-.acc-3 { --accent: #9D9669; }
+/* ---------------------------------------------------------------
+   F. LE TITRE PORTE LA COULEUR. Plus de chiffre du tout : c'est le
+   titre lui-meme qui prend la couleur de sa colonne. Le filet vertical
+   reste. C'est la version la plus depouillee des six, et celle qui
+   laisse le plus d'air aux trois textes.
+   --------------------------------------------------------------- */
+.couleur strong { color: var(--accent); }
+
+/* ---------------------------------------------------------------
+   G. LE TITRE SURLIGNE, ET LE TRAIT EST DE TRAVERS. Le surlignage ne
+   suit pas le texte : il deborde a gauche, il s'arrete avant la fin, il
+   descend sous le milieu de la ligne, et il penche. C'est ce qui le
+   fait lire comme un geste de la main plutot que comme un fond de
+   cellule. La troisieme colonne penche plus fort et deborde des deux
+   cotes.
+   --------------------------------------------------------------- */
+.surligne strong { position: relative; display: inline-block; align-self: start; }
+
+.surligne strong::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -.55em;
+  right: 1.5em;
+  top: 60%;
+  height: .78em;
+  transform: translateY(-50%) rotate(-1.4deg);
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: .5;
+}
+
+.surligne .mot { position: relative; z-index: 1; }
+
+.surligne > li:nth-child(2) strong::before { right: 2.4em; top: 56%; transform: translateY(-50%) rotate(1.1deg); }
+.surligne > li:nth-child(3) strong::before { left: -.8em; right: -.5em; top: 58%; height: .9em; transform: translateY(-50%) rotate(-3.4deg); }
+
+/* ---------------------------------------------------------------
+   H. LE FEUTRE EST PASSE PAR LA. Trois gestes differents, comme
+   quelqu'un qui relit avec un feutre a la main : la premiere idee est
+   surlignee, la deuxieme entouree en deux tours, la troisieme
+   griffonnee en diagonale. Les traces sont dessinees a main levee en
+   SVG, jamais des rectangles : un rectangle a coins ronds derriere un
+   mot, c'est une cellule de tableur, pas un feutre.
+   --------------------------------------------------------------- */
+.feutre strong { position: relative; display: inline-block; align-self: start; }
+.feutre .mot { position: relative; z-index: 1; }
+
+/* La hauteur est imposee, jamais deduite. Un SVG est un element remplace :
+   avec « height: auto », son viewBox lui donne un ratio, et « bottom » est
+   ignore. Mesure du 10/09 : sous un titre de 20 px, les traces se rendaient
+   sur 56, 62 et 77 px de haut et retombaient sur le paragraphe. */
+.feutre__trace {
+  position: absolute;
+  z-index: 0;
+  left: -.7em;
+  top: -.2em;
+  width: calc(100% + 1.4em);
+  height: calc(100% + .3em);
+  color: var(--accent);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.feutre__trace path { vector-effect: non-scaling-stroke; }
+
+/* ---------- pied de simulateur ---------- */
 
 @media (max-width: 900px) {
-  .manchette, .plume, .bande, .compte { grid-template-columns: 1fr; }
-  .plume > li + li { border-left: 0; border-top: 1px solid var(--filet); padding-top: 2.2rem; }
-  .bande > li + li { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .22); }
-  .pilote { position: static; transform: none; margin: 1rem; }
+  .lot { grid-template-columns: 1fr; }
+  .lot--filets > li + li { border-left: 0; border-top: 1px solid var(--filet); padding-left: 0; padding-top: 1.6rem; }
+  .pilote { position: static; margin: 1rem; }
+  .etiquette { display: none; }
 }
 </style>
 </head>
-<body data-jeu="a" data-titre="3">
+<body data-jeu="f" data-air="large" data-pilote="ouvert">
 
 <header class="entete" id="entete">
   <div class="entete__inner">
@@ -201,7 +241,7 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
   </div>
 </header>
 
-<p class="etiquette" id="etiquette">A · cartes</p>
+<p class="etiquette" id="etiquette">F · le titre porte la couleur</p>
 
 <main>
   <section class="page-tete page-tete--midi" id="pourquoi">
@@ -209,7 +249,7 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
     <div class="contenu">
       <div class="tete-duo">
         <div class="tete-duo__dire">
-          <h1 class="page-tete__titre"><span class="titre-3">Les parts sociales<br>de la Maison Audacieuse</span><span class="titre-2">Les parts sociales<br>de la Maison Audacieuse</span></h1>
+          <h1 class="page-tete__titre">Les parts sociales<br>de la Maison Audacieuse</h1>
           <p class="page-tete__chapo">Pour porter ce projet, il fallait choisir une forme juridique.<br>
             Nous avons choisi l'évidence&nbsp;: <span class="marqueur marqueur--3"><strong>la coopérative.</strong></span><br>
             <strong>Car c'est celle qui colle le plus avec nos valeurs.</strong></p>
@@ -220,6 +260,7 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
         </figure>
       </div>
 
+      <!-- A : la version en ligne, cartes blanches a ombre portee. -->
       <div class="jeu" id="jeu-a">
         <ul class="raisons">
           <li class="raisons--terracotta">
@@ -240,25 +281,9 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
         </ul>
       </div>
 
-      <div class="jeu" id="jeu-b">
-        <ul class="manchette jeu-marge">
-          <li class="acc-1">
-            <strong>Personne ne s'enrichit</strong>
-            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
-          </li>
-          <li class="acc-2">
-            <strong>Une personne <span class="eg">=</span> une voix</strong>
-            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
-          </li>
-          <li class="acc-3">
-            <strong>On peut être très nombreux·ses</strong>
-            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
-          </li>
-        </ul>
-      </div>
-
+      <!-- C : les chiffres manuscrits, reference. -->
       <div class="jeu" id="jeu-c">
-        <ul class="plume jeu-marge">
+        <ul class="lot lot--filets plume jeu-marge">
           <li class="acc-1">
             <span class="plume__rang" aria-hidden="true">1</span>
             <strong>Personne ne s'enrichit</strong>
@@ -266,7 +291,7 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
           </li>
           <li class="acc-2">
             <span class="plume__rang" aria-hidden="true">2</span>
-            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <strong>Une personne <span style="color:var(--accent)">=</span> une voix</strong>
             <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
           </li>
           <li class="acc-3">
@@ -277,28 +302,9 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
         </ul>
       </div>
 
-      <div class="jeu" id="jeu-d">
-        <ul class="bande jeu-marge">
-          <li>
-            <span class="bande__rang" aria-hidden="true">01</span>
-            <strong>Personne ne s'enrichit</strong>
-            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
-          </li>
-          <li>
-            <span class="bande__rang" aria-hidden="true">02</span>
-            <strong>Une personne <span class="eg">=</span> une voix</strong>
-            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
-          </li>
-          <li>
-            <span class="bande__rang" aria-hidden="true">03</span>
-            <strong>On peut être très nombreux·ses</strong>
-            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
-          </li>
-        </ul>
-      </div>
-
+      <!-- E : le chiffre porte le texte. -->
       <div class="jeu" id="jeu-e">
-        <ul class="compte jeu-marge">
+        <ul class="lot compte jeu-marge">
           <li class="acc-1">
             <span class="compte__rang" aria-hidden="true">1</span>
             <strong>Personne ne s'enrichit</strong>
@@ -306,12 +312,81 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
           </li>
           <li class="acc-2">
             <span class="compte__rang" aria-hidden="true">2</span>
-            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <strong>Une personne <span style="color:var(--accent)">=</span> une voix</strong>
             <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
           </li>
           <li class="acc-3">
             <span class="compte__rang" aria-hidden="true">3</span>
             <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- F : plus de chiffre, le titre prend la couleur. -->
+      <div class="jeu" id="jeu-f">
+        <ul class="lot lot--filets couleur jeu-marge">
+          <li class="acc-1">
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <strong>Une personne = une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- G : le titre surligne, le trait de travers. -->
+      <div class="jeu" id="jeu-g">
+        <ul class="lot lot--filets surligne jeu-marge">
+          <li class="acc-1">
+            <strong><span class="mot">Personne ne s'enrichit</span></strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <strong><span class="mot">Une personne = une voix</span></strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <strong><span class="mot">On peut être très nombreux·ses</span></strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- H : trois gestes de feutre, surligne, entoure, griffonne. -->
+      <div class="jeu" id="jeu-h">
+        <ul class="lot lot--filets feutre jeu-marge">
+          <li class="acc-1">
+            <strong>
+              <svg class="feutre__trace" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M5,36 C48,28 96,33 152,26 C170,24 182,26 191,23" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" opacity=".42"/>
+              </svg>
+              <span class="mot">Personne ne s'enrichit</span>
+            </strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <strong>
+              <svg class="feutre__trace" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M56,4 C24,8 5,22 11,36 C18,52 80,56 134,50 C180,45 197,30 187,16 C178,5 120,1 60,6 C22,10 7,22 12,34 C18,48 72,54 122,50" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+              </svg>
+              <span class="mot">Une personne = une voix</span>
+            </strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <strong>
+              <svg class="feutre__trace" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M5,22 C60,13 130,11 193,5 M191,38 C134,45 70,47 7,52" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" opacity=".3"/>
+              </svg>
+              <span class="mot">On peut être très nombreux·ses</span>
+            </strong>
             <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
           </li>
         </ul>
@@ -323,26 +398,30 @@ body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem
 
 <div class="pilote" role="group" aria-label="Choisir un traitement">
   <b>Cadres</b>
-  <button type="button" data-jeu="a" aria-pressed="true">A cartes</button>
-  <button type="button" data-jeu="b" aria-pressed="false">B manchette</button>
+  <button type="button" data-jeu="a" aria-pressed="false">A cartes</button>
   <button type="button" data-jeu="c" aria-pressed="false">C manuscrit</button>
-  <button type="button" data-jeu="d" aria-pressed="false">D une bande</button>
   <button type="button" data-jeu="e" aria-pressed="false">E chiffres</button>
+  <button type="button" data-jeu="f" aria-pressed="true">F couleur</button>
+  <button type="button" data-jeu="g" aria-pressed="false">G surligné</button>
+  <button type="button" data-jeu="h" aria-pressed="false">H feutre</button>
   <span class="sep"></span>
-  <b>Titre</b>
-  <button type="button" data-titre="3" aria-pressed="true">3 lignes</button>
-  <button type="button" data-titre="2" aria-pressed="false">2 lignes</button>
+  <b>Air</b>
+  <button type="button" data-air="normal" aria-pressed="false">normal</button>
+  <button type="button" data-air="large" aria-pressed="true">aéré</button>
+  <span class="sep"></span>
+  <button type="button" class="replier" id="replier" title="Replier le pilote">–</button>
 </div>
 
 <script>
 const NOMS = {
-  a: 'A · cartes',
-  b: 'B · manchette, aucun cadre',
-  c: 'C · chiffres manuscrits, Meow Script',
-  d: 'D · une seule bande violette',
+  a: 'A · cartes, la version en ligne',
+  c: 'C · chiffres manuscrits',
   e: 'E · le chiffre porte le texte',
+  f: 'F · le titre porte la couleur',
+  g: 'G · le titre surligné, le trait de travers',
+  h: 'H · trois gestes de feutre',
 };
-const ORDRE = ['a', 'b', 'c', 'd', 'e'];
+const ORDRE = ['a', 'c', 'e', 'f', 'g', 'h'];
 const etiquette = document.getElementById('etiquette');
 
 function poser(attr, valeur) {
@@ -353,20 +432,31 @@ function poser(attr, valeur) {
   if (attr === 'jeu') etiquette.textContent = NOMS[valeur];
 }
 
-for (const b of document.querySelectorAll('.pilote button')) {
+for (const b of document.querySelectorAll('.pilote button[data-jeu], .pilote button[data-air]')) {
   b.addEventListener('click', () => {
     if (b.dataset.jeu) poser('jeu', b.dataset.jeu);
-    if (b.dataset.titre) poser('titre', b.dataset.titre);
+    if (b.dataset.air) poser('air', b.dataset.air);
   });
 }
 
-// Fleches gauche et droite : on passe d'un traitement au suivant sans viser
-// un bouton. C'est la facon dont on compare vraiment, en aller-retour.
+const replier = document.getElementById('replier');
+replier.addEventListener('click', () => {
+  const plie = document.body.dataset.pilote === 'plie';
+  document.body.dataset.pilote = plie ? 'ouvert' : 'plie';
+  replier.textContent = plie ? '–' : '+';
+});
+
+// Fleches gauche et droite pour les cadres, haut et bas pour l'air : on
+// compare en aller-retour, sans viser un bouton.
 addEventListener('keydown', (e) => {
-  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-  const i = ORDRE.indexOf(document.body.dataset.jeu);
-  const n = (i + (e.key === 'ArrowRight' ? 1 : ORDRE.length - 1)) % ORDRE.length;
-  poser('jeu', ORDRE[n]);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const i = ORDRE.indexOf(document.body.dataset.jeu);
+    const n = (i + (e.key === 'ArrowRight' ? 1 : ORDRE.length - 1)) % ORDRE.length;
+    poser('jeu', ORDRE[n]);
+  }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    poser('air', document.body.dataset.air === 'large' ? 'normal' : 'large');
+  }
 });
 </script>
 
