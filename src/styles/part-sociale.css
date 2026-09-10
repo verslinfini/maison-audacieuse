@@ -433,17 +433,21 @@
 
 .objectif__grille {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 5.7fr) minmax(0, 6fr);
   gap: clamp(2.2rem, 5vw, 4.6rem);
   align-items: start;
 }
 
 /* Le plafond de 24 signes du socle couperait ce titre en lignes de deux mots
    dans une colonne de cette largeur. */
+/* Meme taille que le titre de l'ecran 5 de la home, verifie au pixel le
+   10/09 : 48 px a 1440, graisse 700, interlettre -0,018 em. Il avait ete
+   descendu a 41,6 px parce qu'il fait 57 signes contre 22 a « Le pari du bien
+   commun » ; la largeur reste a 16ch et non aux 11ch de la home, sinon un
+   titre trois fois plus long part sur six lignes. */
 #objectif .bloc__titre {
-  max-width: 16ch;
+  max-width: 18ch;
   margin-bottom: 0;
-  font-size: clamp(1.75rem, 2.95vw, 2.6rem);
 }
 
 /* La phrase d'objectif ferme la colonne de gauche, loin sous le titre : c'est

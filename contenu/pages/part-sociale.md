@@ -62,26 +62,39 @@ expliquent déjà quelque chose ; celui-ci doit faire ressentir.
 L'objection qu'il traite, et que rien d'autre sur le site ne traite : « mes 100 €, ça ne changera
 rien ». C'est la première objection de tout souscripteur citoyen. La phrase de Romain la retourne.
 
-**Titre**, colonne de gauche :
+**Titre**, colonne de gauche. Formatage identique à celui de l'écran 5 de la home, vérifié au pixel le
+10/09 : 48 px à 1440, graisse 700, interligne 49,92 px, interlettre -0,864 px, blanc. Seule la largeur
+diffère, 18ch contre 11ch, parce que le titre fait 57 signes contre 22 à « Le pari du bien commun ».
 Réunir le plus de monde possible pour créer un bien commun
 
-**Phrase de gauche**, italique graisse 500, réglage de l'écran 5 de la home :
-L'argent compte pour que le projet existe, **mais le nombre compte encore plus.**
-*(« mais le nombre compte encore plus. » surligné au marqueur jaune, coupé librement sur deux lignes)*
+**Phrase de gauche**, sans surlignage. Formatage identique à la chute de l'écran 5 de la home, vérifié
+au pixel : 20,88 px, graisse 500, interligne 28,4 px, italique, 373,8 px de large, 85,5 px de marge
+haute, blanc.
+L'argent compte pour que le projet existe, mais le nombre compte encore plus.
 
 **Colonne de droite :**
 
 Un bien commun est au service de l'intérêt général.
 Il se partage, se gère et se protège collectivement.
 
-La Ville d'Annecy nous met le bâtiment à disposition pour 99 ans. Ce projet va donc durer plus
-longtemps que celles et ceux qui le lancent aujourd'hui. C'est pourquoi nous cherchons à réunir le plus
-grand nombre de personnes qui partagent nos valeurs et qui veulent voir un tel lieu exister sur le
-territoire, pour qu'il perdure bien longtemps après nous.
+La Ville d'Annecy nous met le bâtiment à disposition pour 99 ans. Ce lieu va donc durer plus longtemps
+que celles et ceux qui le lancent aujourd'hui. C'est pourquoi nous cherchons à réunir le plus grand
+nombre de personnes qui partagent nos valeurs et qui veulent voir ce projet exister sur le territoire.
+Pour qu'il perdure bien longtemps après nous.
 
-Ce nombre montre que le projet répond à une attente réelle des habitants. Chaque personne qui prend une
-part le rend plus solide devant la banque, les financeurs et les institutions. Un projet que trois
-mille personnes portent ne se discute plus de la même façon.
+Un projet que plusieurs milliers de personnes soutiennent n'a plus le même poids. Ce nombre dit
+l'attente des habitants mieux qu'un dossier ne le fera jamais. Chaque personne qui prend une part le
+rend plus solide devant la banque, les financeurs et les institutions.
+
+Le surlignage jaune disparaît de cet écran, arbitrage de Romain du 10/09 au soir : sur une phrase de
+cette longueur, à cette place, il fallait le mettre partout ou nulle part. La zone chaude de la page
+reste sur le fond terracotta de l'écran 4.
+
+Sur la troisième phrase du dernier paragraphe, deux formulations ont été écartées. « La taille de sa
+communauté montre l'attente des habitants » décrit un mécanisme au lieu de le faire sentir. « Personne
+ne met cent euros dans un lieu dont il n'a pas besoin » est plus frappante mais avance le montant deux
+écrans trop tôt. Le passage par le dossier dit la même chose et enchaîne sur la banque et les
+institutions de la phrase suivante.
 
 Arbitrage du 10/09 au soir, sur une question posée par Romain. La colonne de gauche portait deux
 phrases qui disaient la même chose, « réunir du monde pour créer un bien commun » et « créer un lieu
