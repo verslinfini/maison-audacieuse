@@ -26,8 +26,9 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 | | 8. Vos questions | `bloc--gris` | tout le reste, replié |
 | | 9. Prenez votre part | `bloc--sombre` | l'appel |
 
-Une seule zone chaude : le fond plein violet est réservé au prix, l'écran qui doit rester en tête quand
-on referme l'onglet. L'objectif se détache par la taille du texte, pas par un deuxième aplat.
+Deux fonds pleins, jamais visibles ensemble et séparés par un bloc blanc. La règle de la charte porte
+sur la vue, c'est-à-dire l'écran, et non sur la page : la version stricte, un seul aplat par page,
+produisait des suites de blocs pâles que rien ne distinguait les uns des autres.
 
 ---
 
@@ -54,11 +55,14 @@ le lieu ressemble à ce que les gens veulent vraiment.
 
 ### 2. Un lieu qui appartient à celles et ceux qui l'utilisent
 
-Notre objectif est simple : réunir le plus de monde possible pour créer un bien commun.
+Notre objectif est simple : **réunir le plus de monde possible pour créer un bien commun**.
+*(en jaune sur le fond violet)*
 
-- Un lieu qui sort des logiques marchandes.
-- Un lieu où on peut tou·tes décider.
-- Un lieu qui ne sera jamais à vendre.
+Un bien commun, ce n'est pas un lieu qu'on vous prête. C'est un lieu qui sort des logiques marchandes,
+où on peut tou·tes décider, et que personne ne pourra jamais revendre.
+
+Plus nous sommes nombreux·ses à en détenir un morceau, moins ce lieu dépend d'une poignée de personnes,
+et plus il ressemble à ce qu'en attendent celles et ceux qui s'en servent.
 
 ### 3. Une part, c'est un petit morceau de la coopérative
 
