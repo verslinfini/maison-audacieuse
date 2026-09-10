@@ -134,19 +134,31 @@ voix », décidée par Romain le 10/09. Ils disaient la même chose à un écran
 et l'autre en chiffres. Unique fond plein chaud de la page, et seul endroit où le montant est en grand.
 
 **Titre :** Une part sociale, c'est un petit morceau de la coopérative
+*(même corps que le titre de l'écran précédent, deux titres de rang égal se lisant au même corps)*
 
-**100 €** — une part, versés une seule fois
+**100 €** *(seul, en grand)*
 
-Tant que vous détenez une part, vous avez le statut de coopérateur·ice. Il vous donne le droit,
-*si vous le souhaitez*, de participer aux décisions du projet. Rien n'est obligatoire.
+Tant que vous détenez une part sociale, vous avez le statut de coopérateur·ice. Il vous donne le droit
+(si vous le souhaitez) de participer aux décisions du projet.
 
-Vous pouvez en prendre autant que vous voulez. Votre voix ne change pas pour autant : une coopérative
-compte les personnes, pas les euros.
+Vous pouvez prendre autant de parts que vous voulez. Elles sont remboursables sur demande.
 
 *(encart, chaîne validée de la campagne, se recopie au mot près)* Votre argent reste le vôtre. Vous
 pouvez demander le remboursement de vos parts à tout moment.
 
 *(bouton)* Je prends ma part
+
+Allégé le 10/09 au soir, sur la consigne de Romain : on va au minimum. Sont sortis « une part, versés
+une seule fois » (le titre dit déjà de quoi il s'agit), « Rien n'est obligatoire » (la parenthèse le
+dit), « Votre voix ne change pas pour autant : une coopérative compte les personnes, pas les euros »
+(c'est la raison 2 de l'écran 1) et « La part ne rapporte pas de contrepartie financière », qui
+descend en FAQ avec le reste de l'ancien écran sur le retour.
+
+« si vous le souhaitez » passe entre parenthèses et perd son surlignage. Règle générale de Romain,
+rappelée le 10/09 : une incise ne s'encadre jamais de virgules.
+
+« autant de parts que vous voulez » plutôt que « que vous le souhaitez », qui répétait le verbe de la
+phrase précédente à deux lignes d'écart.
 
 Premier appel de la page. Il vient là parce que le lecteur sait maintenant ce que la part coûte et ce
 qu'elle donne : c'est le premier moment où il peut décider.

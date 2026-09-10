@@ -249,6 +249,14 @@
    comme une etiquette posee dessus. */
 #la-part .carte { background: var(--blanc); border-color: transparent; }
 
+/* Meme taille que le titre de l'ecran precedent, demande du 10/09 : deux
+   titres de rang egal se lisent au meme corps. */
+#la-part .bloc__titre { font-size: clamp(1.75rem, 2.95vw, 2.6rem); }
+
+/* Le nombre est seul, « une part, verses une seule fois » est sorti le 10/09.
+   Le titre juste au-dessus dit deja de quoi il s'agit. */
+.prix__somme { align-self: start; }
+
 #la-part .carte__titre { color: var(--violet-sombre); }
 
 
