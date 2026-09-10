@@ -185,7 +185,17 @@ Six variantes s ajoutent aux quatre existantes, avec la meme mecanique : `<secti
 
 Trois regles :
 
-**Une seule zone chaude par vue.** Un fond plein par page, `bloc--violet` ou `bloc--terracotta`, jamais les deux, jamais deux fois.
+**Une seule zone chaude par vue.** Une VUE, c'est un ecran, pas une page. Deux fonds pleins peuvent
+cohabiter sur une meme page a condition qu'on ne les voie jamais ensemble et qu'au moins un bloc clair
+les separe. Regle assouplie le 10/09 : la version precedente disait un seul fond plein par page, et
+elle produisait des suites de trois blocs pales que rien ne distinguait les uns des autres. Deux blocs
+qui se suivent doivent trancher franchement, c'est cela qui compte.
+
+**Un fond plein qui recoit du corps de texte se remesure.** Les voiles de `bloc--violet` et de
+`bloc--terracotta` ont ete calibres a l'oeil sur des titres, puis remontes trois fois apres mesure des
+qu'un paragraphe s'est pose dessus : 8 puis 20 puis 24 % pour le violet, 16 puis 22 puis 30 % pour le
+terracotta. Le blanc sur un aplat colore passe son seuil en gros et l'echoue en corps de texte, et cela
+ne se voit pas a la relecture du code.
 
 **Deux fonds identiques qui se suivent sont un seul bloc.** Soit on les fusionne, soit on change l un des deux.
 

@@ -39,11 +39,16 @@
 /* Plafonne a 1,62 rem : « Le Dauphine Libere » fait 18 signes pour une
    colonne de 256 px a 1440. Au-dela il passe sur deux lignes et decale
    sa legende par rapport aux trois autres. */
+/* Graisse 700 et non 600. Le jaune de la charte sur le violet plein vaut
+   4,48, et ce nom mesure 20 px : en graisse 600 son seuil est 4,5 et il
+   echoue de deux centiemes, en graisse 700 il depasse les 18,66 px du texte
+   large et son seuil tombe a 3. Un nom de media est un titre, la graisse lui
+   va. Mesure du 10/09. */
 .nom__titre {
   display: block;
   color: var(--jaune);
   font-size: clamp(1.25rem, 1.85vw, 1.62rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.14;
   letter-spacing: -.015em;
 }

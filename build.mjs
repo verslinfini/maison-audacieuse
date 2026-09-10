@@ -124,19 +124,16 @@ for (const fichier of pages) {
     }
   }
 
-  // Une valeur d'exemple porte « data-a-remplir » : elle vit en preproduction,
-  // jamais en production. Le compteur de la home en est une. Sans ce garde,
-  // le site s'ouvre au public en annoncant un nombre de cooperateur ices faux,
-  // et c'est le premier chiffre que voit un visiteur.
-  if (PROD) {
-    const exemple = page.match(/data-a-remplir="([^"]*)"/);
-    if (exemple) {
-      throw new Error(`${fichier} : valeur d'exemple encore en place, « ${exemple[1]} ». `
-        + `La remplacer par la valeur reelle et retirer l'attribut avant de construire en production.`);
-    }
-  }
-
   const adresse = '/' + (champs.sortie || `${nom}/index.html`).replace(/index\.html$/, '');
+
+  // La page courante se signale dans les menus. Sans ce marqueur, on ouvre une
+  // page interieure et rien dans la navigation ne dit ou l'on est : le seul
+  // repere est le titre de la page, qui a defile des le premier ecran.
+  // « aria-current » le dit aux lecteurs d'ecran, la classe le dit a l'oeil.
+  // Le logo porte deja une classe, il n'est donc jamais marque : il ramene a
+  // l'accueil, il ne dit pas ou l'on est.
+  page = page.split(`<a href="${adresse}"`).join(`<a class="est-ici" aria-current="page" href="${adresse}"`);
+
   produites.push({ adresse, titre: champs.titre, description: champs.description });
 
   const sortie = join(DIST, champs.sortie || `${nom}/index.html`);

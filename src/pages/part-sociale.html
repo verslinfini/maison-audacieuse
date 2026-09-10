@@ -15,45 +15,60 @@ sortie: part-sociale/index.html
 
   <!-- 1. Pourquoi une cooperative. Pas de titre de section avant les trois
        raisons : le H1 ouvre, le chapo donne la reponse, les trois raisons la
-       prouvent. Un lecteur qui s'arrete la a compris l'essentiel. -->
+       prouvent. Un lecteur qui s'arrete la a compris l'essentiel.
+       L'ecran tient toute la hauteur : on doit voir ces trois raisons SANS le
+       debut du bloc suivant, sinon l'oeil part avant d'avoir lu la troisieme.
+       Les trois raisons sont en colonnes et non en liste : elles ne se
+       classent pas, elles pesent pareil. -->
   <section class="page-tete page-tete--aube" id="pourquoi">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <h1 class="page-tete__titre">Les parts sociales de la Maison Audacieuse</h1>
-      <p class="page-tete__chapo">Pour porter ce projet, il fallait choisir une forme juridique. Le choix était évident avant même qu'on ait besoin d'en parler&nbsp;: <span class="marqueur marqueur--3">la coopérative</span>. C'est celle qui colle le plus avec nos valeurs.</p>
-      <div class="mesure prose tete__suite">
-        <ul class="points">
-          <li>
-            <strong>Personne ne s'enrichit.</strong>
-            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
-          </li>
-          <li>
-            <strong>Une personne, une voix.</strong>
-            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes tous à égalité.</p>
-          </li>
-          <li>
-            <strong>On peut être très nombreux·ses.</strong>
-            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble à ce que les gens veulent vraiment.</p>
-          </li>
-        </ul>
+      <div class="tete-duo">
+        <div class="tete-duo__dire">
+          <h1 class="page-tete__titre">Les parts sociales<br>de la Maison Audacieuse</h1>
+          <p class="page-tete__chapo">Pour porter ce projet, il fallait choisir une forme juridique.<br>
+            Le choix était évident avant même qu'on ait besoin d'en parler&nbsp;: <span class="marqueur marqueur--3">la coopérative</span>.<br>
+            <strong>C'est celle qui colle le plus avec nos valeurs.</strong></p>
+        </div>
+        <figure class="figure tete-duo__voir">
+          <img src="/assets/img/collectif-provisoire.webp" alt="Un groupe de personnes réunies dehors sous des guirlandes lumineuses, certaines dansent, d'autres discutent autour d'une table" width="1400" height="1000">
+          <figcaption><span class="a-sourcer">[À SOURCER&nbsp;: image provisoire libre de droits, Unsplash. À remplacer par une photo du collectif de la Maison Audacieuse avant toute mise en ligne.]</span></figcaption>
+        </figure>
       </div>
+      <ul class="raisons">
+        <li>
+          <span class="raisons__rang" aria-hidden="true">1</span>
+          <strong>Personne ne s'enrichit</strong>
+          <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+        </li>
+        <li>
+          <span class="raisons__rang" aria-hidden="true">2</span>
+          <strong>Une personne <span class="raisons__egale">=</span> une voix</strong>
+          <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes tous à égalité.</p>
+        </li>
+        <li>
+          <span class="raisons__rang" aria-hidden="true">3</span>
+          <strong>On peut être très nombreux·ses</strong>
+          <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble à ce que les gens veulent vraiment.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
-  <!-- 2. L'objectif. Le bloc qui hausse la voix : c'est le seul de la page ou
-       le texte devient grand et ou les lignes se detachent les unes des
-       autres. Fond clair et non fond plein, la seule zone chaude de la page
-       est reservee au prix, ecran suivant. -->
-  <section class="bloc bloc--claire" id="objectif">
+  <!-- 2. L'objectif. Fond plein, juste apres un ecran clair : les deux
+       premiers blocs doivent trancher franchement, sinon on croit lire la
+       suite du meme. Les trois affirmations qui etaient en liste ont ete
+       coulees dans une phrase : trois colonnes a l'ecran precedent et trois
+       lignes ici, c'etait la meme figure deux fois de suite. -->
+  <section class="bloc bloc--violet" id="objectif">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
-      <h2 class="bloc__titre">Un lieu qui appartient à celles et ceux qui s'en servent</h2>
-      <p class="bloc__intro">Notre objectif est simple&nbsp;: réunir le plus de monde possible pour créer un bien commun.</p>
-      <ul class="manifeste">
-        <li>Un lieu qui sort des logiques marchandes.</li>
-        <li>Un lieu où on peut tou·tes décider.</li>
-        <li>Un lieu qui ne sera jamais à vendre.</li>
-      </ul>
+      <h2 class="bloc__titre">Un lieu qui appartient à celles et ceux qui l'utilisent</h2>
+      <p class="bloc__intro">Notre objectif est simple&nbsp;: <span class="souligne-jaune">réunir le plus de monde possible pour créer un bien commun</span>.</p>
+      <div class="mesure prose">
+        <p>Un bien commun, ce n'est pas un lieu qu'on vous prête. C'est un lieu qui sort des logiques marchandes, où on peut tou·tes décider, et que personne ne pourra jamais revendre.</p>
+        <p>Plus nous sommes nombreux·ses à en détenir un morceau, moins ce lieu dépend d'une poignée de personnes, et plus il ressemble à ce qu'en attendent celles et ceux qui s'en servent.</p>
+      </div>
     </div>
   </section>
 
@@ -88,7 +103,7 @@ sortie: part-sociale/index.html
        n'apparait en grand qu'ici. Les deux phrases de l'encart sont la chaine
        validee de la campagne : elles se recopient au mot pres et ne se
        reformulent jamais. -->
-  <section class="bloc bloc--violet" id="cent-euros">
+  <section class="bloc bloc--terracotta" id="cent-euros">
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <h2 class="bloc__titre">100 €, une voix</h2>

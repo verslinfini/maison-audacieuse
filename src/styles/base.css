@@ -31,6 +31,16 @@
   --marge: clamp(1.25rem, 3.6vw, 3.5rem);
 
   --t-display: clamp(2.55rem, 6.4vw, 5.25rem);
+  /* Deux echelles de titre, et non une seule. Le socle servait « --t-titre »
+     a la fois au titre de page et aux titres de section : les deux faisaient
+     48 px sur les dix pages interieures, et un titre de page qui pese
+     exactement autant que les titres qu'il coiffe ne coiffe rien. Le rapport
+     entre les deux niveaux est desormais de 1,25, la valeur demandee par la
+     charte.
+     « --t-titre » ne bouge pas : c'est lui qui dimensionne les titres de la
+     page d'accueil, qui est gelee. La graisse, elle, a bouge : voir la note
+     de « .bloc__titre ». */
+  --t-tete: clamp(2.4rem, 4.17vw, 3.75rem);
   --t-titre: clamp(1.95rem, 3.4vw, 3rem);
   --t-lead: clamp(1.2rem, 1.55vw, 1.55rem);
   --t-corps: clamp(1.0625rem, .95vw, 1.125rem);
@@ -174,6 +184,20 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
 
 .nav a:hover { border-bottom-color: currentColor; }
 
+/* La page courante. Le filet du survol existait deja sous chaque entree, en
+   transparent : la page ou l'on se trouve l'allume en permanence, et le
+   libelle passe au violet. Pose par « build.mjs », qui connait l'adresse de
+   chaque page. */
+.nav .est-ici,
+.menu-mobile .est-ici { font-weight: 700; }
+
+/* Le repere est le filet, pas la couleur du mot. Le violet de la charte a
+   14 px sur le fond pale de l'entete vaut 3,81 pour 4,5 exiges : le libelle
+   reste donc au violet sombre, comme ses voisins, et c'est le trait
+   terracotta sous lui qui dit ou l'on est. Un filet de 2 px est un element
+   graphique, son seuil est 3 et le terracotta y tient. */
+.nav .est-ici { border-bottom-color: var(--terracotta); }
+
 .entete__cta { margin-left: clamp(.5rem, 1.4vw, 1.4rem); }
 
 .menu-bouton {
@@ -265,7 +289,13 @@ section[id] { scroll-margin-top: calc(var(--h-entete) + 1.25rem); }
   transform: rotate(-1.2deg);
 }
 
-.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: var(--texte); text-align: right; }
+/* Legende de figure. Couleur du violet sombre et non du corps de texte :
+   a 11,8 px, le corps de texte tombait a 4,43 pour 4,5 sur les nappes pales,
+   mesure du 10/09 sur « prendre-part ». Une legende est deja petite, elle ne
+   peut pas etre pale en plus. La page d'accueil en porte deux : l'ecart est
+   inscrit dans « verif/home-conforme.mjs », un plancher d'accessibilite
+   n'etant pas un gout. */
+.figure figcaption { margin-top: 1rem; font-size: .74rem; letter-spacing: .04em; color: var(--violet-sombre); text-align: right; }
 
 
 /* Surlignage de la charte, releve sur les affiches de la Fete de l'audace.
@@ -518,9 +548,9 @@ h2 .marqueur::before {
   margin: 0;
   max-width: 18ch;
   color: var(--violet-sombre);
-  font-size: var(--t-titre);
-  font-weight: 600;
-  letter-spacing: -.015em;
+  font-size: var(--t-tete);
+  font-weight: 700;
+  letter-spacing: -.018em;
 }
 
 .page-tete__chapo {
@@ -559,13 +589,16 @@ h2 .marqueur::before {
 .bloc--sombre .lien-texte:hover { text-decoration-color: var(--jaune); }
 .bloc--sombre :focus-visible { outline-color: var(--jaune); }
 
+/* Graisse 700 et non 600, et interlettrage -.018 : les valeurs de la page
+   d'accueil, qui est la reference validee. La charte admet 600 comme 700,
+   mais pas les deux sur le meme site. */
 .bloc__titre {
   margin: 0 0 clamp(1.3rem, 2.4vw, 2.1rem);
   max-width: 24ch;
   color: var(--violet-sombre);
   font-size: var(--t-titre);
-  font-weight: 600;
-  letter-spacing: -.015em;
+  font-weight: 700;
+  letter-spacing: -.018em;
 }
 
 .bloc__intro {
@@ -631,6 +664,18 @@ h2 .marqueur::before {
      7 px n'est pas un mot, l'ecart se voit moins que sur du texte. */
   background: var(--vert);
 }
+
+
+/* Un membre de phrase mis en couleur. Le surlignage au feutre du socle est
+   dessine pour du texte sombre sur fond clair : sur un aplat plein il salit
+   au lieu de souligner, d'ou cette variante qui ne joue que sur la couleur.
+   Sur fond clair elle retombe sur le violet, jamais sur le jaune, qui ne
+   tiendrait aucun seuil de contraste sur du blanc. */
+.souligne-jaune { color: var(--violet); font-weight: 600; }
+
+.bloc--violet .souligne-jaune,
+.bloc--terracotta .souligne-jaune,
+.bloc--sombre .souligne-jaune { color: var(--jaune); }
 
 .bloc--sombre .puces li::before { background: var(--jaune); }
 
@@ -1061,7 +1106,7 @@ h2 .marqueur::before {
     radial-gradient(90% 50% at 6% 98%, rgba(56,54,72,.46), rgba(56,54,72,0) 70%),
     radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
     radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
-    linear-gradient(rgba(56,54,72,.20), rgba(56,54,72,.20)),
+    linear-gradient(rgba(56,54,72,.24), rgba(56,54,72,.24)),
     var(--violet);
   color: var(--blanc);
 }
@@ -1540,7 +1585,13 @@ ol.etapes > li::marker { content: none; }
 
 /* 8. Le fond terracotta non plus. Mesure 4,10 sur du corps de texte.
    Meme traitement que le violet : les deux nappes chaudes les plus claires
-   descendent, le voile reste a 16 %. Le fond garde son mouvement. */
+   descendent, le voile reste a 16 %. Le fond garde son mouvement.
+   Voile porte de 22 a 30 % le 10/09, quand ce fond a recu du corps de texte
+   pour la premiere fois : le blanc y mesurait entre 4,30 et 4,38 a 768 px,
+   pour 4,5. A 30 % la meme ligne tient 4,74. Le violet de l'ecran du pari,
+   sur la page d'accueil, avait demande exactement la meme correction deux
+   jours plus tot : un fond plein calibre a l'oeil sur un titre ne tient pas
+   des qu'on pose un paragraphe dessus. */
 .bloc--terracotta {
   background:
     radial-gradient(66% 38% at 88% 104%, rgba(56,54,72,.44), rgba(56,54,72,0) 66%),
@@ -1548,7 +1599,7 @@ ol.etapes > li::marker { content: none; }
     radial-gradient(74% 42% at 6% 96%, rgba(56,54,72,.34), rgba(56,54,72,0) 70%),
     radial-gradient(68% 74% at 74% 44%, rgba(126,80,90,.56), rgba(126,80,90,0) 72%),
     radial-gradient(62% 70% at 26% 56%, rgba(146,101,80,.52), rgba(146,101,80,0) 74%),
-    linear-gradient(rgba(56,54,72,.22), rgba(56,54,72,.22)),
+    linear-gradient(rgba(56,54,72,.30), rgba(56,54,72,.30)),
     var(--terracotta);
 }
 
