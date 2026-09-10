@@ -70,21 +70,25 @@ Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui 
 
 **Colonne de droite :**
 
-Un bien commun est au service de l'intérêt général. Il se gère, se protège et se partage collectivement.
+Un bien commun est au service de l'intérêt général. Il se partage, se gère et se protège collectivement.
 
-Nous avons signé avec la Ville d'Annecy une promesse de bail de 99 ans. Ce lieu devra donc durer plus
-longtemps que celles et ceux qui le lancent aujourd'hui.
+Nous avons signé avec la Ville d'Annecy une promesse de bail de 99 ans. Ce lieu va donc durer plus
+longtemps que celles et ceux qui le lancent aujourd'hui. C'est pourquoi nous cherchons à réunir autour
+du projet le plus grand nombre de personnes qui partagent nos valeurs et qui veulent voir un tel lieu
+exister sur le territoire.
 
-Nous cherchons à réunir autour de lui le plus grand nombre de personnes qui partagent nos valeurs et qui
-veulent voir un lieu comme celui-ci exister sur le territoire. Un lieu détenu par une multitude ne
-dépend de personne en particulier, alors il traverse le temps.
-
-*(paragraphe pivot, tout en gras, la seconde phrase à la ligne)* L'argent compte pour que le projet
-existe. **Le nombre compte encore plus**, parce qu'il montre que ce lieu répond à une attente réelle.
-*(« Le nombre compte encore plus » surligné au marqueur jaune, seule zone chaude de l'écran)*
+*(paragraphe pivot, tout en gras)* L'argent compte pour que le projet existe, mais **le nombre compte
+encore plus.** *(retour à la ligne)* Parce qu'il montre que celui-ci répond à une attente réelle.
+*(« le nombre compte encore plus. » surligné au marqueur jaune, point compris, et rendu insécable pour
+qu'il ne se coupe jamais en deux ; seule zone chaude de l'écran)*
 
 Chaque personne qui prend une part rend le projet plus solide devant la banque, les financeurs et les
-institutions. Elle rapproche aussi le lieu de celles et ceux qui s'en serviront.
+institutions.
+
+Deux phrases retirées à la relecture de Romain du 10/09 : « Un lieu détenu par une multitude ne dépend
+de personne en particulier, alors il traverse le temps » (le lecteur le comprend seul) et « Elle
+rapproche aussi le lieu de celles et ceux qui s'en serviront ». Le mot « lieu » passe de six occurrences
+à deux, en alternant avec « projet ».
 
 Une correction de fait sur la dictée de Romain : elle disait « nous avons signé un bail de 99 ans avec
 la mairie d'Annecy ». C'est une promesse de bail, le bail lui-même vient après le permis.
