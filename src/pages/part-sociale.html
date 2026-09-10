@@ -98,21 +98,33 @@ sortie: part-sociale/index.html
        Les deux phrases de l'encart sont la chaine validee de la campagne :
        elles se recopient au mot pres et ne se reformulent jamais. -->
   <section class="bloc bloc--terracotta" id="la-part">
+    <!-- La bascule du violet au terracotta. Deux aplats pleins qui se suivent
+         font une rupture nette au scroll : la diagonale et le filet blanc en
+         font un passage. Le viewBox est etire en largeur, le trace garde son
+         epaisseur en pixels CSS. -->
+    <svg class="bascule" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="bascule__plein" d="M0,0 H1440 V18 L0,56 Z"/>
+      <path class="bascule__voile" d="M0,0 H1440 V18 L0,56 Z"/>
+      <path class="bascule__trait" d="M1440,18 L0,56"/>
+    </svg>
     <div class="grain__voile" aria-hidden="true"></div>
     <div class="contenu">
       <h2 class="bloc__titre">Une part sociale, c'est un petit morceau de la coopérative</h2>
       <div class="prix">
         <p class="prix__somme">
           <span class="prix__nombre">100&nbsp;€</span>
+          <span class="prix__mot">la part</span>
         </p>
         <div class="prix__dire prose">
           <p>Tant que vous détenez une part sociale, vous avez le statut de coopérateur·ice. Il vous donne le droit (si vous le souhaitez) de participer aux décisions du projet.</p>
           <p>Vous pouvez prendre autant de parts que vous voulez. Elles sont remboursables sur demande.</p>
-          <div class="carte">
-            <p class="carte__titre">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
-          </div>
-          <p class="prix__agir"><a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a></p>
         </div>
+      </div>
+      <div class="prix__suite">
+        <div class="carte">
+          <p class="carte__titre">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+        </div>
+        <p class="prix__agir"><a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a></p>
       </div>
     </div>
   </section>

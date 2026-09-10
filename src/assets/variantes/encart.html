@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Traitements de l'encart de remboursement — La Maison Audacieuse</title>
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/part-sociale.css">
+<style>
+/* ==================================================================
+   SIMULATEUR. La phrase de remboursement de l'ecran « la part », dans
+   son contexte reel : meme entete, meme fond terracotta, meme bascule,
+   meme montant. On compare des ecrans, pas des vignettes.
+
+   La phrase est la chaine validee de la campagne. Elle se recopie au
+   mot pres dans les cinq versions, seule sa mise en forme change.
+
+   Contrainte de couleur, mesuree le 10/09 sur les pixels rendus : sur
+   ce terracotta, seuls le blanc (4,7), le jaune (4,2 au-dessus de
+   24 px) et la menthe tiennent un seuil. Le violet, le vert, le kaki et
+   le violet sombre y tombent sous 2. La palette de cet ecran est donc
+   fermee a trois couleurs, ce n'est pas un choix de gout.
+
+   Rien ici n'est en ligne : la page vit dans « src/assets/variantes/ »
+   et ne figure ni au menu, ni au plan du site, ni aux controles.
+   ================================================================== */
+
+/* ---------- le pilote, repliable pour ne pas manger l'ecran ---------- */
+
+.pilote {
+  position: fixed;
+  z-index: 60;
+  left: 1rem;
+  top: calc(var(--h-entete) + .4rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .55rem;
+  border-radius: 999px;
+  background: rgba(31, 29, 45, .93);
+  box-shadow: 0 14px 40px rgba(31, 29, 45, .3);
+}
+
+body[data-pilote="plie"] .pilote > *:not(.replier) { display: none; }
+body[data-pilote="plie"] .pilote { padding: .4rem; }
+
+.pilote b {
+  padding: 0 .45rem 0 .3rem;
+  color: rgba(255, 255, 255, .5);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pilote button {
+  appearance: none;
+  min-height: 34px;
+  padding: 0 .75rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pilote button:hover { background: rgba(255, 255, 255, .22); }
+.pilote button[aria-pressed="true"] { background: #FFF3A8; color: #383648; font-weight: 700; }
+.pilote .sep { width: 1px; height: 22px; background: rgba(255, 255, 255, .2); margin: 0 .2rem; }
+.pilote .replier { padding: 0 .6rem; background: rgba(255, 255, 255, .16); }
+
+.etiquette {
+  position: fixed;
+  z-index: 60;
+  bottom: 1rem;
+  right: 1rem;
+  padding: .38rem .8rem;
+  border-radius: 999px;
+  background: rgba(31, 29, 45, .9);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+/* ---------- les cinq versions ---------- */
+
+.jeu { display: none; }
+body[data-jeu="a"] #jeu-a, body[data-jeu="b"] #jeu-b, body[data-jeu="c"] #jeu-c,
+body[data-jeu="d"] #jeu-d, body[data-jeu="e"] #jeu-e { display: block; }
+
+.jeu { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+
+.jeu > p { margin-top: 0; margin-bottom: 0; }
+
+/* B. LA PHRASE NUE, EN JAUNE, PLEINE LARGEUR. Le fond disparait, la
+   couleur tient seule le role que la plaque tenait. Le jaune se rend a
+   1,35 rem au moins, soit 21,6 px : sous les 24 px qui feraient tomber
+   son seuil a 3, il est donc mesure contre 4,5, ou il vaut 4,2. C'est
+   l'ecart connu du jaune sur terracotta, deja assume ailleurs sur le
+   site pour les nombres. */
+.nue {
+  max-width: none;
+  color: var(--jaune);
+  font-size: clamp(1.2rem, 1.7vw, 1.42rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* C. DE TRAVERS, VERS LA DROITE, EN MENTHE. La menthe est la seule
+   couleur de charte qui reste apres le blanc et le jaune : plus douce
+   que le jaune, elle ne tire pas l'oeil autant. Le leger pivot dit que
+   la phrase est ajoutee au bloc, pas incluse dedans. */
+.penchee {
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: clamp(0px, 3vw, 3rem);
+  color: var(--menthe);
+  font-size: clamp(1.14rem, 1.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.42;
+  transform: rotate(-1.6deg);
+}
+
+/* D. LE FILET ET RIEN D'AUTRE. Un trait blanc fin au-dessus, la phrase
+   en blanc plein en dessous. Version la plus sobre des cinq : aucune
+   forme nouvelle, aucun aplat, la phrase se detache par le seul
+   changement de graisse et par le vide au-dessus d'elle. */
+.filet {
+  max-width: none;
+  padding-top: clamp(1rem, 1.8vw, 1.4rem);
+  border-top: 2px solid rgba(255, 255, 255, .55);
+  color: var(--blanc);
+  font-size: clamp(1.14rem, 1.5vw, 1.32rem);
+  font-weight: 600;
+  line-height: 1.42;
+}
+
+/* E. A LA MAIN. La Meow Script au-dessus de 24 px : son seuil tombe a 3
+   et le jaune y vaut 4,2, largement au-dessus. La phrase se lit comme
+   une note ajoutee apres coup, ce qu'elle est : une reassurance, pas un
+   argument de vente. Le socle interdit la manuscrite sur une phrase
+   entiere ; c'est une exception a trancher, la phrase fait 96 signes et
+   une police manuscrite se lit mal. */
+.main {
+  max-width: 30ch;
+  margin-left: auto;
+  color: var(--jaune);
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  line-height: 1.25;
+  transform: rotate(-2deg);
+}
+
+/* Posee AVANT les cinq versions et non apres : declaree en fin de feuille,
+   « margin: 0 » ecrasait le « margin-left: auto » de la version penchee, qui
+   restait calee a gauche. */
+</style>
+</head>
+<body data-jeu="a" data-pilote="ouvert">
+
+<header class="entete" id="entete">
+  <div class="entete__inner">
+    <a class="logo" href="/"><img src="/assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/le-projet-architectural/">Le lieu</a></li>
+        <li><a href="/le-modele-economique/">Le projet</a></li>
+        <li><a class="est-ici" aria-current="page" href="/part-sociale/">La part sociale</a></li>
+        <li><a href="/lequipe-projet/">L'équipe</a></li>
+        <li><a href="/les-medias/">Médias</a></li>
+        <li><a href="/contacts/">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="bouton bouton--primaire entete__cta" href="/prendre-part/">Je prends ma part</a>
+  </div>
+</header>
+
+<p class="etiquette" id="etiquette">A · la plaque blanche, la version en ligne</p>
+
+<main>
+  <section class="bloc bloc--terracotta" id="la-part">
+    <svg class="bascule" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="bascule__plein" d="M0,0 H1440 V18 L0,56 Z"/>
+      <path class="bascule__voile" d="M0,0 H1440 V18 L0,56 Z"/>
+      <path class="bascule__trait" d="M1440,18 L0,56"/>
+    </svg>
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <h2 class="bloc__titre">Une part sociale, c'est un petit morceau de la coopérative</h2>
+      <div class="prix">
+        <p class="prix__somme">
+          <span class="prix__nombre">100&nbsp;€</span>
+          <span class="prix__mot">la part</span>
+        </p>
+        <div class="prix__dire prose">
+          <p>Tant que vous détenez une part sociale, vous avez le statut de coopérateur·ice. Il vous donne le droit (si vous le souhaitez) de participer aux décisions du projet.</p>
+          <p>Vous pouvez prendre autant de parts que vous voulez. Elles sont remboursables sur demande.</p>
+        </div>
+      </div>
+
+      <div class="jeu" id="jeu-a">
+        <div class="carte">
+          <p class="carte__titre">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+        </div>
+      </div>
+
+      <div class="jeu" id="jeu-b">
+        <p class="nue">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+      </div>
+
+      <div class="jeu" id="jeu-c">
+        <p class="penchee">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+      </div>
+
+      <div class="jeu" id="jeu-d">
+        <p class="filet">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+      </div>
+
+      <div class="jeu" id="jeu-e">
+        <p class="main">Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.</p>
+      </div>
+
+      <p class="prix__agir"><a class="bouton bouton--primaire" href="/prendre-part/">Je prends ma part</a></p>
+    </div>
+  </section>
+</main>
+
+<div class="pilote" role="group" aria-label="Choisir un traitement">
+  <b>Encart</b>
+  <button type="button" data-jeu="a" aria-pressed="true">A plaque</button>
+  <button type="button" data-jeu="b" aria-pressed="false">B jaune centré</button>
+  <button type="button" data-jeu="c" aria-pressed="false">C penché menthe</button>
+  <button type="button" data-jeu="d" aria-pressed="false">D filet</button>
+  <button type="button" data-jeu="e" aria-pressed="false">E à la main</button>
+  <span class="sep"></span>
+  <button type="button" class="replier" id="replier" title="Replier le pilote">–</button>
+</div>
+
+<script>
+const NOMS = {
+  a: 'A · la plaque blanche, la version en ligne',
+  b: 'B · la phrase nue, en jaune, centrée',
+  c: 'C · de travers, vers la droite, en menthe',
+  d: 'D · un filet et rien d’autre',
+  e: 'E · à la main, en Meow Script',
+};
+const ORDRE = ['a', 'b', 'c', 'd', 'e'];
+const etiquette = document.getElementById('etiquette');
+
+function poser(valeur) {
+  document.body.dataset.jeu = valeur;
+  for (const b of document.querySelectorAll('.pilote button[data-jeu]')) {
+    b.setAttribute('aria-pressed', String(b.dataset.jeu === valeur));
+  }
+  etiquette.textContent = NOMS[valeur];
+}
+
+for (const b of document.querySelectorAll('.pilote button[data-jeu]')) {
+  b.addEventListener('click', () => poser(b.dataset.jeu));
+}
+
+const replier = document.getElementById('replier');
+replier.addEventListener('click', () => {
+  const plie = document.body.dataset.pilote === 'plie';
+  document.body.dataset.pilote = plie ? 'ouvert' : 'plie';
+  replier.textContent = plie ? '–' : '+';
+});
+
+// Fleches gauche et droite : on compare en aller-retour, sans viser un bouton.
+addEventListener('keydown', (e) => {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  const i = ORDRE.indexOf(document.body.dataset.jeu);
+  poser(ORDRE[(i + (e.key === 'ArrowRight' ? 1 : ORDRE.length - 1)) % ORDRE.length]);
+});
+</script>
+
+</body>
+</html>

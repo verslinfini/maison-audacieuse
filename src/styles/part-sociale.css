@@ -576,3 +576,61 @@
 /* Le deuxieme bouton de la page, apres l'arbre d'implication : le lecteur
    vient d'apprendre jusqu'ou ca l'engage, c'est la seconde objection levee. */
 .implication__agir { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+
+
+/* ---------- la bascule du violet au terracotta ---------- */
+
+/* Deux aplats pleins qui se suivent font une rupture nette : on voit le
+   violet, on scrolle, on voit le terracotta. La diagonale et son filet blanc
+   en font un passage. Le violet est reconstitue a l'identique, couleur de
+   charte plus le meme voile sombre a 24 % que .bloc--violet, sinon la bande
+   serait plus vive que le fond dont elle prolonge. */
+.bascule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(2rem, 4.4vh, 3.5rem);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bascule__plein { fill: var(--violet); }
+
+.bascule__voile { fill: var(--violet-sombre); fill-opacity: .24; }
+
+.bascule__trait {
+  fill: none;
+  stroke: var(--blanc);
+  stroke-width: 2.5;
+  /* Le trace se rend en pixels CSS et non en unites de viewBox : sans cela,
+     « preserveAspectRatio: none » l'ecraserait a l'horizontale. */
+  vector-effect: non-scaling-stroke;
+}
+
+/* Le titre ne passe pas sous la diagonale. */
+#la-part { padding-top: calc(clamp(3rem, 6vw, 5.5rem) + clamp(2rem, 4.4vh, 3.5rem)); }
+
+
+/* ---------- le montant ---------- */
+
+/* Le filet ne court plus que sur la hauteur des deux paragraphes : l'encart
+   et le bouton sont sortis de la grille. Le montant se centre sur cette
+   hauteur, il ne s'aligne plus sur la premiere ligne. */
+.prix { align-items: center; }
+
+/* « la part » a la main, sous le nombre. La Meow Script se rend a 28,8 px
+   ici, au-dessus des 24 px qui font passer le seuil de contraste de 4,5 a 3 :
+   le jaune de la charte vaut 4,2 sur ce terracotta, il tient son seuil. */
+.prix__mot {
+  display: block;
+  margin-top: .35rem;
+  color: var(--jaune);
+  font-family: "Meow Script", "Segoe Script", cursive;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  line-height: 1.1;
+  transform: rotate(-3deg);
+  transform-origin: left center;
+}
+
+.prix__suite { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
