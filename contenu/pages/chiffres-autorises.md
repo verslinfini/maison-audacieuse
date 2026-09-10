@@ -5,7 +5,7 @@ Règle : un chiffre absent de ce fichier ou marqué interdit est RETIRÉ de la p
 | Chiffre | Formulation | Source | Statut |
 |---|---|---|---|
 | 88 900 € | levés en dons, campagne close le 23/04/2026 | CLAUDE.md LMA jalon J2 ; page HelloAsso | autorisé HORS home (FAQ, page financière) : la home compte des personnes, et HelloAsso affichera bientôt ~135 k€ avec le mécénat de compétences. Cohérence 20/08 : 120 000 € est le nouveau chiffre public avec mécénat de compétences (frise home, écran 4), 88 900 € reste le total HelloAsso d'avril (dons seuls, hors mécénat) |
-| 650+ | donateurs et donatrices de la campagne de dons | CLAUDE.md LMA jalon J2 ; plan de campagne 14/08 | autorisé (666 = chiffre exact à figer au 07/09) |
+| 670 | donatrices et donateurs de la campagne de dons, premier palier de la cascade | arbitrage de Romain du 10/09/2026 : c'est le chiffre arrondi retenu pour la communication, « les gens ne sont pas capables de trancher le chiffre en réunion » | autorisé sur /part-sociale/. ATTENTION : la home affiche encore 666 au premier palier de la jauge et « plus de 650 » à l'écran du pari, les deux pages divergent tant que la home n'est pas alignée (elle est gelée par verif/home-conforme, l'alignement se déclare en écart voulu) |
 | 100 € | valeur d'une part sociale | statuts constitutifs signés de La Coop Audacieuse | autorisé |
 | une personne = une voix | principe coopératif | statuts (4 collèges pondérés 35/35/20/10) | autorisé |
 | 99 ans | PROMESSE de bail emphytéotique administratif signée avec la Ville d'Annecy (le bail lui-même vient après le permis) | conseil municipal du 02/02/2026, promesse signée le 06/03/2026 | autorisé, à formuler « la Ville a signé la promesse de bail de 99 ans », jamais « la ferme est sous bail » |

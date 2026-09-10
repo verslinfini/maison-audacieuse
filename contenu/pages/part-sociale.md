@@ -18,8 +18,8 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 |---|---|---|---|
 | **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
 | | 2. Réunir le plus de monde possible pour créer un bien commun | `bloc--violet` | pourquoi le nombre |
-| **QUOI** | 3. Une part, c'est un petit morceau de la coopérative | `bloc--blanc` | c'est quoi, concrètement |
-| | 4. 100 €, une voix | `bloc--terracotta` | combien, et est-ce que je le reperds |
+| **QUOI** | 3. Combien nous devons être | `bloc--nappe` | où on va, et la preuve du nombre |
+| | 4. Une part sociale, c'est un petit morceau de la coopérative | `bloc--terracotta` | c'est quoi, combien, ce que ça donne, et le premier appel |
 | | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
 | **COMMENT** | 6. Concrètement, comment ça marche | `bloc--nappe` | qu'est-ce que je fais, dans quel ordre |
 | | 7. Vous vous impliquez autant que vous voulez | `bloc--blanc` | jusqu'où ça m'engage |
@@ -100,28 +100,58 @@ totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. L
 bailleur et candidate au capital, l'instructeur ESUS lit le site, la presse aussi. La charge politique
 passe par ce que le lieu fait, jamais par ce qu'il dénonce.
 
-### 3. Une part, c'est un petit morceau de la coopérative
+### 3. Combien nous devons être
 
-La coopérative qui porte le projet de la Maison Audacieuse s'appelle **La Coop Audacieuse**.
+Écran créé le 10/09. Il prouve ce que l'écran 2 affirme. Sans lui, « le nombre compte encore plus »
+reste une phrase sans appui, alors que deux chiffres vérifiables la soutiennent. Il tient aussi la
+règle des fonds pleins : violet et terracotta ne se touchent jamais, un bloc clair les sépare.
 
-C'est elle qui signera le bail emphytéotique de 99 ans avec la Ville d'Annecy, qui portera les travaux
-et qui regroupera la gouvernance du projet.
+**Titre :** Combien nous devons être
+**Chapô :** Trois paliers, et aucun plafond.
 
-À partir du moment où vous détenez une part sociale, vous avez le statut de coopérateur·ice. Il vous
-donne le droit, **si vous le souhaitez**, de participer aux décisions du projet. Rien n'est obligatoire.
+670 — Autant que les personnes qui ont donné pendant la campagne de dons, close en avril.
+1 700 — Autant que les personnes qui ont signé la lettre de soutien en 2025.
+3 000 — Le nombre à partir duquel le projet tient vraiment debout, devant la banque comme devant les
+institutions.
 
-*Photo : la fenêtre dans le mur épais.*
+Puis un trou nommé pour l'échelle au-delà de 3 000, à arrêter en collectif.
 
-### 4. 100 €, une voix
+670 est l'arbitrage de Romain du 10/09. La home affiche encore 666 au premier palier de la jauge et
+« plus de 650 » à l'écran du pari : les deux pages divergent tant que la home n'est pas alignée, et
+elle est gelée par `verif/home-conforme`, donc l'alignement se déclare en écart voulu.
 
-**100 €** — une part, versés une seule fois.
+L'échelle ne mélange pas les paliers réels et les paliers de rêve. Mise à côté d'un nombre à six
+chiffres, la cible de 3 000 se dévaluerait, et une jauge dont l'objectif atteignable tient sur un pixel
+démoralise au lieu d'entraîner. Le rêve vit en aparté, sous les trois paliers.
+
+### 4. Une part sociale, c'est un petit morceau de la coopérative
+
+Fusion des deux anciens écrans « une part, c'est un petit morceau de la coopérative » et « 100 €, une
+voix », décidée par Romain le 10/09. Ils disaient la même chose à un écran d'intervalle, l'un en mots
+et l'autre en chiffres. Unique fond plein chaud de la page, et seul endroit où le montant est en grand.
+
+**Titre :** Une part sociale, c'est un petit morceau de la coopérative
+
+**100 €** — une part, versés une seule fois
+
+Tant que vous détenez une part, vous avez le statut de coopérateur·ice. Il vous donne le droit,
+*si vous le souhaitez*, de participer aux décisions du projet. Rien n'est obligatoire.
 
 Vous pouvez en prendre autant que vous voulez. Votre voix ne change pas pour autant : une coopérative
 compte les personnes, pas les euros.
 
-**Ce n'est pas un don.** La part est remboursée sur demande, votre argent n'est pas perdu.
+*(encart, chaîne validée de la campagne, se recopie au mot près)* Votre argent reste le vôtre. Vous
+pouvez demander le remboursement de vos parts à tout moment.
 
-> **Votre argent reste le vôtre. Vous pouvez demander le remboursement de vos parts à tout moment.**
+*(bouton)* Je prends ma part
+
+Premier appel de la page. Il vient là parce que le lecteur sait maintenant ce que la part coûte et ce
+qu'elle donne : c'est le premier moment où il peut décider.
+
+Sorti à la fusion : « Ce n'est pas un don. La part est remboursée sur demande, votre argent n'est pas
+perdu. » L'encart qui suit dit la même chose en mieux, et la dénégation attirait l'attention sur le mot
+qu'elle voulait écarter. Sorti aussi : la présentation de La Coop Audacieuse (bail, travaux,
+gouvernance), qui descend en FAQ.
 
 ### 5. Le retour sur investissement : c'est que le lieu existe
 

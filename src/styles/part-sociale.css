@@ -247,9 +247,9 @@
    importante de la page ne peut pas etre la moins lisible de la page. En
    plaque opaque elle tient largement son seuil, et elle se detache du fond
    comme une etiquette posee dessus. */
-#cent-euros .carte { background: var(--blanc); border-color: transparent; }
+#la-part .carte { background: var(--blanc); border-color: transparent; }
 
-#cent-euros .carte__titre { color: var(--violet-sombre); }
+#la-part .carte__titre { color: var(--violet-sombre); }
 
 
 
@@ -494,3 +494,49 @@
   #objectif .bloc__titre { max-width: 100%; }
   .objectif__chute { margin-top: 1.5rem; max-width: 100%; }
 }
+
+
+/* ---------- les paliers ---------- */
+
+/* Trois nombres, chacun avec la seule chose qui compte : ce qu'il veut dire.
+   Un palier sans lecture est un nombre rond, et un nombre rond n'engage
+   personne. Les deux premiers se verifient (les dons, la lettre de soutien),
+   le troisieme est la cible arretee par Romain le 10/09. */
+.paliers { display: flex; flex-direction: column; list-style: none; }
+
+.paliers > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+  align-items: baseline;
+  padding: clamp(1rem, 1.8vw, 1.4rem) 0;
+  border-top: 1px solid var(--filet);
+}
+
+.paliers > li:last-child { border-bottom: 1px solid var(--filet); }
+
+/* Le nombre est aligne a droite pour que les unites tombent les unes sous les
+   autres : « 670 » et « 3 000 » n'ont pas le meme nombre de signes, et un
+   alignement a gauche ferait boiter la colonne. */
+.paliers__nombre {
+  min-width: 4.6ch;
+  text-align: right;
+  color: var(--violet-sombre);
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.paliers p { margin: 0; }
+
+.paliers__apres { margin-top: clamp(1.2rem, 2.4vw, 1.8rem); }
+
+
+/* ---------- l'appel de l'ecran de la part ---------- */
+
+/* Le premier bouton de la page. Il vient la parce que le lecteur sait
+   maintenant ce que la part coute et ce qu'elle donne : c'est le premier
+   moment ou il peut decider. */
+.prix__agir { margin-top: clamp(1.4rem, 2.6vw, 2rem); }
