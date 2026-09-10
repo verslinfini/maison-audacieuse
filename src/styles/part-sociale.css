@@ -252,10 +252,17 @@
 #cent-euros .carte__titre { color: var(--violet-sombre); }
 
 
+
 /* ---------- le premier ecran ---------- */
 
+/* Densite arretee avec Romain le 10/09 sur le simulateur : la version aeree.
+   Chaque element est un cran plus petit que le reglage par defaut du socle et
+   tous les intervalles sont plus grands. Le raisonnement est le sien : « on
+   est dans un monde qui est charge, il n'y a plus d'espace ». On ne retire
+   rien de l'ecran, on redonne du vide entre les choses. */
+
 /* L'ecran tient toute la hauteur visible. Sans cela, le haut du bloc suivant
-   apparait sous les trois cartes, l'oeil y va, et la troisieme n'est jamais
+   apparait sous les trois raisons, l'oeil y va, et la troisieme n'est jamais
    lue. C'est un ecran et un seul : « on a choisi la forme cooperative, et
    voici pourquoi ». « svh » et non « vh » : sur mobile, « vh » compte la
    barre d'adresse comme si elle n'existait pas. */
@@ -268,24 +275,63 @@
 }
 
 /* Le titre et le chapo a gauche, la photo debout a droite. Le texte reste
-   premier dans le HTML, donc premier au clavier et a la lecture d'ecran. */
+   premier dans le HTML, donc premier au clavier et a la lecture d'ecran.
+   « start » et non « center » : centrees, les deux colonnes se decalaient
+   l'une par rapport a l'autre et la photo descendait sous le titre. Alignees
+   en haut, elles finissent a la meme hauteur, et le vide qui reste tombe
+   entier au-dessus des trois raisons. */
 .tete-duo {
   display: grid;
-  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
-  gap: clamp(1.8rem, 4vw, 3.4rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr);
+  gap: clamp(2.2rem, 5vw, 4.4rem);
+  align-items: start;
 }
 
-/* L'image ne colle ni a l'entete ni au bord droit : elle descend de la
-   hauteur d'une ligne et rentre d'un demi-pouce dans la page. */
-.tete-duo__voir { margin: clamp(1.2rem, 4vh, 2.6rem) 0 0; justify-self: end; margin-right: clamp(0px, 2.5vw, 2.6rem); width: min(100%, 19rem); }
+/* Le titre, un cran au-dessus de la version aeree du simulateur (3,35vw) et
+   un cran sous le reglage du socle (4,17vw). Reglage demande le 10/09. Il
+   tient en trois lignes de 1440 a 1728 : « Les parts sociales », puis « de la
+   Maison » et « Audacieuse », la premiere coupe etant posee a la main dans le
+   HTML et la seconde venant de la largeur de la colonne. */
+#pourquoi .page-tete__titre {
+  max-width: none;
+  font-size: clamp(2.3rem, 4vw, 3.6rem);
+}
+
+/* L'ecart entre le titre et les trois lignes du chapo est le premier respir
+   de la page : il vaut deux fois celui du socle. */
+#pourquoi .page-tete__chapo {
+  margin-top: clamp(1.9rem, 3.8vw, 3.1rem);
+  font-size: clamp(1.08rem, 1.36vw, 1.36rem);
+  line-height: 1.62;
+}
+
+/* La photo part du haut de la grille, comme le titre, et non plus du milieu.
+   Elle finit alors a la meme hauteur que le chapo, ce qui lui donne le meme
+   espace qu'a lui avant les trois raisons ; elle en avait 27 px le 09/09,
+   contre 113 px au texte.
+   Le bord gauche est cale sur la fin de « L'equipe » dans le menu, repere
+   donne par Romain le 10/09 : elle tombait au milieu de « Medias », 43 px
+   trop a droite a 1440 et 54 px a 1728.
+   Le calage ne se fait pas a la marge mais par la grille : la colonne de
+   droite commence deja a cet endroit (896 px a 1440, 1039 a 1728, contre 900
+   et 1023 pour la fin de « L'equipe »), il suffit donc de poser l'image au
+   debut de sa colonne au lieu de la fin. Une marge droite en vw aurait tenu a
+   1440 et derive partout ailleurs, parce que le contenu est plafonne : au-dela
+   de 1440 il ne s'elargit plus, il se recentre.
+   L'image est alors plus etroite que sa colonne et laisse du vide a sa droite.
+   C'est le prix de l'alignement demande, et il va dans le sens de l'ecran. */
+.tete-duo__voir {
+  margin: clamp(.3rem, 1vh, .8rem) 0 0;
+  justify-self: start;
+  width: min(100%, 14rem);
+}
 
 /* Photo debout. Le plafond de 268 px du socle est calibre sur une vignette
    couchee : une image verticale s'y ecrase en bandeau. Elle prend ici la
    hauteur que l'ecran lui laisse, et pas un pixel de plus, sinon le premier
-   ecran deborde et les cartes passent sous la ligne de flottaison. */
+   ecran deborde et les trois raisons passent sous la ligne de flottaison. */
 .tete-duo__voir img {
-  max-height: min(42vh, 24rem);
+  max-height: min(36vh, 19.6rem);
   aspect-ratio: 5 / 7;
   object-position: 50% 42%;
   transform: rotate(1.6deg);
@@ -293,96 +339,141 @@
 
 .tete-duo__voir figcaption { text-align: left; }
 
-/* Trois raisons qui pesent pareil, donc trois cartes de meme taille et non
-   une liste verticale : une liste se lit comme un classement. Chacune porte
-   sa couleur de charte, en bandeau et sur son rang : c'est la seule facon de
-   donner trois accents differents sans ecrire trois fois la meme carte. */
+/* Trois raisons qui pesent pareil, donc trois colonnes de meme largeur et non
+   une liste verticale : une liste se lit comme un classement.
+   Traitement arrete avec Romain le 10/09 apres six essais en vraie page
+   (cartes, chiffres manuscrits, chiffre porteur, couleur, surlignage penche,
+   feutre) : le filet vertical et la couleur sur le titre, rien d'autre. Les
+   cartes faisaient « un peu PowerPoint », les rangs numerotes mangeaient la
+   place que l'ecran devait rendre. C'est le traitement le plus sobre des six
+   et celui qui laisse le plus d'air aux trois textes. */
 .raisons {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 1.8vw, 1.6rem);
-  margin-top: clamp(1.3rem, 3vh, 2.4rem);
+  gap: clamp(1.5rem, 3.2vw, 3rem);
+  /* Ecart inchange depuis le 09/09 : « on laisse le meme espace entre les
+     trois lignes de texte et les trois parties du dessous ». Il part du bas
+     du bloc de tete, donc du bas du chapo ou de la legende, selon la plus
+     basse des deux colonnes. */
+  margin-top: clamp(3.4rem, 12.5vh, 7.4rem);
 }
 
-.raisons > li {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: .4rem;
-  padding: clamp(1.1rem, 1.8vw, 1.6rem);
-  border-radius: 12px;
-  background: var(--blanc);
-  box-shadow: 0 14px 34px rgba(56, 54, 72, .10);
-  overflow: hidden;
-}
+.raisons > li { display: flex; flex-direction: column; gap: .55rem; }
 
-/* Le bandeau de couleur en tete de carte. Trait purement graphique : il ne
-   porte aucun texte, donc aucun seuil de contraste ne s'y applique, et le
-   vert de la charte peut y servir alors qu'il ne peut pas porter un mot. */
-.raisons > li::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 5px;
-  background: var(--accent);
+/* Le filet tient les trois ensemble sans les enfermer. Il ne se pose pas
+   avant la premiere : un filet en tete de la premiere colonne la couperait du
+   texte qui la precede. */
+.raisons > li + li {
+  padding-left: clamp(1.4rem, 3vw, 2.8rem);
+  border-left: 1px solid var(--filet);
 }
 
 .raisons--terracotta { --accent: var(--terracotta); }
 .raisons--vert { --accent: var(--vert); }
 .raisons--kaki { --accent: var(--kaki); }
 
-/* Le rang, en gros et en clair, derriere le titre plutot qu'au-dessus : il
-   numerote sans prendre une ligne a lui. Masque aux lecteurs d'ecran, ou il
-   n'ajoute rien au texte qui suit. */
-.raisons__rang {
-  position: absolute;
-  top: .35rem;
-  right: .7rem;
-  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.04em;
-  /* Violet sombre et non la couleur de la carte. Le kaki sur blanc vaut 2,92
-     pour un seuil de 3 : le chiffre echouait, et l opacite n y change rien,
-     un controle de contraste lit la couleur declaree et non l alpha du
-     calque. Ce chiffre est decoratif et porte « aria-hidden », mais on ne
-     construit pas un site sur l argument qu un texte ne compte pas. La
-     couleur de la carte reste sur le bandeau et sur le signe egal, ou elle
-     est graphique. */
-  color: var(--violet-sombre);
-  opacity: .15;
-}
-
-/* Une seule ligne par titre. Le plafond de 15 signes cassait les trois en
-   deux lignes ; la taille descend juste assez pour que le plus long,
-   « On peut etre tres nombreux·ses », tienne dans la largeur d'une carte. */
+/* Le titre prend la couleur de sa colonne. C'est la seule couleur de la
+   colonne : le corps de texte reste au gris du socle, qui tient ses 4,5.
+   19,2 px en graisse 700, et cette taille est un choix de contraste avant
+   d'etre un choix de dessin. Au-dela de 18,66 px en gras, le seuil WCAG passe
+   de 4,5 a 3. Mesures du 10/09 sur les pixels rendus : terracotta 3,62,
+   vert 2,55 a 2,58, kaki 2,14 sur la nappe rosee de 768. La taille sauve le
+   terracotta, les deux autres restent sous le seuil et sont des ecarts
+   assumes, inscrits comme tels dans verif/contraste.mjs. */
 .raisons strong {
-  position: relative;
-  margin-top: .35rem;
-  color: var(--violet-sombre);
-  font-size: clamp(1rem, 1.18vw, 1.13rem);
+  color: var(--accent);
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.24;
   letter-spacing: -.015em;
 }
 
-/* Le signe egal se lit mieux detache que colle aux mots, et il porte la
-   couleur de sa carte : c'est lui l'idee, pas les mots autour. */
-.raisons__egale { color: var(--accent); margin: 0 .1em; }
+/* Le signe egal se detache des mots, il ne s'y colle pas. */
+.raisons__egale { margin: 0 .1em; }
 
-.raisons p { margin: 0; font-size: var(--t-corps); line-height: 1.5; color: var(--texte); }
-
-/* Le titre est coupe a la main en deux lignes, « Les parts sociales » puis
-   « de la Maison Audacieuse ». Le plafond de 18 signes du socle le recoupait
-   en trois. La colonne du duo borne deja sa largeur. */
-#pourquoi .page-tete__titre { max-width: none; }
-
-#pourquoi .page-tete__chapo { margin-top: clamp(.9rem, 1.6vw, 1.4rem); }
+.raisons p { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--texte); }
 
 @media (max-width: 900px) {
   #pourquoi { min-height: 0; display: block; }
   .tete-duo { grid-template-columns: 1fr; }
-  .tete-duo__voir { justify-self: start; width: min(100%, 17rem); }
+  .tete-duo__voir { width: min(100%, 17rem); }
   .tete-duo__voir img { max-height: 20rem; }
-  .raisons { grid-template-columns: 1fr; }
+
+  /* Le filet vertical n'a plus de sens quand les colonnes s'empilent : il
+     devient le filet horizontal des autres listes de la page. */
+  .raisons { grid-template-columns: 1fr; gap: 0; }
+  .raisons > li + li { padding: clamp(1rem, 1.8vw, 1.35rem) 0 0; border-left: 0; border-top: 1px solid var(--filet); }
+  .raisons > li { padding-bottom: clamp(1rem, 1.8vw, 1.35rem); }
+}
+
+
+/* ---------- le deuxieme ecran : le sens ---------- */
+
+/* Disposition reprise de l'ecran 5 de la home, a la demande de Romain le
+   10/09 : le titre en haut a gauche, la phrase d'objectif dessous, le texte
+   qui explique a droite. Meme densite aeree que le premier ecran.
+   La colonne de gauche est plus large que celle de la home (4,2 contre 6,4
+   la-bas) parce que le titre y est trois fois plus long : « Le pari du bien
+   commun » tient en 22 signes, celui-ci en 57. */
+#objectif {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+#objectif > .contenu { width: 100%; }
+
+.objectif__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.2rem, 5vw, 4.6rem);
+  align-items: start;
+}
+
+/* Le plafond de 24 signes du socle couperait ce titre en lignes de deux mots
+   dans une colonne de cette largeur. */
+#objectif .bloc__titre {
+  max-width: 16ch;
+  margin-bottom: 0;
+  font-size: clamp(1.75rem, 2.95vw, 2.6rem);
+}
+
+/* La phrase d'objectif ferme la colonne de gauche, loin sous le titre : c'est
+   le meme decrochage que la chute de l'ecran 5 de la home. Blanc plein et
+   gras, sans surlignage. La zone chaude de cet ecran est dans la colonne de
+   droite, sur le pivot, et la charte n'en autorise qu'une par vue. */
+.objectif__chute {
+  margin-top: clamp(2.4rem, 7vh, 5rem);
+  max-width: 30ch;
+  color: var(--blanc);
+  font-size: clamp(1.12rem, 1.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.34;
+  letter-spacing: -.012em;
+}
+
+/* Le socle interdit le corps de texte sous 1,0625 rem sur les fonds pleins :
+   blanc sur violet vaut 4,7 et ne se rattrape pas en descendant la taille. */
+.objectif__texte {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.2vh, 1.5rem);
+  max-width: 52ch;
+  font-size: clamp(1.0625rem, 1.14vw, 1.18rem);
+  line-height: 1.62;
+}
+
+.objectif__texte p { margin: 0; }
+
+/* Le paragraphe pivot, tout en gras : c'est la seule phrase de l'ecran qui
+   s'adresse au lecteur au lieu de decrire le lieu. */
+.objectif__fort { font-weight: 700; }
+
+.objectif__texte strong { color: var(--blanc); font-weight: 700; }
+
+@media (max-width: 900px) {
+  #objectif { min-height: 0; display: block; }
+  .objectif__grille { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; }
+  #objectif .bloc__titre { max-width: 100%; }
+  .objectif__chute { margin-top: 1.5rem; max-width: 100%; }
 }

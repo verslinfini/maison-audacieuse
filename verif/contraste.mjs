@@ -53,6 +53,20 @@ const ASSUMES = [
     quoi: 'vert de la charte sur du texte, arbitrage de Romain du 09/09/2026',
     test: (p) => p.couleur === 'rgb(94, 158, 133)',
   },
+  {
+    // 10/09/2026, meme principe applique au traitement retenu pour les trois
+    // raisons de /part-sociale/ : le titre de chaque colonne prend la couleur
+    // de sa colonne, terracotta, vert et kaki. La taille est montee a 19,2 px
+    // en graisse 700 pour passer au palier « texte large » de WCAG, ou le
+    // seuil tombe de 4,5 a 3 ; cela suffit au terracotta (3,62) et pas aux
+    // deux autres. Mesures du 10/09 sur les pixels rendus, a 1440 : kaki 2,66,
+    // vert 2,90 a 2,95 ; a 768, sur la nappe rosee du fond, kaki 2,18.
+    // Le kaki attend une confirmation de Romain, a qui la mesure a ete donnee
+    // avec une alternative : la troisieme colonne au violet #766DA0, couleur
+    // de charte prevue pour les titres, qui tiendrait le seuil.
+    quoi: 'kaki de la charte sur les titres des trois raisons, en attente de confirmation',
+    test: (p) => p.couleur === 'rgb(157, 150, 105)',
+  },
 ];
 
 import { createRequire } from 'node:module';

@@ -17,7 +17,7 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 | | Section | Fond | La question à laquelle elle répond |
 |---|---|---|---|
 | **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
-| | 2. Un lieu qui appartient à celles et ceux qui l'utilisent | `bloc--violet` | pour quoi faire |
+| | 2. Réunir le plus de monde possible pour créer un bien commun | `bloc--violet` | pourquoi moi |
 | **QUOI** | 3. Une part, c'est un petit morceau de la coopérative | `bloc--blanc` | c'est quoi, concrètement |
 | | 4. 100 €, une voix | `bloc--terracotta` | combien, et est-ce que je le reperds |
 | | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
@@ -53,16 +53,45 @@ Ici, nous sommes tous à égalité.
 **On peut être très nombreux·ses.** Et c'est ça le but. Plus il y a de monde autour de la table, plus
 le lieu ressemble à ce que les gens veulent vraiment.
 
-### 2. Un lieu qui appartient à celles et ceux qui l'utilisent
+### 2. Réunir le plus de monde possible pour créer un bien commun
 
-Notre objectif est simple : **réunir le plus de monde possible pour créer un bien commun**.
-*(en jaune sur le fond violet)*
+Réécrit le 10/09. La version précédente définissait le bien commun, et cette définition redisait trois
+choses déjà dites ailleurs : les logiques marchandes sont le sujet de l'écran 5 de la home, « on peut
+tou·tes décider » est la raison 2 de l'écran précédent, « plus nous sommes nombreux·ses » est la
+raison 3. Une seule idée sur cinq appartenait à cet écran en propre.
+Il porte maintenant ce qu'aucun autre écran du site ne porte : pourquoi on demande cet argent à des
+habitants et pas à des investisseurs. Disposition reprise de l'écran 5 de la home, à la demande de
+Romain : titre à gauche, phrase d'objectif dessous, texte explicatif à droite.
 
-Un bien commun, ce n'est pas un lieu qu'on vous prête. C'est un lieu qui sort des logiques marchandes,
-où on peut tou·tes décider, et que personne ne pourra jamais revendre.
+**Titre**, colonne de gauche :
+Réunir le plus de monde possible pour créer un bien commun
 
-Plus nous sommes nombreux·ses à en détenir un morceau, moins ce lieu dépend d'une poignée de personnes,
-et plus il ressemble à ce qu'en attendent celles et ceux qui s'en servent.
+**Phrase d'objectif**, sous le titre, en blanc gras, sans surlignage :
+Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui l'utilisent.
+
+**Colonne de droite :**
+
+Un bien commun appartient au collectif qui s'en sert. La Maison Audacieuse restera à celles et ceux
+qui la font vivre. Personne ne pourra jamais la revendre.
+
+Le lieu bouscule les inégalités de genre et il expérimente de nouvelles manières de vivre ensemble.
+La première tient dans la façon dont il se finance : par le nombre.
+
+*(paragraphe pivot, tout en gras)* Un lieu ressemble à celles et ceux qui le financent. Un investisseur
+attend une contrepartie et il l'obtient. Celui-ci, **nous vous le devrons**.
+*(« nous vous le devrons » surligné au marqueur jaune, seule zone chaude de l'écran)*
+
+Le territoire compte déjà beaucoup de projets marchands alors qu'il manque des endroits où des inconnus
+décident ensemble, où l'on se soigne, où l'on se loge et où l'on se rencontre sans rien vendre.
+**Chaque part sociale en construit un.**
+
+Ce qui a été écarté de la matière du 10/09, et pourquoi : le capitalisme, le fascisme, la surveillance
+et le totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. La Ville d'Annecy
+est bailleur emphytéotique et candidate au capital, l'instructeur ESUS lit le site, la presse aussi.
+Une page qui demande de l'argent et qui dénonce le fascisme se fait renvoyer à sa dénonciation. La
+charge politique passe donc par ce que le lieu fait, jamais par ce qu'il dénonce, ce qui est aussi la
+règle de la voix de Romain sur LinkedIn : il dit ce qu'il a fait, jamais ce qu'il est, et la critique
+vise un système, jamais une personne.
 
 ### 3. Une part, c'est un petit morceau de la coopérative
 
