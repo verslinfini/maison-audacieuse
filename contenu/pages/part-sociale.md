@@ -16,10 +16,10 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 
 | | Section | Fond | La question à laquelle elle répond |
 |---|---|---|---|
-| **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--aube` | pourquoi une coopérative |
-| | 2. Un lieu qui appartient à celles et ceux qui s'en servent | `bloc--claire` | pour quoi faire |
+| **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
+| | 2. Un lieu qui appartient à celles et ceux qui l'utilisent | `bloc--violet` | pour quoi faire |
 | **QUOI** | 3. Une part, c'est un petit morceau de la coopérative | `bloc--blanc` | c'est quoi, concrètement |
-| | 4. 100 €, une voix | `bloc--violet` | combien, et est-ce que je le reperds |
+| | 4. 100 €, une voix | `bloc--terracotta` | combien, et est-ce que je le reperds |
 | | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
 | **COMMENT** | 6. Concrètement, comment ça marche | `bloc--nappe` | qu'est-ce que je fais, dans quel ordre |
 | | 7. Vous vous impliquez autant que vous voulez | `bloc--blanc` | jusqu'où ça m'engage |
@@ -35,8 +35,13 @@ on referme l'onglet. L'objectif se détache par la taille du texte, pas par un d
 
 ### 1. Les parts sociales de la Maison Audacieuse
 
-Pour porter ce projet, il fallait choisir une forme juridique. Le choix était évident avant même qu'on
-ait besoin d'en parler : **la coopérative**. C'est celle qui colle le plus avec nos valeurs.
+Pour porter ce projet, il fallait choisir une forme juridique.
+Nous avons choisi l'évidence : **la coopérative.**
+**Car c'est celle qui colle le plus avec nos valeurs.**
+
+*Trois lignes, la troisième en gras. « la coopérative. » est surlignée au feutre jaune, point compris.
+Une photo debout à droite, penchée. Les trois raisons en cartes, chacune avec sa couleur de charte en
+bandeau. L'écran tient une fenêtre entière, en 1440 x 900 comme en 1280 x 720.*
 
 **Personne ne s'enrichit.** Une part vaut 100 € le premier jour et 100 € vingt ans plus tard. Elle ne
 prend pas de valeur avec le temps.
@@ -47,7 +52,7 @@ Ici, nous sommes tous à égalité.
 **On peut être très nombreux·ses.** Et c'est ça le but. Plus il y a de monde autour de la table, plus
 le lieu ressemble à ce que les gens veulent vraiment.
 
-### 2. Un lieu qui appartient à celles et ceux qui s'en servent
+### 2. Un lieu qui appartient à celles et ceux qui l'utilisent
 
 Notre objectif est simple : réunir le plus de monde possible pour créer un bien commun.
 

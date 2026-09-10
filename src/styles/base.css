@@ -1502,7 +1502,25 @@ h2 .marqueur::before {
 .bloc--claire > .grain__voile,
 .bloc--nappe > .grain__voile,
 .bloc--ouvert > .grain__voile,
-.page-tete--aube > .grain__voile {
+/* Deuxieme ambiance de tete de page. « --aube » reprend exactement la recette
+   du heros de la page d'accueil, menthe en haut a gauche, terracotta au bord
+   droit, lavande en bas, centre blanc sur violace : deux pages qui la
+   partagent s'ouvrent sur le meme ecran, et l'on ne sent pas qu'on a change
+   de page. « --midi » prend les trois autres couleurs de la charte, jaune en
+   haut a droite, vert dilue a gauche, terracotta en bas a gauche, sur blanc.
+   Meme charte, autre heure du jour. */
+.page-tete--midi {
+  background:
+    radial-gradient(62% 56% at 98% 2%, rgba(255,243,168,.92), rgba(255,243,168,0) 62%),
+    radial-gradient(54% 66% at -8% 34%, rgba(94,158,133,.42), rgba(94,158,133,0) 64%),
+    radial-gradient(66% 52% at 16% 106%, rgba(163,113,106,.40), rgba(163,113,106,0) 66%),
+    radial-gradient(38% 40% at 74% 96%, rgba(157,150,105,.26), rgba(157,150,105,0) 68%),
+    radial-gradient(50% 46% at 46% 46%, rgba(255,255,255,.88), rgba(255,255,255,0) 72%),
+    var(--blanc);
+}
+
+.page-tete--aube > .grain__voile,
+.page-tete--midi > .grain__voile {
   background-image: var(--grain-couleur);
   background-size: 240px 240px;
   opacity: .18;

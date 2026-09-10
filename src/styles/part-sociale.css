@@ -255,70 +255,130 @@
 /* ---------- le premier ecran ---------- */
 
 /* L'ecran tient toute la hauteur visible. Sans cela, le haut du bloc suivant
-   apparait sous les trois raisons, l'oeil y va, et la troisieme raison n'est
-   jamais lue. « svh » et non « vh » : sur mobile, « vh » compte la barre
-   d'adresse comme si elle n'existait pas. */
+   apparait sous les trois cartes, l'oeil y va, et la troisieme n'est jamais
+   lue. C'est un ecran et un seul : « on a choisi la forme cooperative, et
+   voici pourquoi ». « svh » et non « vh » : sur mobile, « vh » compte la
+   barre d'adresse comme si elle n'existait pas. */
 #pourquoi {
   min-height: 100svh;
   display: flex;
   align-items: center;
+  padding-top: calc(var(--h-entete) + clamp(.9rem, 2.4vh, 2rem));
+  padding-bottom: clamp(1.2rem, 3vh, 2.4rem);
 }
 
-/* Le titre et le chapo a gauche, l'image a droite. Le texte reste premier
-   dans le HTML, donc premier au clavier et a la lecture d'ecran. */
+/* Le titre et le chapo a gauche, la photo debout a droite. Le texte reste
+   premier dans le HTML, donc premier au clavier et a la lecture d'ecran. */
 .tete-duo {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: clamp(1.8rem, 4vw, 3.6rem);
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(1.8rem, 4vw, 3.4rem);
   align-items: center;
 }
 
-.tete-duo__voir img { max-height: none; aspect-ratio: 7 / 5; object-fit: cover; }
+.tete-duo__voir { margin: 0; justify-self: end; width: min(100%, 20rem); }
 
-/* Trois raisons qui pesent pareil, donc trois colonnes et non une liste
-   verticale : une liste se lit comme un classement. Le rang reste ecrit, il
-   aide a compter, mais il est masque aux lecteurs d'ecran, ou il n'ajoute
-   rien au texte qui suit. */
+/* Photo debout. Le plafond de 268 px du socle est calibre sur une vignette
+   couchee : une image verticale s'y ecrase en bandeau. Elle prend ici la
+   hauteur que l'ecran lui laisse, et pas un pixel de plus, sinon le premier
+   ecran deborde et les cartes passent sous la ligne de flottaison. */
+.tete-duo__voir img {
+  max-height: min(42vh, 24rem);
+  aspect-ratio: 5 / 7;
+  object-position: 50% 42%;
+  transform: rotate(1.6deg);
+}
+
+.tete-duo__voir figcaption { text-align: left; }
+
+/* Trois raisons qui pesent pareil, donc trois cartes de meme taille et non
+   une liste verticale : une liste se lit comme un classement. Chacune porte
+   sa couleur de charte, en bandeau et sur son rang : c'est la seule facon de
+   donner trois accents differents sans ecrire trois fois la meme carte. */
 .raisons {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.4rem, 3vw, 2.8rem);
-  margin-top: clamp(2rem, 4.5vh, 3.4rem);
-  padding-top: clamp(1.6rem, 3vw, 2.4rem);
-  border-top: 1px solid var(--filet);
+  gap: clamp(1rem, 1.8vw, 1.6rem);
+  margin-top: clamp(1.3rem, 3vh, 2.4rem);
 }
 
-.raisons > li { display: flex; flex-direction: column; gap: .45rem; }
+.raisons > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: clamp(1.1rem, 1.8vw, 1.6rem);
+  border-radius: 12px;
+  background: var(--blanc);
+  box-shadow: 0 14px 34px rgba(56, 54, 72, .10);
+  overflow: hidden;
+}
 
+/* Le bandeau de couleur en tete de carte. Trait purement graphique : il ne
+   porte aucun texte, donc aucun seuil de contraste ne s'y applique, et le
+   vert de la charte peut y servir alors qu'il ne peut pas porter un mot. */
+.raisons > li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--accent);
+}
+
+.raisons--terracotta { --accent: var(--terracotta); }
+.raisons--vert { --accent: var(--vert); }
+.raisons--kaki { --accent: var(--kaki); }
+
+/* Le rang, en gros et en clair, derriere le titre plutot qu'au-dessus : il
+   numerote sans prendre une ligne a lui. Masque aux lecteurs d'ecran, ou il
+   n'ajoute rien au texte qui suit. */
 .raisons__rang {
-  font-size: var(--t-petit);
+  position: absolute;
+  top: .35rem;
+  right: .7rem;
+  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
   font-weight: 700;
-  letter-spacing: .08em;
-  color: var(--terracotta);
+  line-height: 1;
+  letter-spacing: -.04em;
+  /* Violet sombre et non la couleur de la carte. Le kaki sur blanc vaut 2,92
+     pour un seuil de 3 : le chiffre echouait, et l opacite n y change rien,
+     un controle de contraste lit la couleur declaree et non l alpha du
+     calque. Ce chiffre est decoratif et porte « aria-hidden », mais on ne
+     construit pas un site sur l argument qu un texte ne compte pas. La
+     couleur de la carte reste sur le bandeau et sur le signe egal, ou elle
+     est graphique. */
+  color: var(--violet-sombre);
+  opacity: .15;
 }
 
 .raisons strong {
+  position: relative;
+  margin-top: .35rem;
+  max-width: 15ch;
   color: var(--violet-sombre);
-  font-size: 1.2rem;
+  font-size: clamp(1.12rem, 1.4vw, 1.28rem);
   font-weight: 700;
-  line-height: 1.24;
-  letter-spacing: -.01em;
+  line-height: 1.2;
+  letter-spacing: -.015em;
 }
 
-/* Le signe egal se lit mieux detache que colle aux mots. */
-.raisons__egale { margin: 0 .12em; font-weight: 700; }
+/* Le signe egal se lit mieux detache que colle aux mots, et il porte la
+   couleur de sa carte : c'est lui l'idee, pas les mots autour. */
+.raisons__egale { color: var(--accent); margin: 0 .1em; }
 
-.raisons p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
-
-@media (max-width: 900px) {
-  #pourquoi { min-height: 0; }
-  .tete-duo { grid-template-columns: 1fr; }
-  .raisons { grid-template-columns: 1fr; gap: 1.2rem; }
-  .raisons > li { padding-bottom: 1.2rem; border-bottom: 1px solid var(--filet); }
-  .raisons > li:last-child { padding-bottom: 0; border-bottom: 0; }
-}
+.raisons p { margin: 0; font-size: var(--t-corps); line-height: 1.5; color: var(--texte); }
 
 /* Le titre est coupe a la main en deux lignes, « Les parts sociales » puis
    « de la Maison Audacieuse ». Le plafond de 18 signes du socle le recoupait
    en trois. La colonne du duo borne deja sa largeur. */
 #pourquoi .page-tete__titre { max-width: none; }
+
+#pourquoi .page-tete__chapo { margin-top: clamp(.9rem, 1.6vw, 1.4rem); }
+
+@media (max-width: 900px) {
+  #pourquoi { min-height: 0; display: block; }
+  .tete-duo { grid-template-columns: 1fr; }
+  .tete-duo__voir { justify-self: start; width: min(100%, 17rem); }
+  .tete-duo__voir img { max-height: 20rem; }
+  .raisons { grid-template-columns: 1fr; }
+}
