@@ -493,6 +493,21 @@
 
 @media (max-width: 900px) {
   #objectif { min-height: 0; display: block; }
+
+  /* A 375, les nappes du fond violet remontent une zone claire sous la
+     colonne de texte, rgb(133,123,141) mesure le 10/09, et le blanc y tombe a
+     4,03 pour un seuil de 4,5. Les nappes sont posees en pourcentage : la
+     composition n'est pas la meme a 375 qu'a 1440, ou le meme texte tient
+     largement son seuil. Un voile sombre pose a cette seule largeur rend le
+     seuil sans toucher au rendu du grand ecran. Il passe sous « .contenu »,
+     qui est en z-index 1. */
+  #objectif::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(56, 54, 72, .18);
+    pointer-events: none;
+  }
   .objectif__grille { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; }
   #objectif .bloc__titre { max-width: 100%; }
   .objectif__chute { margin-top: 1.5rem; max-width: 100%; }
