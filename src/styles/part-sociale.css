@@ -271,12 +271,14 @@
    premier dans le HTML, donc premier au clavier et a la lecture d'ecran. */
 .tete-duo {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
   gap: clamp(1.8rem, 4vw, 3.4rem);
   align-items: center;
 }
 
-.tete-duo__voir { margin: 0; justify-self: end; width: min(100%, 20rem); }
+/* L'image ne colle ni a l'entete ni au bord droit : elle descend de la
+   hauteur d'une ligne et rentre d'un demi-pouce dans la page. */
+.tete-duo__voir { margin: clamp(1.2rem, 4vh, 2.6rem) 0 0; justify-self: end; margin-right: clamp(0px, 2.5vw, 2.6rem); width: min(100%, 19rem); }
 
 /* Photo debout. Le plafond de 268 px du socle est calibre sur une vignette
    couchee : une image verticale s'y ecrase en bandeau. Elle prend ici la
@@ -351,12 +353,14 @@
   opacity: .15;
 }
 
+/* Une seule ligne par titre. Le plafond de 15 signes cassait les trois en
+   deux lignes ; la taille descend juste assez pour que le plus long,
+   « On peut etre tres nombreux·ses », tienne dans la largeur d'une carte. */
 .raisons strong {
   position: relative;
   margin-top: .35rem;
-  max-width: 15ch;
   color: var(--violet-sombre);
-  font-size: clamp(1.12rem, 1.4vw, 1.28rem);
+  font-size: clamp(1rem, 1.18vw, 1.13rem);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -.015em;

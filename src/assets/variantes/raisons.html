@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cinq traitements des trois raisons — La Maison Audacieuse</title>
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/part-sociale.css">
+<style>
+/* ==================================================================
+   SIMULATEUR. Cinq traitements des trois raisons du premier ecran de
+   « part-sociale », dans leur contexte reel : meme entete, meme fond,
+   meme titre, meme photo. On compare des ecrans, pas des vignettes.
+
+   Le contenu est identique dans les cinq. Seule la mise en forme change.
+   Rien ici n'est en ligne : cette page vit dans « src/assets/variantes/ »
+   et ne figure ni au menu, ni au plan du site, ni aux controles.
+   ================================================================== */
+
+.pilote {
+  position: fixed;
+  z-index: 60;
+  left: 1.1rem;
+  top: calc(var(--h-entete) + .5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem .6rem;
+  border-radius: 999px;
+  background: rgba(31, 29, 45, .93);
+  box-shadow: 0 14px 40px rgba(31, 29, 45, .3);
+}
+
+.pilote b {
+  padding: 0 .55rem 0 .35rem;
+  color: rgba(255, 255, 255, .5);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pilote button {
+  appearance: none;
+  min-height: 36px;
+  padding: 0 .85rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pilote button:hover { background: rgba(255, 255, 255, .2); }
+.pilote button[aria-pressed="true"] { background: #FFF3A8; color: #383648; font-weight: 700; }
+.pilote .sep { width: 1px; height: 24px; background: rgba(255, 255, 255, .2); margin: 0 .25rem; }
+
+.etiquette {
+  position: fixed;
+  z-index: 60;
+  bottom: 1.1rem;
+  right: 1.1rem;
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  background: rgba(31, 29, 45, .9);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+/* On n'affiche que la variante choisie. */
+.jeu { display: none; }
+.jeu-marge { margin-top: clamp(1.3rem, 3vh, 2.4rem); }
+body[data-jeu="a"] #jeu-a,
+body[data-jeu="b"] #jeu-b,
+body[data-jeu="c"] #jeu-c,
+body[data-jeu="d"] #jeu-d,
+body[data-jeu="e"] #jeu-e { display: block; }
+
+/* Le titre en deux ou en trois lignes. */
+body[data-titre="3"] .titre-2 { display: none; }
+body[data-titre="2"] .titre-3 { display: none; }
+body[data-titre="2"] .page-tete__titre { font-size: clamp(2.1rem, 3.5vw, 3.15rem); }
+
+/* ---------------------------------------------------------------
+   B. MANCHETTE. Aucun cadre. Un trait epais de couleur au-dessus de
+   chaque colonne, comme la manchette d'un journal, puis le titre, puis
+   le texte. Le vocabulaire est celui de la presse ecrite : c'est ce
+   qui l'eloigne le plus du bloc a ombre portee.
+   --------------------------------------------------------------- */
+.manchette { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.4rem, 3vw, 3rem); }
+.manchette > li { display: flex; flex-direction: column; gap: .5rem; padding-top: .9rem; border-top: 4px solid var(--accent); }
+.manchette strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
+.manchette p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
+.manchette .eg { color: var(--accent); }
+
+/* ---------------------------------------------------------------
+   C. CHIFFRES MANUSCRITS. Le rang est ecrit a la main, en Meow Script,
+   la police d'accent de la charte, qui ne sert presque nulle part sur
+   le site. Pas de cadre, un filet fin entre les colonnes. C'est le
+   geste le plus fait main des cinq, et le seul qui ne pourrait pas
+   sortir d'un gabarit.
+   --------------------------------------------------------------- */
+.plume { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.6rem, 3.4vw, 3.2rem); }
+.plume > li { position: relative; display: flex; flex-direction: column; gap: .5rem; padding-left: clamp(2.6rem, 4vw, 3.6rem); }
+.plume > li + li { border-left: 1px solid var(--filet); padding-left: clamp(3.2rem, 5vw, 4.6rem); }
+.plume__rang {
+  position: absolute;
+  left: clamp(-.2rem, .6vw, .6rem);
+  top: -.9rem;
+  font-family: "Meow Script", "Onest", cursive;
+  font-size: clamp(3rem, 4.6vw, 4.4rem);
+  line-height: 1;
+  color: var(--accent);
+  transform: rotate(-9deg);
+}
+.plume > li + li .plume__rang { left: clamp(.6rem, 1.4vw, 1.4rem); }
+.plume strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
+.plume p { margin: 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
+.plume .eg { color: var(--accent); }
+
+/* ---------------------------------------------------------------
+   D. UNE SEULE BANDE. Les trois raisons ne sont plus trois objets mais
+   trois temps d'un meme bloc, sur le violet plein, separes par des
+   filets clairs. Repond a « ca fait trois boites » en supprimant les
+   boites.
+   --------------------------------------------------------------- */
+.bande {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 78% at 76% 44%, rgba(108,107,172,.78), rgba(108,107,172,0) 70%),
+    radial-gradient(64% 74% at 24% 60%, rgba(131,109,150,.70), rgba(131,109,150,0) 72%),
+    linear-gradient(rgba(56,54,72,.30), rgba(56,54,72,.30)),
+    #766DA0;
+}
+.bande > li { display: flex; flex-direction: column; gap: .5rem; padding: clamp(1.3rem, 2.2vw, 1.9rem); }
+.bande > li + li { border-left: 1px solid rgba(255, 255, 255, .22); }
+.bande__rang { color: var(--jaune); font-size: .8rem; font-weight: 700; letter-spacing: .14em; }
+.bande strong { color: #fff; font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
+.bande p { margin: 0; font-size: var(--t-corps); line-height: 1.5; color: rgba(255, 255, 255, .92); }
+.bande .eg { color: var(--jaune); }
+
+/* ---------------------------------------------------------------
+   E. LE CHIFFRE PORTE LE TEXTE. Un tres grand chiffre en couleur
+   pleine a gauche, le texte cale contre lui. Aucun cadre, aucune
+   ombre, rien que du rapport de taille. C'est le plus graphique des
+   cinq et le plus sec.
+   --------------------------------------------------------------- */
+.compte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.4rem, 3vw, 2.8rem); }
+.compte > li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .1rem clamp(.7rem, 1.2vw, 1.1rem); align-items: start; }
+.compte__rang {
+  grid-row: 1 / span 2;
+  font-size: clamp(2.8rem, 4.4vw, 4.2rem);
+  font-weight: 700;
+  line-height: .82;
+  letter-spacing: -.06em;
+  color: var(--accent);
+}
+.compte strong { color: var(--violet-sombre); font-size: clamp(1.05rem, 1.3vw, 1.24rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
+.compte p { margin: .35rem 0 0; font-size: var(--t-corps); line-height: 1.55; color: var(--texte); }
+.compte .eg { color: var(--accent); }
+
+.acc-1 { --accent: #A3716A; }
+.acc-2 { --accent: #5E9E85; }
+.acc-3 { --accent: #9D9669; }
+
+@media (max-width: 900px) {
+  .manchette, .plume, .bande, .compte { grid-template-columns: 1fr; }
+  .plume > li + li { border-left: 0; border-top: 1px solid var(--filet); padding-top: 2.2rem; }
+  .bande > li + li { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .22); }
+  .pilote { position: static; transform: none; margin: 1rem; }
+}
+</style>
+</head>
+<body data-jeu="a" data-titre="3">
+
+<header class="entete" id="entete">
+  <div class="entete__inner">
+    <a class="logo" href="/"><img src="/assets/logo/lma.svg" alt="La Maison Audacieuse" width="3576" height="1099"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/le-projet-architectural/">Le lieu</a></li>
+        <li><a href="/le-modele-economique/">Le projet</a></li>
+        <li><a class="est-ici" aria-current="page" href="/part-sociale/">La part sociale</a></li>
+        <li><a href="/lequipe-projet/">L'équipe</a></li>
+        <li><a href="/les-medias/">Médias</a></li>
+        <li><a href="/contacts/">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="bouton bouton--primaire entete__cta" href="/prendre-part/">Je prends ma part</a>
+  </div>
+</header>
+
+<p class="etiquette" id="etiquette">A · cartes</p>
+
+<main>
+  <section class="page-tete page-tete--midi" id="pourquoi">
+    <div class="grain__voile" aria-hidden="true"></div>
+    <div class="contenu">
+      <div class="tete-duo">
+        <div class="tete-duo__dire">
+          <h1 class="page-tete__titre"><span class="titre-3">Les parts sociales<br>de la Maison Audacieuse</span><span class="titre-2">Les parts sociales<br>de la Maison Audacieuse</span></h1>
+          <p class="page-tete__chapo">Pour porter ce projet, il fallait choisir une forme juridique.<br>
+            Nous avons choisi l'évidence&nbsp;: <span class="marqueur marqueur--3"><strong>la coopérative.</strong></span><br>
+            <strong>Car c'est celle qui colle le plus avec nos valeurs.</strong></p>
+        </div>
+        <figure class="figure tete-duo__voir">
+          <img src="/assets/img/collectif-provisoire.webp" alt="Six femmes assises sur un escalier peint de couleurs vives, elles rient ensemble" width="1000" height="1400">
+          <figcaption>À remplacer par une photo du collectif</figcaption>
+        </figure>
+      </div>
+
+      <div class="jeu" id="jeu-a">
+        <ul class="raisons">
+          <li class="raisons--terracotta">
+            <span class="raisons__rang" aria-hidden="true">01</span>
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="raisons--vert">
+            <span class="raisons__rang" aria-hidden="true">02</span>
+            <strong>Une personne <span class="raisons__egale">=</span> une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="raisons--kaki">
+            <span class="raisons__rang" aria-hidden="true">03</span>
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="jeu" id="jeu-b">
+        <ul class="manchette jeu-marge">
+          <li class="acc-1">
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="jeu" id="jeu-c">
+        <ul class="plume jeu-marge">
+          <li class="acc-1">
+            <span class="plume__rang" aria-hidden="true">1</span>
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <span class="plume__rang" aria-hidden="true">2</span>
+            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <span class="plume__rang" aria-hidden="true">3</span>
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="jeu" id="jeu-d">
+        <ul class="bande jeu-marge">
+          <li>
+            <span class="bande__rang" aria-hidden="true">01</span>
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li>
+            <span class="bande__rang" aria-hidden="true">02</span>
+            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li>
+            <span class="bande__rang" aria-hidden="true">03</span>
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="jeu" id="jeu-e">
+        <ul class="compte jeu-marge">
+          <li class="acc-1">
+            <span class="compte__rang" aria-hidden="true">1</span>
+            <strong>Personne ne s'enrichit</strong>
+            <p>Une part vaut 100&nbsp;€ le premier jour et 100&nbsp;€ vingt ans plus tard. Elle ne prend pas de valeur avec le temps.</p>
+          </li>
+          <li class="acc-2">
+            <span class="compte__rang" aria-hidden="true">2</span>
+            <strong>Une personne <span class="eg">=</span> une voix</strong>
+            <p>Ailleurs, c'est celui qui met le plus d'argent qui a le plus de pouvoir. Ici, nous sommes toutes et tous à égalité.</p>
+          </li>
+          <li class="acc-3">
+            <span class="compte__rang" aria-hidden="true">3</span>
+            <strong>On peut être très nombreux·ses</strong>
+            <p>Et c'est ça le but. Plus il y a de monde autour de la table, plus le lieu ressemble vraiment à ce que les gens veulent.</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<div class="pilote" role="group" aria-label="Choisir un traitement">
+  <b>Cadres</b>
+  <button type="button" data-jeu="a" aria-pressed="true">A cartes</button>
+  <button type="button" data-jeu="b" aria-pressed="false">B manchette</button>
+  <button type="button" data-jeu="c" aria-pressed="false">C manuscrit</button>
+  <button type="button" data-jeu="d" aria-pressed="false">D une bande</button>
+  <button type="button" data-jeu="e" aria-pressed="false">E chiffres</button>
+  <span class="sep"></span>
+  <b>Titre</b>
+  <button type="button" data-titre="3" aria-pressed="true">3 lignes</button>
+  <button type="button" data-titre="2" aria-pressed="false">2 lignes</button>
+</div>
+
+<script>
+const NOMS = {
+  a: 'A · cartes',
+  b: 'B · manchette, aucun cadre',
+  c: 'C · chiffres manuscrits, Meow Script',
+  d: 'D · une seule bande violette',
+  e: 'E · le chiffre porte le texte',
+};
+const ORDRE = ['a', 'b', 'c', 'd', 'e'];
+const etiquette = document.getElementById('etiquette');
+
+function poser(attr, valeur) {
+  document.body.dataset[attr] = valeur;
+  for (const b of document.querySelectorAll(`.pilote button[data-${attr}]`)) {
+    b.setAttribute('aria-pressed', String(b.dataset[attr] === valeur));
+  }
+  if (attr === 'jeu') etiquette.textContent = NOMS[valeur];
+}
+
+for (const b of document.querySelectorAll('.pilote button')) {
+  b.addEventListener('click', () => {
+    if (b.dataset.jeu) poser('jeu', b.dataset.jeu);
+    if (b.dataset.titre) poser('titre', b.dataset.titre);
+  });
+}
+
+// Fleches gauche et droite : on passe d'un traitement au suivant sans viser
+// un bouton. C'est la facon dont on compare vraiment, en aller-retour.
+addEventListener('keydown', (e) => {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  const i = ORDRE.indexOf(document.body.dataset.jeu);
+  const n = (i + (e.key === 'ArrowRight' ? 1 : ORDRE.length - 1)) % ORDRE.length;
+  poser('jeu', ORDRE[n]);
+});
+</script>
+
+</body>
+</html>
