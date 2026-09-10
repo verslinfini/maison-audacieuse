@@ -478,13 +478,11 @@
    s'adresse au lecteur au lieu de decrire le lieu. */
 .objectif__fort { font-weight: 700; }
 
-/* Le surlignage ne se coupe jamais en deux. Coupe, il laisse un ou deux mots
-   surlignes seuls sur la ligne suivante, ce qui se lit comme une erreur
-   d'impression. Insecable, il bascule entier a la ligne d'apres : la premiere
-   ligne se termine sur « mais » et la formule tient d'un seul tenant.
-   A verifier a la passe responsive : le segment mesure 276 px pour 335 px de
-   colonne a 375, la marge est mince. */
-.objectif__fort .marqueur { white-space: nowrap; }
+/* Le surlignage de la chute se coupe librement sur deux lignes : sur une
+   phrase de cette taille, deux traces de marqueur l'un sous l'autre se lisent
+   comme un geste de la main, pas comme une erreur. Arbitrage de Romain du
+   10/09. La regle « insecable » posee le matin ne valait que pour un
+   surlignage noye dans du corps de texte. */
 
 .objectif__texte strong { color: var(--blanc); font-weight: 700; }
 

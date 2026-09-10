@@ -62,33 +62,36 @@ expliquent déjà quelque chose ; celui-ci doit faire ressentir.
 L'objection qu'il traite, et que rien d'autre sur le site ne traite : « mes 100 €, ça ne changera
 rien ». C'est la première objection de tout souscripteur citoyen. La phrase de Romain la retourne.
 
-**Titre**, colonne de gauche, revenu à la formulation du 09/09 :
+**Titre**, colonne de gauche :
 Réunir le plus de monde possible pour créer un bien commun
 
-**Phrase d'objectif**, italique graisse 500, réglage de l'écran 5 de la home :
-Notre objectif est simple : créer un lieu qui appartient à celles et ceux qui l'utilisent.
+**Phrase de gauche**, italique graisse 500, réglage de l'écran 5 de la home :
+L'argent compte pour que le projet existe, **mais le nombre compte encore plus.**
+*(« mais le nombre compte encore plus. » surligné au marqueur jaune, coupé librement sur deux lignes)*
 
 **Colonne de droite :**
 
-Un bien commun est au service de l'intérêt général. Il se partage, se gère et se protège collectivement.
+Un bien commun est au service de l'intérêt général.
+Il se partage, se gère et se protège collectivement.
 
-Nous avons signé avec la Ville d'Annecy une promesse de bail de 99 ans. Ce lieu va donc durer plus
-longtemps que celles et ceux qui le lancent aujourd'hui. C'est pourquoi nous cherchons à réunir autour
-du projet le plus grand nombre de personnes qui partagent nos valeurs et qui veulent voir un tel lieu
-exister sur le territoire.
+La Ville d'Annecy nous met le bâtiment à disposition pour 99 ans. Ce projet va donc durer plus
+longtemps que celles et ceux qui le lancent aujourd'hui. C'est pourquoi nous cherchons à réunir le plus
+grand nombre de personnes qui partagent nos valeurs et qui veulent voir un tel lieu exister sur le
+territoire, pour qu'il perdure bien longtemps après nous.
 
-*(paragraphe pivot, tout en gras)* L'argent compte pour que le projet existe, mais **le nombre compte
-encore plus.** *(retour à la ligne)* Parce qu'il montre que celui-ci répond à une attente réelle.
-*(« le nombre compte encore plus. » surligné au marqueur jaune, point compris, et rendu insécable pour
-qu'il ne se coupe jamais en deux ; seule zone chaude de l'écran)*
+Ce nombre montre que le projet répond à une attente réelle des habitants. Chaque personne qui prend une
+part le rend plus solide devant la banque, les financeurs et les institutions. Un projet que trois
+mille personnes portent ne se discute plus de la même façon.
 
-Chaque personne qui prend une part rend le projet plus solide devant la banque, les financeurs et les
-institutions.
-
-Deux phrases retirées à la relecture de Romain du 10/09 : « Un lieu détenu par une multitude ne dépend
-de personne en particulier, alors il traverse le temps » (le lecteur le comprend seul) et « Elle
-rapproche aussi le lieu de celles et ceux qui s'en serviront ». Le mot « lieu » passe de six occurrences
-à deux, en alternant avec « projet ».
+Arbitrage du 10/09 au soir, sur une question posée par Romain. La colonne de gauche portait deux
+phrases qui disaient la même chose, « réunir du monde pour créer un bien commun » et « créer un lieu
+qui appartient à celles et ceux qui l'utilisent ». Pendant ce temps la phrase la plus forte de l'écran,
+le renversement argent / nombre, était enterrée au milieu du texte de droite.
+Sur un écran à deux colonnes, la gauche porte le message et la droite l'argumentation. Le renversement
+monte donc à gauche et « Notre objectif est simple » disparaît, le titre disant déjà l'objectif. La
+colonne de droite devient autonome : « Parce qu'il montre que » ne pouvait plus ouvrir un paragraphe
+dont l'antécédent est passé dans l'autre colonne, la phrase se referme sur « Ce nombre montre que ».
+Retour à la version précédente en un revert si l'arbitrage ne tient pas.
 
 Une correction de fait sur la dictée de Romain : elle disait « nous avons signé un bail de 99 ans avec
 la mairie d'Annecy ». C'est une promesse de bail, le bail lui-même vient après le permis.
