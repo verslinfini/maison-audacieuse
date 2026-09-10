@@ -671,7 +671,12 @@ h2 .marqueur::before {
    au lieu de souligner, d'ou cette variante qui ne joue que sur la couleur.
    Sur fond clair elle retombe sur le violet, jamais sur le jaune, qui ne
    tiendrait aucun seuil de contraste sur du blanc. */
-.souligne-jaune { color: var(--violet); font-weight: 600; }
+/* Graisse 700 et non 600 : sur le violet plein, le jaune de la charte vaut
+   4,48 et ce membre de phrase mesure 19 px. En 600 son seuil est 4,5 et il
+   echoue de deux centiemes ; en 700 il depasse les 18,66 px du texte large et
+   son seuil tombe a 3. Une phrase qu on met en couleur pour la faire ressortir
+   supporte le gras. Mesure du 10/09 a 375 px. */
+.souligne-jaune { color: var(--violet); font-weight: 700; }
 
 .bloc--violet .souligne-jaune,
 .bloc--terracotta .souligne-jaune,
