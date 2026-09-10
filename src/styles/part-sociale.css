@@ -558,3 +558,13 @@
    maintenant ce que la part coute et ce qu'elle donne : c'est le premier
    moment ou il peut decider. */
 .prix__agir { margin-top: clamp(1.4rem, 2.6vw, 2rem); }
+
+
+/* La relance de l'ecran des paliers. Un lien et non un second bouton : deux
+   appels de meme intention a un ecran d'intervalle s'annulent, et celui-ci
+   vient juste apres le bouton de l'ecran de la part. */
+.paliers__relance { margin-top: clamp(1.4rem, 2.6vw, 2rem); }
+
+/* Le deuxieme bouton de la page, apres l'arbre d'implication : le lecteur
+   vient d'apprendre jusqu'ou ca l'engage, c'est la seconde objection levee. */
+.implication__agir { margin-top: clamp(1.6rem, 3vw, 2.4rem); }

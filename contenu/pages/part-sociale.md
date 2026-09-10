@@ -18,9 +18,8 @@ lecteur ne se demande jamais pourquoi il lit le suivant.
 |---|---|---|---|
 | **POURQUOI** | 1. Les parts sociales de la Maison Audacieuse | `page-tete--midi` | pourquoi une coopérative |
 | | 2. Réunir le plus de monde possible pour créer un bien commun | `bloc--violet` | pourquoi le nombre |
-| **QUOI** | 3. Combien nous devons être | `bloc--nappe` | où on va, et la preuve du nombre |
-| | 4. Une part sociale, c'est un petit morceau de la coopérative | `bloc--terracotta` | c'est quoi, combien, ce que ça donne, et le premier appel |
-| | 5. Le retour sur investissement : c'est que le lieu existe | `bloc--photo` | si ça ne rapporte rien, à quoi ça sert |
+| **QUOI** | 3. Une part sociale, c'est un petit morceau de la coopérative | `bloc--terracotta` | ce qu'on me demande, ce que je risque, et le premier appel |
+| | 4. Combien nous devons être | `bloc--blanc` | à quoi je sers, et la relance |
 | **COMMENT** | 6. Concrètement, comment ça marche | `bloc--nappe` | qu'est-ce que je fais, dans quel ordre |
 | | 7. Vous vous impliquez autant que vous voulez | `bloc--blanc` | jusqu'où ça m'engage |
 | | 8. Vos questions | `bloc--gris` | tout le reste, replié |
@@ -123,31 +122,12 @@ totalitarisme sont nommés dans le brief vocal, ils ne sont pas dans le texte. L
 bailleur et candidate au capital, l'instructeur ESUS lit le site, la presse aussi. La charge politique
 passe par ce que le lieu fait, jamais par ce qu'il dénonce.
 
-### 3. Combien nous devons être
+### 3. Une part sociale, c'est un petit morceau de la coopérative
 
-Écran créé le 10/09. Il prouve ce que l'écran 2 affirme. Sans lui, « le nombre compte encore plus »
-reste une phrase sans appui, alors que deux chiffres vérifiables la soutiennent. Il tient aussi la
-règle des fonds pleins : violet et terracotta ne se touchent jamais, un bloc clair les sépare.
-
-**Titre :** Combien nous devons être
-**Chapô :** Trois paliers, et aucun plafond.
-
-670 — Autant que les personnes qui ont donné pendant la campagne de dons, close en avril.
-1 700 — Autant que les personnes qui ont signé la lettre de soutien en 2025.
-3 000 — Le nombre à partir duquel le projet tient vraiment debout, devant la banque comme devant les
-institutions.
-
-Puis un trou nommé pour l'échelle au-delà de 3 000, à arrêter en collectif.
-
-670 est l'arbitrage de Romain du 10/09. La home affiche encore 666 au premier palier de la jauge et
-« plus de 650 » à l'écran du pari : les deux pages divergent tant que la home n'est pas alignée, et
-elle est gelée par `verif/home-conforme`, donc l'alignement se déclare en écart voulu.
-
-L'échelle ne mélange pas les paliers réels et les paliers de rêve. Mise à côté d'un nombre à six
-chiffres, la cible de 3 000 se dévaluerait, et une jauge dont l'objectif atteignable tient sur un pixel
-démoralise au lieu d'entraîner. Le rêve vit en aparté, sous les trois paliers.
-
-### 4. Une part sociale, c'est un petit morceau de la coopérative
+Fond terracotta collé au violet de l'écran précédent, ce que la règle des fonds interdit. Écart assumé
+le 10/09 : les deux ne se voient jamais ensemble puisque chaque écran tient une hauteur d'écran, ils
+sont de familles opposées, et ce basculement du froid au chaud marque le passage de « pourquoi » à
+« combien ». C'est un effet, pas un défaut.
 
 Fusion des deux anciens écrans « une part, c'est un petit morceau de la coopérative » et « 100 €, une
 voix », décidée par Romain le 10/09. Ils disaient la même chose à un écran d'intervalle, l'un en mots
@@ -176,16 +156,49 @@ perdu. » L'encart qui suit dit la même chose en mieux, et la dénégation atti
 qu'elle voulait écarter. Sorti aussi : la présentation de La Coop Audacieuse (bail, travaux,
 gouvernance), qui descend en FAQ.
 
-### 5. Le retour sur investissement : c'est que le lieu existe
+### 4. Combien nous devons être
 
-La part sociale ne rapporte pas de contrepartie financière. Pas d'intérêts, pas de dividendes. Nous
-avons fait le choix de l'inscrire noir sur blanc dans nos statuts.
+Écran créé le 10/09, placé d'abord avant l'écran de la part puis déplacé après, le soir même, sur une
+objection de Romain à laquelle il faut donner raison : un objectif collectif est une information sur
+nous, pas sur le lecteur. Tant qu'il ignore ce qu'une part coûte et ce qu'elle donne, il ne peut pas se
+situer dans le compteur, et 3 000 ne lui dit rien. Le placement du matin suivait la logique du texte,
+qui voulait se prouver lui-même, pas celle du lecteur.
+Le déplacement change aussi le rôle de l'écran. Avant le bouton, il prouvait. Après, il relance celui
+qui n'a pas cliqué : on est tant, il en faut tant, il manque vous. Il se ferme donc sur un lien et non
+sur un second bouton, deux appels de même intention à un écran d'intervalle s'annulant.
 
-Vos 100 € financent la rénovation du bâtiment. Une banque ne finance que la moitié d'un lieu comme
-celui-ci. L'autre moitié, c'est nous. Plus nous sommes nombreux·ses à prendre une part, moins la
-coopérative emprunte et plus les loyers resteront accessibles aux structures qui feront vivre le lieu.
+**Titre :** Combien nous devons être
+**Chapô :** Trois paliers, et aucun plafond.
 
-*Lien : Comment le projet se finance. Photo : la grange aujourd'hui.*
+670 — Autant que les personnes qui ont donné pendant la campagne de dons, close en avril.
+1 700 — Autant que les personnes qui ont signé la lettre de soutien en 2025.
+3 000 — Le nombre à partir duquel le projet tient vraiment debout, devant la banque comme devant les
+institutions.
+
+Puis un trou nommé pour l'échelle au-delà de 3 000, à arrêter en collectif.
+
+670 est l'arbitrage de Romain du 10/09. La home affiche encore 666 au premier palier de la jauge et
+« plus de 650 » à l'écran du pari : les deux pages divergent tant que la home n'est pas alignée, et
+elle est gelée par `verif/home-conforme`, donc l'alignement se déclare en écart voulu.
+
+L'échelle ne mélange pas les paliers réels et les paliers de rêve. Mise à côté d'un nombre à six
+chiffres, la cible de 3 000 se dévaluerait, et une jauge dont l'objectif atteignable tient sur un pixel
+démoralise au lieu d'entraîner. Le rêve vit en aparté, sous les trois paliers.
+
+### L'écran « Le retour sur investissement », supprimé le 10/09
+
+Il disait deux fois ce que l'encart de remboursement dit déjà, et il installait le mot
+« investissement » sur une page qui passe son temps à expliquer que ce n'en est pas un. Romain en
+doutait lui-même, il l'a tranché le 10/09 au soir.
+
+Ce qu'il portait de neuf a été replacé, rien n'est perdu. « La part ne rapporte pas de contrepartie
+financière. Pas d'intérêts, pas de dividendes. Nous l'avons inscrit noir sur blanc dans nos statuts. »
+rejoint l'écran de la part, où c'est une modalité parmi les autres. Le paragraphe sur le financement,
+« une banque ne finance que la moitié d'un lieu comme celui-ci, l'autre moitié c'est nous », et le lien
+vers le modèle économique descendent en FAQ, dans une question nouvelle : « À quoi servent mes 100 € ? »
+
+La page perd au passage sa seule image pleine largeur, la grange. Le rythme visuel s'en ressent, à
+replacer ailleurs si besoin.
 
 ### 6. Concrètement, comment ça marche
 
